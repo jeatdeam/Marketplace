@@ -1,0 +1,14 @@
+extends layout
+
+block content
+    main.containerBrands
+        h1 #{title.toUpperCase()}
+        section.productsBrands
+            each element,indice in productosPorMarca
+                div(class=`elementProduct elementProduct_${indice+1}`,data-brand=`${element.brand}`,data-name=`${element.name}`)
+                    img(src=`${element.img}`)
+                    b #{element.subtitle}
+                    small S/.#{element.price}
+                    div
+                        button(data-id=element.id, data-brand=element.brand, data-img=element.img, data-price=element.price, data-name=element.name) agregar al carrito
+                        button(data-id=element.id, data-brand=element.brand, data-img=element.img, data-price=element.price, data-name=element.name) comprar

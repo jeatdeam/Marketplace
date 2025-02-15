@@ -1,0 +1,10 @@
+extends layout
+
+block content
+    main
+        h1= name
+        //img(src="/img/jeatdeam-logo.png")
+        section.containerCards
+            each el, indice in baseDatos
+                a.cardElement(class=`cardElement-${indice}`, id=`${indice}`, href=`/producto/${indice}`)
+                    h1 #{indice}
