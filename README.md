@@ -1,0 +1,1 @@
+Debido a que el proyecto sirve los archivos HTML desde el back-end con node.js no puede ser deployado en github pages, por lo que he usado un Render como hosting para el proyecto. A continuacion adjunto la url para visualizar la pagina https://marketplace-1-daxe.onrender.com
