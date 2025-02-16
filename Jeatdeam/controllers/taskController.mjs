@@ -207,15 +207,11 @@ let datosCliente=[
     const urlProducts="https://api.stripe.com/v1/products?limit=100";
      const urlPrices = "https://api.stripe.com/v1/prices?limit=100";
 
-
-
-
      const options={
              headers:{
                  Authorization:`Bearer ${secretKey}`
              }
     }
-
     const peticionId = async () => {
         const response=await fetch(urlPrices,options);
 
