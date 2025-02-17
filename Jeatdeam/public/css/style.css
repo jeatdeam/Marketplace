@@ -2445,7 +2445,7 @@ input:focus{
         align-items: center;
         padding:10px 20px;
         width: 275px;
-        box-shadow: 0 0 2.5px rgba(0,0,0,0.2);
+        box-shadow: 0 0 7.5px rgba(0,0,0,0.4);
     }
     .masVendidoElement:hover,.masVendidoElement_two:hover{
         transition: all 0.3s ease-in-out;
@@ -2469,8 +2469,11 @@ input:focus{
         border-radius: 7.5px;
         padding: 2.5px 12px;
         flex: 1;
-        border-color: transparent;
-        box-shadow: 0 0 1px rgba(0,0,0,0.2);
+        border:1px solid transparent;
+        transition: all 0.25s ease-in-out;
+    }
+    .masVendidoElement>div>button:hover, .masVendidoElement_two>div>button:hover{
+        border: 1px solid rgba(0,0,0,0.4);
     }
 
 
@@ -2931,7 +2934,7 @@ input:focus{
         align-items: center;
         padding:10px 20px;
         width: 275px;
-        box-shadow: 0 0 15px rgba(0,0,0,0.6);
+        box-shadow: 0 0 7.5px rgba(0,0,0,0.4);
     }
     .masVendidoElement:hover,.masVendidoElement_two:hover{
         transition: all 0.3s ease-in-out;
@@ -2955,8 +2958,11 @@ input:focus{
         border-radius: 7.5px;
         padding: 2.5px 12px;
         flex: 1;
-        border-color: transparent;
-        box-shadow: 0 0 5px rgba(0,0,0,0.5);
+        border: 1px solid transparent;
+        transition: all 0.25s ease-in-out;
+    }
+    .masVendidoElement>div>button:hover,.masVendidoElement_two>div>button:hover{
+        border: 1px solid rgba(0,0,0,0.4);
     }
     @keyframes movimientoHorizontal{
         0%{
@@ -3401,7 +3407,7 @@ input:focus{
         align-items: center;
         padding:10px 20px;
         width: 275px;
-        box-shadow: 0 0 15px rgba(0,0,0,0.6);
+        box-shadow: 0 0 7.5px rgba(0,0,0,0.4);
     }
     .masVendidoElement:hover,.masVendidoElement_two:hover{
         transition: all 0.3s ease-in-out;
@@ -3425,8 +3431,11 @@ input:focus{
         border-radius: 7.5px;
         padding: 2.5px 12px;
         flex: 1;
-        border-color: transparent;
-        box-shadow: 0 0 5px rgba(0,0,0,0.5);
+        border: 1px solid transparent;
+        transition: all 0.25s ease-in-out;
+    }
+    .masVendidoElement>div>button:hover,.masVendidoElement_two>div>button:hover{
+        border: 1px solid rgba(0,0,0,0.4);
     }
     @keyframes movimientoHorizontal{
         0%{
@@ -3856,7 +3865,7 @@ input:focus{
         align-items: center;
         padding:10px 20px;
         width: 275px;
-        box-shadow: 0 0 15px rgba(0,0,0,0.6);
+        box-shadow: 0 0 7.5px rgba(0,0,0,0.4);
     }
     .masVendidoElement:hover,.masVendidoElement_two:hover{
         transition: all 0.3s ease-in-out;
@@ -3880,8 +3889,11 @@ input:focus{
         border-radius: 7.5px;
         padding: 2.5px 12px;
         flex: 1;
-        border-color: transparent;
-        box-shadow: 0 0 5px rgba(0,0,0,0.5);
+        border: 1px solid transparent;
+        transition: all 0.25s ease-in-out;
+    }
+    .masVendidoElement>div>button:hover,.masVendidoElement_two>div>button:hover{
+        border:1px solid rgba(0,0,0,0.4);
     }
     @keyframes movimientoHorizontal{
         0%{
@@ -4358,7 +4370,7 @@ input:focus{
         align-items: center;
         padding:10px 20px;
         width: 275px;
-        box-shadow: 0 0 15px rgba(0,0,0,0.6);
+        box-shadow: 0 0 7.5px rgba(0,0,0,0.4);
     }
     .masVendidoElement:hover,.masVendidoElement_two:hover{
         transition: all 0.3s ease-in-out;
@@ -4382,8 +4394,11 @@ input:focus{
         border-radius: 7.5px;
         padding: 2.5px 12px;
         flex: 1;
-        border-color: transparent;
-        box-shadow: 0 0 5px rgba(0,0,0,0.5);
+        border: 1px solid transparent;
+        transition: all 0.25s ease-in-out;
+    }
+    .masVendidoElement>div>button:hover,.masVendidoElement_two>div>button:hover{
+        border: 1px solid rgba(0,0,0,0.4)
     }
     @keyframes movimientoHorizontal{
         0%{
@@ -4861,7 +4876,7 @@ input:focus{
         align-items: center;
         padding:10px 20px;
         width: 275px;
-        box-shadow: 0 0 15px rgba(0,0,0,0.6);
+        box-shadow: 0 0 7.5px rgba(0,0,0,0.4);
     }
     .masVendidoElement:hover,.masVendidoElement_two:hover{
         transition: all 0.3s ease-in-out;
@@ -4885,8 +4900,11 @@ input:focus{
         border-radius: 7.5px;
         padding: 2.5px 12px;
         flex: 1;
-        border-color: transparent;
-        box-shadow: 0 0 5px rgba(0,0,0,0.5);
+        border:1px solid transparent;
+        transition: all 0.25s ease-in-out;
+    }
+    .masVendidoElement>div>button:hover,.masVendidoElement_two>div>button:hover{
+        border: 1px solid rgba(0,0,0,0.4);
     }
     @keyframes movimientoHorizontal{
         0%{
@@ -5379,7 +5397,8 @@ input:focus{
         align-items: center;
         padding:10px 20px;
         width: 275px;
-        box-shadow: 0 0 15px rgba(0,0,0,0.6);
+        box-shadow: 0 0 7.5px rgba(0,0,0,0.4);
+        /*display: none;*/
     }
     .masVendidoElement:hover,.masVendidoElement_two:hover{
         transition: all 0.3s ease-in-out;
@@ -5403,8 +5422,11 @@ input:focus{
         border-radius: 7.5px;
         padding: 2.5px 12px;
         flex: 1;
-        border-color: transparent;
-        box-shadow: 0 0 5px rgba(0,0,0,0.5);
+        border: 1px solid transparent;
+        transition: all 0.25s ease-in-out;
+    }
+    .masVendidoElement>div>button:hover,.masVendidoElement_two>div>button:hover{
+        border: 1px solid rgba(0,0,0,0.4);
     }
     @keyframes movimientoHorizontal{
         0%{

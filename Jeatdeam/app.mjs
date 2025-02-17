@@ -79,6 +79,10 @@ app.post("/generar-qr",taskController.controllerQr)
 //RUTAS DELETE
 app.delete('/compra/compra/compra',taskController.deleteCarrito);
 app.delete('/datos/cliente/compra',taskController.deleteDatos)
-app.listen(port, () => {
-    console.log(`Servidor en http://localhost:${port}`);
-});
+
+const PORT=process.env.PORT||5000;
+app.listen(PORT, () => console.log(`Servidor corriendo en el puerto ${PORT}`))
+
+// app.listen(port, () => {
+//     console.log(`Servidor en http://localhost:${port}`);
+// });

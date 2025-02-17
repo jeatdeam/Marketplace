@@ -276,7 +276,7 @@ const index=(req,res)=>{
 
     // res.redirect("/")
     console.log(carrito);
-    res.render('index',{baseDatos,carrito})
+    res.render('index',{baseDatos})
 }
 
 const product=(req,res)=>{
@@ -406,16 +406,23 @@ const recibirDatosShort = async (req, res) => {
         text: `Hola ${nombre}, hemos recibido tu información. Teléfono: ${tel}, Teléfono Secundario: ${telSec}.`,
     };
 
-    try {
-        await transporter.sendMail(mailOptions);
+        // await transporter.sendMail(mailOptions);
+        transporter.sendMail(mailOptions)
+            .then(result=>{
+                console.log('correo enviado: ',result)
+            })
+            .catch(error=>{
+                console.error('error al enviar el correo: ',error);
+            });
+
         return res.json({
             estado: `✅ Datos recibidos y correo enviado -> ${correo}`,
             datosCliente,
         });
-    } catch (error) {
-        console.error("❌ Error al enviar el correo:", error);
-        return res.status(500).json({ error: "Error al enviar el correo" });
-    }
+    // } catch (error) {
+    //     console.error("❌ Error al enviar el correo:", error);
+    //     return res.status(500).json({ error: "Error al enviar el correo" });
+    // }
 };
 
 

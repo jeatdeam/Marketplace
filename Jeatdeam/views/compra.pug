@@ -1,5 +1,4 @@
 extends layout
-
 block content
     section.compraPage
         if carrito && carrito.length
@@ -26,7 +25,6 @@ block content
                                             small 0
                                         svg(id="arrowRight" data-id=item.id data-brand=item.brand data-img=item.img data-price=item.price, data-name=item.name xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#999999")
                                          path(d="M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z")
-
                 section.pasarelaPago
                     form#myForm
                         div.titleForm
@@ -84,33 +82,6 @@ block content
                 button#formularioEnvio Rellenar Datos
                 button#payCard pagar con tarjeta
                 button#payVirtualWallet pagar con billeteras digital
-            //section.sendProduct
-            //    h1 Detalles de envio
-            //    div
-            //        div
-            //            h1 Ingrese su correo
-            //            input(type="email", placeholder="ingrese un correo")
-            //        div
-            //            h1 Ingrese su numero
-            //            input(type="tel", placeholder="ingrese un numero de contacto")
-            //            h1 Ingrese un numero alternativo
-            //            input(type="tel", placeholder="ingrese un numero adicional")
-            //        div
-            //            input(type="radio", name="ubicacion", value="Lima")
-            //            label Lima
-            //            input(type="radio", name="ubicacion", value="Provincia")
-            //            label Provincia
-            //        div
-            //            div
-            //                h1 Direccion de entrega
-            //                input(type="text", placeholder="ingrese su direccion")
-            //            div
-            //                h1 Distrito
-            //                input(type="text", placeholder="ingrese el distrito")
-            //            div
-            //                h1 Adicional
-            //                input(type="text", placeholder="referencia/numero de departamento/etc")
-            //        button Enviar
         else
             h2(style="text-align:center;") El carrito está vacío.
 

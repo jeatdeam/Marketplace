@@ -2,10 +2,10 @@ extends layout
 block content
     section.carouselImages
         div.containerImages
-            img(src="/img/irene-2.jpg", alt="")
-            img(src="/img/irene-3.jpg", alt="")
-            img(src="/img/tocotoco4.webp", alt="")
-            img(src="/img/tocotoco5.webp", alt="")
+            img(src="./img/irene-2.jpg", alt="")
+            img(src="./img/irene-3.jpg", alt="")
+            img(src="./img/tocotoco4.webp", alt="")
+            img(src="./img/tocotoco5.webp", alt="")
         ul#containerArrows
             li
                 <svg class="arrowLeft" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#FFFFFF"><path d="M400-80 0-480l400-400 71 71-329 329 329 329-71 71Z"/></svg>
@@ -35,56 +35,68 @@ block content
     section.marcas
         h1  NUESTRAS MARCAS
         div.containerMarcas
-            div(class="marca marcaOne",data-id="1",data-name="tocobo") T
-            div(class="marca marcaTwo", data-Id="2",data-name="numbuzin") N
-            div(class="marca marcaThree",data-id="3",data-name="skini1004") S
-            div(class="marca marcaFour", data-id="4",data-name="centella") C
-            div(class="marca marcaFive",data-id="5",data-name="beauty of joseon") B
-            div(class="marca marcaSix", data-id="6",data-name="celimax") C
-            div(class="marca marcaSeven", data-id="7",data-name="haru haru") H
-            div(class="marca marcaEight", data-id="8",data-name="cosrx") C
-            div(class="marca marcaNine", data-id="9",data-name="nacific") N
-            div(class="marca marcaTen", data-id="10",data-name="techito") T
+            div(class="marca marcaOne", data-id="1", data-name="tocobo") T
+            div(class="marca marcaTwo", data-Id="2", data-name="numbuzin") N
+            div(class="marca marcaThree", data-id="3", data-name="skini1004") S
+            div(class="marca marcaFour", data-id="4", data-name="centella") C
+            div(class="marca marcaFive", data-id="5", data-name="beauty of joseon") B
+            div(class="marca marcaSix", data-id="6", data-name="celimax") C
+            div(class="marca marcaSeven", data-id="7", data-name="haru haru") H
+            div(class="marca marcaEight", data-id="8", data-name="cosrx") C
+            div(class="marca marcaNine", data-id="9", data-name="nacific") N
+            div(class="marca marcaTen", data-id="10", data-name="techito") T
     section.masVendidos
         h1 PRODUCTOS MAS VENDIDOS
         div.movimientoMasVendidos
             div.containerMasVendidos_one
-                each element,indice in baseDatos
-                    div(class=`masVendidoElement masVendidoElement_${indice+1}`)
-                        img(src=`${element.img}`)
-                        b #{element.subtitle}
-                        small S/.#{element.price}
-                        div
-                            button agregar al carrito
-                            button comprar
+                if baseDatos && baseDatos.length > 0
+                    each element,indice in baseDatos
+                      div(class=`masVendidoElement masVendidoElement_${indice+1}` )
+                           img(src=`${element.img}`)
+                           b #{element.subtitle}
+                           small S/.#{element.price}
+                           div
+                                button(data-id=element.id, data-brand=element.brand, data-img=element.img, data-price=element.price, data-name=element.name) agregar al carrito
+                                button(data-id=element.id, data-brand=element.brand, data-img=element.img, data-price=element.price, data-name=element.name) comprar
+                else
+                    p No se encontraron productos
             div.containerMasVendidos_two
-                each element,indice in baseDatos
-                    div(class=`masVendidoElement masVendidoElement_${indice + 1}`)
-                        img(src=`${element.img}`)
-                        b #{element.subtitle}
-                        small S/.#{element.price}
-                        div
-                           button() agregar al carrito
-                           button comprar
+                if baseDatos && baseDatos.length > 0
+                    each element,indice in baseDatos
+                        div(class=`masVendidoElement masVendidoElement_${indice + 1}`)
+                            img(src=`${element.img}`)
+                            b #{element.subtitle}
+                            small S/.#{element.price}
+                            div
+                                button(data-id=element.id, data-brand=element.brand, data-img=element.img, data-price=element.price, data-name=element.name) agregar al carrito
+                                button(data-id=element.id, data-brand=element.brand, data-img=element.img, data-price=element.price, data-name=element.name) comprar
+                else
+                    p No se encontraron productos
         div.movimientoMasVendidos_2
             div.containerMasVendidos_2_one
-                each element,indice in baseDatos
-                    div(class=`masVendidoElement_two masVendidoElement_two_${indice+1}`)
-                        img(src=`${element.img}`)
-                        b #{element.subtitle}
-                        small S/.#{element.price}
-                        div
-                            button agregar al carrito
-                            button comprar
+                if baseDatos && baseDatos.length > 0
+                    each element,indice in baseDatos
+                        div(class=`masVendidoElement_two masVendidoElement_two_${indice+1}`)
+                            img(src=`${element.img}`)
+                            b #{element.subtitle}
+                            small S/.#{element.price}
+                            div
+                                button(data-id=element.id, data-brand=element.brand, data-img=element.img, data-price=element.price, data-name=element.name) agregar al carrito
+                                button(data-id=element.id, data-brand=element.brand, data-img=element.img, data-price=element.price, data-name=element.name) comprar
+                else
+                    p No se encontraron productos
             div.containerMasVendidos_2_two
-                each element,indice in baseDatos
-                    div(class=`masVendidoElement_two masVendidoElement_two_${indice + 1}`)
-                        img(src=`${element.img}`)
-                        b #{element.subtitle}
-                        small S/.#{element.price}
-                        div
-                            button agregar al carrito
-                            button comprar
+                if baseDatos && baseDatos.length > 0
+                    each element,indice in baseDatos
+                        div(class=`masVendidoElement_two masVendidoElement_two_${indice + 1}`)
+                            img(src=`${element.img}`)
+                            b #{element.subtitle}
+                            small S/.#{element.price}
+                            div
+                                button(data-id=element.id, data-brand=element.brand, data-img=element.img, data-price=element.price, data-name=element.name) agregar al carrito
+                                button(data-id=element.id, data-brand=element.brand, data-img=element.img, data-price=element.price, data-name=element.name) comprar
+                else
+                    p No se encontraron productos
     section.catalogo
         h1 DESCUBRE NUESTRO CATALOGO
         .catalogoElements

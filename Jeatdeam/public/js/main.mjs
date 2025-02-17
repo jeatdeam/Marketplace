@@ -3,6 +3,9 @@
 // import stripe from './stripe.mjs';
 // import Stripe from "stripe";
 import keysFromStripe from './keysFromStripe.mjs';
+import {masVendidosElement}  from './masVendidos.mjs';
+
+masVendidosElement();
 
 //193->active button despues del envio de datos
 
@@ -192,8 +195,8 @@ function insertCheck() {
     const computedCheck=getComputedStyle($containerCheck).display;
     const $formularioEnvio=document.getElementById('formularioEnvio');
 
-        $formularioEnvio.style.display="none";
-    // if(computedCheck==="none") $formularioEnvio.style.display="none";
+    if($formularioEnvio)  $formularioEnvio.style.display="none";
+
 
 
 }
@@ -451,25 +454,12 @@ document.addEventListener('click',e=>{
         }
 
 
-
-
-
-        // $textarea.style.height="60px";
-
     }
 })
 
 }
 absorberDatosFormulario()
 
-
-function courierDetail(){
-
-
-
-
-
-}
 
 
 const $sideLeft=document.querySelector('.sideLeft');
@@ -691,9 +681,6 @@ function carritoContadorDOM() {
     $contador_carrito.style.fontSize = "10px";
     $contador_carrito.style.padding = "9px";
     $contador_carrito.style.transition = "opacity 0.35s ease-in-out, transform 0.35s ease-in-out"; // Añadimos una transición de tamaño
-
-
-
 
     const url = "/carrito/estado/cuack/cuack";
     const options = {
@@ -936,37 +923,99 @@ document.addEventListener('click', async (e) => {
 });
 
 
+export async function addProduct(node){
 
-    // if(isActive){
+            if(node.matches(".masVendidoElement>div>button:nth-child(1)")||node.matches(".masVendidoElement_two>div>button:nth-child(1)")){
+                console.log(node);
 
-// function eventsProductMarcaCarritoAdd(){
-//     const $buttonCarritoAll=document.querySelectorAll('.elementProduct>div>button:nth-of-type(1)');
-//
-//     if($buttonCarritoAll){
-//         $buttonCarritoAll.forEach(button=>{
-//             button.addEventListener('mouseenter',e=>{
-//                 isActive=true;
-//                 if(isActive){
-//
-//                     document.addEventListener('click',e=>{
-//
-//                         if(e.target.matches('.elementProduct>div>button:nth-of-type(1)')){
-//                         }
-//
-//                     })
-//                 }
-//             })
-//             button.addEventListener('mouseleave',e=>{
-//
-//                 isActive=false;
-//             })
-//         })
-//     }
-//
-//
-//
-// }
-// eventsProductMarcaCarritoAdd();
+                let idCompra = await lastIdCompra();
+
+                if(idCompra===0){
+                    idCompra=1;
+                }else{
+                    idCompra=idCompra+1;
+                }
+
+                const {id, brand, img, price, name} = node.dataset;
+
+                console.log(id,idCompra,brand, img, price, name)
+
+                const url = "/compra/compra/compra"
+                const product = {
+                    id,
+                    idCompra: parseInt(idCompra),
+                    brand,
+                    img,
+                    price: parseFloat(price),
+                    name,
+                }
+
+                const options = {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify(product)
+                }
+                const peticionCompra = async () => {
+                    const response = await fetch(url, options);
+                    if (!response.ok) {
+                        throw new Error(`error en la peticion->${response.statusText}`)
+                    }
+                    const result=await response.json();
+
+                    console.log(result.message,"->",result.allProduct);
+
+                }
+                peticionCompra();
+                carritoContadorDOM();
+            }else{
+
+                console.log(node)
+
+                let idCompra = await lastIdCompra();
+
+                if(idCompra===0){
+                    idCompra=1;
+                }else{
+                    idCompra=idCompra+1;
+                }
+
+                const {id, brand, img, price, name} = node.dataset;
+
+                console.log(id,idCompra,brand, img, price, name)
+
+                const url = "/compra/compra/compra"
+                const product = {
+                    id,
+                    idCompra: parseInt(idCompra),
+                    brand,
+                    img,
+                    price: parseFloat(price),
+                    name,
+                }
+
+                const options = {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify(product)
+                }
+                const peticionCompra = async () => {
+                    const response = await fetch(url, options);
+                    if (!response.ok) {
+                        throw new Error(`error en la peticion->${response.statusText}`)
+                    }
+                    const result=await response.json();
+
+                    console.log(result.message,"->",result.allProduct);
+
+                }
+                peticionCompra();
+                carritoContadorDOM();
+                window.location.href="/compra/compra/compra"
+            }
+
+
+
+}
 
 function eventsProductMarcaComprar(){
 
@@ -1494,7 +1543,7 @@ function renderAfterAction(carrito) {
 /*----LOGICA PARA AGREGAR Y ELIMINAR CON LAS FLECHAS Y EL ICONO X DE COMPRAR*/
 
 
-async function lastIdCompra(){
+export async function lastIdCompra(){
     const url="/carrito/estado/cuack/cuack";
     const options={
         method: "GET",
@@ -2050,7 +2099,7 @@ function rellenarDatos(){
     document.addEventListener('click',e=>{
 
         const $pasarelaPago=document.querySelector('.pasarelaPago');
-        const computedPasarela=getComputedStyle($pasarelaPago);
+        // const computedPasarela=getComputedStyle($pasarelaPago);
 
         if(e.target.id==="formularioEnvio"){
 
@@ -2545,7 +2594,7 @@ async function searchProducts() {
 
 searchProducts();
 
-async function datosCarrito(){
+export async function datosCarrito(){
     const url="/carrito/estado/cuack/cuack";
     const options={
         method: 'GET',
@@ -2694,119 +2743,6 @@ async function carritoDesplegado() {
 carritoDesplegado();
 
 
-/*-------------------@mediaquerys----------------------------*/
-
-// const mediaQuery_640=window.matchMedia('(max-width: 640px)');
-//
-// function manipularMediaQuery(e){
-//     if(e.matches){
-//
-//         const $menu=document.querySelector('.menu');
-//         $menu.style.display="none";
-//
-//         const $containerIcons=document.querySelector('.containerIcons')
-//         // $containerIcons.style.position="relative";
-//         $containerIcons.style.justifyContent="space-between";
-//         $containerIcons.style.width="";
-//
-//
-//         const $inputSearch = document.querySelector('.searchAndOptions>input');
-//         $inputSearch.style.position = "absolute";
-//         $inputSearch.style.top = "100%";
-//         // $inputSearch.style.opacity = "0";
-//
-//         const $searchIcon = document.querySelector('#iconsNav>li:nth-child(1)');
-//         $searchIcon.style.background = "pink";
-//
-//         // document.addEventListener('click', (e) => {
-//         //     // Busca el elemento <li> más cercano al objetivo del clic
-//         //     if (e.target.closest('#iconsNav>li:nth-child(1)')) {
-//         //         console.log('El evento se disparó en:', e.target);
-//         //         $searchIcon.style.background = "lightblue";
-//         //
-//         //         const $navegador=document.querySelector('.navegador');
-//         //         $navegador.style.position="relative";
-//         //
-//         //         $inputSearch.style.opacity="1";
-//         //         $inputSearch.style.width="400px";
-//         //         // $inputSearch.style.right="0";
-//         //         $inputSearch.style.transform="translateX(-50%)";
-//         //         $inputSearch.style.top="110%";
-//         //         $inputSearch.style.margin="0 auto";
-//         //         $inputSearch.style.left="50%";
-//         //
-//         //         $inputSearch.style.zIndex="2";
-//         //
-//         //
-//         //
-//         //         const sectionBusqueda=document.createElement('section');
-//         //
-//         //         sectionBusqueda.innerHTML=`
-//         //             <div class="sectionBusquedaNew">
-//         //                 <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#000000"><path d="M784-120 532-372q-30 24-69 38t-83 14q-109 0-184.5-75.5T120-580q0-109 75.5-184.5T380-840q109 0 184.5 75.5T640-580q0 44-14 83t-38 69l252 252-56 56ZM380-400q75 0 127.5-52.5T560-580q0-75-52.5-127.5T380-760q-75 0-127.5 52.5T200-580q0 75 52.5 127.5T380-400Z"/></svg>
-//         //                 <input type="search" placeholder="Busca el producto">
-//         //                 <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#000000"><path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h280v80H200v560h280v80H200Zm440-160-55-58 102-102H360v-80h327L585-622l55-58 200 200-200 200Z"/></svg>
-//         //             </div>
-//         //             <h1>Productos</h1>
-//         //             <div class="productosFiltrados"></div>
-//         //
-//         //
-//         //         `;
-//         //         sectionBusqueda.classList.add('sectionBusqueda')
-//         //
-//         //         const html=document.querySelector('html');
-//         //         html.style.position="relative";
-//         //         html.appendChild(sectionBusqueda);
-//         //
-//         //         if(sectionBusqueda){
-//         //             const $body=document.querySelector('body');
-//         //
-//         //             $body.style.filter="blur(10px) grayscale(100%)";
-//         //
-//         //         }
-//         //
-//         //
-//         //     }
-//         // });
-//         //
-//         //
-//         // document.addEventListener('click',e=>{
-//         //
-//         //     if(e.target.tagName==="BODY"){
-//         //
-//         //         console.log('si tamos funcionando');
-//         //
-//         //         const $sectionBusqueda=document.querySelector('.sectionBusqueda');
-//         //
-//         //         $sectionBusqueda.style.opacity="0";
-//         //
-//         //         document.body.style.filter="";
-//         //
-//         //
-//         //     }
-//         //
-//         //
-//         //
-//         // })
-//
-//     }else{
-//
-//         const $menu=document.querySelector('.menu');
-//         $menu.style.display="flex";
-//
-//         document.body.style.display="";
-//         document.body.style.background="red";
-//     }
-//
-// }
-//
-// mediaQuery_640.addEventListener('change',manipularMediaQuery);
-//
-//
-// manipularMediaQuery(mediaQuery_640)
-
-
-
 /*---------------------menu<@media 640px---------------------------*/
 
 function createTemplateMenuSmall(){
@@ -2881,8 +2817,6 @@ function menuMediaVerySmall() {
                         $containerMenuSmallWindow.style.pointerEvents = "none";
                         $body.style.filter = "";
                         $containerMenuSmallWindow.style.left="-300px";
-                        // $body.style.pointerEvents = "auto";
-                        // $body.style.overflow="";
                         $menu.style.pointerEvents="auto";
                     }
                 isActive=false;
@@ -2968,7 +2902,6 @@ function menuMediaVerySmall() {
                 }
 
         }
-
 
     });
 
@@ -3256,38 +3189,7 @@ mediaQuery8.addEventListener('change',menuSmallActive8);
 menuSmallActive8(mediaQuery8);
 
 
-// const mediaQueries = [
-//     { query: '(max-width: 640px)', action: menuSmallActive },
-//     { query: '(min-width: 641px) and (max-width: 768px)', action: menuSmallActive2 },
-//     { query: '(min-width: 769px) and (max-width: 1024px)', action: menuSmallActive3 },
-//     { query: '(min-width: 1025px) and (max-width: 1280px)', action: menuSmallActive4 },
-//     { query: '(min-width: 1281px) and (max-width: 1440px)', action: menuSmallActive5 },
-//     { query: '(min-width: 1441px) and (max-width: 1536px)', action: menuSmallActive7 },
-//     { query: '(min-width: 1537px)', action: menuSmallActive8 }
-// ];
-//
-// // Función para evaluar y ejecutar la media query correcta
-// function checkMediaQueries() {
-//     for (let { query, action } of mediaQueries) {
-//         if (window.matchMedia(query).matches) {
-//             action(window.matchMedia(query));
-//         }
-//     }
-// }
-//
-// // Agregar evento `resize` para que se ejecute al cambiar el tamaño de la ventana
-// window.addEventListener('resize', checkMediaQueries);
-//
-// // Ejecutar al cargar la página
-// checkMediaQueries();
-
-/*-------------------------MARCA EVENTOS--------------------------------*/
-
 function eventosMarcaProducts(){
-
-
-
-
 
     document.addEventListener('click', e=>{
 
@@ -3319,17 +3221,6 @@ function eventosMarcaProducts(){
         }
 
     })
-    // bottonAdd.addEventListener('mouseleave',e=>{
-    //
-    //       const  $elementProduct=document.querySelector('.elementProduct');
-    //
-    //       $elementProduct.style.pointerEvents="auto";
-    //       bottonAdd.classList.remove('activeEventsButton');
-    //
-    //       console.log('funciona el mouseleave->',e.target);
-    //
-    // })
+
 
 }
-
-// eventosMarcaProducts()
