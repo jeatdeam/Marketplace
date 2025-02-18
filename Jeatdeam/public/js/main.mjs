@@ -2169,7 +2169,7 @@ async function addPriceAndImg(text){
     const fragmentUL=document.createDocumentFragment();
     if($ul){
             // console.log(text);
-            const textoLimpio=limpiarTexto(text)
+            let textoLimpio=limpiarTexto(text)
             const element=baseDatos.find(element=>{
 
                 if([element.brand,element.name].join(' ')===textoLimpio){
@@ -2181,7 +2181,8 @@ async function addPriceAndImg(text){
             const fragmentLi=document.createDocumentFragment();
             const li=document.createElement('li');
             const span=document.createElement('span');
-            span.innerHTML=textoLimpio
+            // textoLimpio=textoLimpio.toUpperCase()
+            span.textContent=textoLimpio.toUpperCase();
             const img=document.createElement("img")
             img.src=element.img;
             const price=document.createElement("span");
