@@ -66,7 +66,7 @@ block content
             div.containerElementsRecomended
                 each element,index in baseDatos
                    div(class=`product${element.category} productRecomendent`)
-                        img(src=`${element.img}`)
+                        img(src=element.img)
                         b #{element.subtitle}
                         b #{element.price}
                         div

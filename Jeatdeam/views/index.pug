@@ -51,7 +51,7 @@ block content
             div.containerMasVendidos_one
                 if baseDatos && baseDatos.length > 0
                     each element,indice in baseDatos
-                      div(class=`masVendidoElement masVendidoElement_${indice+1}` )
+                      div(class=`masVendidoElement masVendidoElement_${indice+1}`, data-brand=element.brand, data-name=element.name )
                            img(src=`${element.img}`)
                            b #{element.subtitle}
                            small S/.#{element.price}
@@ -63,7 +63,7 @@ block content
             div.containerMasVendidos_two
                 if baseDatos && baseDatos.length > 0
                     each element,indice in baseDatos
-                        div(class=`masVendidoElement masVendidoElement_${indice + 1}`)
+                        div(class=`masVendidoElement masVendidoElement_${indice + 1}`, data-brand=element.brand, data-name=element.name)
                             img(src=`${element.img}`)
                             b #{element.subtitle}
                             small S/.#{element.price}
@@ -76,7 +76,7 @@ block content
             div.containerMasVendidos_2_one
                 if baseDatos && baseDatos.length > 0
                     each element,indice in baseDatos
-                        div(class=`masVendidoElement_two masVendidoElement_two_${indice+1}`)
+                        div(class=`masVendidoElement_two masVendidoElement_two_${indice+1}`, data-brand=element.brand, data-name=element.name)
                             img(src=`${element.img}`)
                             b #{element.subtitle}
                             small S/.#{element.price}
@@ -88,7 +88,7 @@ block content
             div.containerMasVendidos_2_two
                 if baseDatos && baseDatos.length > 0
                     each element,indice in baseDatos
-                        div(class=`masVendidoElement_two masVendidoElement_two_${indice + 1}`)
+                        div(class=`masVendidoElement_two masVendidoElement_two_${indice + 1}`, data-brand=element.brand, data-name=element.name)
                             img(src=`${element.img}`)
                             b #{element.subtitle}
                             small S/.#{element.price}

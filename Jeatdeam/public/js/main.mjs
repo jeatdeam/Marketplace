@@ -3,10 +3,13 @@
 // import stripe from './stripe.mjs';
 // import Stripe from "stripe";
 import keysFromStripe from './keysFromStripe.mjs';
-import {masVendidosElement}  from './masVendidos.mjs';
+import {masVendidosElement} from './masVendidos.mjs';
+import {redirectMasVendidoElement} from './masVendidos.mjs'
 
 masVendidosElement();
 
+// export let activeButton=true;
+redirectMasVendidoElement();
 //193->active button despues del envio de datos
 
 
@@ -657,9 +660,7 @@ const create_circles_carousel = () => {
     startAutoSlide();
 };
 
-const state={
-    codeCompra:1,
-}
+let controllerInterval;
 
 function carritoContadorDOM() {
     const $carrito = document.getElementById('carrito').parentNode;
@@ -706,15 +707,18 @@ function carritoContadorDOM() {
             setTimeout(() => {
                 $contador_carrito.textContent = ""; // Elimina el contenido después de la transición
             }, 500); // Tiempo de transición
+            clearInterval(controllerInterval);
         } else {
             $contador_carrito.textContent = longitudCarrito;
             $contador_carrito.style.opacity = "1";
             $contador_carrito.style.transform = "scale(1)"; // Restaura el tamaño
-            $contador_carrito.style.transition="all 0.35s linear"
+            $contador_carrito.style.transition="all 0.25s linear"
             $contador_carrito.style.textAlign = "center";
 
 
-            setInterval(() => {
+            clearInterval(controllerInterval);
+
+            controllerInterval=setInterval(() => {
                 // Obtener el valor computado del background
                 const backgroundColor = getComputedStyle($contador_carrito).backgroundColor;
                 const transformMatrix = getComputedStyle($contador_carrito).transform;
@@ -729,12 +733,12 @@ function carritoContadorDOM() {
                 // Cambiar escala
                 if (transformMatrix === "none") {
                     // Si no hay transformación aplicada, considerar como escala 1
-                    $contador_carrito.style.transform = "scale(1.15)";
+                    $contador_carrito.style.transform = "scale(1.10)";
                 } else {
                     // Extraer el valor de la escala desde la matriz
                     const scaleX = parseFloat(transformMatrix.split(",")[0].replace("matrix(", "").trim());
                     if (scaleX === 1) {
-                        $contador_carrito.style.transform = "scale(1.15)";
+                        $contador_carrito.style.transform = "scale(1.10)";
                     } else {
                         $contador_carrito.style.transform = "scale(1)";
                     }
@@ -926,19 +930,13 @@ document.addEventListener('click', async (e) => {
 export async function addProduct(node){
 
             if(node.matches(".masVendidoElement>div>button:nth-child(1)")||node.matches(".masVendidoElement_two>div>button:nth-child(1)")){
-                console.log(node);
 
-                let idCompra = await lastIdCompra();
+                let lastId = await lastIdCompra();
 
-                if(idCompra===0){
-                    idCompra=1;
-                }else{
-                    idCompra=idCompra+1;
-                }
+                let idCompra= lastId ? lastId+1 : 1;
 
                 const {id, brand, img, price, name} = node.dataset;
 
-                console.log(id,idCompra,brand, img, price, name)
 
                 const url = "/compra/compra/compra"
                 const product = {
@@ -971,13 +969,9 @@ export async function addProduct(node){
 
                 console.log(node)
 
-                let idCompra = await lastIdCompra();
+                let lastId = await lastIdCompra();
 
-                if(idCompra===0){
-                    idCompra=1;
-                }else{
-                    idCompra=idCompra+1;
-                }
+                let idCompra= lastId ? lastId+1 : 1;
 
                 const {id, brand, img, price, name} = node.dataset;
 
@@ -1013,8 +1007,6 @@ export async function addProduct(node){
                 window.location.href="/compra/compra/compra"
             }
 
-
-
 }
 
 function eventsProductMarcaComprar(){
@@ -1035,9 +1027,8 @@ function eventsProductMarcaComprar(){
             })
         })
     }
-    // if(isActive){
 
-        document.addEventListener('click',e=>{
+        document.addEventListener('click',async e=>{
 
             if(e.target.closest('.elementProduct>div>button:nth-of-type(2)')) {
 
@@ -1045,10 +1036,15 @@ function eventsProductMarcaComprar(){
 
                     const {id, brand, img, price, name} = e.target.dataset;
 
-                    const url = "/compra/compra/compra"
+                    const url = "/compra/compra/compra";
+
+                    let lastId=await lastIdCompra()
+
+                    let idCompra= lastId ? lastId+1 : 1;
+
                     const product = {
                         id,
-                        idCompra: parseInt(state.codeCompra),
+                        idCompra: parseInt(idCompra),
                         brand,
                         img,
                         price: parseFloat(price),
@@ -1074,7 +1070,6 @@ function eventsProductMarcaComprar(){
                         console.log(result.baseDatos);
                     }
                     peticionCompraMarca();
-                    state.codeCompra++;
 
                     window.location.href="/compra/compra/compra";
                 }
@@ -1085,115 +1080,6 @@ function eventsProductMarcaComprar(){
 }
 eventsProductMarcaComprar();
 
-function eventsProductMarcaCarrito(){
-
-    const $buttonAgregarCarritoAll=document.querySelectorAll('.elementProduct>div>button:nth-of-type(1)')
-
-    if($buttonAgregarCarritoAll){
-        $buttonAgregarCarritoAll.forEach(button=>{
-            button.addEventListener('mouseenter',e=>{
-                isActive=true;
-            })
-            button.addEventListener('mouseleave',e=>{
-                isActive=false;
-            })
-        })
-        document.addEventListener('click',e=>{
-
-            if(e.target.matches('.elementProduct>div>button:nth-of-type(1)')){
-
-                if(isActive){
-                    const {id,brand,img,price,name}=e.target.dataset;
-                    const url="/compra/compra/compra";
-                    const product={
-                        id,
-                        idCompra: parseInt(state.codeCompra),
-                        brand,
-                        img,
-                        price:parseFloat(price),
-                        name,
-                    }
-                    const options={
-                        method: 'POST',
-                        headers: {"Content-Type":"application/json"},
-                        body: JSON.stringify(product),
-                    }
-                const peticionCompraCarrito=async()=>{
-                        const response=await fetch(url,options);
-
-                        if(!response.ok){
-                            throw new Error(`ocurrio un error en la peticion->${response.statusText}`)
-                        }
-                        const result=await response.json();
-
-                        console.log(result.carrito);
-                        console.log(result.allProduct);
-
-                }
-                peticionCompraCarrito();
-                    state.codeCompra++
-
-                   // setTimeout(()=>{
-                   //     const $carritoBag=document.querySelector('#contador-carrito');
-                   //     // $carritoBag.style.display="none";
-                   //     // $carritoBag.remove();
-                   //     console.log('aqui estoy gente->',$carritoBag)
-                   //     $carritoBag.style.background="red"
-                   //     },1500)
-                // renderizarContadorCarrito()
-
-                    const urlInfo="/carrito/estado/cuack/cuack";
-                    const optionsInfo={
-                        method: 'GET',
-                        headers: {"Content-Type":"application/json"},
-                    };
-
-                    const peticionCarritoInfo=async()=>{
-                        const response=await fetch(urlInfo,optionsInfo);
-
-                        if(!response.ok){
-                            throw new Error(`hubo un error en la peticion->${response.statusText}`)
-                        }
-
-                        const result=await response.json();
-
-
-                        console.log("aqui esta el carrito despues de agregarlo->",result.carrito);
-
-                        // if(result.carritoL>0){
-                        //     const $carritoContador=document.getElementById('contador-carrito');
-                        //     $carritoContador.textContent=result.carritoL;
-                        //     $carritoContador.style.opacity="1";
-                        //
-                        //     $carritoContador.innerHTML=`${result.carritoL}`
-                        // }
-
-
-
-                    }
-                    peticionCarritoInfo();
-                    carritoContadorDOM();
-
-                }
-            }
-        })
-    }
-}
-eventsProductMarcaCarrito();
-
-function renderizarContadorCarrito(){
-    const $carritoBag=document.getElementById('contador-carrito');
-
-    if($carritoBag){
-
-        $carritoBag.style.background="blue";
-
-        console.log('si hay cambios en el carrito bag->',$carritoBag)
-
-    }
-}
-
-
 /*----click en el nombre de busqueda-----*/
 
 document.addEventListener('click',(e)=>{
@@ -1203,9 +1089,7 @@ document.addEventListener('click',(e)=>{
             window.location.href=`/${marcaDirection}`;
 
     }
-    // if(e.target){
-    //     console.log('este es el elemento presionado->',e.target)
-    // }
+
 })
 
 /*contador de productos repetidos*/
@@ -1290,7 +1174,6 @@ async function deleteProductRender(node){
     if($groupProducts){
         if($compraElement){
             $compraElement.remove();
-            // setTimeout(ordenGroup,300)
         }
 
         const existenciaCompras=$groupProducts.querySelectorAll('.compraElement');
@@ -1298,7 +1181,6 @@ async function deleteProductRender(node){
         if(existenciaCompras.length===0){
             $groupProducts.remove();
             if(!$groupProducts){
-               // setTimeout(ordenGroup,300)
             }
         }
         console.log('aqui esta el grupo del elemento presionado->', $groupProducts);
@@ -1313,7 +1195,6 @@ async function deleteProductRender(node){
 
 }
 
-// deleteProductRender();
 
 async function addProductRender(node) {
     const $groupProducts = node.closest('.group_products');
@@ -1360,7 +1241,7 @@ async function addProductRender(node) {
 
         $groupProducts.appendChild(elementProductAdd);
 
-        // ✅ Aplica la animación de parpadeo a todo el grupo de productos
+        // Aplica la animación de parpadeo a todo el grupo de productos
         $groupProducts.classList.add("blinkEffect");
 
         setTimeout(() => {
@@ -1387,14 +1268,7 @@ function deleteGroup(node){
         ordenGroup();
     }
 
-
-
-
-
-
 }
-
-
 
 function renderAfterAction(carrito) {
     const containerElements = document.querySelector('.containerElementsCompra');
@@ -1483,40 +1357,6 @@ function renderAfterAction(carrito) {
 
             const $pathLeftAll=document.querySelectorAll('#arrowLeft>path')
             const $pathRightAll=document.querySelectorAll('#arrowRight>path')
-
-
-            // if($pathLeftAll.length>0){
-            //     $pathLeftAll.forEach(pathLeft=>{
-            //
-            //         pathLeft.style.zIndex="3";
-            //
-            //         pathLeft.addEventListener('mouseenter',e=>{
-            //             pathLeft.style.background="lightblue";
-            //         })
-            //         pathLeft.addEventListener('mouseleave',e=>{
-            //             pathLeft.style.background=""
-            //         })
-            //     })
-            // }
-            // if($pathRightAll.length>0){
-            //     $pathRightAll.forEach(pathRight=>{
-            //
-            //         pathRight.style.zIndex="3";
-            //
-            //         pathRight.addEventListener('mouseenter',e=>{
-            //             pathRight.style.background="lightblue";
-            //         })
-            //         pathRight.addEventListener('mouseleave',e=>{
-            //             pathRight.style.background=""
-            //         })
-            //     })
-            // }
-
-            // if($arrowLeft&&$arrowRight){
-            //     $arrowLeft.classList.add('activeAfter');
-            //     $arrowRight.classList.add('activeAfter');
-            // }
-
 
             // Estilos para el primer elemento del grupo (visible)
             if (index === 0) {
@@ -1672,8 +1512,6 @@ document.addEventListener('click',async(e)=>{
         let idCompra=await lastIdCompra();
 
         idCompra = idCompra ? idCompra + 1 : 1;
-
-
 
 
         // Crear el objeto del producto con un nuevo idCompra
@@ -2321,44 +2159,46 @@ async function extraerDatos() {
 }
 
 
-async function addPriceAndImg(){
+async function addPriceAndImg(text){
 
     const baseDatos=await extraerDatos();
 
     const $searchAndOptions=document.querySelector('.searchAndOptions')
 
-
     const $ul=$searchAndOptions.querySelector('ul');
-
+    const fragmentUL=document.createDocumentFragment();
     if($ul){
-        const $allLi=$ul.querySelectorAll('li');
-
-
-        $allLi.forEach(li=>{
-
-
-            const textoLimpio=limpiarTexto(li.textContent)
+            // console.log(text);
+            const textoLimpio=limpiarTexto(text)
             const element=baseDatos.find(element=>{
 
                 if([element.brand,element.name].join(' ')===textoLimpio){
                     return element;
                 }
             })
+        // console.log(element);
 
-            // const img=`<img src="${element.img}">`
+            const fragmentLi=document.createDocumentFragment();
+            const li=document.createElement('li');
+            const span=document.createElement('span');
+            span.innerHTML=textoLimpio
             const img=document.createElement("img")
             img.src=element.img;
             const price=document.createElement("span");
-            price.textContent=element.price;
+            price.textContent="S/. "+element.price;
 
-            li.prepend(img);
-            li.appendChild(price);
 
-        })
+            fragmentLi.appendChild(img)
+            fragmentLi.appendChild(span)
+            fragmentLi.appendChild(price)
+
+            li.appendChild(fragmentLi);
+            fragmentUL.appendChild(li);
+
     }else{
         console.log('creo que el nodo no fue restituido correctamente')
     }
-
+    $ul.appendChild(fragmentUL)
 
 }
 
@@ -2368,9 +2208,6 @@ function limpiarTexto(texto){
 
     return onlyText;
 }
-
-
-
 
 function createContainerSearchProducts() {
     const $template = document.getElementById('optionsBusqueda').content;
@@ -2415,27 +2252,12 @@ function createContainerSearchProducts() {
 
                     }
                     console.log(isFocus);
-
                 }
         }
-
-
-
-
-
     })
-
-
 }
-
 // Llamar a la función
 createContainerSearchProducts();
-
-function animationIconSearchProducts(){
-
-    const lupa=document.querySelector('#iconsNav>li:nth-child(1)');
-
-}
 
 function eventoExitSearch(){
 
@@ -2450,10 +2272,7 @@ function eventoExitSearch(){
                 $body.classList.remove('activeBody')
                 $busquedaInteractiva.classList.remove('activeBusqueda')
             }
-
-
         }
-
     })
 
 }
@@ -2477,7 +2296,6 @@ async function searchProducts() {
 
     }
 
-
     const oraciones = baseDatos.map(cadena => {
         return [
             cadena.brand.toLowerCase(),
@@ -2486,51 +2304,107 @@ async function searchProducts() {
     });
 
 
-    document.addEventListener('input', e => {
+    $input_search.addEventListener('input', e => {
         if (e.target.tagName === "INPUT" && e.target.type === "search") {
+
             const $ul = $searchAndOptions.querySelector('ul');
             const textoIngresado = e.target.value.toLowerCase().trim();
+            let arrayExistente = [];
+            let active=true;
 
-            // Limpiar lista anterior
-            $ul.innerHTML = "";
-
+            // $ul.innerHTML = "";
 
             if (!textoIngresado) {
                 const li = document.createElement('li');
-                li.textContent = 'Ingrese texto para buscar gaaaaaa';
-                li.style.padding="10px"
+                while($ul.firstChild) $ul.removeChild($ul.firstChild);
+                li.textContent = 'Ingrese texto para buscar';
+                li.style.padding = "10px"
+                li.style.transition="all 0.25s ease-in-out";
                 $ul.appendChild(li);
+
+                setTimeout(()=>{
+                    li.style.opacity="0";
+                },500)
+                setTimeout(()=>{
+                    li.remove();
+                    active=!active;
+                },750)
                 return;
             }
-
             const textoArray = textoIngresado.split(/\s+/); // Manejar múltiples espacios
             const arrayFiltrado = oraciones.filter(cadena =>
                 textoArray.every(word => cadena.includes(word))
             );
 
+            //nuevo filtro
+            const $liExistente = $ul.querySelectorAll('li')
+            // $liExistente.forEach(li => console.log(li));
 
-            if (arrayFiltrado.length > 0) {
-                arrayFiltrado.forEach((filtrado, indice) => {
-                    let textoResaltado = filtrado;
 
-                    textoArray.forEach(word => {
-                        // Crear una expresión regular para buscar palabras completas
-                        const regex = new RegExp(`\\b(${word})\\b`, 'gi');
-                        textoResaltado = textoResaltado.replace(regex, match => {
-                            return `<span style="background:gray; padding: 7.5px 5px; border-radius:7.5px;">${match}</span>`;
-                        });
-                    });
 
-                    const li = document.createElement('li');
-                    li.innerHTML = `<div>${textoResaltado}</div>`;
-                    $ul.appendChild(li);
-                });
-                addPriceAndImg();
+            if ($liExistente.length > 0) {
+
+                if (arrayFiltrado.length < $liExistente.length) {
+                    $liExistente.forEach((li, indice) => {
+                        // const preTxt=$liExistente[indice].querySelector('span:nth-of-type(1)');
+                        const span = li.querySelector('span:nth-of-type(1)');
+                        console.log(`aqui esta el preTxt->`, span);
+
+                        if (arrayFiltrado[indice] !== span.textContent) li.remove();
+
+                    })
+                }
+                if (arrayFiltrado.length > $liExistente.length) {
+
+                    arrayFiltrado.forEach((text, indice) => {
+
+                        if ($liExistente[indice]) {
+                            const span = $liExistente[indice].querySelector('span:nth-of-type(1)');
+                            if(span) console.log('texto->', span.textContent);
+
+
+                        } else {
+                            addPriceAndImg(text);
+                            arrayExistente.push(text);
+                        }
+                        console.log('array filtrado->',text);
+
+                    })
+
+                    //previo filtro
+                    // if (arrayFiltrado.length > 0) {
+                    //     arrayFiltrado.forEach((filtrado, indice) => {
+                    //         let textoResaltado = filtrado;
+                    //
+                    //         textoArray.forEach(word => {
+                    //             // Crear una expresión regular para buscar palabras completas
+                    //             const regex = new RegExp(`\\b(${word})\\b`, 'gi');
+                    //             // textoResaltado = textoResaltado.replace(regex, match => {
+                    //             //     return `<span style="background:gray; padding: 7.5px 5px; border-radius:7.5px;">${match}</span>`;
+                    //             textoResaltado=textoResaltado.replace(regex,word);
+                    //
+                    //             });
+                    //
+                    //          addPriceAndImg(textoResaltado);
+                    //         });
+                    //
+                    //
+                    //
+                    //
+                    // } else {
+                    //     $ul.innerHTML="";
+                    //     const li = document.createElement('li');
+                    //     li.style.padding="10px"
+                    //     li.textContent = 'No se encontraron coincidencias, pruebe otra vez';
+                    //         $ul.appendChild(li);
+                    // }
+                }
             } else {
-                const li = document.createElement('li');
-                li.style.padding="10px"
-                li.textContent = 'No se encontraron coincidencias, pruebe otra vez';
-                    $ul.appendChild(li);
+                    arrayFiltrado.forEach(filtrado => {
+
+                        addPriceAndImg(filtrado)
+                        arrayExistente.push(filtrado);
+                    })
             }
         }
     });
@@ -2583,9 +2457,8 @@ async function searchProducts() {
             const elementBusqueda2 = baseDatos.map(el => el.name);
             const nuevoElementBusqueda2 = elementBusqueda2.filter(el => filtradoLetra.includes(el));
 
-            // Aquí podrías redirigir o realizar otra acción
             window.location.href = `/${nuevoElementBusqueda[0]}/${nuevoElementBusqueda2[0]}`;
-            return; // Terminar después de procesar el clic en `li`
+            return;
         }
     });
 

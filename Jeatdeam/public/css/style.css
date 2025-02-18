@@ -416,17 +416,15 @@ main{
 }
 /*---template busqueda---*/
 
-
-
-
 .searchAndOptions>ul{
     opacity:0;
     list-style: none;
     display: flex;
     flex-direction: column;
     gap: 12.5px 0;
-    /*background: lightblue;*/
     padding: 0 12.5px;
+    transition: all 0.25s linear;
+
 }
 .searchAndOptions>ul>li{
     background: lightblue;
@@ -435,30 +433,40 @@ main{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 10px;
+    padding: 10px;
     box-shadow: 0 0 25px rgba(0,0,0,0.2);
-    border: 2px solid transparent;
+    border: 3px solid transparent;
     border-radius: 7.5px;
     font-size: 15px;
+    height: 80px;
+    min-height: 80px;
+    transition: all 0.15s ease-in-out;
+
 }
+.searchAndOptions>ul>li>img{
+    min-width: 75px;
+    min-height: 75px;
+}
+.searchAndOptions>ul>li>span:nth-of-type(2){
+    font-weight: bold;
+}
+/*.searchAndOptions>*/
 .activeTransition{
     transition: background-color 0.5s ease-in-out;
 }
-.searchAndOptions>ul>li>div{
-    /*display: flex;*/
-    /*background: red;*/
-    /*justify-content: start;*/
-    /*border: 5px solid blue;*/
-    width: 100%;
-    padding: 0 5px;
-}
+
 .searchAndOptions>ul>li>img{
     height: 75px;
     width: 75px;
+    /*border: 1px solid black;*/
+    box-shadow: 0 0 5px rgba(0,0,0,0.6);
+    border-radius: 7.5px;
     /*aspectratio: 1;*/
 }
+.searchAndOptions>ul>li>span{
+}
 .searchAndOptions>ul>li:hover{
-    border: 2px solid cornflowerblue;
+    border: 3px solid cornflowerblue;
     border-radius: 7.5px;
     transition: border 0.15s ease-in-out;
 }
