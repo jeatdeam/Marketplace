@@ -2159,9 +2159,10 @@ async function extraerDatos() {
 }
 
 
-async function addPriceAndImg(text){
+async function addPriceAndImg(text,textoIngresado){
 
     const baseDatos=await extraerDatos();
+
 
     const $searchAndOptions=document.querySelector('.searchAndOptions')
 
@@ -2176,22 +2177,44 @@ async function addPriceAndImg(text){
                     return element;
                 }
             })
-        // console.log(element);
+
+        const regex = new RegExp(`\\b\\w*${textoIngresado}\\w*\\b`, 'gi');
+        const coincidencias = text.match(regex);
+
 
             const fragmentLi=document.createDocumentFragment();
             const li=document.createElement('li');
-            const span=document.createElement('span');
-            // textoLimpio=textoLimpio.toUpperCase()
-            span.textContent=textoLimpio.toUpperCase();
+            const spanBrand=document.createElement('span');
+            const div=document.createElement('div');
+
+            spanBrand.textContent=element.brand;
+            spanBrand.style.fontWeight="bold";
+            // spanBrand.style.border="1px solid black";
+            // spanBrand.style.padding="2.5px 5px";
+            // spanBrand.style.borderRadius="7.5px"
+            // spanBrand.style.background="rgba(0, 0, 0, 0.2)";
+
+        const spanName=document.createElement('span');
+
+            element.name.split(' ').forEach((word,indice)=>{
+                const span=document.createElement('span');
+                span.textContent=word;
+                console.log(span.textContent);
+
+                spanName.appendChild(span);
+            })
+
             const img=document.createElement("img")
             img.src=element.img;
             const price=document.createElement("span");
             price.textContent="S/. "+element.price;
 
+            div.appendChild(spanBrand)
+            div.appendChild(spanName)
 
-            fragmentLi.appendChild(img)
-            fragmentLi.appendChild(span)
-            fragmentLi.appendChild(price)
+            fragmentLi.appendChild(img);
+            fragmentLi.appendChild(div);
+            fragmentLi.appendChild(price);
 
             li.appendChild(fragmentLi);
             fragmentUL.appendChild(li);
@@ -2202,6 +2225,43 @@ async function addPriceAndImg(text){
     $ul.appendChild(fragmentUL)
 
 }
+function pintarTexto(textoIngresado){
+
+    const textoFiltrado=textoIngresado.split(' ');
+
+    console.log(textoFiltrado,"->ga2");
+
+    const $ul=document.querySelector('.searchAndOptions');
+    const $liAll=$ul.querySelectorAll('li');
+
+    const arrayText=[];
+
+    $liAll.forEach((node,indice)=>{
+
+        // arrayText.push(node.querySelector('span:nth-of-type').textContent);
+        const spanOne=node.querySelector('div>span:nth-of-type(1)');
+        let txtOne=spanOne.textContent;
+        const spanTwo=node.querySelectorAll('div>span:nth-of-type(2)>span');
+        let txtTwo=spanTwo.textContent;
+
+        spanTwo.forEach(span=>{
+            span.style.color="";
+            // span.style.fontWeight="";
+        })
+
+        textoFiltrado.forEach(word=>{
+            spanTwo.forEach(span=>{
+                if(span.textContent===word) {
+                    span.style.color="cornflowerblue";
+                    // span.style.fontWeight="bold";
+                }
+            })
+        })
+    })
+
+
+}
+
 
 function limpiarTexto(texto){
 
@@ -2252,7 +2312,6 @@ function createContainerSearchProducts() {
                         isFocus = true;
 
                     }
-                    console.log(isFocus);
                 }
         }
     })
@@ -2315,6 +2374,8 @@ async function searchProducts() {
 
             // $ul.innerHTML = "";
 
+            pintarTexto(textoIngresado);
+
             if (!textoIngresado) {
                 const li = document.createElement('li');
                 while($ul.firstChild) $ul.removeChild($ul.firstChild);
@@ -2337,11 +2398,9 @@ async function searchProducts() {
                 textoArray.every(word => cadena.includes(word))
             );
 
+
             //nuevo filtro
             const $liExistente = $ul.querySelectorAll('li')
-            // $liExistente.forEach(li => console.log(li));
-
-
 
             if ($liExistente.length > 0) {
 
@@ -2349,7 +2408,6 @@ async function searchProducts() {
                     $liExistente.forEach((li, indice) => {
                         // const preTxt=$liExistente[indice].querySelector('span:nth-of-type(1)');
                         const span = li.querySelector('span:nth-of-type(1)');
-                        console.log(`aqui esta el preTxt->`, span);
 
                         if (arrayFiltrado[indice] !== span.textContent) li.remove();
 
@@ -2361,17 +2419,12 @@ async function searchProducts() {
 
                         if ($liExistente[indice]) {
                             const span = $liExistente[indice].querySelector('span:nth-of-type(1)');
-                            if(span) console.log('texto->', span.textContent);
-
-
                         } else {
-                            addPriceAndImg(text);
+                            addPriceAndImg(text,textoIngresado);
                             arrayExistente.push(text);
                         }
-                        console.log('array filtrado->',text);
 
                     })
-
                     //previo filtro
                     // if (arrayFiltrado.length > 0) {
                     //     arrayFiltrado.forEach((filtrado, indice) => {
@@ -2399,11 +2452,12 @@ async function searchProducts() {
                     //     li.textContent = 'No se encontraron coincidencias, pruebe otra vez';
                     //         $ul.appendChild(li);
                     // }
+
                 }
             } else {
                     arrayFiltrado.forEach(filtrado => {
 
-                        addPriceAndImg(filtrado)
+                        addPriceAndImg(filtrado,textoIngresado)
                         arrayExistente.push(filtrado);
                     })
             }
@@ -2414,7 +2468,6 @@ async function searchProducts() {
     document.addEventListener('keydown', e => {
         if (e.key === 'Enter' && e.target.tagName === "INPUT" && e.target.type === "search") {
             const textoIngresado = e.target.value.trim();
-            console.log('Texto ingresado:', textoIngresado);
 
             if (textoIngresado) {
                 window.location.href = `/${encodeURIComponent(textoIngresado)}`;
@@ -2425,9 +2478,8 @@ async function searchProducts() {
     document.addEventListener('click', e => {
         const searchContainer = document.querySelector('.searchAndOptions');
 
-        // Si el clic ocurre en el input, no hacer nada
         if (e.target.matches('input[type="search"]')) {
-            return; // No ejecutar más lógica
+            return;
         }
 
         // Si el clic ocurrió fuera del contenedor, limpiar la lista
@@ -2442,25 +2494,22 @@ async function searchProducts() {
 
         }
 
-        // Si el clic ocurre en un `li` o en alguno de sus hijos
-        const li = e.target.closest('.searchAndOptions > ul > li');
-        if (li) {
-            const urlPorProduct = li.textContent;
+        if(e.target.closest('.searchAndOptions>ul>li')){
+            const li=e.target.closest('.searchAndOptions>ul>li');
 
-            console.log(li); // Mostrar el elemento `li` en la consola
-            console.log('Seleccionaste:', urlPorProduct);
+            const firtSpan=li.querySelector('div>span:nth-of-type(1)');
+            const brand=firtSpan.textContent;
 
-            const filtradoLetra = urlPorProduct.trim();
-            const elementDeBusqueda = baseDatos.map(el => el.brand);
+            const allSpan=li.querySelectorAll('div>span:nth-of-type(2)>span');
+            let name=[];
+            allSpan.forEach(span=>{
+                name.push(span.textContent);
+            })
 
-            const nuevoElementBusqueda = elementDeBusqueda.filter(el => filtradoLetra.includes(el));
-
-            const elementBusqueda2 = baseDatos.map(el => el.name);
-            const nuevoElementBusqueda2 = elementBusqueda2.filter(el => filtradoLetra.includes(el));
-
-            window.location.href = `/${nuevoElementBusqueda[0]}/${nuevoElementBusqueda2[0]}`;
-            return;
+            window.location.href=`/${brand}/${name.join(' ')}`
         }
+
+
     });
 
 

@@ -68,7 +68,6 @@ export function redirectMasVendidoElement(){
     })
 
     document.addEventListener('click',e=>{
-        console.log('El valor de active button es-> ',activeButton)
         if(activeButton){
             if(e.target.closest('.masVendidoElement')){
                     const element = e.target.closest('.masVendidoElement')

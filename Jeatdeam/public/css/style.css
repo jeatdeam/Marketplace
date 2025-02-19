@@ -433,7 +433,7 @@ main{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px;
+    padding: 10px 20px;
     box-shadow: 0 0 25px rgba(0,0,0,0.2);
     border: 3px solid transparent;
     border-radius: 7.5px;
@@ -441,7 +441,7 @@ main{
     height: 80px;
     min-height: 80px;
     transition: all 0.15s ease-in-out;
-
+    gap: 35px;
 }
 .searchAndOptions>ul>li>img{
     min-width: 75px;
@@ -454,7 +454,22 @@ main{
 .activeTransition{
     transition: background-color 0.5s ease-in-out;
 }
-
+.searchAndOptions>ul>li>div{
+    display: flex;
+    gap: 5px;
+    align-items: center;
+    flex: 1;
+    font-size: 17.5px;
+}
+.searchAndOptions>ul>li>div>span:nth-of-type(2){
+    display: flex;
+    gap: 5px;
+    align-items: center;
+}
+.searchAndOptions>ul>li>span:nth-of-type(1){
+    font-weight: bold;
+    font-size: 17.5px;
+}
 .searchAndOptions>ul>li>img{
     height: 75px;
     width: 75px;
@@ -482,6 +497,11 @@ main{
     font-weight: bold;
     border: 2px solid black;
 }
+
+.iconsBusqueda>svg{
+
+}
+
 #iconsNav{
     /*width: 15%;*/
     display: flex;
@@ -2107,6 +2127,27 @@ input:focus{
         width: 300px;
     }
 
+
+    /*searAndProducts*/
+    .searchAndOptions{
+
+    }
+    .searchAndOptions>ul>li{
+        gap: 25px;
+    }
+    .searchAndOptions>ul>li>div{
+        flex-direction: column;
+        align-items: start;
+    }
+    .searchAndOptions>ul>li>span:nth-of-type(1){
+        align-self: end;
+        transform: translateY(-70%);
+    }
+    .iconsBusqueda>svg{
+        width: 40px;
+        height: 40px;
+    }
+
     /*-------------navegador-------------------*/
     /*-----infoCenter------*/
 
@@ -2270,12 +2311,14 @@ input:focus{
         justify-content: space-between;
     }
     .busquedaInteractiva{
-        width: 400px;
+        width: 425px;
     }
     .iconsBusqueda>input{
         width: 500px;
     }
+    .iconsBusqueda>svg{
 
+    }
     .carouselImages{
 
     }
@@ -2767,12 +2810,14 @@ input:focus{
         justify-content: space-between;
     }
     .busquedaInteractiva{
-        width: 550px;
+        width: 500px;
+        min-width: 500px;
     }
     .iconsBusqueda>input{
         width: 500px;
     }
-
+    .iconsBusqueda>svg{
+    }
     .carouselImages{
 
     }
@@ -3241,12 +3286,15 @@ input:focus{
         justify-content: space-between;
     }
     .busquedaInteractiva{
-        width: 550px;
+        width: 500px;
+        min-width: 500px;
     }
     .iconsBusqueda>input{
         width: 500px;
     }
+    .iconsBusqueda>svg{
 
+    }
     .carouselImages{
 
     }
@@ -3695,12 +3743,15 @@ input:focus{
         justify-content: space-between;
     }
     .busquedaInteractiva{
-        width: 600px;
+        width: 500px;
+        min-width: 500px;
     }
     .iconsBusqueda>input{
         width: 550px;
     }
+    .iconsBusqueda>svg{
 
+    }
 
     .carouselImages{
 
@@ -4152,12 +4203,14 @@ input:focus{
         justify-content: space-between;
     }
     .busquedaInteractiva{
-        width: 600px;
+        width: 500px;
+        min-width: 500px;
     }
     .iconsBusqueda>input{
         width: 550px;
     }
-
+    .iconsBusqueda>svg{
+    }
     .carouselImages{
         overflow: hidden;
         position: relative;
@@ -4658,12 +4711,15 @@ input:focus{
         justify-content: space-between;
     }
     .busquedaInteractiva{
-        width: 650px;
+        width: 500px;
+        min-width: 500px;
     }
     .iconsBusqueda>input{
         width: 600px;
     }
+    .iconsBusqueda>svg{
 
+    }
     .carouselImages{
         overflow: hidden;
         position: relative;
@@ -5168,10 +5224,14 @@ input:focus{
         justify-content: space-between;
     }
     .busquedaInteractiva{
-        width: 750px;
+        width: 500px;
+        min-width: 500px;
     }
     .iconsBusqueda>input{
         width: 700px;
+    }
+    .iconsBusqueda>svg{
+
     }
 
 
