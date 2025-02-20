@@ -335,7 +335,7 @@ main{
 .busquedaInteractiva{
     border: 2px solid black;
     border-radius: 12px;
-    /*padding: 15px 0;*/
+    padding: 2.5px;
     display: flex;
     flex-direction: column;
     /*width: 400px;*/
@@ -355,8 +355,9 @@ main{
 .iconsBusqueda{
     display: flex;
     align-items: center;
-    gap: 12.5px;
-    padding: 12.5px 25px;
+    justify-content: space-evenly;
+    gap: 5px;
+    padding: 12.5px;
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
     /*border-radius-bottomleft: 12.5px;*/
     /*border-radius-bottomright: 12.5px;*/
@@ -370,7 +371,10 @@ main{
     font-weight: 100;
 }
 .iconsBusqueda>svg{
-
+    width: 25px;
+    height: 25px;
+    min-width: 25px;
+    min-height: 25px;
 }
 
 /*----------tittle busqueda e iconos--------------------*/
@@ -421,7 +425,7 @@ main{
     list-style: none;
     display: flex;
     flex-direction: column;
-    gap: 12.5px 0;
+    gap: 15px 0;
     padding: 0 12.5px;
     transition: all 0.25s linear;
 
@@ -1859,9 +1863,11 @@ input:focus{
 
 @media (max-width: 320px){
     /*-----------searchAndOptions-------------------*/
+    .iconsBusqueda{
+        width: 95%;
+    }
     .searchAndOptions>ul>li{
         gap: 25px;
-        position: relative;
         padding: 10px 10px;
     }
     .searchAndOptions>ul>li>div{
@@ -1870,10 +1876,6 @@ input:focus{
     }
     .searchAndOptions>ul>li>span:nth-of-type(1){
         white-space: nowrap;
-        position: absolute;
-        top: 82%;
-        left: 39%;
-
     }
     .searchAndOptions>ul>li>div{
         align-self: start;
@@ -1881,20 +1883,28 @@ input:focus{
     .searchAndOptons>ul>li>span:nth-of-type(1){
 
     }
+    .searchAndOptions>ul>li>div>span:nth-of-type(3){
+        font-weight: bold;
+    }
+
 
     /*--------------------------------*/
     /*-----busquedaInteractiva-------*/
     .busquedaInteractiva{
         /*width: 50px;*/
-        width: 320px;
-        min-width: 320px;
+        /*width: 320px;*/
+        /*min-width: 320px;*/
+        padding: 0;
+        width: 100%;
     }
     .iconsBusqueda>input{
-        width: 280px;
+        width: 80%;
     }
     .iconsBusqueda>svg{
-        width: 20px;
-        height: 20px;
+        width: 25px;
+        height: 25px;
+        min-width: 25px;
+        min-height: 25px;
     }
     /*----------------------*/
     /*infoCenter*/
@@ -1962,10 +1972,10 @@ input:focus{
         align-self: end;
         transform: translateY(-70%);
     }
-    .iconsBusqueda>svg{
-        width: 40px;
-        height: 40px;
-    }
+    /*.iconsBusqueda>svg{*/
+    /*    width: 40px;*/
+    /*    height: 40px;*/
+    /*}*/
 
     /*-------------navegador-------------------*/
     /*-----infoCenter------*/
@@ -2441,9 +2451,12 @@ input:focus{
 }
 @media (min-width: 321px) and (max-width: 480px){
     /*-----------searchAndOptions-------------------*/
+    .iconsBusqueda{
+        width: 95%;
+        margin: 0 auto;
+    }
     .searchAndOptions>ul>li{
         gap: 25px;
-        position: relative;
         padding: 10px 10px;
     }
     .searchAndOptions>ul>li>div{
@@ -2452,10 +2465,6 @@ input:focus{
     }
     .searchAndOptions>ul>li>span:nth-of-type(1){
         white-space: nowrap;
-        position: absolute;
-        top: 82%;
-        left: 39%;
-
     }
     .searchAndOptions>ul>li>div{
         align-self: start;
@@ -2463,20 +2472,29 @@ input:focus{
     .searchAndOptons>ul>li>span:nth-of-type(1){
 
     }
+    .searchAndOptions>ul>li>div>span:nth-of-type(3){
+        font-weight: bold;
+    }
 
     /*-----busquedaInteractiva-------*/
     .busquedaInteractiva{
         /*width: 50px;*/
+        /*width: 320px;*/
+        /*min-width: 320px;*/
+        padding: 0;
         width: 320px;
-        min-width: 320px;
+        margin: 0 auto;
     }
     .iconsBusqueda>input{
-        width: 280px;
+        width: 80%;
     }
     .iconsBusqueda>svg{
-        width: 20px;
-        height: 20px;
+        width: 25px;
+        height: 25px;
+        min-width: 25px;
+        min-height: 25px;
     }
+
     /*----------------------*/
     /*center*/
     .infoCenter{
@@ -2551,10 +2569,10 @@ input:focus{
         align-self: end;
         transform: translateY(-70%);
     }
-    .iconsBusqueda>svg{
-        width: 40px;
-        height: 40px;
-    }
+    /*.iconsBusqueda>svg{*/
+    /*    width: 40px;*/
+    /*    height: 40px;*/
+    /*}*/
 
     /*-------------navegador-------------------*/
     /*-----infoCenter------*/
@@ -2718,14 +2736,14 @@ input:focus{
         display:flex;
         justify-content: space-between;
     }
-    .busquedaInteractiva{
-        /*width: 50px;*/
-        width: 300px;
-        min-width: 300px;
-    }
-    .iconsBusqueda>input{
-        width: 280px;
-    }
+    /*.busquedaInteractiva{*/
+    /*    !*width: 50px;*!*/
+    /*    width: 300px;*/
+    /*    min-width: 300px;*/
+    /*}*/
+    /*.iconsBusqueda>input{*/
+    /*    width: 280px;*/
+    /*}*/
     .iconsBusqueda>svg{
 
     }
@@ -3040,7 +3058,11 @@ input:focus{
     }
 }
 @media (min-width: 481px) and (max-width: 640px){
-/*----------infoCenter-----------*/
+    .iconsBusqueda{
+        width: 90%;
+        margin: 0 auto;
+    }
+    /*----------infoCenter-----------*/
     .infoCenter{
         /*width: calc(70vw + 25px);*/
         width: 80%;

@@ -2,10 +2,15 @@
 // import { loadStripe } from "https://js.stripe.com/v3/";
 // import stripe from './stripe.mjs';
 // import Stripe from "stripe";
+import {moveSpan} from './moveElements.mjs'
 import keysFromStripe from './keysFromStripe.mjs';
 import {masVendidosElement} from './masVendidos.mjs';
 import {redirectMasVendidoElement} from './masVendidos.mjs'
 import {asignarNombresHeader} from "./listaProducts.mjs";
+
+// moveSpan();
+
+window.addEventListener('resize',moveSpan);
 
 masVendidosElement();
 asignarNombresHeader();
