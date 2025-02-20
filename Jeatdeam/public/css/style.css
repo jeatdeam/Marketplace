@@ -338,7 +338,7 @@ main{
     /*padding: 15px 0;*/
     display: flex;
     flex-direction: column;
-    width: 400px;
+    /*width: 400px;*/
     /*min-height: 600px;*/
     position: absolute;
     top: 250px;
@@ -804,7 +804,6 @@ main{
     flex-direction: column;
     align-items: center;
     gap: 15px 0;
-    padding: 15px 0;
 }
 .descriptionTop{
     width: 70%;
@@ -852,7 +851,15 @@ main{
     list-style: none;
     width: 80%;
     display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
     justify-content: space-evenly;
+}
+#footer>h3{
+    font-size: 17.5px;
+    text-align: center;
+    width: 90%;
+    margin: 0 auto;
 }
 .infoDev{
     background: lightblue;
@@ -1805,6 +1812,13 @@ input:focus{
     gap: 35px;
 }
 
+.infoCenter{
+
+}
+.elementInfo_one>div,.elementInfo_two>div{
+    box-shadow: 0 0 10px rgba(0,0,0,0.8);
+}
+
 /*.infoCenter{*/
 /*    width: calc(70vw + 25px);*/
 /*    margin: 0 auto;*/
@@ -1844,6 +1858,15 @@ input:focus{
 /*}*/
 
 @media (max-width: 320px){
+    /*-----busquedaInteractiva-------*/
+    .busquedaInteractiva{
+        /*width: 50px;*/
+        width: 300px;
+        min-width: 300px;
+    }
+    .iconsBusqueda>input{
+        width: 280px;
+    }
 
     /*infoCenter*/
     .infoCenter{
@@ -1874,7 +1897,7 @@ input:focus{
         align-items: center;
         text-align: center;
         gap: 15px;
-        border: 5px solid gray;
+        /*border: 5px solid gray;*/
         border-radius: 15px;
         justify-content: center;
         padding: 0 15px;
@@ -2077,12 +2100,7 @@ input:focus{
         display:flex;
         justify-content: space-between;
     }
-    .busquedaInteractiva{
-        width: 425px;
-    }
-    .iconsBusqueda>input{
-        width: 500px;
-    }
+
     .iconsBusqueda>svg{
 
     }
@@ -2423,7 +2441,7 @@ input:focus{
         align-items: center;
         text-align: center;
         gap: 15px;
-        border: 5px solid gray;
+        /*border: 5px solid gray;*/
         border-radius: 15px;
         justify-content: center;
         padding: 0 15px;
@@ -2635,10 +2653,12 @@ input:focus{
         justify-content: space-between;
     }
     .busquedaInteractiva{
-        width: 425px;
+        /*width: 50px;*/
+        width: 300px;
+        min-width: 300px;
     }
     .iconsBusqueda>input{
-        width: 500px;
+        width: 280px;
     }
     .iconsBusqueda>svg{
 
@@ -2983,7 +3003,7 @@ input:focus{
         align-items: center;
         text-align: center;
         gap: 15px;
-        border: 5px solid gray;
+        /*border: 5px solid gray;*/
         border-radius: 15px;
         justify-content: center;
         padding: 0 15px;
@@ -3542,7 +3562,7 @@ input:focus{
         align-items: center;
         text-align: center;
         gap: 15px;
-        border: 5px solid gray;
+        /*border: 5px solid gray;*/
         border-radius: 15px;
         justify-content: center;
         padding: 0 15px;
@@ -4079,7 +4099,7 @@ input:focus{
         align-items: center;
         text-align: center;
         gap: 15px;
-        border: 5px solid gray;
+        /*border: 5px solid gray;*/
         border-radius: 15px;
         justify-content: center;
         padding: 0 15px;
@@ -4606,7 +4626,7 @@ input:focus{
         align-items: center;
         text-align: center;
         gap: 15px;
-        border: 5px solid gray;
+        /*border: 5px solid gray;*/
         border-radius: 15px;
         justify-content: center;
         padding: 0 15px;
@@ -5116,7 +5136,7 @@ input:focus{
         align-items: center;
         text-align: center;
         gap: 15px;
-        border: 5px solid gray;
+        /*border: 5px solid gray;*/
         border-radius: 15px;
         justify-content: center;
         padding: 0 15px;
@@ -5671,7 +5691,7 @@ input:focus{
         align-items: center;
         text-align: center;
         gap: 15px;
-        border: 5px solid gray;
+        /*border: 5px solid gray;*/
         border-radius: 15px;
         justify-content: center;
         padding: 0 15px;
@@ -6228,7 +6248,7 @@ input:focus{
         align-items: center;
         text-align: center;
         gap: 15px;
-        border: 5px solid gray;
+        /*border: 5px solid gray;*/
         border-radius: 15px;
         justify-content: center;
         padding: 0 15px;

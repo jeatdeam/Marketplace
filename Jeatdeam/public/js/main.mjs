@@ -2206,7 +2206,7 @@ async function addPriceAndImg(text,textoIngresado){
             })
 
             const img=document.createElement("img")
-            img.src=element.img;
+            img.src=element.img[0];
             const price=document.createElement("span");
             price.textContent="S/. "+element.price;
 
