@@ -434,7 +434,7 @@ main{
     justify-content: space-between;
     align-items: center;
     padding: 10px 20px;
-    box-shadow: 0 0 25px rgba(0,0,0,0.2);
+    box-shadow: 0 0 5px rgba(0,0,0,0.8);
     border: 3px solid transparent;
     border-radius: 7.5px;
     font-size: 15px;
@@ -786,43 +786,7 @@ main{
 
 /*----------------DELIVERY INFO------------------------------*/
 
-.infoCenter{
-    width: calc(70vw + 25px);
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: repeat(auto-fit,minmax(300px,1fr));
-    /*justify-content: center;*/
 
-    padding: 50px 25px;
-    gap: 25px;
-}
-.elementInfo_one,.elementInfo_two{
-    display: flex;
-    gap: 25px;
-    flex-wrap: wrap;
-}
-
-.elementInfo_one>div,
-.elementInfo_two>div{
-    display: flex;
-    width: 350px;
-    height: 300px;
-    margin: 0 auto;
-    flex-direction: column;
-    flex-wrap: wrap;
-    align-items: center;
-    text-align: center;
-    gap: 15px;
-    border: 5px solid gray;
-    border-radius: 15px;
-    justify-content: center;
-    padding: 0 15px;
-}
-.elementInfo_one>div>svg,
-.elementInfo_two>div>svg{
-    width: 55px;
-    height: 55px;
-}
 
 /*----------productsBrands----------------*/
 
@@ -830,95 +794,6 @@ main{
 
 
 /*------------------------Marcas-----------------*/
-/*#productosCadaMARCA{*/
-
-
-/*}*/
-
-/*.marcas{*/
-
-
-/*}*/
-/*.marcas>h1{*/
-/*    text-align: center;*/
-/*    !*line-height:2;*!*/
-/*    font-size: 50px;*/
-/*    padding: 25px 0;*/
-/*}*/
-/*.containerMarcas{*/
-/*    !*height: 500px;*!*/
-/*    padding: 25px 0;*/
-/*    width: 70%;*/
-/*    margin: 0 auto;*/
-/*    display: grid;*/
-/*    gap: 15px;*/
-/*    !*grid-template_rows: auto auto auto;*!*/
-/*    grid-template-areas:*/
-/*    "marca_1 marca_1 marca_1"*/
-/*    "marca_2 marca_2 marca_3"*/
-/*    "marca_5 marca_4 marca_4"*/
-/*    "marca_6 marca_6 marca_6"*/
-/*    "marca_7 marca_8 marca_10"*/
-/*    "marca_7 marca_9 marca_10";*/
-/*    grid-auto-rows: 300px;*/
-/*    !*grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;*!*/
-/*    !*grid-template-columns:350px 1fr 350px;*!*/
-/*}*/
-/*.containerMarcas>div{*/
-/*    border: 1px solid black;*/
-/*    border-radius: 15px;*/
-/*    font-size: 50px;*/
-/*    padding: 0 15px;*/
-/*    background: url("/img/tocobo/tocoboBanner3.webp");*/
-/*    background-position: center;*/
-/*    background-repeat: no-repeat;*/
-/*    background-size: cover;*/
-/*    transition: font-size 0.3s ease, background-color 0.3s ease;*/
-/*}*/
-/*.marcaOne{*/
-/*    grid-area: marca_1;*/
-
-/*}*/
-/*.marcaTwo{*/
-/*    grid-area: marca_2;*/
-/*}*/
-/*.marcaThree{*/
-/*    grid-area: marca_3;*/
-/*}*/
-/*.marcaFour{*/
-/*    grid-area: marca_4;*/
-/*}*/
-/*.marcaFive{*/
-/*    grid-area: marca_5;*/
-/*}*/
-/*.marcaSix{*/
-/*    grid-area: marca_6;*/
-/*}*/
-/*.marcaSeven{*/
-/*    grid-area: marca_7;*/
-/*}*/
-/*.marcaEight{*/
-/*    grid-area: marca_8;*/
-/*}*/
-/*.marcaNine{*/
-/*    grid-area: marca_9;*/
-/*}*/
-/*.marcaTen{*/
-/*    grid-area: marca_10;*/
-/*}*/
-/*.marca{*/
-/*    text-align: center;*/
-/*    display: flex;*/
-/*    align-items: center;*/
-/*    justify-content: center;*/
-/*}*/
-/*.marca:hover{*/
-/*    font-size: 65px;*/
-/*    transition: font-size 0.3s ease, background-color 0.3s ease;*/
-/*    background: lightblue;*/
-/*}*/
-
-
 
 
 
@@ -1048,35 +923,7 @@ main{
 
 
 /*-----------------product-detail---------------*/
-/*.container_productDetail{*/
 
-/*}*/
-/*.container_productDetail>h1{*/
-/*    text-align: center;*/
-/*    padding: 25px 0;*/
-/*    font-size: 45px;*/
-/*}*/
-/*.info_productDetail{*/
-/*    width:80%;*/
-/*    margin: 0 auto;*/
-/*    border: 5px solid black;*/
-/*    display: flex;*/
-/*    gap: 125px;*/
-/*}*/
-/*.sideLeft{*/
-/*    display: flex;*/
-/*    flex-direction: column;*/
-/*    gap: 15px 0;*/
-/*    width: 50%;*/
-/*}*/
-/*.topLeft{*/
-
-/*}*/
-/*.topLeft>img{*/
-/*    width: 100%;*/
-/*    border-radius: 12px;*/
-
-/*}*/
 .sideLeft>div:nth-of-type(1)>img,.sideLeft>div:nth-of-type(2)>img{
     box-shadow: 0 0 5px rgba(0,0,0,0.6);
 
@@ -1958,168 +1805,645 @@ input:focus{
     gap: 35px;
 }
 
-
-
-/*.masVendidos{*/
-/*    display: flex;*/
-/*    flex-direction: column;*/
-/*    !*align-items: center;*!*/
-/*    gap: 25px 0;*/
-/*    width: 100%;*/
-/*    overflow: hidden;*/
-/*}*/
-/*.masVendidos>h1{*/
-/*    padding: 55px 0;*/
-/*    font-size: 55px;*/
-/*    text-align: center;*/
-/*    font-weight: 100;*/
-/*}*/
-/*.movimientoMasVendidos {*/
-/*    display: flex;*/
-/*    gap: 0 25px;*/
-/*    transition: all 0.3s ease-in-out;*/
-/*    animation: movimientoHorizontal 25s infinite;*/
-
-/*}*/
-/*.movimientoMasVendidos:hover,*/
-/*.movimientoMasVendidos_2:hover{*/
-/*    transition: all 0.5s ease-in-out;*/
-/*    animation-play-state: paused;*/
-/*}*/
-/*.movimientoMasVendidos:hover .masVendidoElement:not(:hover){*/
-/*    transition: all 0.5s ease-in-out;*/
-/*    filter: grayscale(100%);*/
-/*}*/
-/*.movimientoMasVendidos_2:hover .masVendidoElement_two:not(:hover){*/
-/*    transition: all 0.5s ease-in-out;*/
-/*    filter:grayscale(100%);*/
-
-/*}*/
-/*.containerMasVendidos_one,*/
-/*.containerMasVendidos_two,*/
-/*.containerMasVendidos_2_one,*/
-/*.containerMasVendidos_2_two {*/
-/*    display: flex;*/
-/*    gap: 0 25px;*/
-/*    min-width: 100%;*/
-/*}*/
-
-/*.masVendidoElement,.masVendidoElement_two{*/
-/*    border: 1px solid black;*/
-/*    border-radius: 15px;*/
-/*}*/
-/*.masVendidoElement:hover,.masVendidoElement_two:hover{*/
-/*    transition: all 0.3s ease-in-out;*/
-/*    transform: scale(1.08)*/
-/*}*/
-
-
-/*.masVendidoElement>img,.masVendidoElement_two>img{*/
-/*    width: 100%;*/
-/*    object-fit: cover;*/
-/*    border-radius: 15px;*/
-/*}*/
-/*.masVendidoElement>div,.masVendidoElement_two>div{*/
-/*    !*border: 5px solid blue;*!*/
-/*    width: 100%;*/
-/*    padding: 5px ;*/
-/*    border-radius:15px;*/
-/*}*/
-/*.masVendidoElement>div>button,.masVendidoElement_two>div>button{*/
-/*    !*border: 5px solid blue;*!*/
-/*    width: 100%;*/
-/*    padding: 0 5px;*/
-/*    border-radius:15px;*/
-/*}*/
-/*@keyframes movimientoHorizontal{*/
-/*    0%{*/
-/*        transform: translateX(-100%)*/
-/*    }*/
-/*    100%{*/
-/*        transform: translateX(0)*/
-/*    }*/
-
-/*}*/
-/*!*--2--*!*/
-/*.movimientoMasVendidos_2{*/
-/*    width: 100%;*/
-/*    display: flex;*/
-/*    gap: 0 25px;*/
-/*    transition: all 0.5s ease-in-out;*/
-/*    animation: movimientoHorizontal_2 25s infinite;*/
-/*    animation-play-state: running;*/
-/*}*/
-/*.containerMasVendidos_2_one,.containerMasVendidos_2_two{*/
-/*    min-width: 100%;*/
-/*    display: flex;*/
-/*    gap: 0 25px;*/
-/*}*/
-
-/*.masVendidoElement_two>img{*/
-/*    !*width: 100%;*!*/
-/*}*/
-/*@keyframes movimientoHorizontal_2{*/
-/*    0%{*/
-/*        transform: translateX(0);*/
-/*    }*/
-/*    100%{*/
-/*        transform: translateX(-100%);*/
-/*    }*/
-
-/*}*/
-/*------NUESTRO CATALOGO--------*/
-/*.catalogo{*/
-/*    padding-bottom: 55px;*/
-/*}*/
-/*.catalogo>h1{*/
-/*    font-size: 55px;*/
-/*    padding: 55px 0;*/
-/*    font-weight: 100;*/
-/*    text-align: center;*/
-/*}*/
-/*.catalogoElements{*/
-/*    width: 80%;*/
+/*.infoCenter{*/
+/*    width: calc(70vw + 25px);*/
 /*    margin: 0 auto;*/
-/*    display: flex;*/
-/*    gap: 0 25px;*/
-/*    justify-content: space-evenly;*/
-/*    border: 1px solid blue;*/
-/*}*/
-/*.catalogoElements>div{*/
+/*    display: grid;*/
+/*    grid-template-columns: repeat(auto-fit,minmax(300px,1fr));*/
+/*    !*justify-content: center;*!*/
 
-/*    border: 1px solid black;*/
-/*    border-radius: 15px;*/
-/*    !*height: 350px;*!*/
-/*    width: 450px;*/
+/*    padding: 50px 25px;*/
+/*    gap: 25px;*/
+/*}*/
+/*.elementInfo_one,.elementInfo_two{*/
 /*    display: flex;*/
+/*    gap: 25px;*/
+/*    flex-wrap: wrap;*/
+/*}*/
+
+/*.elementInfo_one>div,*/
+/*.elementInfo_two>div{*/
+/*    display: flex;*/
+/*    width: 350px;*/
+/*    height: 300px;*/
+/*    margin: 0 auto;*/
+/*    flex-direction: column;*/
+/*    flex-wrap: wrap;*/
 /*    align-items: center;*/
-/*    justify-content: center;*/
-/*}*/
-/*.elemento{*/
-/*    !*width:100%;*!*/
-/*    position: relative;*/
-/*}*/
-
-/*.elemento>h2{*/
-/*    position: absolute;*/
-/*    top: 50%;*/
-/*    z-index:2;*/
-/*    font-size: 30px;*/
-/*    background: transparent;*/
-/*    !*filter: opacity(1);*!*/
-/*    !*right: 50%;*!*/
-/*    !*transform: translate(-50%, -50%);*!*/
-/*}*/
-/*.elemento>video{*/
-/*    width: 100%;*/
-/*    height: 100%;*/
-/*    object-fit: cover;*/
+/*    text-align: center;*/
+/*    gap: 15px;*/
+/*    border: 5px solid gray;*/
 /*    border-radius: 15px;*/
-/*    filter: opacity(0.6);*/
+/*    justify-content: center;*/
+/*    padding: 0 15px;*/
+/*}*/
+/*.elementInfo_one>div>svg,*/
+/*.elementInfo_two>div>svg{*/
+/*    width: 55px;*/
+/*    height: 55px;*/
 /*}*/
 
-@media (max-width: 640px){
+@media (max-width: 320px){
 
+    /*infoCenter*/
+    .infoCenter{
+        /*width: calc(70vw + 25px);*/
+        width: 90%;
+        margin: 0 auto;
+        display: grid;
+        align-items: center;
+        /*grid-template-columns: repeat(auto-fit,minmax(300px,1fr));*/
+        justify-content: center;
+        padding: 25px;
+        gap: 25px;
+    }
+    .elementInfo_one,.elementInfo_two{
+        display: flex;
+        gap: 25px;
+        flex-direction: column;
+    }
+
+    .elementInfo_one>div,
+    .elementInfo_two>div{
+        display: flex;
+        width: 250px;
+        height: 250px;
+        margin: 0 auto;
+        flex-direction: column;
+        flex-wrap: wrap;
+        align-items: center;
+        text-align: center;
+        gap: 15px;
+        border: 5px solid gray;
+        border-radius: 15px;
+        justify-content: center;
+        padding: 0 15px;
+    }
+    .elementInfo_one>div>svg,
+    .elementInfo_two>div>svg{
+        width: 55px;
+        height: 55px;
+    }
+
+
+    /*-----------*/
+    #iconsNav>li:nth-of-type(3)>svg{
+        pointer-events: auto;
+    }
+    .containerMenuSmallWindow{
+        width: 300px;
+    }
+
+
+    /*searAndProducts*/
+    .searchAndOptions{
+
+    }
+    .searchAndOptions>ul>li{
+        gap: 25px;
+    }
+    .searchAndOptions>ul>li>div{
+        flex-direction: column;
+        align-items: start;
+    }
+    .searchAndOptions>ul>li>span:nth-of-type(1){
+        align-self: end;
+        transform: translateY(-70%);
+    }
+    .iconsBusqueda>svg{
+        width: 40px;
+        height: 40px;
+    }
+
+    /*-------------navegador-------------------*/
+    /*-----infoCenter------*/
+
+
+
+    /*------menu---------------*/
+
+    .menu{
+        /*display: flex;*/
+        align-items: center;
+        width: 90%;
+        padding: 25px 0;
+        justify-content: space-evenly;
+        margin: 0 auto;
+        /*gap: 0 25px;*/
+        /*opacity: 0;*/
+        display: none;
+    }
+
+    /*-----productsRecomended-------*/
+    .containerElementsRecomended{
+        width: 90%;
+        display: grid;
+        grid-template-columns: repeat(auto-fit,250px);
+        justify-content: center;
+        margin: 0 auto;
+        gap: 55px;
+        /*padding: 0 40px;*/
+        transition: all 0.35s ease-in-out;
+    }
+
+    /*---------detailProduct------------------*/
+    .container_productDetail{
+
+    }
+    .info_productDetail{
+        width:90%;
+        margin: 0 auto;
+        border-radius: 12px;
+        display: flex;
+        flex-wrap: wrap;
+        gap:35px;
+        padding: 25px;
+        /*box-shadow: 0 0 250px rgba(91, 209, 252, 0.3);*/
+    }
+
+    .container_productDetail>h1{
+        text-align: center;
+        padding: 25px 0;
+        font-size: 45px;
+    }
+
+    .sideLeft{
+        display: flex;
+        flex-direction: column;
+        gap: 15px 0;
+        align-self: center;
+    }
+    .topLeft{
+        transition: all 0.35s ease-in-out;
+    }
+    .topLeft>img{
+        width: 100%;
+        border-radius: 12px;
+        transition: all 0.35s ease-in-out;
+    }
+    .botLeft{
+        display: flex;
+        justify-content: space-evenly;
+        /*gap: 0 3%;*/
+        padding: 0 15px;
+        width: 100%;
+        border-radius: 12px;
+        transition: all 0.35s ease-in-out;
+    }
+    .botLeft>img{
+        width:30%;
+        object-fit: cover;
+        border-radius: 12px;
+        transition: all 0.35s ease-in-out;
+    }
+    .sideRight{
+        display: flex;
+        flex-direction: column;
+        gap: 15px 0;
+    }
+    .sideRight>h2{
+        /*width: 80%;*/
+        /*margin: 0 auto;*/
+
+    }
+    .priceStar{
+        display: flex;
+        justify-content: space-between;
+        padding: 0 15px;
+    }
+    #estrellas{
+        display: flex;
+        gap: 0 5px;
+        list-style: none;
+    }
+
+    .middleInfo{
+        display: flex;
+        justify-content: space-between;
+        /*gap: 0 50%;*/
+    }
+    .bottomInfo{
+        display: flex;
+        flex-direction: column;
+        gap: 15px 0;
+        justify-content: center;
+    }
+    .bottomInfo>ul{
+        display: flex;
+        flex-direction: column;
+        gap: 15px 0;
+        padding-left: 25px;
+
+    }
+
+    .lastMove {
+        display: flex;
+        width: 80%;
+        transform: translateY(50%);
+        margin: 0 auto;
+        justify-content: space-between;
+        /*gap: 300px;*/
+        gap: calc(5vw + 15px);
+    }
+    .lastMove>button{
+        padding: 10px 7.5px;
+        border: 1px solid transparent;
+        border-radius: 7.5px;
+        transition: border 0.35s ease-in-out;
+        width: 110px;
+    }
+    .lastMove>button:hover{
+        border: 1px solid gray;
+    }
+
+
+    .productsRecomended{
+    }
+
+    /*-------nav-------*/
+    .navegador{
+        width: 100%;
+        padding: 25px 0;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: relative;
+
+    }
+    .navegador>div{
+        margin: 0 auto;
+        width: 80%;
+        display:flex;
+        justify-content: space-between;
+    }
+    .busquedaInteractiva{
+        width: 425px;
+    }
+    .iconsBusqueda>input{
+        width: 500px;
+    }
+    .iconsBusqueda>svg{
+
+    }
+    .carouselImages{
+
+    }
+    .containerImages{
+
+    }
+    /*-----infoCenter------*/
+
+
+
+    /*----marcas-----*/
+
+    .containerMarcas>div{
+        font-size: 35px;
+    }
+    .containerMarcas>div:hover{
+        font-size: 45px;
+    }
+
+
+
+    #productosCadaMARCA{
+
+
+    }
+
+    .marcas{
+
+
+    }
+    .marcas>h1{
+        text-align: center;
+        /*line-height:2;*/
+        font-size: 35px;
+        padding: 25px 0;
+        font-weight: 100;
+    }
+    .containerMarcas{
+        /*height: 500px;*/
+        padding: 25px 0;
+        width: 80%;
+        margin: 0 auto;
+        display: grid;
+        gap: 25px;
+        grid-template-columns: repeat(auto-fit,275px);
+        justify-content: center;
+        grid-template-areas:
+        "marca_1"
+        "marca_2"
+        "marca_3"
+        "marca_4"
+        "marca_5"
+        "marca_6"
+        "marca_7"
+        "marca_8"
+        "marca_9"
+        "marca_10";
+        grid-auto-rows: 200px;
+        /*grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;*/
+        /*grid-template-columns:350px 1fr 350px;*/
+    }
+    .containerMarcas>div{
+        border: 1px solid black;
+        border-radius: 15px;
+        font-size: 50px;
+        padding: 0 15px;
+        background: url("/img/tocobo/tocoboBanner3.webp");
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        transition: font-size 0.3s ease, background-color 0.3s ease;
+    }
+    .marcaOne{
+        grid-area: marca_1;
+
+    }
+    .marcaTwo{
+        grid-area: marca_2;
+    }
+    .marcaThree{
+        grid-area: marca_3;
+    }
+    .marcaFour{
+        grid-area: marca_4;
+    }
+    .marcaFive{
+        grid-area: marca_5;
+    }
+    .marcaSix{
+        grid-area: marca_6;
+    }
+    .marcaSeven{
+        grid-area: marca_7;
+    }
+    .marcaEight{
+        grid-area: marca_8;
+    }
+    .marcaNine{
+        grid-area: marca_9;
+    }
+    .marcaTen{
+        grid-area: marca_10;
+    }
+    .marca{
+        text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .marca:hover{
+        font-size: 65px;
+        transition: font-size 0.3s ease, background-color 0.3s ease;
+        background: lightblue;
+    }
+
+
+
+    /*-----------Productos más vendidos---*/
+    .masVendidos{
+        display: flex;
+        flex-direction: column;
+        /*align-items: center;*/
+        gap: 50px 0;
+        width: 100%;
+        overflow: hidden;
+        padding: 50px 0;
+    }
+    .masVendidos>h1{
+        padding: 55px 0;
+        font-size: 35px;
+        text-align: center;
+        font-weight: 100;
+    }
+    .movimientoMasVendidos {
+        display: flex;
+        gap: 0 45px;
+        transition: all 0.3s ease-in-out;
+        min-width: 100%;
+        padding: 0 25px;
+    }
+
+
+    .containerMasVendidos_one,
+    .containerMasVendidos_two{
+        display: flex;
+        justify-content: space-around;
+        gap: 0 45px;
+        transition: all 1s linear;
+        animation: movimientoHorizontal 25s linear infinite;
+    }
+
+
+
+    .movimientoMasVendidos:hover .containerMasVendidos_one,.movimientoMasVendidos:hover .containerMasVendidos_two{
+        animation-play-state: paused;
+    }
+    .movimientoMasVendidos:hover .masVendidoElement:not(:hover){
+        filter: grayscale(100%);
+        transition: filter 0.5s ease-in-out;
+    }
+
+
+
+    .masVendidoElement,.masVendidoElement_two{
+        border-radius: 15px;
+        min-width: 275px;
+        height: 425px;
+        width: 275px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        align-items: center;
+        padding:10px 20px;
+
+        box-shadow: 0 0 7.5px rgba(0,0,0,0.4);
+    }
+    .masVendidoElement:hover,.masVendidoElement_two:hover{
+        transition: all 0.3s ease-in-out;
+        transform: scale(1.08)
+    }
+
+
+    .masVendidoElement>img,.masVendidoElement_two>img{
+        width: 100%;
+        object-fit: cover;
+        border-radius: 15px;
+    }
+
+    .masVendidoElement>div,.masVendidoElement_two>div{
+        display: flex;
+        justify-content: space-between;
+        padding: 0 10px;
+        gap: 0 45px;
+    }
+    .masVendidoElement>div>button,.masVendidoElement_two>div>button{
+        border-radius: 7.5px;
+        padding: 2.5px 12px;
+        flex: 1;
+        border:1px solid transparent;
+        transition: all 0.25s ease-in-out;
+    }
+    .masVendidoElement>div>button:hover, .masVendidoElement_two>div>button:hover{
+        border: 1px solid rgba(0,0,0,0.4);
+    }
+
+
+    @keyframes movimientoHorizontal{
+        0%{
+            transform: translateX(-100%)
+        }
+        100%{
+            transform: translateX(0)
+        }
+
+    }
+    /*--2--*/
+    .movimientoMasVendidos_2{
+        min-width: 100%;
+        display: flex;
+        gap: 0 45px;
+        transition: all 0.5s ease-in-out;
+    }
+    .movimientoMasVendidos_2:hover .containerMasVendidos_2_one,.movimientoMasVendidos_2:hover .containerMasVendidos_2_two{
+        animation-play-state: paused;
+    }
+
+    .movimientoMasVendidos_2:hover .masVendidoElement_two:not(:hover){
+        filter: grayscale(100%);
+        transition: filter 0.5s ease-in-out;
+    }
+
+
+
+    .containerMasVendidos_2_one,.containerMasVendidos_2_two{
+        display: flex;
+        gap: 0 45px;
+        transition: all 1s linear;
+        animation: movimientoHorizontal_2 25s linear infinite;
+        animation-play-state: running;
+    }
+
+    .masVendidoElement_two>img{
+        /*width: 100%;*/
+    }
+    @keyframes movimientoHorizontal_2{
+        0%{
+            transform: translateX(0);
+        }
+        100%{
+            transform: translateX(-100%);
+        }
+
+    }
+
+
+    /*---------catalogo-----------*/
+    .catalogo{
+        padding-bottom: 30px;
+    }
+    .catalogo>h1{
+        font-size: 35px;
+        padding: 55px 0;
+        font-weight: 100;
+        text-align: center;
+    }
+    .catalogoElements{
+        width: 90%;
+        margin: 0 auto;
+        display: flex;
+        flex-wrap:wrap;
+        gap: 25px;
+        justify-content: center;
+    }
+    .catalogoElements>div{
+
+        border: 1px solid rgba(0,0,0,0.2);
+        border-radius: 15px;
+        height: 550px;
+        width: 300px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .elemento{
+        /*aspect-ratio: 4.5/8;*/
+        position: relative;
+    }
+
+    .elemento>h2{
+        position: absolute;
+        top: 50%;
+        z-index:2;
+        font-size: 30px;
+        background: transparent;
+        /*filter: opacity(1);*/
+        /*right: 50%;*/
+        /*transform: translate(-50%, -50%);*/
+    }
+    .elemento>video{
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 15px;
+        filter: opacity(0.6);
+    }
+}
+@media (min-width: 321px) and (max-width: 480px){
+
+    /*center*/
+    .infoCenter{
+        /*width: calc(70vw + 25px);*/
+        width: 90%;
+        margin: 0 auto;
+        display: grid;
+        align-items: center;
+        /*grid-template-columns: repeat(auto-fit,minmax(300px,1fr));*/
+        justify-content: center;
+        padding: 25px;
+        gap: 25px;
+    }
+    .elementInfo_one,.elementInfo_two{
+        display: flex;
+        gap: 25px;
+        flex-direction: column;
+    }
+
+    .elementInfo_one>div,
+    .elementInfo_two>div{
+        display: flex;
+        width: 275px;
+        height: 275px;
+        margin: 0 auto;
+        flex-direction: column;
+        flex-wrap: wrap;
+        align-items: center;
+        text-align: center;
+        gap: 15px;
+        border: 5px solid gray;
+        border-radius: 15px;
+        justify-content: center;
+        padding: 0 15px;
+    }
+    .elementInfo_one>div>svg,
+    .elementInfo_two>div>svg{
+        width: 55px;
+        height: 55px;
+    }
+
+
+    /*-----------*/
+    #iconsNav>li:nth-of-type(3)>svg{
+        pointer-events: auto;
+    }
+    .containerMenuSmallWindow{
+        width: 300px;
+    }
+
+    /*----------*/
     #iconsNav>li:nth-of-type(3)>svg{
         pointer-events: auto;
     }
@@ -2353,8 +2677,9 @@ input:focus{
     .marcas>h1{
         text-align: center;
         /*line-height:2;*/
-        font-size: 50px;
+        font-size: 35px;
         padding: 25px 0;
+        font-weight: 100;
     }
     .containerMarcas{
         /*height: 500px;*/
@@ -2363,7 +2688,7 @@ input:focus{
         margin: 0 auto;
         display: grid;
         gap: 25px;
-        grid-template-columns: repeat(auto-fit,350px);
+        grid-template-columns: repeat(auto-fit,275px);
         justify-content: center;
         grid-template-areas:
         "marca_1"
@@ -2448,11 +2773,11 @@ input:focus{
         gap: 50px 0;
         width: 100%;
         overflow: hidden;
-        padding: 50px 0;
+        padding: 25px 0;
     }
     .masVendidos>h1{
-        padding: 55px 0;
-        font-size: 55px;
+        /*padding: 25px 0;*/
+        font-size: 35px;
         text-align: center;
         font-weight: 100;
     }
@@ -2490,12 +2815,12 @@ input:focus{
         border-radius: 15px;
         min-width: 275px;
         height: 425px;
+        width: 275px;
         display: flex;
         flex-direction: column;
         justify-content: space-evenly;
         align-items: center;
         padding:10px 20px;
-        width: 275px;
         box-shadow: 0 0 7.5px rgba(0,0,0,0.4);
     }
     .masVendidoElement:hover,.masVendidoElement_two:hover{
@@ -2582,7 +2907,565 @@ input:focus{
         padding-bottom: 55px;
     }
     .catalogo>h1{
-        font-size: 55px;
+        font-size: 35px;
+        padding: 55px 0;
+        font-weight: 100;
+        text-align: center;
+    }
+    .catalogoElements{
+        width: 90%;
+        margin: 0 auto;
+        display: flex;
+        flex-wrap:wrap;
+        gap: 25px;
+        justify-content: center;
+    }
+    .catalogoElements>div{
+
+        border: 1px solid rgba(0,0,0,0.2);
+        border-radius: 15px;
+        height: 550px;
+        width: 300px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .elemento{
+        /*aspect-ratio: 4.5/8;*/
+        position: relative;
+    }
+
+    .elemento>h2{
+        position: absolute;
+        top: 50%;
+        z-index:2;
+        font-size: 30px;
+        background: transparent;
+        /*filter: opacity(1);*/
+        /*right: 50%;*/
+        /*transform: translate(-50%, -50%);*/
+    }
+    .elemento>video{
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 15px;
+        filter: opacity(0.6);
+    }
+}
+@media (min-width: 481px) and (max-width: 640px){
+/*----------infoCenter-----------*/
+    .infoCenter{
+        /*width: calc(70vw + 25px);*/
+        width: 80%;
+        margin: 0 auto;
+        display: grid;
+        align-items: center;
+        /*grid-template-columns: repeat(auto-fit,minmax(300px,1fr));*/
+        justify-content: center;
+        padding: 25px;
+        gap: 25px;
+    }
+    .elementInfo_one,.elementInfo_two{
+        display: flex;
+        gap: 25px;
+        flex-direction: column;
+    }
+
+    .elementInfo_one>div,
+    .elementInfo_two>div{
+        display: flex;
+        width: 275px;
+        height: 275px;
+        margin: 0 auto;
+        flex-direction: column;
+        flex-wrap: wrap;
+        align-items: center;
+        text-align: center;
+        gap: 15px;
+        border: 5px solid gray;
+        border-radius: 15px;
+        justify-content: center;
+        padding: 0 15px;
+    }
+    .elementInfo_one>div>svg,
+    .elementInfo_two>div>svg{
+        width: 55px;
+        height: 55px;
+    }
+
+/*--------------------*/
+    #iconsNav>li:nth-of-type(3)>svg{
+        pointer-events: auto;
+    }
+    .containerMenuSmallWindow{
+        width: 300px;
+    }
+
+
+    /*searAndProducts*/
+    .searchAndOptions{
+
+    }
+    .searchAndOptions>ul>li{
+        gap: 25px;
+    }
+    .searchAndOptions>ul>li>div{
+        flex-direction: column;
+        align-items: start;
+    }
+    .searchAndOptions>ul>li>span:nth-of-type(1){
+        align-self: end;
+        transform: translateY(-70%);
+    }
+    .iconsBusqueda>svg{
+        width: 40px;
+        height: 40px;
+    }
+
+    /*-------------navegador-------------------*/
+    /*-----infoCenter------*/
+
+
+
+    /*------menu---------------*/
+
+    .menu{
+        /*display: flex;*/
+        align-items: center;
+        width: 90%;
+        padding: 25px 0;
+        justify-content: space-evenly;
+        margin: 0 auto;
+        /*gap: 0 25px;*/
+        /*opacity: 0;*/
+        display: none;
+    }
+
+    /*-----productsRecomended-------*/
+    .containerElementsRecomended{
+        width: 90%;
+        display: grid;
+        grid-template-columns: repeat(auto-fit,250px);
+        justify-content: center;
+        margin: 0 auto;
+        gap: 55px;
+        /*padding: 0 40px;*/
+        transition: all 0.35s ease-in-out;
+    }
+
+    /*---------detailProduct------------------*/
+    .container_productDetail{
+
+    }
+    .info_productDetail{
+        width:90%;
+        margin: 0 auto;
+        border-radius: 12px;
+        display: flex;
+        flex-wrap: wrap;
+        gap:35px;
+        padding: 25px;
+        /*box-shadow: 0 0 250px rgba(91, 209, 252, 0.3);*/
+    }
+
+    .container_productDetail>h1{
+        text-align: center;
+        padding: 25px 0;
+        font-size: 45px;
+    }
+
+    .sideLeft{
+        display: flex;
+        flex-direction: column;
+        gap: 15px 0;
+        align-self: center;
+    }
+    .topLeft{
+        transition: all 0.35s ease-in-out;
+    }
+    .topLeft>img{
+        width: 100%;
+        border-radius: 12px;
+        transition: all 0.35s ease-in-out;
+    }
+    .botLeft{
+        display: flex;
+        justify-content: space-evenly;
+        /*gap: 0 3%;*/
+        padding: 0 15px;
+        width: 100%;
+        border-radius: 12px;
+        transition: all 0.35s ease-in-out;
+    }
+    .botLeft>img{
+        width:30%;
+        object-fit: cover;
+        border-radius: 12px;
+        transition: all 0.35s ease-in-out;
+    }
+    .sideRight{
+        display: flex;
+        flex-direction: column;
+        gap: 15px 0;
+    }
+    .sideRight>h2{
+        /*width: 80%;*/
+        /*margin: 0 auto;*/
+
+    }
+    .priceStar{
+        display: flex;
+        justify-content: space-between;
+        padding: 0 15px;
+    }
+    #estrellas{
+        display: flex;
+        gap: 0 5px;
+        list-style: none;
+    }
+
+    .middleInfo{
+        display: flex;
+        justify-content: space-between;
+        /*gap: 0 50%;*/
+    }
+    .bottomInfo{
+        display: flex;
+        flex-direction: column;
+        gap: 15px 0;
+        justify-content: center;
+    }
+    .bottomInfo>ul{
+        display: flex;
+        flex-direction: column;
+        gap: 15px 0;
+        padding-left: 25px;
+
+    }
+
+    .lastMove {
+        display: flex;
+        width: 80%;
+        transform: translateY(50%);
+        margin: 0 auto;
+        justify-content: space-between;
+        /*gap: 300px;*/
+        gap: calc(5vw + 15px);
+    }
+    .lastMove>button{
+        padding: 10px 7.5px;
+        border: 1px solid transparent;
+        border-radius: 7.5px;
+        transition: border 0.35s ease-in-out;
+        width: 110px;
+    }
+    .lastMove>button:hover{
+        border: 1px solid gray;
+    }
+
+
+    .productsRecomended{
+    }
+
+    /*-------nav-------*/
+    .navegador{
+        width: 100%;
+        padding: 25px 0;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: relative;
+
+    }
+    .navegador>div{
+        margin: 0 auto;
+        width: 80%;
+        display:flex;
+        justify-content: space-between;
+    }
+    .busquedaInteractiva{
+        width: 425px;
+    }
+    .iconsBusqueda>input{
+        width: 500px;
+    }
+    .iconsBusqueda>svg{
+
+    }
+    .carouselImages{
+
+    }
+    .containerImages{
+
+    }
+    /*-----infoCenter------*/
+
+
+
+    /*----marcas-----*/
+
+
+    .containerMarcas>div{
+        font-size: 35px;
+    }
+    .containerMarcas>div:hover{
+        font-size: 45px;
+    }
+
+
+
+    #productosCadaMARCA{
+
+
+    }
+
+    .marcas{
+
+
+    }
+    .marcas>h1{
+        width: 80%;
+        text-align: center;
+        font-weight: 100;
+        margin: 0 auto;
+        /*line-height:2;*/
+        font-size: 40px;
+        padding: 25px 0;
+    }
+    .containerMarcas{
+        /*height: 500px;*/
+        padding: 25px 0;
+        width: 80%;
+        margin: 0 auto;
+        display: grid;
+        gap: 25px;
+        grid-template-columns: repeat(auto-fit,350px);
+        justify-content: center;
+        grid-template-areas:
+        "marca_1"
+        "marca_2"
+        "marca_3"
+        "marca_4"
+        "marca_5"
+        "marca_6"
+        "marca_7"
+        "marca_8"
+        "marca_9"
+        "marca_10";
+        grid-auto-rows: 200px;
+        /*grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;*/
+        /*grid-template-columns:350px 1fr 350px;*/
+    }
+    .containerMarcas>div{
+        border: 1px solid black;
+        border-radius: 15px;
+        font-size: 50px;
+        padding: 0 15px;
+        width: 350px;
+        background: url("/img/tocobo/tocoboBanner3.webp");
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        transition: font-size 0.3s ease, background-color 0.3s ease;
+    }
+    .marcaOne{
+        grid-area: marca_1;
+
+    }
+    .marcaTwo{
+        grid-area: marca_2;
+    }
+    .marcaThree{
+        grid-area: marca_3;
+    }
+    .marcaFour{
+        grid-area: marca_4;
+    }
+    .marcaFive{
+        grid-area: marca_5;
+    }
+    .marcaSix{
+        grid-area: marca_6;
+    }
+    .marcaSeven{
+        grid-area: marca_7;
+    }
+    .marcaEight{
+        grid-area: marca_8;
+    }
+    .marcaNine{
+        grid-area: marca_9;
+    }
+    .marcaTen{
+        grid-area: marca_10;
+    }
+    .marca{
+        text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .marca:hover{
+        font-size: 65px;
+        transition: font-size 0.3s ease, background-color 0.3s ease;
+        background: lightblue;
+    }
+
+
+
+
+
+
+
+    /*-----------Productos más vendidos---*/
+    .masVendidos{
+        display: flex;
+        flex-direction: column;
+        /*align-items: center;*/
+        gap: 50px 0;
+        width: 100%;
+        overflow: hidden;
+        padding-bottom: 25px;
+    }
+    .masVendidos>h1{
+        padding: 25px 0;
+        width: 80%;
+        margin: 0 auto;
+        font-size: 40px;
+        text-align: center;
+        font-weight: 100;
+    }
+    .movimientoMasVendidos {
+        display: flex;
+        gap: 0 45px;
+        transition: all 0.3s ease-in-out;
+        min-width: 100%;
+        /*padding: 0 25px;*/
+    }
+
+
+    .containerMasVendidos_one,
+    .containerMasVendidos_two{
+        display: flex;
+        justify-content: space-around;
+        gap: 0 45px;
+        transition: all 1s linear;
+        animation: movimientoHorizontal 25s linear infinite;
+    }
+
+
+
+    .movimientoMasVendidos:hover .containerMasVendidos_one,.movimientoMasVendidos:hover .containerMasVendidos_two{
+        animation-play-state: paused;
+    }
+    .movimientoMasVendidos:hover .masVendidoElement:not(:hover){
+        filter: grayscale(100%);
+        transition: filter 0.5s ease-in-out;
+    }
+
+
+
+    .masVendidoElement,.masVendidoElement_two{
+        border-radius: 15px;
+        min-width: 275px;
+        height: 425px;
+        width: 275px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        align-items: center;
+        padding:10px 20px;
+        box-shadow: 0 0 7.5px rgba(0,0,0,0.4);
+    }
+    .masVendidoElement:hover,.masVendidoElement_two:hover{
+        transition: all 0.3s ease-in-out;
+        transform: scale(1.08)
+    }
+
+
+    .masVendidoElement>img,.masVendidoElement_two>img{
+        width: 100%;
+        object-fit: cover;
+        border-radius: 15px;
+    }
+
+    .masVendidoElement>div,.masVendidoElement_two>div{
+        display: flex;
+        justify-content: space-between;
+        padding: 0 10px;
+        gap: 0 45px;
+    }
+    .masVendidoElement>div>button,.masVendidoElement_two>div>button{
+        border-radius: 7.5px;
+        padding: 2.5px 12px;
+        flex: 1;
+        border:1px solid transparent;
+        transition: all 0.25s ease-in-out;
+    }
+    .masVendidoElement>div>button:hover, .masVendidoElement_two>div>button:hover{
+        border: 1px solid rgba(0,0,0,0.4);
+    }
+
+
+    @keyframes movimientoHorizontal{
+        0%{
+            transform: translateX(-100%)
+        }
+        100%{
+            transform: translateX(0)
+        }
+
+    }
+    /*--2--*/
+    .movimientoMasVendidos_2{
+        min-width: 100%;
+        display: flex;
+        gap: 0 45px;
+        transition: all 0.5s ease-in-out;
+    }
+    .movimientoMasVendidos_2:hover .containerMasVendidos_2_one,.movimientoMasVendidos_2:hover .containerMasVendidos_2_two{
+        animation-play-state: paused;
+    }
+
+    .movimientoMasVendidos_2:hover .masVendidoElement_two:not(:hover){
+        filter: grayscale(100%);
+        transition: filter 0.5s ease-in-out;
+    }
+
+
+
+    .containerMasVendidos_2_one,.containerMasVendidos_2_two{
+        display: flex;
+        gap: 0 45px;
+        transition: all 1s linear;
+        animation: movimientoHorizontal_2 25s linear infinite;
+        animation-play-state: running;
+    }
+
+    .masVendidoElement_two>img{
+        /*width: 100%;*/
+    }
+    @keyframes movimientoHorizontal_2{
+        0%{
+            transform: translateX(0);
+        }
+        100%{
+            transform: translateX(-100%);
+        }
+
+    }
+
+
+    /*---------catalogo-----------*/
+    .catalogo{
+        padding-bottom: 55px;
+    }
+    .catalogo>h1{
+        font-size: 40px;
+        width: 90%;
+        margin: 0 auto;
         padding: 55px 0;
         font-weight: 100;
         text-align: center;
@@ -2629,9 +3512,48 @@ input:focus{
     }
 }
 
-
 @media (min-width: 641px) and (max-width:768px){
+    /*----------infoCenter-----------*/
+    .infoCenter{
+        /*width: calc(70vw + 25px);*/
+        width: 90%;
+        margin: 0 auto;
+        display: grid;
+        align-items: center;
+        /*grid-template-columns: repeat(auto-fit,minmax(300px,1fr));*/
+        justify-content: center;
+        padding: 25px;
+        gap: 25px;
+    }
+    .elementInfo_one,.elementInfo_two{
+        display: flex;
+        gap: 25px;
+        /*flex-direction: column;*/
+    }
 
+    .elementInfo_one>div,
+    .elementInfo_two>div{
+        display: flex;
+        width: 275px;
+        height: 275px;
+        margin: 0 auto;
+        flex-direction: column;
+        flex-wrap: wrap;
+        align-items: center;
+        text-align: center;
+        gap: 15px;
+        border: 5px solid gray;
+        border-radius: 15px;
+        justify-content: center;
+        padding: 0 15px;
+    }
+    .elementInfo_one>div>svg,
+    .elementInfo_two>div>svg{
+        width: 55px;
+        height: 55px;
+    }
+
+    /*--------------------*/
 
     .containerMenuSmallWindow{
         width: 300px;
@@ -2810,8 +3732,8 @@ input:focus{
         justify-content: space-between;
     }
     .busquedaInteractiva{
-        width: 500px;
-        min-width: 500px;
+        width: 550px;
+        min-width: 550px;
     }
     .iconsBusqueda>input{
         width: 500px;
@@ -2850,9 +3772,12 @@ input:focus{
     }
     .marcas>h1{
         text-align: center;
+        width: 90%;
+        margin: 0 auto;
         /*line-height:2;*/
-        font-size: 50px;
+        font-size: 48px;
         padding: 25px 0;
+        font-weight: 100;
     }
     .containerMarcas{
         /*height: 500px;*/
@@ -2941,11 +3866,14 @@ input:focus{
         gap: 50px 0;
         width: 100%;
         overflow: hidden;
-        padding: 50px 0;
+        /*padding: 50px 0;*/
+        padding-bottom: 50px;
     }
     .masVendidos>h1{
-        padding: 55px 0;
-        font-size: 55px;
+        padding: 25px 0;
+        width: 80%;
+        margin: 0 auto;
+        font-size: 40px;
         text-align: center;
         font-weight: 100;
     }
@@ -2981,12 +3909,12 @@ input:focus{
         border-radius: 15px;
         min-width: 275px;
         height: 425px;
+        width: 275px;
         display: flex;
         flex-direction: column;
         justify-content: space-evenly;
         align-items: center;
         padding:10px 20px;
-        width: 275px;
         box-shadow: 0 0 7.5px rgba(0,0,0,0.4);
     }
     .masVendidoElement:hover,.masVendidoElement_two:hover{
@@ -3071,13 +3999,16 @@ input:focus{
         padding-bottom: 55px;
     }
     .catalogo>h1{
-        font-size: 55px;
+        font-size: 40px;
+        width: 90%;
+        margin: 0 auto;
         padding: 55px 0;
         font-weight: 100;
         text-align: center;
     }
     .catalogoElements{
-        width: 90%;
+        /*width: 90%;*/
+        padding: 0 25px;
         margin: 0 auto;
         display: flex;
         flex-wrap:wrap;
@@ -3119,7 +4050,47 @@ input:focus{
 }
 
 @media (min-width: 769px) and (max-width:1024px){
+    /*----------infoCenter-----------*/
+    .infoCenter{
+        /*width: calc(70vw + 25px);*/
+        width: 90%;
+        margin: 0 auto;
+        display: grid;
+        align-items: center;
+        /*grid-template-columns: repeat(auto-fit,minmax(300px,1fr));*/
+        justify-content: center;
+        padding: 25px;
+        gap: 25px;
+    }
+    .elementInfo_one,.elementInfo_two{
+        display: flex;
+        gap: 25px;
+        /*flex-direction: column;*/
+    }
 
+    .elementInfo_one>div,
+    .elementInfo_two>div{
+        display: flex;
+        width: 300px;
+        height: 300px;
+        margin: 0 auto;
+        flex-direction: column;
+        flex-wrap: wrap;
+        align-items: center;
+        text-align: center;
+        gap: 15px;
+        border: 5px solid gray;
+        border-radius: 15px;
+        justify-content: center;
+        padding: 0 15px;
+    }
+    .elementInfo_one>div>svg,
+    .elementInfo_two>div>svg{
+        width: 55px;
+        height: 55px;
+    }
+
+    /*--------------------*/
     .containerMenuSmallWindow{
         width: 300px;
     }
@@ -3286,8 +4257,8 @@ input:focus{
         justify-content: space-between;
     }
     .busquedaInteractiva{
-        width: 500px;
-        min-width: 500px;
+        width: 550px;
+        min-width: 550px;
     }
     .iconsBusqueda>input{
         width: 500px;
@@ -3329,12 +4300,15 @@ input:focus{
     .marcas>h1{
         text-align: center;
         /*line-height:2;*/
-        font-size: 50px;
-        padding: 25px 0;
+        font-size: 45px;
+        width: 80%;
+        margin: 0 auto;
+        font-weight: 100;
+        padding: 25px 0 25px 0;
     }
     .containerMarcas{
         /*height: 500px;*/
-        padding: 25px 0;
+        padding: 25px 0 0 0;
         width: 80%;
         margin: 0 auto;
         display: grid;
@@ -3422,8 +4396,10 @@ input:focus{
         padding: 50px 0;
     }
     .masVendidos>h1{
-        padding: 55px 0;
-        font-size: 55px;
+        padding: 25px 0;
+        width: 80%;
+        margin: 0 auto;
+        font-size: 45px;
         text-align: center;
         font-weight: 100;
     }
@@ -3434,7 +4410,11 @@ input:focus{
         min-width: 100%;
         padding: 0 25px;
     }
-
+    .masVendidoElement,.masVendidoElement_two{
+        min-width: 275px;
+        height: 425px;
+        width: 275px;
+    }
 
     .containerMasVendidos_one,
     .containerMasVendidos_two{
@@ -3457,12 +4437,12 @@ input:focus{
         border-radius: 15px;
         min-width: 275px;
         height: 425px;
+        width: 275px;
         display: flex;
         flex-direction: column;
         justify-content: space-evenly;
         align-items: center;
         padding:10px 20px;
-        width: 275px;
         box-shadow: 0 0 7.5px rgba(0,0,0,0.4);
     }
     .masVendidoElement:hover,.masVendidoElement_two:hover{
@@ -3547,8 +4527,10 @@ input:focus{
         padding-bottom: 55px;
     }
     .catalogo>h1{
-        font-size: 55px;
-        padding: 55px 0;
+        font-size: 45px;
+        width: 80%;
+        margin: 0 auto;
+        padding: 25px 0 55px 0;
         font-weight: 100;
         text-align: center;
     }
@@ -3595,6 +4577,48 @@ input:focus{
 }
 
 @media (min-width: 1025px) and (max-width:1280px){
+    /*----------infoCenter-----------*/
+    .infoCenter{
+        /*width: calc(70vw + 25px);*/
+        width: 90%;
+        margin: 0 auto;
+        display: grid;
+        align-items: center;
+        /*grid-template-columns: repeat(auto-fit,minmax(300px,1fr));*/
+        justify-content: center;
+        padding: 25px;
+        gap: 25px;
+    }
+    .elementInfo_one,.elementInfo_two{
+        display: flex;
+        gap: 25px;
+        /*flex-direction: column;*/
+    }
+
+    .elementInfo_one>div,
+    .elementInfo_two>div{
+        display: flex;
+        width: 325px;
+        height: 325px;
+        margin: 0 auto;
+        flex-direction: column;
+        flex-wrap: wrap;
+        align-items: center;
+        text-align: center;
+        gap: 15px;
+        border: 5px solid gray;
+        border-radius: 15px;
+        justify-content: center;
+        padding: 0 15px;
+    }
+    .elementInfo_one>div>svg,
+    .elementInfo_two>div>svg{
+        width: 55px;
+        height: 55px;
+    }
+
+    /*--------------------*/
+
     #iconsNav>li:nth-of-type(3)>svg{
         pointer-events: none;
     }
@@ -3743,8 +4767,8 @@ input:focus{
         justify-content: space-between;
     }
     .busquedaInteractiva{
-        width: 500px;
-        min-width: 500px;
+        width: 550px;
+        min-width: 550px;
     }
     .iconsBusqueda>input{
         width: 550px;
@@ -3788,7 +4812,10 @@ input:focus{
     .marcas>h1{
         text-align: center;
         /*line-height:2;*/
-        font-size: 50px;
+        font-size:40px;
+        width: 80%;
+        margin: 0 auto;
+        font-weight: 100;
         padding: 25px 0;
     }
     .containerMarcas{
@@ -3881,8 +4908,10 @@ input:focus{
         padding: 50px 0;
     }
     .masVendidos>h1{
-        padding: 55px 0;
-        font-size: 55px;
+        padding:0 0 25px 0;
+        font-size: 45px;
+        width: 80%;
+        margin: 0 auto;
         text-align: center;
         font-weight: 100;
     }
@@ -4008,8 +5037,10 @@ input:focus{
         padding-bottom: 55px;
     }
     .catalogo>h1{
-        font-size: 55px;
-        padding: 55px 0;
+        font-size: 45px;
+        padding: 25px 0 55px 0;
+        width: 80%;
+        margin: 0 auto;
         font-weight: 100;
         text-align: center;
     }
@@ -4056,6 +5087,47 @@ input:focus{
 }
 
 @media (min-width: 1281px) and (max-width:1440px){
+    /*----------infoCenter-----------*/
+    .infoCenter{
+        /*width: calc(70vw + 25px);*/
+        width: 90%;
+        margin: 0 auto;
+        display: grid;
+        align-items: center;
+        /*grid-template-columns: repeat(auto-fit,minmax(300px,1fr));*/
+        justify-content: center;
+        padding: 25px;
+        gap: 25px;
+    }
+    .elementInfo_one,.elementInfo_two{
+        display: flex;
+        gap: 25px;
+        /*flex-direction: column;*/
+    }
+
+    .elementInfo_one>div,
+    .elementInfo_two>div{
+        display: flex;
+        width: 350px;
+        height: 350px;
+        margin: 0 auto;
+        flex-direction: column;
+        flex-wrap: wrap;
+        align-items: center;
+        text-align: center;
+        gap: 15px;
+        border: 5px solid gray;
+        border-radius: 15px;
+        justify-content: center;
+        padding: 0 15px;
+    }
+    .elementInfo_one>div>svg,
+    .elementInfo_two>div>svg{
+        width: 55px;
+        height: 55px;
+    }
+
+    /*--------------------*/
     #iconsNav>li:nth-of-type(3)>svg{
         pointer-events: none;
     }
@@ -4203,8 +5275,8 @@ input:focus{
         justify-content: space-between;
     }
     .busquedaInteractiva{
-        width: 500px;
-        min-width: 500px;
+        width: 550px;
+        min-width: 550px;
     }
     .iconsBusqueda>input{
         width: 550px;
@@ -4295,8 +5367,11 @@ input:focus{
     .marcas>h1{
         text-align: center;
         /*line-height:2;*/
+        width: 80%;
+        margin: 0 auto;
         font-size: 50px;
-        padding: 25px 0;
+        font-weight: 100;
+        padding: 25px 0 25px 0;
     }
     .containerMarcas{
         /*height: 500px;*/
@@ -4388,10 +5463,13 @@ input:focus{
         padding: 50px 0;
     }
     .masVendidos>h1{
-        padding: 55px 0;
-        font-size: 55px;
+        padding: 0 0 25px 0;
+        font-size: 50px;
+        width: 80%;
+        margin: 0 auto;
         text-align: center;
         font-weight: 100;
+
     }
     .movimientoMasVendidos {
         display: flex;
@@ -4515,8 +5593,10 @@ input:focus{
         padding-bottom: 55px;
     }
     .catalogo>h1{
-        font-size: 55px;
-        padding: 55px 0;
+        font-size: 50px;
+        width: 80%;
+        margin: 0 auto;
+        padding: 25px 0 55px 0;
         font-weight: 100;
         text-align: center;
     }
@@ -4562,6 +5642,48 @@ input:focus{
 }
 
 @media (min-width: 1441px) and (max-width:1536px){
+    /*----------infoCenter-----------*/
+    .infoCenter{
+        width: 70%;
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        /*grid-template-columns: repeat(auto-fit,minmax(300px,1fr));*/
+        justify-content: center;
+        padding: 50px;
+        gap: 25px;
+        flex-wrap: wrap;
+    }
+    .elementInfo_one,.elementInfo_two{
+        display: flex;
+        gap: 25px;
+        /*flex-direction: column;*/
+    }
+
+    .elementInfo_one>div,
+    .elementInfo_two>div{
+        display: flex;
+        width: 325px;
+        height: 325px;
+        margin: 0 auto;
+        flex-direction: column;
+        flex-wrap: wrap;
+        align-items: center;
+        text-align: center;
+        gap: 15px;
+        border: 5px solid gray;
+        border-radius: 15px;
+        justify-content: center;
+        padding: 0 15px;
+    }
+    .elementInfo_one>div>svg,
+    .elementInfo_two>div>svg{
+        width: 55px;
+        height: 55px;
+    }
+
+    /*--------------------*/
+
     #iconsNav>li:nth-of-type(3)>svg{
         pointer-events: none;
     }
@@ -4711,8 +5833,8 @@ input:focus{
         justify-content: space-between;
     }
     .busquedaInteractiva{
-        width: 500px;
-        min-width: 500px;
+        width: 550px;
+        min-width: 550px;
     }
     .iconsBusqueda>input{
         width: 600px;
@@ -4805,7 +5927,8 @@ input:focus{
         text-align: center;
         /*line-height:2;*/
         font-size: 50px;
-        padding: 25px 0;
+        padding: 25px 0 55px 0;
+        font-weight: 100;
     }
     .containerMarcas{
         /*height: 500px;*/
@@ -4897,8 +6020,10 @@ input:focus{
         padding: 50px 0;
     }
     .masVendidos>h1{
-        padding: 55px 0;
-        font-size: 55px;
+        padding: 0 0 25px 0;
+        width: 80%;
+        margin : 0 auto;
+        font-size: 50px;
         text-align: center;
         font-weight: 100;
     }
@@ -5024,8 +6149,10 @@ input:focus{
         padding-bottom: 55px;
     }
     .catalogo>h1{
-        font-size: 55px;
-        padding: 55px 0;
+        font-size: 50px;
+        width: 80%;
+        margin: 0 auto;
+        padding: 25px 0 55px 0;
         font-weight: 100;
         text-align: center;
     }
@@ -5072,6 +6199,49 @@ input:focus{
 }
 
 @media (min-width: 1537px){
+    /*----------infoCenter-----------*/
+    .infoCenter{
+        width: 90%;
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        /*grid-template-columns: repeat(auto-fit,minmax(300px,1fr));*/
+        justify-content: center;
+        padding: 50px;
+        gap: 25px;
+        flex-wrap: wrap;
+    }
+    .elementInfo_one,.elementInfo_two{
+        display: flex;
+        gap: 25px;
+        /*flex-direction: column;*/
+    }
+
+    .elementInfo_one>div,
+    .elementInfo_two>div{
+        display: flex;
+        width: 300px;
+        height: 300px;
+        margin: 0 auto;
+        flex-direction: column;
+        flex-wrap: wrap;
+        align-items: center;
+        text-align: center;
+        gap: 15px;
+        border: 5px solid gray;
+        border-radius: 15px;
+        justify-content: center;
+        padding: 0 15px;
+    }
+    .elementInfo_one>div>svg,
+    .elementInfo_two>div>svg{
+        width: 55px;
+        height: 55px;
+    }
+
+    /*--------------------*/
+
+
     #iconsNav>li:nth-of-type(3)>svg{
         pointer-events: none;
     }
@@ -5224,8 +6394,8 @@ input:focus{
         justify-content: space-between;
     }
     .busquedaInteractiva{
-        width: 500px;
-        min-width: 500px;
+        width: 550px;
+        min-width: 550px;
     }
     .iconsBusqueda>input{
         width: 700px;
@@ -5330,7 +6500,8 @@ input:focus{
         text-align: center;
         /*line-height:2;*/
         font-size: 50px;
-        padding: 25px 0;
+        padding:  25px 0 55px 0;
+        font-weight: 100;
     }
     .containerMarcas{
         /*height: 500px;*/
@@ -5422,8 +6593,10 @@ input:focus{
         padding: 50px 0;
     }
     .masVendidos>h1{
-        padding: 55px 0;
-        font-size: 55px;
+        padding: 25px 0;
+        width: 80%;
+        margin: 0 auto;
+        font-size: 50px;
         text-align: center;
         font-weight: 100;
     }
@@ -5550,8 +6723,10 @@ input:focus{
         padding-bottom: 55px;
     }
     .catalogo>h1{
-        font-size: 55px;
-        padding: 55px 0;
+        font-size: 50px;
+        width: 80%;
+        margin: 0 auto;
+        padding: 25px 0 55px 0;
         font-weight: 100;
         text-align: center;
     }

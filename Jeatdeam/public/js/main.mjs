@@ -5,9 +5,10 @@
 import keysFromStripe from './keysFromStripe.mjs';
 import {masVendidosElement} from './masVendidos.mjs';
 import {redirectMasVendidoElement} from './masVendidos.mjs'
+import {asignarNombresHeader} from "./listaProducts.mjs";
 
 masVendidosElement();
-
+asignarNombresHeader();
 // export let activeButton=true;
 redirectMasVendidoElement();
 //193->active button despues del envio de datos

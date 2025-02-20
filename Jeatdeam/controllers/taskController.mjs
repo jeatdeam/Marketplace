@@ -26,7 +26,261 @@ transporter.verify((error,success)=>{
 
 })
 
+let seccionProducts={
+    boj: {
+        bloqueadorBarra: {
 
+        },
+        bloqueadorCrema:{
+
+        },
+        contornoOjos:{
+
+        },
+        jabon:{
+
+        },
+        mascarilla:{
+
+        },
+        parches:{
+
+        },
+        serum:{
+
+        }
+    },
+    celimax: {
+        bloqueadorBarra: {
+
+        },
+        bloqueadorCrema:{
+
+        },
+        contornoOjos:{
+
+        },
+        jabon:{
+
+        },
+        mascarilla:{
+
+        },
+        parches:{
+
+        },
+        serum:{
+
+        }
+    },
+    cosrx: {
+        bloqueadorBarra: {
+
+        },
+        bloqueadorCrema:{
+
+        },
+        contornoOjos:{
+
+        },
+        jabon:{
+
+        },
+        mascarilla:{
+
+        },
+        parches:{
+
+        },
+        serum:{
+
+        }
+    },
+    haruharu: {
+        bloqueadorBarra: {
+
+        },
+        bloqueadorCrema:{
+
+        },
+        contornoOjos:{
+
+        },
+        jabon:{
+
+        },
+        mascarilla:{
+
+        },
+        parches:{
+
+        },
+        serum:{
+
+        }
+    },
+    nacific: {
+        bloqueadorBarra: {
+
+        },
+        bloqueadorCrema:{
+
+        },
+        contornoOjos:{
+
+        },
+        jabon:{
+
+        },
+        mascarilla:{
+
+        },
+        parches:{
+
+        },
+        serum:{
+
+        }
+    },
+    numbuzin: {
+        bloqueadorBarra: {
+
+        },
+        bloqueadorCrema:{
+
+        },
+        contornoOjos:{
+
+        },
+        jabon:{
+
+        },
+        mascarilla:{
+
+        },
+        parches:{
+
+        },
+        serum:{
+
+        }
+    },
+    skinni1004: {
+        bloqueadorBarra: {
+
+        },
+        bloqueadorCrema:{
+
+        },
+        contornoOjos:{
+
+        },
+        jabon:{
+
+        },
+        mascarilla:{
+
+        },
+        parches:{
+
+        },
+        serum:{
+
+        }
+    },
+    tocobo: {
+        bloqueadorBarra: {
+
+        },
+        bloqueadorCrema:{
+
+        },
+        contornoOjos:{
+
+        },
+        jabon:{
+
+        },
+        mascarilla:{
+
+        },
+        parches:{
+
+        },
+        serum:{
+
+        }
+    },
+    centella: {
+        bloqueadorBarra: {
+
+        },
+        bloqueadorCrema:{
+
+        },
+        contornoOjos:{
+
+        },
+        jabon:{
+
+        },
+        mascarilla:{
+
+        },
+        parches:{
+
+        },
+        serum:{
+
+        }
+    },
+    avene: {
+        bloqueadorBarra: {
+
+        },
+        bloqueadorCrema:{
+
+        },
+        contornoOjos:{
+
+        },
+        jabon:{
+
+        },
+        mascarilla:{
+
+        },
+        parches:{
+
+        },
+        serum:{
+
+        }
+    },
+    eucerin: {
+        bloqueadorBarra: {
+
+        },
+        bloqueadorCrema:{
+
+        },
+        contornoOjos:{
+
+        },
+        jabon:{
+
+        },
+        mascarilla:{
+
+        },
+        parches:{
+
+        },
+        serum:{
+
+        }
+    },
+}
 
  let baseDatos = [
     {
@@ -38,7 +292,7 @@ transporter.verify((error,success)=>{
         category:"bloqueador",
         completed: true,
         brand:"tocobo",
-        img:"/img/tocobo/bloqueadorBarra.webp"
+        img:["/img/tocobo/bloqueadorBarra.webp","/img/tocobo/bloqueadorBarra.webp","/img/tocobo/bloqueadorBarra.webp","/img/tocobo/bloqueadorBarra.webp"]
     },
     {
 
@@ -50,7 +304,7 @@ transporter.verify((error,success)=>{
         category:"bloqueador",
         completed: true,
         brand:"tocobo",
-        img:"/img/tocobo/bloqueadorBarra.webp"
+        img:["/img/tocobo/bloqueadorBarra.webp","/img/tocobo/bloqueadorBarra.webp","/img/tocobo/bloqueadorBarra.webp","/img/tocobo/bloqueadorBarra.webp"]
     },
     {
         id: 3,
@@ -61,7 +315,7 @@ transporter.verify((error,success)=>{
         category:"bloqueador",
         completed: true,
         brand:"boj",
-        img:"/img/tocobo/bloqueadorBarra.webp"
+        img:["/img/tocobo/bloqueadorBarra.webp","/img/tocobo/bloqueadorBarra.webp","/img/tocobo/bloqueadorBarra.webp","/img/tocobo/bloqueadorBarra.webp"]
     },
     {
         id: 4,
@@ -72,7 +326,7 @@ transporter.verify((error,success)=>{
         category:"bloqueador",
         completed: true,
         brand:"boj",
-        img:"/img/tocobo/bloqueadorBarra.webp"
+        img:["/img/tocobo/bloqueadorBarra.webp","/img/tocobo/bloqueadorBarra.webp","/img/tocobo/bloqueadorBarra.webp","/img/tocobo/bloqueadorBarra.webp"]
 
     },
     {
@@ -84,7 +338,7 @@ transporter.verify((error,success)=>{
         category:"bloqueador",
         completed: true,
         brand:"skinni1004",
-        img:"/img/tocobo/bloqueadorBarra.webp",
+        img:["/img/tocobo/bloqueadorBarra.webp","/img/tocobo/bloqueadorBarra.webp","/img/tocobo/bloqueadorBarra.webp","/img/tocobo/bloqueadorBarra.webp"]
     },
     {
         id: 6,
@@ -95,7 +349,7 @@ transporter.verify((error,success)=>{
         category:"bloqueador",
         completed: false,
         brand: 'skinni1004',
-        img:"/img/tocobo/bloqueadorBarra.webp"
+        img:["/img/tocobo/bloqueadorBarra.webp","/img/tocobo/bloqueadorBarra.webp","/img/tocobo/bloqueadorBarra.webp","/img/tocobo/bloqueadorBarra.webp"]
 
     },
     {
@@ -107,7 +361,7 @@ transporter.verify((error,success)=>{
         category:"bloqueador",
         completed: false,
         brand: 'numbuzin',
-        img:"/img/tocobo/bloqueadorBarra.webp"
+        img:["/img/tocobo/bloqueadorBarra.webp","/img/tocobo/bloqueadorBarra.webp","/img/tocobo/bloqueadorBarra.webp","/img/tocobo/bloqueadorBarra.webp"]
     },
     {
         id: 8,
@@ -118,7 +372,7 @@ transporter.verify((error,success)=>{
         category:"bloqueador",
         completed: false,
         brand: 'numbuzin',
-        img:"/img/tocobo/bloqueadorBarra.webp"
+        img:["/img/tocobo/bloqueadorBarra.webp","/img/tocobo/bloqueadorBarra.webp","/img/tocobo/bloqueadorBarra.webp","/img/tocobo/bloqueadorBarra.webp"]
     },
     {
         id: 9,
@@ -129,7 +383,7 @@ transporter.verify((error,success)=>{
         category:"bloqueador",
         completed: false,
         brand: 'cosrx',
-        img:"/img/tocobo/bloqueadorBarra.webp"
+        img:["/img/tocobo/bloqueadorBarra.webp","/img/tocobo/bloqueadorBarra.webp","/img/tocobo/bloqueadorBarra.webp","/img/tocobo/bloqueadorBarra.webp"]
     },
     {
         id: 10,
@@ -140,7 +394,7 @@ transporter.verify((error,success)=>{
         category:"bloqueador",
         completed: false,
         brand: 'cosrx',
-        img:"/img/tocobo/bloqueadorBarra.webp"
+        img:["/img/tocobo/bloqueadorBarra.webp","/img/tocobo/bloqueadorBarra.webp","/img/tocobo/bloqueadorBarra.webp","/img/tocobo/bloqueadorBarra.webp"]
     },
     {
         id: 11,
@@ -151,7 +405,7 @@ transporter.verify((error,success)=>{
         category:"limpiador",
         completed: false,
         brand: 'tocobo',
-        img:"/img/tocobo/bloqueadorBarra.webp"
+        img:["/img/tocobo/bloqueadorBarra.webp","/img/tocobo/bloqueadorBarra.webp","/img/tocobo/bloqueadorBarra.webp","/img/tocobo/bloqueadorBarra.webp"]
     },
     {
         id: 12,
@@ -162,7 +416,7 @@ transporter.verify((error,success)=>{
         category:"limpiador",
         completed: false,
         brand: 'celimax',
-        img:"/img/tocobo/bloqueadorBarra.webp"
+        img:["/img/tocobo/bloqueadorBarra.webp","/img/tocobo/bloqueadorBarra.webp","/img/tocobo/bloqueadorBarra.webp","/img/tocobo/bloqueadorBarra.webp"]
     },
     {
         id: 13,
@@ -173,7 +427,7 @@ transporter.verify((error,success)=>{
         category:"limpiador",
         completed: false,
         brand: 'skin1004',
-        img:"/img/tocobo/bloqueadorBarra.webp"
+        img:["/img/tocobo/bloqueadorBarra.webp","/img/tocobo/bloqueadorBarra.webp","/img/tocobo/bloqueadorBarra.webp","/img/tocobo/bloqueadorBarra.webp"]
     },
     {
         id: 14,
@@ -184,7 +438,7 @@ transporter.verify((error,success)=>{
         category:"serum",
         completed: false,
         brand: 'centella',
-        img:"/img/tocobo/bloqueadorBarra.webp"
+        img:["/img/tocobo/bloqueadorBarra.webp","/img/tocobo/bloqueadorBarra.webp","/img/tocobo/bloqueadorBarra.webp","/img/tocobo/bloqueadorBarra.webp"]
     },
 
 
@@ -267,6 +521,15 @@ function getPrices(){
 }
 getPrices();
 
+const extraerMarcas=(req,res)=>{
+
+
+    res.json({
+        seccionProducts,
+    })
+}
+
+
 const baseDatosProducts=(req,res)=>{
 
     res.json({baseDatos})
@@ -305,6 +568,10 @@ const detailProduct=(req,res)=>{
     if(!producto){
         return res.status(404).render('error',{title: 'producto no encontrado',carrito})
     }
+
+
+
+
 
     res.render('product_detail',{name:`${name}`,producto,baseDatos,carrito})
 }
@@ -549,6 +816,7 @@ const deleteTask = (req, res) => {
 }
 
 export default {
+    extraerMarcas,
     deleteDatos,
     verificarDatos,
     recibirDatosShort,

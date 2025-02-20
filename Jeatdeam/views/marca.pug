@@ -6,9 +6,9 @@ block content
         section.productsBrands
             each element,indice in productosPorMarca
                 div(class=`elementProduct elementProduct_${indice+1}`,data-brand=`${element.brand}`,data-name=`${element.name}`)
-                    img(src=`${element.img}`)
+                    img(src=element.img[0])
                     b #{element.subtitle}
                     small S/.#{element.price}
                     div
-                        button(data-id=element.id, data-brand=element.brand, data-img=element.img, data-price=element.price, data-name=element.name) agregar al carrito
-                        button(data-id=element.id, data-brand=element.brand, data-img=element.img, data-price=element.price, data-name=element.name) comprar
+                        button(data-id=element.id, data-brand=element.brand, data-img=element.img[0], data-price=element.price, data-name=element.name) agregar al carrito
+                        button(data-id=element.id, data-brand=element.brand, data-img=element.img[0], data-price=element.price, data-name=element.name) comprar

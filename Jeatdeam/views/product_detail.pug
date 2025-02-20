@@ -1,90 +1,75 @@
 extends layout
 block content
-    main.container_productDetail
-        h1= producto.brand
-        section.info_productDetail
-            div.sideLeft
-                div.topLeft
-                    img(src="/img/irene-2.jpg")
-                div.botLeft
-                    img(src="/img/irene-3.jpg")
-                    img(src="/img/irene-4.jpg")
-                    img(src="/img/irene-5.jpg")
-                    div.arrowsLeftSide
-                        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#999999"><path d="M400-80 0-480l400-400 71 71-329 329 329 329-71 71Z"/></svg>
-                        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#999999"><path d="m321-80-71-71 329-329-329-329 71-71 400 400L321-80Z"/></svg>
-                    div.circlesLeftSide
-                        div
-                        div
-                        div
-                        div
-            div.sideRight
-                    h2=producto.subtitle
-                    div.priceStar
-                        b=producto.price
-                        ul#estrellas
-                            li
-                                <i class="fa-solid fa-star"></i>
-                            li
-                                <i class="fa-solid fa-star"></i>
-                            li
-                                <i class="fa-solid fa-star"></i>
-                            li
-                                <i class="fa-solid fa-star"></i>
-                            li
-                                <i class="fa-solid fa-star"></i>
-                    hr
-                    div.middleInfo
-                        b marca
-                        h4 haruharu
-                    div.middleInfo
-                        b marca
-                        h4 haruharu
-                    div.middleInfo
-                        b marca
-                        h4 haruharu
-                    div.middleInfo
-                        b rango de edad
-                        h4 adulto
-                    div.middleInfo
-                        b caracteristicas
-                        h4 lightweight, hipoalergenico
-                    hr
-                    div.bottomInfo
-                        h1 Sobre este árticulo
-                        ul
-                            li Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci at delectus deserunt dolorem dolores doloribus excepturi exercitationem fuga iure laborum laudantium, maxime nisi perferendis, quod repellendus sint tenetur velit vitae.
-                            li Lorem ipsum dolor sit amet, consectetur adipisicing elit. A amet aperiam autem consectetur, cumque cupiditate deleniti dignissimos eaque enim, eveniet expedita fugit incidunt itaque nisi quo recusandae saepe sed veritatis!
-                            li Lorem ipsum dolor sit amet, consectetur adipisicing elit. A alias aliquam aliquid distinctio dolorem ea eaque error eveniet explicabo id, illo laudantium libero nemo nesciunt quae quasi recusandae veritatis voluptatum!
-                            li Lorem ipsum dolor sit amet, consectetur adipisicing elit. A ad at consectetur culpa cum doloribus ea eveniet facilis iusto maiores molestiae mollitia, nesciunt nostrum odio omnis quas sapiente ut veniam?
-                    div.lastMove
-                        button enviar al carrito
-                        button comprar
+    if producto
+        main.container_productDetail
+            h1= producto.brand
+            section.info_productDetail
+                div.sideLeft
+                    div.topLeft
+                        img(src=producto.img[0])
+                    div.botLeft
+                        img(src=producto.img[1])
+                        img(src=producto.img[2])
+                        img(src=producto.img[3])
+                        div.arrowsLeftSide
+                            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#999999"><path d="M400-80 0-480l400-400 71 71-329 329 329 329-71 71Z"/></svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#999999"><path d="m321-80-71-71 329-329-329-329 71-71 400 400L321-80Z"/></svg>
+                        div.circlesLeftSide
+                            div
+                            div
+                            div
+                            div
+                div.sideRight
+                        h2=producto.subtitle
+                        div.priceStar
+                            b=producto.price
+                            ul#estrellas
+                                li
+                                    <i class="fa-solid fa-star"></i>
+                                li
+                                    <i class="fa-solid fa-star"></i>
+                                li
+                                    <i class="fa-solid fa-star"></i>
+                                li
+                                    <i class="fa-solid fa-star"></i>
+                                li
+                                    <i class="fa-solid fa-star"></i>
+                        hr
+                        div.middleInfo
+                            b marca
+                            h4 haruharu
+                        div.middleInfo
+                            b marca
+                            h4 haruharu
+                        div.middleInfo
+                            b marca
+                            h4 haruharu
+                        div.middleInfo
+                            b rango de edad
+                            h4 adulto
+                        div.middleInfo
+                            b caracteristicas
+                            h4 lightweight, hipoalergenico
+                        hr
+                        div.bottomInfo
+                            h1 Sobre este árticulo
+                            ul
+                                li Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci at delectus deserunt dolorem dolores doloribus excepturi exercitationem fuga iure laborum laudantium, maxime nisi perferendis, quod repellendus sint tenetur velit vitae.
+                                li Lorem ipsum dolor sit amet, consectetur adipisicing elit. A amet aperiam autem consectetur, cumque cupiditate deleniti dignissimos eaque enim, eveniet expedita fugit incidunt itaque nisi quo recusandae saepe sed veritatis!
+                                li Lorem ipsum dolor sit amet, consectetur adipisicing elit. A alias aliquam aliquid distinctio dolorem ea eaque error eveniet explicabo id, illo laudantium libero nemo nesciunt quae quasi recusandae veritatis voluptatum!
+                                li Lorem ipsum dolor sit amet, consectetur adipisicing elit. A ad at consectetur culpa cum doloribus ea eveniet facilis iusto maiores molestiae mollitia, nesciunt nostrum odio omnis quas sapiente ut veniam?
+                        div.lastMove
+                            button enviar al carrito
+                            button comprar
 
-        section.productsRecomended
-            h1 Productos Recomendados
-            div.containerElementsRecomended
-                each element,index in baseDatos
-                   div(class=`product${element.category} productRecomendent`)
-                        img(src=element.img)
-                        b #{element.subtitle}
-                        b #{element.price}
-                        div
-                            button(class="btn-carrito", data-id=element.id, data-brand=element.brand, data-img=element.img, data-price=element.price, data-name=element.name) agregar al carrito
-                            button(class="btn-comprar", data-id=element.id, data-brand=element.brand, data-img=element.img, data-price=element.price, data-name=element.name) compra
-
-        //section.info_brand
-        //    h1 Acerca de la marca
-        //    div.containerElementInfo
-        //        div.gridLeft
-        //            div.leftTopSection
-        //            div.leftBottomSection
-        //        div.gridRight
-        //            div.rightTopSection
-        //                div.sideLeftBox
-        //                div.sideRightBox
-        //                    div
-        //                    div
-        //            div.rightBottomSection
-
-
+            section.productsRecomended
+                h1 Productos Recomendados
+                div.containerElementsRecomended
+                    each element,index in baseDatos
+                        div(class=`product${element.category} productRecomendent`)
+                            img(src=element.img[0])
+                            b #{element.subtitle}
+                            b #{element.price}
+                            div
+                                button(class="btn-carrito", data-id=element.id, data-brand=element.brand, data-img=element.img[0], data-price=element.price, data-name=element.name) agregar al carrito
+                                button(class="btn-comprar", data-id=element.id, data-brand=element.brand, data-img=element.img[0], data-price=element.price, data-name=element.name) compra
