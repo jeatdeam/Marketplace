@@ -2,15 +2,18 @@
 // import { loadStripe } from "https://js.stripe.com/v3/";
 // import stripe from './stripe.mjs';
 // import Stripe from "stripe";
-import {moveSpan} from './moveElements.mjs'
+import {moveBottomInfo, moveSpan} from './moveElements.mjs'
 import keysFromStripe from './keysFromStripe.mjs';
 import {masVendidosElement} from './masVendidos.mjs';
+import {redirectMarca} from './redireccionamientos.mjs'
 import {redirectMasVendidoElement} from './masVendidos.mjs'
 import {asignarNombresHeader} from "./listaProducts.mjs";
 
 // moveSpan();
 
+redirectMarca();
 window.addEventListener('resize',moveSpan);
+window.addEventListener('resize',moveBottomInfo)
 
 masVendidosElement();
 asignarNombresHeader();
@@ -1626,7 +1629,6 @@ container_group.forEach(container => {
 
 
 /*-----------busqueda de productos-----------------*/
-
 
 function deleteAddProducts() {
     const all_elements = document.querySelectorAll('.compraElement');

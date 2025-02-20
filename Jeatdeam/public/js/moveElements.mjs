@@ -25,3 +25,25 @@ export function moveSpan(){
     }
 
 }
+
+export function moveBottomInfo(){
+
+    if(window.innerWidth <= 1024){
+        const bottomInfo=document.querySelector('.bottomInfo');
+        const infoProduct=document.querySelector('.info_productDetail')
+
+        infoProduct.insertAdjacentElement('afterend',bottomInfo)
+
+
+    }
+    if(window.innerWidth >=1025){
+        const bottomInfo=document.querySelector('.bottomInfo');
+        const lastMove=document.querySelector('.lastMove');
+
+        lastMove.insertAdjacentElement('beforebegin',bottomInfo)
+
+    }
+
+
+
+}

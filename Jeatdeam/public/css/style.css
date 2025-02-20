@@ -880,6 +880,10 @@ main{
 .containerBrands{
     width: 80%;
     margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    padding: 25px 0 50px 0;
 }
 .containerBrands>h1{
     text-align: center;
@@ -892,23 +896,29 @@ main{
     /*align-content: center;*/
     justify-content: center;
     display: grid;
-    gap: 15px;
+    gap: 25px;
     grid-template-columns: repeat(auto-fit,350px);
     /*grid-auto-rows: 450px;*/
 }
 .elementProduct{
-    width: 250px;
-    border: 1px solid orange;
+    width: 275px;
+    height: 425px;
     border-radius: 12px;
     display: flex;
     flex-direction: column;
-    background: lightblue;
-    gap: 15px 0;
+    gap: 10px 0;
     align-items: center;
     padding: 15px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    transition: all 0.25s ease-in-out;
+}
+.elementProduct:hover{
+    box-shadow: 0 0 20px rgba(0,191,255,0.5);
+    transition: all 0.25s ease-in-out;
 }
 .elementProduct>img{
-    width: 100%;
+    width: 250px;
+    height: 250px;
 }
 .elementProduct>div{
     display: flex;
@@ -950,7 +960,7 @@ main{
     top: 50%;
     display: flex;
     justify-content: space-between;
-    width: 105%;
+    width: 110%;
     transform: translateY(-50%);
 }
 .arrowsLeftSide>svg{
@@ -1043,11 +1053,13 @@ main{
 /*}*/
 .containerElementsRecomended>div{
     display: flex;
-    width: 250px;
-    height: 405px;
+    width: 275px;
+    height: 425px;
+    min-width: 275px;
     flex-direction: column;
     align-items: center;
-    gap: 15px 0;
+    gap: 10px 0;
+    min-height: 425px;
     border: 1px solid rgba(0,0,0,0.4);
     border-radius: 12px;
     padding: 15px;
@@ -1060,8 +1072,9 @@ main{
     border-color: gray;
 }
 .containerElementsRecomended>div>img{
-    width: 100%;
-    height: 100%;
+    width: 250px;
+    height: 250px;
+
 }
 .productRecomendent>div{
     width: 100%;
@@ -2062,6 +2075,7 @@ input:focus{
         display: flex;
         flex-direction: column;
         gap: 15px 0;
+        margin-top: 35px;
     }
     .sideRight>h2{
         /*width: 80%;*/
@@ -2089,13 +2103,14 @@ input:focus{
         flex-direction: column;
         gap: 15px 0;
         justify-content: center;
+        width: 80%;
+        margin: 50px auto 0 auto;
     }
     .bottomInfo>ul{
         display: flex;
         flex-direction: column;
         gap: 15px 0;
         padding-left: 25px;
-
     }
 
     .lastMove {
@@ -2659,6 +2674,7 @@ input:focus{
         display: flex;
         flex-direction: column;
         gap: 15px 0;
+        margin-top: 35px;
     }
     .sideRight>h2{
         /*width: 80%;*/
@@ -2686,13 +2702,14 @@ input:focus{
         flex-direction: column;
         gap: 15px 0;
         justify-content: center;
+        width: 80%;
+        margin: 50px auto 0 auto;
     }
     .bottomInfo>ul{
         display: flex;
         flex-direction: column;
         gap: 15px 0;
         padding-left: 25px;
-
     }
 
     .lastMove {
@@ -3058,6 +3075,15 @@ input:focus{
     }
 }
 @media (min-width: 481px) and (max-width: 640px){
+    /*--arrowsLeftSide---*/
+    .arrowsLeftSide{
+        position: absolute;
+        top: 50%;
+        display: flex;
+        justify-content: space-between;
+        width: 110%;
+        transform: translateY(-50%);
+    }
     .iconsBusqueda{
         width: 90%;
         margin: 0 auto;
@@ -3216,6 +3242,7 @@ input:focus{
         display: flex;
         flex-direction: column;
         gap: 15px 0;
+        margin-top: 35px;
     }
     .sideRight>h2{
         /*width: 80%;*/
@@ -3243,6 +3270,8 @@ input:focus{
         flex-direction: column;
         gap: 15px 0;
         justify-content: center;
+        width: 80%;
+        margin: 50px auto 0 auto;
     }
     .bottomInfo>ul{
         display: flex;
@@ -3621,6 +3650,15 @@ input:focus{
 }
 
 @media (min-width: 641px) and (max-width:768px){
+    /*--arrowsLeftSide---*/
+    .arrowsLeftSide{
+        position: absolute;
+        top: 50%;
+        display: flex;
+        justify-content: space-between;
+        width: 115%;
+        transform: translateY(-50%);
+    }
     /*----------infoCenter-----------*/
     .infoCenter{
         /*width: calc(70vw + 25px);*/
@@ -3783,12 +3821,13 @@ input:focus{
         display: flex;
         flex-direction: column;
         gap: 15px 0;
-        position: absolute;
         top: 92.5%;
         left: 0;
         min-height: 350px;
         justify-content: center;
         padding: 0 25px;
+        width: 80%;
+        margin: 50px auto 0 auto;
     }
     .bottomInfo>ul{
         display: flex;
@@ -3819,7 +3858,6 @@ input:focus{
 
 
     .productsRecomended{
-        margin-top: 300px;
     }
 
     /*-------nav-------*/
@@ -4308,12 +4346,13 @@ input:focus{
         display: flex;
         flex-direction: column;
         gap: 15px 0;
-        position: absolute;
         top: 92.5%;
         left: 0;
         min-height: 350px;
         justify-content: center;
         padding: 0 25px;
+        width: 80%;
+        margin: 50px auto 0 auto;
     }
     .bottomInfo>ul{
         display: flex;
@@ -4344,7 +4383,6 @@ input:focus{
 
 
     .productsRecomended{
-        margin-top: 300px;
     }
 
     /*-------nav-------*/

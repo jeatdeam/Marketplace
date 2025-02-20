@@ -2,7 +2,7 @@ extends layout
 
 block content
     main.containerBrands
-        if element
+        if productosPorMarca
             h1 #{title.toUpperCase()}
             section.productsBrands
                 each element,indice in productosPorMarca
@@ -13,3 +13,5 @@ block content
                         div
                             button(data-id=element.id, data-brand=element.brand, data-img=element.img[0], data-price=element.price, data-name=element.name) agregar al carrito
                             button(data-id=element.id, data-brand=element.brand, data-img=element.img[0], data-price=element.price, data-name=element.name) comprar
+        else
+            h1 no existe elementos de esta marca
