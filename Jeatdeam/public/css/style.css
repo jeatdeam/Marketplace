@@ -1858,16 +1858,45 @@ input:focus{
 /*}*/
 
 @media (max-width: 320px){
+    /*-----------searchAndOptions-------------------*/
+    .searchAndOptions>ul>li{
+        gap: 25px;
+        position: relative;
+        padding: 10px 10px;
+    }
+    .searchAndOptions>ul>li>div{
+        flex-direction: column;
+        align-items: start;
+    }
+    .searchAndOptions>ul>li>span:nth-of-type(1){
+        white-space: nowrap;
+        position: absolute;
+        top: 82%;
+        left: 39%;
+
+    }
+    .searchAndOptions>ul>li>div{
+        align-self: start;
+    }
+    .searchAndOptons>ul>li>span:nth-of-type(1){
+
+    }
+
+    /*--------------------------------*/
     /*-----busquedaInteractiva-------*/
     .busquedaInteractiva{
         /*width: 50px;*/
-        width: 300px;
-        min-width: 300px;
+        width: 320px;
+        min-width: 320px;
     }
     .iconsBusqueda>input{
         width: 280px;
     }
-
+    .iconsBusqueda>svg{
+        width: 20px;
+        height: 20px;
+    }
+    /*----------------------*/
     /*infoCenter*/
     .infoCenter{
         /*width: calc(70vw + 25px);*/
@@ -2411,7 +2440,44 @@ input:focus{
     }
 }
 @media (min-width: 321px) and (max-width: 480px){
+    /*-----------searchAndOptions-------------------*/
+    .searchAndOptions>ul>li{
+        gap: 25px;
+        position: relative;
+        padding: 10px 10px;
+    }
+    .searchAndOptions>ul>li>div{
+        flex-direction: column;
+        align-items: start;
+    }
+    .searchAndOptions>ul>li>span:nth-of-type(1){
+        white-space: nowrap;
+        position: absolute;
+        top: 82%;
+        left: 39%;
 
+    }
+    .searchAndOptions>ul>li>div{
+        align-self: start;
+    }
+    .searchAndOptons>ul>li>span:nth-of-type(1){
+
+    }
+
+    /*-----busquedaInteractiva-------*/
+    .busquedaInteractiva{
+        /*width: 50px;*/
+        width: 320px;
+        min-width: 320px;
+    }
+    .iconsBusqueda>input{
+        width: 280px;
+    }
+    .iconsBusqueda>svg{
+        width: 20px;
+        height: 20px;
+    }
+    /*----------------------*/
     /*center*/
     .infoCenter{
         /*width: calc(70vw + 25px);*/
