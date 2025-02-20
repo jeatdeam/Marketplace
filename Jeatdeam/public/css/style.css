@@ -1037,8 +1037,10 @@ main{
 }
 .productsRecomended>h1{
     text-align: center;
-    padding: 55px 0;
-    font-size: 40px;
+    padding: 25px 0 55px 0;
+    font-size: 45px;
+    font-weight: 100;
+    /*border: 5px solid black;*/
 }
 /*.containerElementsRecomended{*/
 /*    width: 80%;*/
@@ -2134,8 +2136,12 @@ input:focus{
     }
 
 
-    .productsRecomended{
-    }
+    /*.productsRecomended>h1{*/
+    /*    border: 5px solid black;*/
+    /*}*/
+    /*.productsRecomended>h1{*/
+    /*    border: 5px solid black;*/
+    /*}*/
 
     /*-------nav-------*/
     .navegador{
@@ -3214,12 +3220,16 @@ input:focus{
         flex-direction: column;
         gap: 15px 0;
         align-self: center;
+        margin: 0 auto;
     }
     .topLeft{
         transition: all 0.35s ease-in-out;
+        display: flex;
+        justify-content: center;
     }
     .topLeft>img{
-        width: 100%;
+        /*width: 100%;*/
+        width: 350px;
         border-radius: 12px;
         transition: all 0.35s ease-in-out;
     }
@@ -3227,16 +3237,22 @@ input:focus{
         display: flex;
         justify-content: space-evenly;
         /*gap: 0 3%;*/
+        gap: 15px;
         padding: 0 15px;
         width: 100%;
         border-radius: 12px;
         transition: all 0.35s ease-in-out;
     }
     .botLeft>img{
-        width:30%;
+        width: 100px;
+        height: 100px;
         object-fit: cover;
         border-radius: 12px;
         transition: all 0.35s ease-in-out;
+    }
+    .arrowsLeftSide>svg{
+        width: 30px;
+        height: 30px;
     }
     .sideRight{
         display: flex;
@@ -3249,6 +3265,7 @@ input:focus{
         /*margin: 0 auto;*/
 
     }
+
     .priceStar{
         display: flex;
         justify-content: space-between;
@@ -3763,7 +3780,7 @@ input:focus{
     .sideLeft{
         display: flex;
         flex-direction: column;
-        gap: 15px 0;
+        gap: 10px 0;
         width: 50%;
         align-self: center;
     }
@@ -3773,12 +3790,12 @@ input:focus{
     .topLeft>img{
         width: 100%;
         border-radius: 12px;
-
     }
     .botLeft{
         display: flex;
         justify-content: space-evenly;
         /*gap: 0 3%;*/
+        gap: 10px;
         padding: 0 15px;
         width: 100%;
         border-radius: 12px;
@@ -3789,6 +3806,13 @@ input:focus{
         object-fit: cover;
         border-radius: 12px;
 
+    }
+    .arrowsLeftSide{
+        width: 115%;
+    }
+    .arrowsLeftSide>svg{
+        width: 30px;
+        height: 30px;
     }
     .sideRight{
         width:50%;
@@ -4288,7 +4312,7 @@ input:focus{
     .sideLeft{
         display: flex;
         flex-direction: column;
-        gap: 15px 0;
+        gap: 10px 0;
         width: 50%;
         align-self: center;
     }
@@ -4300,26 +4324,35 @@ input:focus{
         border-radius: 12px;
 
     }
+
     .botLeft{
         display: flex;
         justify-content: space-evenly;
         /*gap: 0 3%;*/
+        gap: 10px;
         padding: 0 15px;
         width: 100%;
         border-radius: 12px;
-
     }
+
     .botLeft>img{
         width:30%;
         object-fit: cover;
         border-radius: 12px;
-
+    }
+    .arrowsLeftSide{
+        width: 110%;
+    }
+    .arrowsLeftSide>svg{
+        width: 30px;
+        height: 30px;
     }
     .sideRight{
         width:50%;
         display: flex;
         flex-direction: column;
         gap: 15px 0;
+        align-self: center;
     }
     .sideRight>h2{
         /*width: 80%;*/
@@ -4806,7 +4839,7 @@ input:focus{
     .sideLeft{
         display: flex;
         flex-direction: column;
-        gap: 15px 0;
+        gap: 12.5px 0;
         width: 50%;
         align-self: center;
     }
@@ -4822,16 +4855,23 @@ input:focus{
         display: flex;
         justify-content: space-evenly;
         /*gap: 0 3%;*/
+        gap: 15px;
         padding: 0 15px;
         width: 100%;
         border-radius: 12px;
-
     }
     .botLeft>img{
         width:30%;
         object-fit: cover;
         border-radius: 12px;
 
+    }
+    .arrowsLeftSide{
+        width: 110%;
+    }
+    .arrowsLeftSide>svg{
+        width: 35px;
+        height: 35px;
     }
     .sideRight{
         width:50%;
@@ -5331,6 +5371,7 @@ input:focus{
         display: flex;
         justify-content: space-evenly;
         /*gap: 0 3%;*/
+        gap: 15px;
         padding: 0 15px;
         width: 100%;
         border-radius: 12px;
@@ -5340,6 +5381,11 @@ input:focus{
         width:30%;
         object-fit: cover;
         border-radius: 12px;
+    }
+    .arrowsLeftSide{
+
+    }
+    .arrowsLeftSide>svg{
 
     }
     .sideRight{
@@ -6420,7 +6466,8 @@ input:focus{
         font-size: 45px;
     }
     .info_productDetail{
-        width:70%;
+        /*width:70%;*/
+        width: 1200px;
         margin: 0 auto;
         border-radius: 12px;
         display: flex;
@@ -6431,15 +6478,16 @@ input:focus{
     .sideLeft{
         display: flex;
         flex-direction: column;
-        gap: 15px 0;
+        gap: 25px 0;
         width: 50%;
         align-self: center;
     }
     .topLeft{
-
+        display: flex;
+        justify-content: center;
     }
     .topLeft>img{
-        width: 100%;
+        width: 500px;
         border-radius: 12px;
 
     }
@@ -6453,10 +6501,11 @@ input:focus{
         gap: 25px;
     }
     .botLeft>img{
-        width:30%;
+        width:150px;
+        height: 150px;
         object-fit: cover;
         border-radius: 12px;
-        flex: 1;
+        /*flex: 1;*/
     }
     .sideRight{
         width:50%;
