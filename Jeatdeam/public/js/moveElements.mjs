@@ -44,6 +44,12 @@ export function moveBottomInfo(){
 
     }
 
+}
+
+export function movePasarelaPagoPhones(){
+
+
+
 
 
 }

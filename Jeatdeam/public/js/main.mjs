@@ -8,10 +8,18 @@ import {masVendidosElement} from './masVendidos.mjs';
 import {redirectMarca} from './redireccionamientos.mjs'
 import {redirectMasVendidoElement} from './masVendidos.mjs'
 import {asignarNombresHeader} from "./listaProducts.mjs";
-
+import {menuSmallWindowEvents} from "./menuSmall.mjs";
 // moveSpan();
 
 redirectMarca();
+
+
+document.addEventListener('DOMContentLoaded',()=>{
+    // moveSpan();
+    // moveBottomInfo();
+    menuSmallWindowEvents();
+})
+
 window.addEventListener('resize',moveSpan);
 window.addEventListener('resize',moveBottomInfo)
 
@@ -1965,8 +1973,8 @@ function rellenarDatos(){
 
                 if($pasarelaPago){
                     // $pasarelaPago.style.opacity="1";
-                    $pasarelaPago.style.minWidth="500px";
-                    $pasarelaPago.style.width="500px";
+                    // $pasarelaPago.style.minWidth="500px";
+                    // $pasarelaPago.style.width="500px";
                     $pasarelaPago.style.height="100%";
                     $pasarelaPago.style.pointerEvents="auto";
                     $pasarelaPago.style.display="flex";
@@ -1984,8 +1992,8 @@ function rellenarDatos(){
                     $pasarelaPago.style.display="none";
                 }else {
                     // $pasarelaPago.style.opacity = "1";
-                    $pasarelaPago.style.width = "500px";
-                    $pasarelaPago.style.minWidth = "500px";
+                    // $pasarelaPago.style.width = "500px";
+                    // $pasarelaPago.style.minWidth = "500px";
                     $pasarelaPago.style.height = "100%";
                     $pasarelaPago.style.pointerEvents="auto";
                     $pasarelaPago.style.display="flex";
@@ -2029,8 +2037,8 @@ document.addEventListener('click',async e=>{
                     $containerYapePlin.style.pointerEvents="none";
                 }else{
                     $containerYapePlin.style.opacity="1";
-                    $containerYapePlin.style.width="500px";
-                    $containerYapePlin.style.minWidth="500px";
+                    // $containerYapePlin.style.width="500px";
+                    // $containerYapePlin.style.minWidth="500px";
                     $containerYapePlin.style.height="800px";
                     $containerYapePlin.style.pointerEvents="auto";
                 }
@@ -2691,30 +2699,35 @@ function createTemplateMenuSmall(){
 
 
     document.addEventListener('click',e=>{
+//listaSmall>dov>svg
 
-        if(e.target.closest('.containerMenuSmallWindow>div>div>svg')){
+        const svgElement=e.target.closest('.listaMarcaIcon svg')
 
-            const listaCercana=e.target.parentNode.nextElementSibling;
+
+        if(svgElement){
+
+            const listaCercana=e.target.closest('.listaMarcaIcon').nextElementSibling;
+
+            console.log(listaCercana);
 
             if(listaCercana){
                 const propiedadOpacityActive=getComputedStyle(listaCercana).opacity
                 if(propiedadOpacityActive==="1"){
                     listaCercana.style.opacity="0";
                     listaCercana.style.height="0";
+                    listaCercana.style.display="none";
                     // listaCercana.style.padding="";
                 }else{
                     listaCercana.style.opacity="1";
                     listaCercana.style.height="100%";
+                    listaCercana.style.display="block";
+
                     // listaCercana.style.padding="10px 40px";
 
                 }
             }
 
-
-
-
         }
-
     })
 
 }
@@ -2845,313 +2858,313 @@ menuMediaVerySmall();
 
 /*------------menu media querys smallMenu------------------*/
 
-const mediaQuery=window.matchMedia('(max-width: 640px)')
-
- function menuSmallActive(e){
-
-    const $menu=document.querySelector('.menu');
-    const $body=document.querySelector('body');
-     const $icon=document.querySelector('#iconsNav>li:nth-of-type(3)>svg')
-
-    if(e.matches){
-        $menu.style.display="none";
-        $icon.style.pointerEvents="auto";
-    }
-
- }
-
- mediaQuery.addEventListener('change',menuSmallActive);
- //
- menuSmallActive(mediaQuery);
-
-
-const mediaQuery2=window.matchMedia('(min-width:641px) and (max-width:768px)')
-
-function menuSmallActive2(e){
-
-    const $menu=document.querySelector('.menu');
-    const $body=document.querySelector('body');
-    const $icon=document.querySelector('#iconsNav>li:nth-of-type(3)>svg')
-
-    const iconActive=getComputedStyle($icon).pointerEvents;
-
-    if(iconActive==="none"){
-        $icon.style.pointerEvents="auto";
-    }
-    if(e.matches){
-        $icon.style.pointerEvents="auto";
-        $menu.style.display="none";
-
-    }
-}
-mediaQuery2.addEventListener('change',menuSmallActive2);
-
-menuSmallActive2(mediaQuery2);
-
-const mediaQuery3=window.matchMedia('(min-width:769px) and (max-width:1024px)')
-
-function menuSmallActive3(e){
-
-    const $menu=document.querySelector('.menu');
-    const $containerMenuSmall=document.querySelector('.containerMenuSmallWindow');
-    const activeMenuSmall=getComputedStyle($containerMenuSmall).opacity;
-    const $icon=document.querySelector('#iconsNav>li:nth-of-type(3)>svg')
-    const $body=document.querySelector('body')
-
-setTimeout(()=>{
-    if(e.matches){
-        $menu.style.display="flex";
-        $icon.style.pointerEvents="none";
-
-    }else{
-        $icon.style.pointerEvents="auto";
-    }
-
-    if(activeMenuSmall==="1"){
-        console.log('el menu esta activo con el valor de ->',activeMenuSmall)
-        $containerMenuSmall.style.opacity="0";
-        $body.style.filter="";
-        //$icon.style.pointerEvents="none"
-    }
-
-
-},300)
-
-
-}
-mediaQuery3.addEventListener('change',menuSmallActive3);
-menuSmallActive3(mediaQuery3)
-
-/*-------------------------------------------------*/
-
-const mediaQuery4=window.matchMedia('(min-width:1025px) and (max-width:1280px)')
-
-function menuSmallActive4(e){
-
-    const $menu=document.querySelector('.menu');
-    const $containerMenuSmall=document.querySelector('.containerMenuSmallWindow');
-    const activeMenuSmall=getComputedStyle($containerMenuSmall).opacity;
-    const $icon=document.querySelector('#iconsNav>li:nth-of-type(3)>svg')
-    const $body=document.querySelector('body')
-
-
-    setTimeout(()=>{
-        if(e.matches){
-            $menu.style.display="flex";
-            $icon.style.pointerEvents="none";
-
-        }else{
-            $menu.style.pointerEvents="auto";
-        }
-
-        // setTimeout(()=>{
-        // if(e.matches){
-        if(activeMenuSmall==="1"){
-            console.log('el menu esta activo con el valor de ->',activeMenuSmall)
-            $containerMenuSmall.style.opacity="0";
-            $body.style.filter="";
-            //$icon.style.pointerEvents="none"
-        }
-
-    },300)
-    // },300)
-
-}
-mediaQuery4.addEventListener('change',menuSmallActive4);
-
-menuSmallActive4(mediaQuery4)
-
-/*------------------Media query 5----------------------------*/
-const mediaQuery5=window.matchMedia('(min-width:1281px) and (max-width:1440px)')
-
-function menuSmallActive5(e){
-
-    const $menu=document.querySelector('.menu');
-    const $containerMenuSmall=document.querySelector('.containerMenuSmallWindow');
-    const activeMenuSmall=getComputedStyle($containerMenuSmall).opacity;
-    const $icon=document.querySelector('#iconsNav>li:nth-of-type(3)>svg')
-    const $body=document.querySelector('body')
-
-
-    setTimeout(()=>{
-        if(e.matches){
-            $menu.style.display="flex";
-            $icon.style.pointerEvents="none";
-
-        }else{
-            $menu.style.pointerEvents="auto";
-        }
-
-        // setTimeout(()=>{
-        // if(e.matches){
-        if(activeMenuSmall==="1"){
-            console.log('el menu esta activo con el valor de ->',activeMenuSmall)
-            $containerMenuSmall.style.opacity="0";
-            $body.style.filter="";
-            //$icon.style.pointerEvents="none"
-        }
-
-    },300)
-
-    // },300)
-
-}
-mediaQuery5.addEventListener('change',menuSmallActive5);
-
-menuSmallActive5(mediaQuery5)
-
-/*----------------------------6-------------------------------------*/
-
-const mediaQuery6=window.matchMedia('(min-width:1281px) and (max-width:1440px)')
-
-function menuSmallActive6(e){
-
-    const $menu=document.querySelector('.menu');
-    const $containerMenuSmall=document.querySelector('.containerMenuSmallWindow');
-    const activeMenuSmall=getComputedStyle($containerMenuSmall).opacity;
-    const $icon=document.querySelector('#iconsNav>li:nth-of-type(3)>svg')
-    const $body=document.querySelector('body')
-
-
-    setTimeout(()=>{
-        if(e.matches){
-            $menu.style.display="flex";
-            $icon.style.pointerEvents="none";
-
-        }else{
-            $menu.style.pointerEvents="auto";
-        }
-
-        // setTimeout(()=>{
-        // if(e.matches){
-        if(activeMenuSmall==="1"){
-            console.log('el menu esta activo con el valor de ->',activeMenuSmall)
-            $containerMenuSmall.style.opacity="0";
-            $body.style.filter="";
-            //$icon.style.pointerEvents="none"
-        }
-
-    },300)
-    // },300)
-
-}
-mediaQuery6.addEventListener('change',menuSmallActive6);
-
-menuSmallActive6(mediaQuery6)
-
-/*--------------------------*----7-----------------------------------*/
-
-const mediaQuery7=window.matchMedia('(min-width:1441px) and (max-width:1536px)')
-
-function menuSmallActive7(e){
-
-    const $menu=document.querySelector('.menu');
-    const $containerMenuSmall=document.querySelector('.containerMenuSmallWindow');
-    const activeMenuSmall=getComputedStyle($containerMenuSmall).opacity;
-    const $icon=document.querySelector('#iconsNav>li:nth-of-type(3)>svg')
-    const $body=document.querySelector('body')
-
-
-    setTimeout(()=>{
-        if(e.matches){
-            $menu.style.display="flex";
-            $icon.style.pointerEvents="none";
-
-        }else{
-            $menu.style.pointerEvents="auto";
-        }
-
-        // setTimeout(()=>{
-        // if(e.matches){
-        if(activeMenuSmall==="1"){
-            console.log('el menu esta activo con el valor de ->',activeMenuSmall)
-            $containerMenuSmall.style.opacity="0";
-            $body.style.filter="";
-            //$icon.style.pointerEvents="none"
-        }
-
-    },300)
-
-    // },300)
-
-}
-mediaQuery7.addEventListener('change',menuSmallActive7);
-menuSmallActive7(mediaQuery7);
-/*--------------------------*----8-----------------------------------*/
-
-const mediaQuery8=window.matchMedia('(min-width:1537px)')
-
-function menuSmallActive8(e){
-
-    const $menu=document.querySelector('.menu');
-    const $containerMenuSmall=document.querySelector('.containerMenuSmallWindow');
-    const activeMenuSmall=getComputedStyle($containerMenuSmall).opacity;
-    const $icon=document.querySelector('#iconsNav>li:nth-of-type(3)>svg')
-    const $body=document.querySelector('body')
-
-
-    setTimeout(()=>{
-        if(e.matches){
-            $menu.style.display="flex";
-            $icon.style.pointerEvents="none";
-
-        }else{
-            $menu.style.pointerEvents="auto";
-        }
-
-        // setTimeout(()=>{
-        // if(e.matches){
-        if(activeMenuSmall==="1"){
-            console.log('el menu esta activo con el valor de ->',activeMenuSmall)
-            $containerMenuSmall.style.opacity="0";
-            $body.style.filter="";
-            //$icon.style.pointerEvents="none"
-        }
-
-    },300)
-
-
-
-    // },300)
-
-}
-mediaQuery8.addEventListener('change',menuSmallActive8);
-
-menuSmallActive8(mediaQuery8);
-
-
-function eventosMarcaProducts(){
-
-    document.addEventListener('click', e=>{
-
-        const bottonAddCarrito=e.target.closest('.elementProduct>div>button:nth-of-type(1)');
-
-        if(bottonAddCarrito){
-
-            console.log('estamos presionado el-> ',e.target)
-
-        }
-
-    })
-
-
-        const bottonAdd=document.querySelector('.elementProduct>div>button:nth-of-type(1)');
-
-    bottonAdd.addEventListener('mouseenter',e=>{
-
-        if(bottonAdd.contains(e.target)){
-
-            console.log('funcioan el mouseenter en el boton 1',e.target)
-            const $elementProduct=document.querySelector('.elementProduct');
-
-            $elementProduct.style.pointerEvents="none";
-
-
-            bottonAdd.classList.add('activeEventsButton')
-
-        }
-
-    })
-
-
-}
+// const mediaQuery=window.matchMedia('(max-width: 640px)')
+//
+//  function menuSmallActive(e){
+//
+//     const $menu=document.querySelector('.menu');
+//     const $body=document.querySelector('body');
+//      const $icon=document.querySelector('#iconsNav>li:nth-of-type(3)>svg')
+//
+//     if(e.matches){
+//         $menu.style.display="none";
+//         $icon.style.pointerEvents="auto";
+//     }
+//
+//  }
+//
+//  mediaQuery.addEventListener('change',menuSmallActive);
+//  //
+//  // menuSmallActive(mediaQuery);
+//
+//
+// const mediaQuery2=window.matchMedia('(min-width:641px) and (max-width:768px)')
+//
+// function menuSmallActive2(e){
+//
+//     const $menu=document.querySelector('.menu');
+//     const $body=document.querySelector('body');
+//     const $icon=document.querySelector('#iconsNav>li:nth-of-type(3)>svg')
+//
+//     const iconActive=getComputedStyle($icon).pointerEvents;
+//
+//     if(iconActive==="none"){
+//         $icon.style.pointerEvents="auto";
+//     }
+//     if(e.matches){
+//         $icon.style.pointerEvents="auto";
+//         $menu.style.display="none";
+//
+//     }
+// }
+// mediaQuery2.addEventListener('change',menuSmallActive2);
+//
+// // menuSmallActive2(mediaQuery2);
+//
+// const mediaQuery3=window.matchMedia('(min-width:769px) and (max-width:1024px)')
+//
+// function menuSmallActive3(e){
+//
+//     const $menu=document.querySelector('.menu');
+//     const $containerMenuSmall=document.querySelector('.containerMenuSmallWindow');
+//     const activeMenuSmall=getComputedStyle($containerMenuSmall).opacity;
+//     const $icon=document.querySelector('#iconsNav>li:nth-of-type(3)>svg')
+//     const $body=document.querySelector('body')
+//
+// setTimeout(()=>{
+//     if(e.matches){
+//         $menu.style.display="flex";
+//         $icon.style.pointerEvents="none";
+//
+//     }else{
+//         $icon.style.pointerEvents="auto";
+//     }
+//
+//     if(activeMenuSmall==="1"){
+//         console.log('el menu esta activo con el valor de ->',activeMenuSmall)
+//         $containerMenuSmall.style.opacity="0";
+//         $body.style.filter="";
+//         //$icon.style.pointerEvents="none"
+//     }
+//
+//
+// },300)
+//
+//
+// }
+// mediaQuery3.addEventListener('change',menuSmallActive3);
+// // menuSmallActive3(mediaQuery3)
+//
+// /*-------------------------------------------------*/
+//
+// const mediaQuery4=window.matchMedia('(min-width:1025px) and (max-width:1280px)')
+//
+// function menuSmallActive4(e){
+//
+//     const $menu=document.querySelector('.menu');
+//     const $containerMenuSmall=document.querySelector('.containerMenuSmallWindow');
+//     const activeMenuSmall=getComputedStyle($containerMenuSmall).opacity;
+//     const $icon=document.querySelector('#iconsNav>li:nth-of-type(3)>svg')
+//     const $body=document.querySelector('body')
+//
+//
+//     setTimeout(()=>{
+//         if(e.matches){
+//             $menu.style.display="flex";
+//             $icon.style.pointerEvents="none";
+//
+//         }else{
+//             $menu.style.pointerEvents="auto";
+//         }
+//
+//         // setTimeout(()=>{
+//         // if(e.matches){
+//         if(activeMenuSmall==="1"){
+//             console.log('el menu esta activo con el valor de ->',activeMenuSmall)
+//             $containerMenuSmall.style.opacity="0";
+//             $body.style.filter="";
+//             //$icon.style.pointerEvents="none"
+//         }
+//
+//     },300)
+//     // },300)
+//
+// }
+// mediaQuery4.addEventListener('change',menuSmallActive4);
+//
+// // menuSmallActive4(mediaQuery4)
+//
+// /*------------------Media query 5----------------------------*/
+// const mediaQuery5=window.matchMedia('(min-width:1281px) and (max-width:1440px)')
+//
+// function menuSmallActive5(e){
+//
+//     const $menu=document.querySelector('.menu');
+//     const $containerMenuSmall=document.querySelector('.containerMenuSmallWindow');
+//     const activeMenuSmall=getComputedStyle($containerMenuSmall).opacity;
+//     const $icon=document.querySelector('#iconsNav>li:nth-of-type(3)>svg')
+//     const $body=document.querySelector('body')
+//
+//
+//     setTimeout(()=>{
+//         if(e.matches){
+//             $menu.style.display="flex";
+//             $icon.style.pointerEvents="none";
+//
+//         }else{
+//             $menu.style.pointerEvents="auto";
+//         }
+//
+//         // setTimeout(()=>{
+//         // if(e.matches){
+//         if(activeMenuSmall==="1"){
+//             console.log('el menu esta activo con el valor de ->',activeMenuSmall)
+//             $containerMenuSmall.style.opacity="0";
+//             $body.style.filter="";
+//             //$icon.style.pointerEvents="none"
+//         }
+//
+//     },300)
+//
+//     // },300)
+//
+// }
+// mediaQuery5.addEventListener('change',menuSmallActive5);
+//
+// menuSmallActive5(mediaQuery5)
+//
+// /*----------------------------6-------------------------------------*/
+//
+// const mediaQuery6=window.matchMedia('(min-width:1281px) and (max-width:1440px)')
+//
+// function menuSmallActive6(e){
+//
+//     const $menu=document.querySelector('.menu');
+//     const $containerMenuSmall=document.querySelector('.containerMenuSmallWindow');
+//     const activeMenuSmall=getComputedStyle($containerMenuSmall).opacity;
+//     const $icon=document.querySelector('#iconsNav>li:nth-of-type(3)>svg')
+//     const $body=document.querySelector('body')
+//
+//
+//     setTimeout(()=>{
+//         if(e.matches){
+//             $menu.style.display="flex";
+//             $icon.style.pointerEvents="none";
+//
+//         }else{
+//             $menu.style.pointerEvents="auto";
+//         }
+//
+//         // setTimeout(()=>{
+//         // if(e.matches){
+//         if(activeMenuSmall==="1"){
+//             console.log('el menu esta activo con el valor de ->',activeMenuSmall)
+//             $containerMenuSmall.style.opacity="0";
+//             $body.style.filter="";
+//             //$icon.style.pointerEvents="none"
+//         }
+//
+//     },300)
+//     // },300)
+//
+// }
+// mediaQuery6.addEventListener('change',menuSmallActive6);
+//
+// menuSmallActive6(mediaQuery6)
+//
+// /*--------------------------*----7-----------------------------------*/
+//
+// const mediaQuery7=window.matchMedia('(min-width:1441px) and (max-width:1536px)')
+//
+// function menuSmallActive7(e){
+//
+//     const $menu=document.querySelector('.menu');
+//     const $containerMenuSmall=document.querySelector('.containerMenuSmallWindow');
+//     const activeMenuSmall=getComputedStyle($containerMenuSmall).opacity;
+//     const $icon=document.querySelector('#iconsNav>li:nth-of-type(3)>svg')
+//     const $body=document.querySelector('body')
+//
+//
+//     setTimeout(()=>{
+//         if(e.matches){
+//             $menu.style.display="flex";
+//             $icon.style.pointerEvents="none";
+//
+//         }else{
+//             $menu.style.pointerEvents="auto";
+//         }
+//
+//         // setTimeout(()=>{
+//         // if(e.matches){
+//         if(activeMenuSmall==="1"){
+//             console.log('el menu esta activo con el valor de ->',activeMenuSmall)
+//             $containerMenuSmall.style.opacity="0";
+//             $body.style.filter="";
+//             //$icon.style.pointerEvents="none"
+//         }
+//
+//     },300)
+//
+//     // },300)
+//
+// }
+// mediaQuery7.addEventListener('change',menuSmallActive7);
+// menuSmallActive7(mediaQuery7);
+// /*--------------------------*----8-----------------------------------*/
+//
+// const mediaQuery8=window.matchMedia('(min-width:1537px)')
+//
+// function menuSmallActive8(e){
+//
+//     const $menu=document.querySelector('.menu');
+//     const $containerMenuSmall=document.querySelector('.containerMenuSmallWindow');
+//     const activeMenuSmall=getComputedStyle($containerMenuSmall).opacity;
+//     const $icon=document.querySelector('#iconsNav>li:nth-of-type(3)>svg')
+//     const $body=document.querySelector('body')
+//
+//
+//     setTimeout(()=>{
+//         if(e.matches){
+//             $menu.style.display="flex";
+//             $icon.style.pointerEvents="none";
+//
+//         }else{
+//             $menu.style.pointerEvents="auto";
+//         }
+//
+//         // setTimeout(()=>{
+//         // if(e.matches){
+//         if(activeMenuSmall==="1"){
+//             console.log('el menu esta activo con el valor de ->',activeMenuSmall)
+//             $containerMenuSmall.style.opacity="0";
+//             $body.style.filter="";
+//             //$icon.style.pointerEvents="none"
+//         }
+//
+//     },300)
+//
+//
+//
+//     // },300)
+//
+// }
+// mediaQuery8.addEventListener('change',menuSmallActive8);
+//
+// menuSmallActive8(mediaQuery8);
+//
+//
+// function eventosMarcaProducts(){
+//
+//     document.addEventListener('click', e=>{
+//
+//         const bottonAddCarrito=e.target.closest('.elementProduct>div>button:nth-of-type(1)');
+//
+//         if(bottonAddCarrito){
+//
+//             console.log('estamos presionado el-> ',e.target)
+//
+//         }
+//
+//     })
+//
+//
+//         const bottonAdd=document.querySelector('.elementProduct>div>button:nth-of-type(1)');
+//
+//     bottonAdd.addEventListener('mouseenter',e=>{
+//
+//         if(bottonAdd.contains(e.target)){
+//
+//             console.log('funcioan el mouseenter en el boton 1',e.target)
+//             const $elementProduct=document.querySelector('.elementProduct');
+//
+//             $elementProduct.style.pointerEvents="none";
+//
+//
+//             bottonAdd.classList.add('activeEventsButton')
+//
+//         }
+//
+//     })
+//
+//
+// }

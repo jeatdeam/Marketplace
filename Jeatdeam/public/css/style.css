@@ -104,7 +104,6 @@ html{
 
 }
 .titleAndExist>svg path{
-    pointer-events: none;
 }
 .containerMenuSmallWindow{
     background: lightblue;
@@ -116,7 +115,6 @@ html{
     padding-bottom: 50px;
     display: flex;
     flex-direction: column;
-    /*gap: 25px 0;*/
     gap: 25px 0;
     opacity: 0;
     box-shadow: 0 0 35px rgba(0,0,0,1);
@@ -133,6 +131,22 @@ html{
     }
 
 }
+.listaSmall svg{
+}
+.listaMarcaIcon>svg>path{
+    pointer-events: none; !important;
+}
+
+.listaSmall>ul{
+    display: none;
+}
+.listaSmall>ul{
+    border: 1px solid black;
+}
+.listaSmall>ul>li{
+}
+
+
 
 
 .listaMarcaIcon{
@@ -143,6 +157,11 @@ html{
     border-bottom: 1px solid gray;
     /*display: none;*/
 }
+
+.listaMarcaIcon>b:hover{
+    color: cornflowerblue;
+}
+
 .containerMenuSmallWindow>div{
     transition:height 0.25s ease-in-out;
 }
@@ -167,16 +186,12 @@ html{
 }
 .containerMenuSmallWindow>div>ul li{
     padding: 10px 40px;
-    /*transition: background 0.35s ease-in-out;*/
     border-top: 1px solid transparent;
     border-bottom: 1px solid transparent;
     box-shadow: 0 0 15px rgba(0,0,0,0);
     transition: box-shadow 0.35s ease-in-out;
-    /*border-radius: 12px;*/
 }
 .containerMenuSmallWindow>div>ul li:hover{
-    /*border-top: 1px solid blue;*/
-    /*border-bottom: 1px solid blue;*/
     transition: box-shadow 0.35s ease-in-out;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
 }
@@ -445,7 +460,7 @@ main{
     height: 80px;
     min-height: 80px;
     transition: all 0.15s ease-in-out;
-    gap: 35px;
+    gap: 30px;
 }
 .searchAndOptions>ul>li>img{
     min-width: 75px;
@@ -1226,20 +1241,18 @@ main{
 }
 .productsAndPay{
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     width: 80%;
     margin: 0 auto;
-    gap: 100px;
+    gap: 25px;
     border-radius: 12px;
     padding: 25px;
     transition: all 0.35s ease-in-out;
 }
-
-
-
 .containerElementsCompra{
-    padding: 25px 0;
+    /*padding: 25px 0;*/
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
@@ -1299,7 +1312,7 @@ main{
     gap: 15px 0;
     box-shadow:  0 0 25px rgba(0,0,0,0.2);
     transition: all 0.35s linear;
-    width: 0;
+    width: 500px;
     height: 0;
     border-radius: 12px;
     padding: 15px 25px;
@@ -1325,23 +1338,17 @@ input:focus{
     padding: 10px 15px;
     border-radius: 7.5px;
     border: 1.5px solid rgba(0,0,0,0.3);
-    width: 175px;
     align-self: end;
     box-shadow: 0 0 2.5px rgba(0,0,0,0.2);
     transition: all 0.25s linear;
 }
-.pasarelaPago>form button:nth-of-type(1){
-    width: 100%;
-}
+
 .pasarelaPago>form button:hover{
     border: 1.5px solid rgba(0,0,0,0.5);
     box-shadow: 0 0 5px rgba(0,0,0,0.2);
     transition: all 0.25s linear;
 }
-.pasarelaPago>form>button:nth-last-child(1){
-    width: 175px;
-}
-.detailCard>div{
+.recojoTienda{
 }
 /*.pasarelaPago>form>div{*/
 /*    display: flex;*/
@@ -1372,7 +1379,7 @@ input:focus{
     box-shadow: 0 0 5px rgba(0,0,0,0.2);
     padding: 10px;
     max-width: 450px;
-    min-width: 450px;
+    /*min-width: 450px;*/
     min-height: 35px;
 }
 
@@ -1404,6 +1411,7 @@ input:focus{
 }
 .couriers>button{
     flex: 1;
+
 }
 
 .couriersContainer>textarea{
@@ -1411,14 +1419,16 @@ input:focus{
     box-shadow: 0 0 5px rgba(0,0,0,0.2);
     height: 75px;
     max-width: 450px;
-    min-width: 450px;
+    /*min-width: 450px;*/
     min-height: 75px;
     padding: 10px;
     /*height: 0;*/
     display: none;
     transition: all 0.25s linear;
 }
-
+.couriersContainer~button{
+    width: 175px;
+}
 
 
 .compraElement{
@@ -1789,7 +1799,7 @@ input:focus{
     justify-content: space-evenly;
     box-shadow:  0 0 5px rgba(0,0,0,0.2);
     padding: 15px 20px;
-    border-radius: 7.5px;
+    border-radius: 12px;
 }
 .buttonsFinalizar>button{
     /*width: 185px;*/
@@ -1832,7 +1842,6 @@ input:focus{
 }
 
 .infoCenter{
-
 }
 .elementInfo_one>div,.elementInfo_two>div{
     box-shadow: 0 0 10px rgba(0,0,0,0.8);
@@ -1877,13 +1886,48 @@ input:focus{
 /*}*/
 
 @media (max-width: 320px){
+    .productsAndPay{
+        width: 90%;
+    }
+    .containerElementsCompra{
+    }
+    .pasarelaPago{
+        width: 320px;
+    }
+    .detailCard>div{
+        flex-direction: column;
+    }
+    .nameCountry>div{
+        flex-direction: column;
+    }
+    .region>input{
+        min-height: 40px; !important
+        flex: 1;
+    }
+    .couriers{
+        flex-wrap: wrap;
+    }
+    .couriersContainer>textarea{
+        height: 90px;
+    }
+    .couriersContainer~button{
+        width: 100%;
+    }
+    /*--------buttonsFinalizar--------*/
+    .buttonsFinalizar{
+        width: 80%;
+        flex-direction: column;
+    }
+
     /*-----------searchAndOptions-------------------*/
     .iconsBusqueda{
         width: 95%;
     }
     .searchAndOptions>ul>li{
-        gap: 25px;
+        /*gap: 10px;*/
         padding: 10px 10px;
+        justify-content: center;
+        gap: 15px;
     }
     .searchAndOptions>ul>li>div{
         flex-direction: column;
@@ -1931,7 +1975,7 @@ input:focus{
         align-items: center;
         /*grid-template-columns: repeat(auto-fit,minmax(300px,1fr));*/
         justify-content: center;
-        padding: 25px;
+        padding: 35px 25px;
         gap: 25px;
     }
     .elementInfo_one,.elementInfo_two{
@@ -1973,12 +2017,7 @@ input:focus{
 
 
     /*searAndProducts*/
-    .searchAndOptions{
 
-    }
-    .searchAndOptions>ul>li{
-        gap: 25px;
-    }
     .searchAndOptions>ul>li>div{
         flex-direction: column;
         align-items: start;
@@ -2471,14 +2510,48 @@ input:focus{
     }
 }
 @media (min-width: 321px) and (max-width: 480px){
+    /*---containerElementsCompra---*/
+    .productsAndPay{
+        width: 90%;
+    }
+    .containerElementsCompra{
+    }
+    .pasarelaPago{
+        width: 320px;
+    }
+    .detailCard>div{
+        flex-direction: column;
+    }
+    .nameCountry>div{
+        flex-direction: column;
+    }
+    .region>input{
+        min-height: 40px; !important
+    flex: 1;
+    }
+    .couriers{
+        flex-wrap: wrap;
+    }
+    .couriersContainer>textarea{
+        height: 90px;
+    }
+    .couriersContainer~button{
+        width: 100%;
+    }
+
+    /*-------buttonsFinalizar---------*/
+    .buttonsFinalizar{
+        width: 80%;
+        flex-direction: column;
+    }
     /*-----------searchAndOptions-------------------*/
     .iconsBusqueda{
         width: 95%;
         margin: 0 auto;
     }
     .searchAndOptions>ul>li{
-        gap: 25px;
-        padding: 10px 10px;
+        gap: 20px;
+        padding: 10px 20px;
     }
     .searchAndOptions>ul>li>div{
         flex-direction: column;
@@ -2526,7 +2599,7 @@ input:focus{
         align-items: center;
         /*grid-template-columns: repeat(auto-fit,minmax(300px,1fr));*/
         justify-content: center;
-        padding: 25px;
+        padding: 35px 25px;
         gap: 25px;
     }
     .elementInfo_one,.elementInfo_two{
@@ -2580,7 +2653,6 @@ input:focus{
 
     }
     .searchAndOptions>ul>li{
-        gap: 25px;
     }
     .searchAndOptions>ul>li>div{
         flex-direction: column;
@@ -3081,6 +3153,32 @@ input:focus{
     }
 }
 @media (min-width: 481px) and (max-width: 640px){
+
+    /*---containerElementsCompra---*/
+    .couriers{
+        flex-wrap:wrap;
+        /*flex: 1;*/
+        background: blue;
+        gap: 0;
+    }
+    .couriers>button{
+        white-space: nowrap;
+    }
+    .productsAndPay{
+        width: 90%;
+    }
+    .containerElementsCompra{
+    }
+    .pasarelaPago{
+        width: 450px;
+    }
+    /*-------buttonsFinalizar---------*/
+    .buttonsFinalizar{
+        border-radius: 12px;
+        width: 80%;
+        flex-direction: column;
+    }
+
     /*--arrowsLeftSide---*/
     .arrowsLeftSide{
         position: absolute;
@@ -3103,12 +3201,12 @@ input:focus{
         align-items: center;
         /*grid-template-columns: repeat(auto-fit,minmax(300px,1fr));*/
         justify-content: center;
-        padding: 25px;
-        gap: 25px;
+        padding: 35px 25px 25px 25px;
+        gap: 35px;
     }
     .elementInfo_one,.elementInfo_two{
         display: flex;
-        gap: 25px;
+        gap: 35px;
         flex-direction: column;
     }
 
@@ -3665,8 +3763,25 @@ input:focus{
         filter: opacity(0.6);
     }
 }
-
 @media (min-width: 641px) and (max-width:768px){
+    .buttonsFinalizar{
+        width: 90%;
+    }
+    .buttonsFinalizar>h2{
+        white-space: nowrap;
+    }
+
+   .couriers>button{
+       white-space: nowrap;
+   }
+    /*---containerElementsCompra---*/
+    .productsAndPay{
+        width: 90%;
+    }
+    .containerElementsCompra{
+    }
+
+
     /*--arrowsLeftSide---*/
     .arrowsLeftSide{
         position: absolute;
@@ -3685,12 +3800,12 @@ input:focus{
         align-items: center;
         /*grid-template-columns: repeat(auto-fit,minmax(300px,1fr));*/
         justify-content: center;
-        padding: 25px;
-        gap: 25px;
+        padding: 35px 25px 25px 25px;
+        gap: 35px;
     }
     .elementInfo_one,.elementInfo_two{
         display: flex;
-        gap: 25px;
+        gap: 35px;
         /*flex-direction: column;*/
     }
 
@@ -4218,8 +4333,17 @@ input:focus{
         filter: opacity(0.6);
     }
 }
-
 @media (min-width: 769px) and (max-width:1024px){
+
+    .buttonsFinalizar{
+        width: 75%;
+    }
+    .buttonsFinalizar>h2{
+        white-space: nowrap;
+    }
+
+
+
     /*----------infoCenter-----------*/
     .infoCenter{
         /*width: calc(70vw + 25px);*/
@@ -4229,12 +4353,12 @@ input:focus{
         align-items: center;
         /*grid-template-columns: repeat(auto-fit,minmax(300px,1fr));*/
         justify-content: center;
-        padding: 25px;
-        gap: 25px;
+        padding: 35px 25px 25px 25px;
+        gap: 35px;
     }
     .elementInfo_one,.elementInfo_two{
         display: flex;
-        gap: 25px;
+        gap: 35px;
         /*flex-direction: column;*/
     }
 
@@ -4756,6 +4880,20 @@ input:focus{
 }
 
 @media (min-width: 1025px) and (max-width:1280px){
+
+    /*-----pasarelaPago-----*/
+    .productsAndPay{
+        width: 80%;
+        gap: 25px;
+        flex-direction: row;
+    }
+    /*---------buttonsFinalizar-----------*/
+    .buttonsFinalizar{
+        width: 70%;
+    }
+    .buttonsFinalizar>h2{
+        white-space: nowrap;
+    }
     /*----------infoCenter-----------*/
     .infoCenter{
         /*width: calc(70vw + 25px);*/
@@ -4765,12 +4903,12 @@ input:focus{
         align-items: center;
         /*grid-template-columns: repeat(auto-fit,minmax(300px,1fr));*/
         justify-content: center;
-        padding: 25px;
-        gap: 25px;
+        padding: 35px 25px 25px 25px;
+        gap: 35px;
     }
     .elementInfo_one,.elementInfo_two{
         display: flex;
-        gap: 25px;
+        gap: 35px;
         /*flex-direction: column;*/
     }
 
@@ -5271,8 +5409,21 @@ input:focus{
         filter: opacity(0.6);
     }
 }
-
 @media (min-width: 1281px) and (max-width:1440px){
+    .productsAndPay{
+        width: 80%;
+        gap: 25px;
+        flex-direction: row;
+    }
+    /*--------buttonsFinalizar-------*/
+    .buttonsFinalizar{
+        width: 50%;
+    }
+    /*-----pasarelaPago-----*/
+    .productsAndPay{
+        flex-direction: row;
+    }
+
     /*----------infoCenter-----------*/
     .infoCenter{
         /*width: calc(70vw + 25px);*/
@@ -5282,12 +5433,12 @@ input:focus{
         align-items: center;
         /*grid-template-columns: repeat(auto-fit,minmax(300px,1fr));*/
         justify-content: center;
-        padding: 25px;
-        gap: 25px;
+        padding: 35px 25px 25px 25px;
+        gap: 35px;
     }
     .elementInfo_one,.elementInfo_two{
         display: flex;
-        gap: 25px;
+        gap: 35px;
         /*flex-direction: column;*/
     }
 
@@ -5832,8 +5983,12 @@ input:focus{
         filter: opacity(0.6);
     }
 }
-
 @media (min-width: 1441px) and (max-width:1536px){
+    .productsAndPay{
+        width: 80%;
+        gap: 50px;
+        flex-direction: row;
+    }
     /*----------infoCenter-----------*/
     .infoCenter{
         width: 70%;
@@ -5842,13 +5997,13 @@ input:focus{
         align-items: center;
         /*grid-template-columns: repeat(auto-fit,minmax(300px,1fr));*/
         justify-content: center;
-        padding: 50px;
-        gap: 25px;
+        padding: 35px 25px 25px 25px;
+        gap: 40px;
         flex-wrap: wrap;
     }
     .elementInfo_one,.elementInfo_two{
         display: flex;
-        gap: 25px;
+        gap: 40px;
         /*flex-direction: column;*/
     }
 
@@ -6389,8 +6544,12 @@ input:focus{
         filter: opacity(0.6);
     }
 }
-
 @media (min-width: 1537px){
+    .productsAndPay{
+        width: 70%;
+        gap: 50px;
+        flex-direction: row;
+    }
     /*----------infoCenter-----------*/
     .infoCenter{
         width: 90%;
@@ -6400,12 +6559,12 @@ input:focus{
         /*grid-template-columns: repeat(auto-fit,minmax(300px,1fr));*/
         justify-content: center;
         padding: 50px;
-        gap: 25px;
+        gap: 50px;
         flex-wrap: wrap;
     }
     .elementInfo_one,.elementInfo_two{
         display: flex;
-        gap: 25px;
+        gap: 50px;
         /*flex-direction: column;*/
     }
 
