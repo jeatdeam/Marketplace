@@ -1886,6 +1886,19 @@ input:focus{
 /*}*/
 
 @media (max-width: 320px){
+    .containerYapePlin{
+        width: 300px;
+        min-width: 300px;
+        padding: 60px 20px;
+    }
+    .boxYapePlin{
+        flex-direction: column;
+        justify-content: center;
+    }
+    .yape,.plin{
+        width: 100px;
+        height: 100px;
+    }
     .productsAndPay{
         width: 90%;
     }
@@ -2510,6 +2523,20 @@ input:focus{
     }
 }
 @media (min-width: 321px) and (max-width: 480px){
+    .boxYapePlin{
+        flex-direction: column;
+    }
+    .yape,.plin{
+        width: 100px;
+        height: 100px;
+    }
+
+
+    .containerYapePlin{
+        width: 300px;
+        min-width: 300px;
+        padding: 60px 25px;
+    }
     /*---containerElementsCompra---*/
     .productsAndPay{
         width: 90%;
@@ -3153,12 +3180,24 @@ input:focus{
     }
 }
 @media (min-width: 481px) and (max-width: 640px){
+    .containerYapePlin{
+        width: 450px;
+        min-width: 450px;
+        padding: 60px 25px;
+        border: 5px solid blue;
+    }
+    /*padding: 60px 50px;*/
+    .yape,.plin{
+        width: 150px;
+        height: 150px;
+        min-width: 150px;
+        min-height: 150px;
+    }
 
     /*---containerElementsCompra---*/
     .couriers{
         flex-wrap:wrap;
         /*flex: 1;*/
-        background: blue;
         gap: 0;
     }
     .couriers>button{
