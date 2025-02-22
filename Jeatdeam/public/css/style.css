@@ -1684,7 +1684,7 @@ input:focus{
     padding: 60px 50px;
 }
 .containerYapePlin>img{
-        width: 80%;
+        width: 200px;
     align-self: center;
 }
 /*.containerYapePLin>h1{*/
@@ -1714,40 +1714,31 @@ input:focus{
     justify-content: space-evenly;
     gap:25px;
 }
-.yape,.plin{
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-}
+
 .yape{
     background-image: url('/img/yape.png');
 }
 .plin{
     background-image: url('/img/plin.webp');
 }
-.boxYapePlin>div{
-    width: 300px;
-    height: 200px;
-    /*border: 1px solid black;*/
-    box-shadow: 0 0 5px rgba(0,0,0,0.5);
-    border-radius: 12.5px;
-    justify-content: center;
-}
 
-.boxYapePlin>div{
+
+.yape,.plin{
+    width: 200px;
+    height: 200px;
     display: flex;
     align-items: center;
     justify-content: center;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    border-radius: 7.5px;
 }
 .boxYapePlin~button{
     padding: 15px;
     border-radius: 10px;
     width: 200px;
     align-self: center;
-}
-.containerYapePlin>h1{
-    font-weight: bold;
-    font-size: 30px;
 }
 .containerYapePlin>button{
     min-width: 200px;
@@ -1784,6 +1775,10 @@ input:focus{
     height: 40px;
     border: 1px solid transparent;
     transition: all 0.25s ease-in-out;
+    border-radius: 7.5px;
+}
+.returnYapePlin{
+    border-radius: 7.5px;
 }
 .buttonsFinalizar>*{
     /*border: 1px solid black;*/
@@ -1887,18 +1882,56 @@ input:focus{
 
 @media (max-width: 320px){
     .containerYapePlin{
-        width: 300px;
-        min-width: 300px;
+        width: 250px;
+        min-width: 250px;
         padding: 60px 20px;
+        /*padding: 0;*/
+        box-shadow: 0 0 5px rgba(0,0,0,0.2);
+        justify-content: space-evenly;
+        height: auto;
+        flex-direction: column;
+        gap: 60px;
     }
+    .textContainer{
+
+    }
+
     .boxYapePlin{
         flex-direction: column;
         justify-content: center;
+        /*gap: 0;*/
+
+    }
+    .containerYapePlin>img{
+        width: 200px;
+        align-self: center;
     }
     .yape,.plin{
-        width: 100px;
-        height: 100px;
+        width: 200px;
+        height: 200px;
+        min-width: 200px;
+        min-height: 200px;
+        border-radius: 7.5px;
     }
+
+    .textContainer>h1:nth-of-type(1){
+        font-size: 25px;
+    }
+    .textContainer>h1:nth-of-type(2){
+        font-size: 20px;
+    }
+    .deleteYapePlin{
+        width: 30px;
+        height: 30px;
+    }
+    .returnYapePlin{
+        width: 30px;
+        height: 30px;
+    }
+
+
+
+    /*----------------------*/
     .productsAndPay{
         width: 90%;
     }
@@ -2523,20 +2556,55 @@ input:focus{
     }
 }
 @media (min-width: 321px) and (max-width: 480px){
-    .boxYapePlin{
-        flex-direction: column;
-    }
-    .yape,.plin{
-        width: 100px;
-        height: 100px;
-    }
-
-
     .containerYapePlin{
         width: 300px;
         min-width: 300px;
-        padding: 60px 25px;
+        padding: 60px 20px;
+        /*padding: 0;*/
+        box-shadow: 0 0 5px rgba(0,0,0,0.2);
+        justify-content: space-evenly;
+        height: auto;
+        flex-direction: column;
+        gap: 45px;
     }
+    .textContainer{
+
+    }
+
+    .boxYapePlin{
+        flex-direction: column;
+        justify-content: center;
+        /*gap: 0;*/
+        align-items: center;
+
+    }
+    .containerYapePlin>img{
+        width: 200px;
+        align-self: center;
+    }
+    .yape,.plin{
+        width: 200px;
+        height: 200px;
+        min-width: 200px;
+        min-height: 200px;
+        border-radius: 7.5px;
+    }
+
+    .textContainer>h1:nth-of-type(1){
+        font-size: 25px;
+    }
+    .textContainer>h1:nth-of-type(2){
+        font-size: 20px;
+    }
+    .deleteYapePlin{
+        width: 30px;
+        height: 30px;
+    }
+    .returnYapePlin{
+        width: 30px;
+        height: 30px;
+    }
+
     /*---containerElementsCompra---*/
     .productsAndPay{
         width: 90%;
@@ -3184,14 +3252,12 @@ input:focus{
         width: 450px;
         min-width: 450px;
         padding: 60px 25px;
-        border: 5px solid blue;
     }
     /*padding: 60px 50px;*/
     .yape,.plin{
-        width: 150px;
-        height: 150px;
-        min-width: 150px;
-        min-height: 150px;
+        width: 200px;
+        height: 200px;
+        border-radius: 7.5px;
     }
 
     /*---containerElementsCompra---*/
