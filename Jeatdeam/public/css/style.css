@@ -1974,25 +1974,52 @@ input:focus{
         padding: 10px 10px;
         justify-content: center;
         gap: 15px;
+        /*text-overflow: ellipsis;*/
+        /*overflow: hidden;*/
     }
     .searchAndOptions>ul>li>div{
         flex-direction: column;
         align-items: start;
+        overflow:hidden;
+        text-overflow: ellipsis;
     }
-    .searchAndOptions>ul>li>span:nth-of-type(1){
+    .searchAndOptions>ul>li>div>span:nth-of-type(2){
+        background: pink;
+        width: 100%;
+        /*display: flex;*/
+        /*gap: 5px;*/
+        display: block;
+        /*overflow:hidden;*/
+        /*text-overflow: ellipsis;*/
         white-space: nowrap;
+        overflow:hidden;
+        text-overflow: ellipsis;
     }
-    .searchAndOptions>ul>li>div{
-        align-self: start;
-    }
-    .searchAndOptons>ul>li>span:nth-of-type(1){
+    .searchAndOptions>ul>li>div>span:nth-of-type(2)>span{
+        /*background: pink;*/
+        /*display: inline-block;*/
+        /*white-space: nowrap;*/
+        /*width: 100%;*/
+        display: inline-block;
+        /*overflow:hidden;*/
+        /*text-overflow: ellipsis;*/
+        /*width: 100%;*/
 
+    }
+    .searchAndOptions>ul>li>div>span:nth-of-type(2)>span:nth-of-type(1)~span{
+        margin-left: 5px;
     }
     .searchAndOptions>ul>li>div>span:nth-of-type(3){
         font-weight: bold;
     }
 
+    /*searAndProducts*/
 
+    .searchAndOptions>ul>li>span:nth-of-type(1){
+        align-self: end;
+        transform: translateY(-70%);
+        white-space: nowrap;
+    }
     /*--------------------------------*/
     /*-----busquedaInteractiva-------*/
     .busquedaInteractiva{
@@ -2652,9 +2679,9 @@ input:focus{
         flex-direction: column;
         align-items: start;
     }
-    .searchAndOptions>ul>li>span:nth-of-type(1){
-        white-space: nowrap;
-    }
+    /*.searchAndOptions>ul>li>span:nth-of-type(1){*/
+    /*    white-space: nowrap;*/
+    /*}*/
     .searchAndOptions>ul>li>div{
         align-self: start;
     }
@@ -2663,6 +2690,11 @@ input:focus{
     }
     .searchAndOptions>ul>li>div>span:nth-of-type(3){
         font-weight: bold;
+    }
+    /*searAndProducts*/
+    .searchAndOptions>ul>li>span:nth-of-type(1){
+        align-self: end;
+        transform: translateY(-70%);
     }
 
     /*-----busquedaInteractiva-------*/
@@ -2743,20 +2775,7 @@ input:focus{
     }
 
 
-    /*searAndProducts*/
-    .searchAndOptions{
 
-    }
-    .searchAndOptions>ul>li{
-    }
-    .searchAndOptions>ul>li>div{
-        flex-direction: column;
-        align-items: start;
-    }
-    .searchAndOptions>ul>li>span:nth-of-type(1){
-        align-self: end;
-        transform: translateY(-70%);
-    }
     /*.iconsBusqueda>svg{*/
     /*    width: 40px;*/
     /*    height: 40px;*/
