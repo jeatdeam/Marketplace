@@ -686,14 +686,14 @@ function carritoContadorDOM() {
     $carrito.style.position = "relative";
 
     $contador_carrito.style.position = "absolute";
-    $contador_carrito.style.top = "-7px";
-    $contador_carrito.style.right = "-7px";
-    $contador_carrito.style.width = "19px";
-    $contador_carrito.style.height = "19px";
-    $contador_carrito.style.lineHeight = "19px"; // Centrar el número
-    $contador_carrito.style.border = "1px solid white";
-    $contador_carrito.style.background = "lightblue";
-    $contador_carrito.style.borderColor="black";
+    $contador_carrito.style.top = "-12px";
+    $contador_carrito.style.right = "-12px";
+    $contador_carrito.style.width = "12.5px";
+    $contador_carrito.style.height = "12.5px";
+    // $contador_carrito.style.lineHeight = "19px"; // Centrar el número
+    // $contador_carrito.style.border = "1px solid white";
+    // $contador_carrito.style.background = "lightblue";
+    // $contador_carrito.style.borderColor="black";
     $contador_carrito.style.borderRadius = "50%";
     $contador_carrito.style.textAlign = "center";
     $contador_carrito.style.fontSize = "10px";
@@ -733,34 +733,34 @@ function carritoContadorDOM() {
             $contador_carrito.style.textAlign = "center";
 
 
-            clearInterval(controllerInterval);
+            // clearInterval(controllerInterval);
 
-            controllerInterval=setInterval(() => {
-                // Obtener el valor computado del background
-                const backgroundColor = getComputedStyle($contador_carrito).backgroundColor;
-                const transformMatrix = getComputedStyle($contador_carrito).transform;
-
-                // Cambiar color de fondo
-                if (backgroundColor === "rgb(255, 192, 203)") { // "pink" en formato RGB
-                    $contador_carrito.style.background = "lightblue";
-                } else {
-                    $contador_carrito.style.background = "lightblue";
-                }
-
-                // Cambiar escala
-                if (transformMatrix === "none") {
-                    // Si no hay transformación aplicada, considerar como escala 1
-                    $contador_carrito.style.transform = "scale(1.10)";
-                } else {
-                    // Extraer el valor de la escala desde la matriz
-                    const scaleX = parseFloat(transformMatrix.split(",")[0].replace("matrix(", "").trim());
-                    if (scaleX === 1) {
-                        $contador_carrito.style.transform = "scale(1.10)";
-                    } else {
-                        $contador_carrito.style.transform = "scale(1)";
-                    }
-                }
-            }, 2000);
+            // controllerInterval=setInterval(() => {
+            //     // Obtener el valor computado del background
+            //     const backgroundColor = getComputedStyle($contador_carrito).backgroundColor;
+            //     const transformMatrix = getComputedStyle($contador_carrito).transform;
+            //
+            //     // Cambiar color de fondo
+            //     if (backgroundColor === "rgb(255, 192, 203)") { // "pink" en formato RGB
+            //         $contador_carrito.style.background = "lightblue";
+            //     } else {
+            //         $contador_carrito.style.background = "lightblue";
+            //     }
+            //
+            //     // Cambiar escala
+            //     if (transformMatrix === "none") {
+            //         // Si no hay transformación aplicada, considerar como escala 1
+            //         $contador_carrito.style.transform = "scale(1.10)";
+            //     } else {
+            //         // Extraer el valor de la escala desde la matriz
+            //         const scaleX = parseFloat(transformMatrix.split(",")[0].replace("matrix(", "").trim());
+            //         if (scaleX === 1) {
+            //             $contador_carrito.style.transform = "scale(1.10)";
+            //         } else {
+            //             $contador_carrito.style.transform = "scale(1)";
+            //         }
+            //     }
+            // }, 2000);
 
         }
     };

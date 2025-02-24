@@ -325,8 +325,8 @@ main{
     align-items: center;
     font-size:17.5px;
     font-weight: 100;
-    border-bottom: 1px solid black;
-    border-top: 1px solid black;
+    /*border-bottom: 1px solid black;*/
+    /*border-top: 1px solid black;*/
     white-space: nowrap;
 }
 @keyframes carrito {
@@ -527,30 +527,69 @@ main{
     align-items: center;
     justify-content: space-between;
     list-style: none;
-    gap: 10px;
+    gap: 15px;
 }
 #iconsNav>li{
-    /*width: 25px;*/
-    /*height: 25px;*/
     font-size: 20px;
     display: flex;
     align-items: center;
-    padding: 5px;
+    /*padding: 5px;*/
 }
 #iconsNav>li>i{
     background: transparent;
 }
 #iconsNav>li:nth-child(1){
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
     position: relative;
     border-radius: 50%;
     /*transition: background-color 0.35s ease-in-out;*/
-    transition: background 0.35s linear
+    transition: box-shadow 0.35s linear;
+    z-index:1;
 }
-#iconsNav>li:nth-child(1):hover{
-    background: rgba(50,200,50,0.5);
+#iconsNav>li:nth-child(1)::before{
+    content: '';
+    width: 20px;
+    height: 20px;
     border-radius: 50%;
-    transition: background 0.25s linear;
+    background: lightblue;
+    z-index:-1;
+    position: absolute;
+    border: 1px solid lightblue;
+
+    /*animation: palpito 1s infinite linear;*/
 }
+#iconsNav>li:nth-child(1)>svg{
+    background: white;
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+}
+
+
+#iconsNav>li:nth-child(1):hover{
+    box-shadow: 0 0 10px rgba(0,0,0,0.5)
+
+}
+
+@keyframes palpito{
+    0%{
+        transform: scale(1,1);
+        /*opacity: 1;*/
+    }
+    50%{
+        opacity: 0.75;
+    }
+    100%{
+        opacity: 0.50;
+        transform: scale(2);
+    }
+}
+
+
+
 #carrito{
     position:relative;
     display: flex;
@@ -575,11 +614,61 @@ main{
     justify-content: center;
     align-items: center;
 }
+
 #contador-carrito{
     display: flex;
     align-items: center;
     justify-content: center;
+    /*background: rgba(173, 216, 230, 0.6)*/
+    /*border: 1px solid black;*/
+
 }
+
+@keyframes crecimiento{
+    0%{
+        transform: scale(1,1);
+    }
+    100%{
+        transform: scale(1.5);
+    }
+}
+#contador-carrito::after{
+    content: '';
+    width: 12.5px;
+    height: 12.5px;
+    border-radius: 50%;
+    border: 1px solid lightblue;
+    position: absolute;
+
+    animation: crecimiento 1s infinite linear;
+}
+#contador-carrito::before{
+    content: '';
+    width: 15px;
+    height: 15px;
+    background: lightblue;
+    border-radius: 50%;
+    position: absolute;
+    /*z-index: -2;*/
+
+    animation: pulse 1s infinite linear;
+}
+
+@keyframes pulse{
+    0%{
+        transform: scale(1,1);
+        opacity: 0.75;
+    }
+    50%{
+        opacity: 0.50;
+    }
+    100%{
+        opacity: 0.25;
+        transform: scale(3);
+    }
+}
+
+
 .active_carrito2{
     transform: scale(2);
     background: green;
@@ -597,8 +686,8 @@ main{
     background: lightblue;
     padding: 15px;
     position: absolute;
-    top: 100%;
-    right: 100%;
+    top: 150%;
+    right: 10%;
     z-index: 4;
     display: flex;
     flex-direction: column;
@@ -621,7 +710,7 @@ main{
     font-weight: bold;
     padding: 10px;
     position: absolute;
-    top: 85%;
+    top: 100%;
     z-index: 4;
     transition: opacity 0.35s ease-in-out;
 }
@@ -1229,15 +1318,22 @@ main{
 }
 .compraPage>div:nth-of-type(1){
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
     background: lightblue;
-    line-height: 2;
-    padding: 0 15%;
+    height: 50px;
+    gap: 10px;
+}
+.compraPage>div>h1{
+    white-space: nowrap;
+    font-size: 25px;
 }
 .compraPage>div:nth-of-type(1)>button{
-    padding: 6px 15px;
+    /*padding: 6px 15px;*/
     border-radius: 7.5px;
+    height: 35px;
+    padding: 0 17.5px;
+    white-space: nowrap;
 }
 .productsAndPay{
     display: flex;
@@ -1881,6 +1977,19 @@ input:focus{
 /*}*/
 
 @media (max-width: 320px){
+    /*--------cajitaCompas---------*/
+    .cajitaCompras{
+        width: 250px;
+        right: -100%;
+    }
+
+    /*------compraPage-----------*/
+    .compraPage>div>h1{
+        white-space: nowrap;
+        font-size: 22.5px;
+    }
+
+
     .containerYapePlin{
         width: 250px;
         min-width: 250px;
@@ -1974,8 +2083,6 @@ input:focus{
         padding: 10px 10px;
         justify-content: center;
         gap: 15px;
-        /*text-overflow: ellipsis;*/
-        /*overflow: hidden;*/
     }
     .searchAndOptions>ul>li>div{
         flex-direction: column;
@@ -1984,7 +2091,6 @@ input:focus{
         text-overflow: ellipsis;
     }
     .searchAndOptions>ul>li>div>span:nth-of-type(2){
-        background: pink;
         width: 100%;
         /*display: flex;*/
         /*gap: 5px;*/
@@ -2086,6 +2192,9 @@ input:focus{
     }
     .containerMenuSmallWindow{
         width: 300px;
+    }
+    #iconsNav{
+        gap: 5px;
     }
 
 
@@ -2268,11 +2377,17 @@ input:focus{
     }
     .navegador>div{
         margin: 0 auto;
-        width: 80%;
+        width: 90%;
         display:flex;
         justify-content: space-between;
     }
 
+    #iconsNav{
+        gap: 5px;
+    }
+    #iconsNav>li{
+        padding: 0;
+    }
     .iconsBusqueda>svg{
 
     }
@@ -2583,6 +2698,31 @@ input:focus{
     }
 }
 @media (min-width: 321px) and (max-width: 480px){
+    /*-------nav-------*/
+    .navegador{
+        width: 100%;
+        padding: 25px 0;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: relative;
+
+    }
+    .navegador>div{
+        margin: 0 auto;
+        width: 85%;
+        display:flex;
+        justify-content: space-between;
+    }
+
+    #iconsNav{
+        gap: 7.5px;
+    }
+    #iconsNav>li{
+        padding: 0;
+    }
+    /*------------------------------------*/
     .containerYapePlin{
         width: 300px;
         min-width: 300px;
@@ -2781,7 +2921,6 @@ input:focus{
     /*    height: 40px;*/
     /*}*/
 
-    /*-------------navegador-------------------*/
     /*-----infoCenter------*/
 
 
@@ -2928,23 +3067,7 @@ input:focus{
     .productsRecomended{
     }
 
-    /*-------nav-------*/
-    .navegador{
-        width: 100%;
-        padding: 25px 0;
-        margin: 0 auto;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        position: relative;
 
-    }
-    .navegador>div{
-        margin: 0 auto;
-        width: 80%;
-        display:flex;
-        justify-content: space-between;
-    }
     /*.busquedaInteractiva{*/
     /*    !*width: 50px;*!*/
     /*    width: 300px;*/

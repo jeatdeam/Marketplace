@@ -28,13 +28,10 @@ transporter.verify((error,success)=>{
 
 let seccionProducts={
     boj: {
-        bloqueadorBarra: {
+        "bloqueadores": {
 
         },
-        bloqueadorCrema:{
-
-        },
-        contornoOjos:{
+        "contorno de ojos":{
 
         },
         jabon:{
@@ -50,14 +47,11 @@ let seccionProducts={
 
         }
     },
-    celimax: {
-        bloqueadorBarra: {
+    celimax:  {
+        "bloqueadores": {
 
         },
-        bloqueadorCrema:{
-
-        },
-        contornoOjos:{
+        "contorno de ojos":{
 
         },
         jabon:{
@@ -73,14 +67,11 @@ let seccionProducts={
 
         }
     },
-    cosrx: {
-        bloqueadorBarra: {
+    cosrx:  {
+        "bloqueadores": {
 
         },
-        bloqueadorCrema:{
-
-        },
-        contornoOjos:{
+        "contorno de ojos":{
 
         },
         jabon:{
@@ -96,14 +87,11 @@ let seccionProducts={
 
         }
     },
-    haruharu: {
-        bloqueadorBarra: {
+    haruharu:  {
+        "bloqueadores": {
 
         },
-        bloqueadorCrema:{
-
-        },
-        contornoOjos:{
+        "contorno de ojos":{
 
         },
         jabon:{
@@ -120,13 +108,10 @@ let seccionProducts={
         }
     },
     nacific: {
-        bloqueadorBarra: {
+        "bloqueadores": {
 
         },
-        bloqueadorCrema:{
-
-        },
-        contornoOjos:{
+        "contorno de ojos":{
 
         },
         jabon:{
@@ -142,14 +127,11 @@ let seccionProducts={
 
         }
     },
-    numbuzin: {
-        bloqueadorBarra: {
+    numbuzin:  {
+        "bloqueadores": {
 
         },
-        bloqueadorCrema:{
-
-        },
-        contornoOjos:{
+        "contorno de ojos":{
 
         },
         jabon:{
@@ -165,14 +147,11 @@ let seccionProducts={
 
         }
     },
-    skinni1004: {
-        bloqueadorBarra: {
+    skinni1004:  {
+        "bloqueadores": {
 
         },
-        bloqueadorCrema:{
-
-        },
-        contornoOjos:{
+        "contorno de ojos":{
 
         },
         jabon:{
@@ -188,14 +167,11 @@ let seccionProducts={
 
         }
     },
-    tocobo: {
-        bloqueadorBarra: {
+    tocobo:  {
+        "bloqueadores": {
 
         },
-        bloqueadorCrema:{
-
-        },
-        contornoOjos:{
+        "contorno de ojos":{
 
         },
         jabon:{
@@ -211,14 +187,11 @@ let seccionProducts={
 
         }
     },
-    centella: {
-        bloqueadorBarra: {
+    centella:  {
+        "bloqueadores": {
 
         },
-        bloqueadorCrema:{
-
-        },
-        contornoOjos:{
+        "contorno de ojos":{
 
         },
         jabon:{
@@ -234,14 +207,11 @@ let seccionProducts={
 
         }
     },
-    avene: {
-        bloqueadorBarra: {
+    avene:  {
+        "bloqueadores": {
 
         },
-        bloqueadorCrema:{
-
-        },
-        contornoOjos:{
+        "contorno de ojos":{
 
         },
         jabon:{
@@ -257,14 +227,11 @@ let seccionProducts={
 
         }
     },
-    eucerin: {
-        bloqueadorBarra: {
+    eucerin:  {
+        "bloqueadores": {
 
         },
-        bloqueadorCrema:{
-
-        },
-        contornoOjos:{
+        "contorno de ojos":{
 
         },
         jabon:{
