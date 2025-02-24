@@ -88,36 +88,35 @@ html{
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 25px;
+    padding: 0 20px 0 20px;
 }
 .titleAndExit>svg{
-    width: 35px;
-    height: 35px;
-    z-index: 3;
+    width: 30px;
+    height: 30px;
     border-radius: 7.5px;
     box-shadow: 0 0 0 rgba(0,0,0,0);
-    transition: box-shadow 0.15s  ease-in-out;
+    transition: all 0.25s  ease-in-out;
 }
 .titleAndExit>svg:hover{
     /*background: orange;*/
-    box-shadow: 0 0 35px rgba(0,0,0,0.2);
+    box-shadow: 0 0 5px rgba(0,0,0,0.8);
+    transition: all 0.25s  ease-in-out;
 
 }
 .titleAndExist>svg path{
 }
 .containerMenuSmallWindow{
-    background: lightblue;
+    background: white;
     border-radius: 12px;
     position: absolute;
     top: 200px;
     left: -300px;
-    border: 1px solid black;
-    padding-bottom: 50px;
     display: flex;
     flex-direction: column;
-    gap: 25px 0;
+    padding: 35px 0;
+    gap: 20px 0;
     opacity: 0;
-    box-shadow: 0 0 35px rgba(0,0,0,1);
+    box-shadow: 0 0 10px rgba(0,0,0,1);
 
     transition: all 0.5s ease-in-out;
 }
@@ -137,28 +136,23 @@ html{
     pointer-events: none; !important;
 }
 
-.listaSmall>ul{
-    display: none;
-}
-.listaSmall>ul{
-    border: 1px solid black;
-}
+
 .listaSmall>ul>li{
+    border-radius: 7.5px;
 }
-
-
-
 
 .listaMarcaIcon{
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 0 20px;
-    border-bottom: 1px solid gray;
+    /*border-bottom: 1px solid gray;*/
     /*display: none;*/
+    box-shadow: 0 0 5px rgba(0,0,0,0.5);
 }
 
 .listaMarcaIcon>b:hover{
+    transition: all 0.2s linear;
     color: cornflowerblue;
 }
 
@@ -178,14 +172,20 @@ html{
 .containerMenuSmallWindow>div>div>svg>path{
     pointer-events: none;
 }
-.containerMenuSmallWindow > div > ul {
+.listaSmall> ul {
+    padding-top: 20px;
+    display: none;
+    border-radius: 7.5px;
     opacity: 0;
     height: 0; /* Cambiar height a max-height */
     transition: opacity 0.25s ease-in-out, height 0.25s ease-in-out;
     list-style: none;
+
 }
 .containerMenuSmallWindow>div>ul li{
-    padding: 10px 40px;
+    /*padding: 10px 40px;*/
+    padding: 10px 30px;
+    /*margin-top: 20px;*/
     border-top: 1px solid transparent;
     border-bottom: 1px solid transparent;
     box-shadow: 0 0 15px rgba(0,0,0,0);
@@ -551,28 +551,41 @@ main{
 }
 #iconsNav>li:nth-child(1)::before{
     content: '';
-    width: 20px;
-    height: 20px;
+    width: 30px;
+    height: 30px;
     border-radius: 50%;
-    background: lightblue;
+    /*background: lightblue;*/
     z-index:-1;
     position: absolute;
-    border: 1px solid lightblue;
-
+    border: 2px solid transparent;
+    transition: border 0.25s linear;
     /*animation: palpito 1s infinite linear;*/
 }
-#iconsNav>li:nth-child(1)>svg{
-    background: white;
-    border-radius: 50%;
-    width: 25px;
-    height: 25px;
+#iconsNav>li:nth-child(1):hover::before{
+    border-color: lightblue;
 }
+/*#iconsNav>li:nth-child(1)>svg{*/
+/*    background: white;*/
+/*    border-radius: 50%;*/
+/*    width: 25px;*/
+/*    height: 25px;*/
+/*    border: 1px solid transparent;*/
+/*    position: relative;*/
+/*}*/
+/*#iconsNav>li:nth-child(1)>svg::before{*/
+/*    content: '';*/
+/*    width: 35px;*/
+/*    height: 35px;*/
+/*    position: absolute;*/
+/*    border: 1px solid black;*/
+/*    border-radius: 50%;*/
+/*}*/
 
 
-#iconsNav>li:nth-child(1):hover{
-    box-shadow: 0 0 10px rgba(0,0,0,0.5)
-
-}
+/*#iconsNav>li:nth-child(1)>svg:hover{*/
+/*    !*box-shadow: 0 0 10px rgba(0,0,0,0.5)*!*/
+/*    border: 1px solid black;*/
+/*}*/
 
 @keyframes palpito{
     0%{
@@ -746,6 +759,7 @@ main{
 .menu{
     display: flex;
     align-items: center;
+    gap: 10px;
     width: 90%;
     padding: 25px 0;
     justify-content: space-evenly;
@@ -757,7 +771,7 @@ main{
     position: relative;
     /*z-index: 3;*/
     /*flex: 1;*/
-    min-width:115px;
+    min-width:150px;
 }
 .containerGroup>b{
     width: 100%;
@@ -767,8 +781,9 @@ main{
     /*padding: 10px;*/
 }
 .listaInicio{
-    border: 1px solid black;
-    border-radius: 12px;
+    padding: 10px 0;
+    gap: 10px;
+    border-radius: 7.5px;
     box-sizing: border-box;
     width: 100%;
     text-align: center;
@@ -779,11 +794,12 @@ main{
     opacity: 0;
     top: 130%;
     z-index: 2;
-
+    /*padding: 5px 0;*/
     background: lightblue;
 
     transition: all 0.35s ease-in-out;
     pointer-events: none;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.6);
 }
 
 
@@ -792,15 +808,14 @@ main{
     padding: 7.5px;
     opacity: 0;
     border-radius: 7.5px;
-}
-.listaInicio>li:hover{
-    background: lightseagreen;
+    white-space: nowrap;
     transition: all 0.35s ease-in-out
 }
-.listaInicio:hover{
-
-    /*background: pink;*/
+.listaInicio>li:hover{
+    box-shadow: 0 0 5px rgba(0,0,0,1);
+    transition: all 0.35s ease-in-out
 }
+
 .nombreElement{
     display: block;
     width: 100%;
@@ -2191,7 +2206,7 @@ input:focus{
         pointer-events: auto;
     }
     .containerMenuSmallWindow{
-        width: 300px;
+        width: 275px;
     }
     #iconsNav{
         gap: 5px;
@@ -2903,16 +2918,14 @@ input:focus{
         pointer-events: auto;
     }
     .containerMenuSmallWindow{
-        width: 300px;
+        width: 275px;
     }
 
     /*----------*/
     #iconsNav>li:nth-of-type(3)>svg{
         pointer-events: auto;
     }
-    .containerMenuSmallWindow{
-        width: 300px;
-    }
+
 
 
 
@@ -3484,7 +3497,7 @@ input:focus{
         pointer-events: auto;
     }
     .containerMenuSmallWindow{
-        width: 300px;
+        width: 275px;
     }
 
 
@@ -4081,7 +4094,7 @@ input:focus{
     /*--------------------*/
 
     .containerMenuSmallWindow{
-        width: 300px;
+        width: 275px;
     }
 
     #iconsNav>li:nth-of-type(3)>svg{
@@ -4582,6 +4595,8 @@ input:focus{
 }
 @media (min-width: 769px) and (max-width:1024px){
 
+    .containerGroup
+
     .buttonsFinalizar{
         width: 75%;
     }
@@ -4633,7 +4648,7 @@ input:focus{
 
     /*--------------------*/
     .containerMenuSmallWindow{
-        width: 300px;
+        width: 275px;
     }
 
     #iconsNav>li:nth-of-type(3)>svg{
