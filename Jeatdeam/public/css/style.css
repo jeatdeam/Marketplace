@@ -2,6 +2,9 @@
 /*@tailwind components;*/
 /*@tailwind utilities;*/
 
+
+
+
 * {
     margin: 0;
     padding: 0;
@@ -14,8 +17,16 @@ body{
 
 button{
     transition: all 0.15s linear;
+    background: white;
 }
+main{
 
+    background: rgb(224,246,255);
+    background: radial-gradient(circle, rgba(224,246,255,0.9164040616246498) 21%, rgba(150,211,249,0.8883928571428571) 80%, rgba(79,178,244,0.8491771708683473) 100%);
+
+    /*background: rgb(224,246,255);*/
+    /*background: linear-gradient(0deg, rgba(224,246,255,0.8393732492997199) 10%, rgba(139,210,255,0.7511379551820728) 54%, rgba(79,178,244,0.7231267507002801) 100%);*/
+}
 .marca{
     background-size: cover;
     background-position: center;
@@ -466,7 +477,7 @@ main{
 
 }
 .searchAndOptions>ul>li{
-    background: lightblue;
+    background: rgba(145,218,255,0.8);
     flex:1;
     box-sizing: border-box;
     display: flex;
@@ -520,7 +531,7 @@ main{
 .searchAndOptions>ul>li>span{
 }
 .searchAndOptions>ul>li:hover{
-    border: 3px solid cornflowerblue;
+    /*background: rgba(145,218,255,0.5);*/
     border-radius: 7.5px;
     transition: border 0.15s ease-in-out;
 }
@@ -802,7 +813,7 @@ main{
     /*padding: 10px;*/
 }
 .listaInicio{
-    padding: 10px 0;
+    padding: 20px 0;
     gap: 10px;
     border-radius: 7.5px;
     box-sizing: border-box;
@@ -816,11 +827,11 @@ main{
     top: 130%;
     z-index: 2;
     /*padding: 5px 0;*/
-    background: lightblue;
+    background: rgba(145,218,255,0.9);
 
     transition: all 0.35s ease-in-out;
     pointer-events: none;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.6);
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.8);
 }
 
 
@@ -830,11 +841,13 @@ main{
     opacity: 0;
     border-radius: 7.5px;
     white-space: nowrap;
-    transition: all 0.35s ease-in-out
+    transition: all 0.35s ease-in-out;
+    font-size: 18.5px;
 }
 .listaInicio>li:hover{
     box-shadow: 0 0 5px rgba(0,0,0,1);
-    transition: all 0.35s ease-in-out
+    transition: all 0.35s ease-in-out;
+    background: rgba(255,255,255,0.6) ;
 }
 
 .nombreElement{
@@ -843,7 +856,7 @@ main{
     position: relative;
 }
 .nombreElement:hover{
-    background: lightblue;
+    background: rgba(145,218,255,0.5);
     border-radius: 12px;
     transition: background 0.35s ease-in-out;
 }
@@ -1017,7 +1030,7 @@ main{
 
 /*----------------BRANDS---------------------------------*/
 .containerBrands{
-    width: 80%;
+    /*width: 80%;*/
     margin: 0 auto;
     display: flex;
     flex-direction: column;
@@ -1048,11 +1061,14 @@ main{
     gap: 10px 0;
     align-items: center;
     padding: 20px;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.8);
     transition: all 0.25s ease-in-out;
+
+    background: rgb(255,255,255);
+    background: radial-gradient(circle, rgba(255,255,255,0.3617822128851541) 6%, rgba(75,196,255,0.29735644257703087) 49%, rgba(145,218,255,0.6026785714285714) 93%);
 }
 .elementProduct:hover{
-    box-shadow: 0 0 20px rgba(0,191,255,0.5);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 1);
     transition: all 0.25s ease-in-out;
 }
 .elementProduct>img{
@@ -1210,6 +1226,9 @@ main{
     padding:20px;
     box-shadow: 0 0 15px rgba(0,0,0,0.2);
     transition: box-shadow 0.25s ease-in-out;
+
+    background: rgb(255,255,255);
+    background: radial-gradient(circle, rgba(255,255,255,0.3617822128851541) 6%, rgba(75,196,255,0.29735644257703087) 49%, rgba(145,218,255,0.6026785714285714) 93%);
 }
 .containerElementsRecomended>div:hover{
     box-shadow: 0 0 20px rgba(0,191,255,0.5);
@@ -2024,6 +2043,11 @@ input:focus{
     /*border: 1px solid black;*/
 }
 .masVendidoElement,.masVendidoElement_two{
+    background: rgb(255,255,255);
+    background: radial-gradient(circle, rgba(255,255,255,0.3617822128851541) 6%, rgba(75,196,255,0.29735644257703087) 49%, rgba(145,218,255,0.6026785714285714) 93%);
+
+    /*background: rgb(224,246,255);*/
+    /*background: linear-gradient(0deg, rgba(224,246,255,0.8393732492997199) 10%, rgba(139,210,255,0.7511379551820728) 54%, rgba(79,178,244,0.7231267507002801) 100%);*/
 }
 
 
@@ -2651,7 +2675,7 @@ input:focus{
         align-items: center;
         padding:10px 20px;
 
-        box-shadow: 0 0 7.5px rgba(0,0,0,0.4);
+        box-shadow: 0 0 5px rgba(0,0,0,0.8);
     }
     .masVendidoElement:hover,.masVendidoElement_two:hover{
         transition: all 0.3s ease-in-out;
@@ -3383,7 +3407,7 @@ input:focus{
         justify-content: space-evenly;
         align-items: center;
         padding:10px 20px;
-        box-shadow: 0 0 7.5px rgba(0,0,0,0.4);
+        box-shadow: 0 0 5px rgba(0,0,0,0.8);
     }
     .masVendidoElement:hover,.masVendidoElement_two:hover{
         transition: all 0.3s ease-in-out;
@@ -4016,7 +4040,7 @@ input:focus{
         justify-content: space-evenly;
         align-items: center;
         padding:10px 20px;
-        box-shadow: 0 0 7.5px rgba(0,0,0,0.4);
+        box-shadow: 0 0 5px rgba(0,0,0,0.8);
     }
     .masVendidoElement:hover,.masVendidoElement_two:hover{
         transition: all 0.3s ease-in-out;
@@ -4153,12 +4177,12 @@ input:focus{
 @media (min-width: 641px) and (max-width:768px){
     .marca>div{
         font-size: 50px;
-        /*border: 5px solid red;*/
+        border: 5px solid red;
     }
     .marca:nth-of-type(3){
         display: flex;
         flex-direction: column;
-        /*border: 10px solid orange;*/
+        border: 10px solid orange;
     }
     .buttonsFinalizar{
         width: 90%;
@@ -4594,7 +4618,7 @@ input:focus{
         justify-content: space-evenly;
         align-items: center;
         padding:10px 20px;
-        box-shadow: 0 0 7.5px rgba(0,0,0,0.4);
+        box-shadow: 0 0 5px rgba(0,0,0,0.8);
     }
     .masVendidoElement:hover,.masVendidoElement_two:hover{
         transition: all 0.3s ease-in-out;
@@ -4727,16 +4751,18 @@ input:focus{
         filter: opacity(0.6);
     }
 }
+
+
 @media (min-width: 769px) and (max-width:1024px){
 
     .marca>div{
         font-size: 50px;
-        /*border: 5px solid red;*/
+        border: 5px solid red;
     }
     .marca:nth-of-type(3){
         display: flex;
         flex-direction: column;
-        /*border: 10px solid red;*/
+        border: 10px solid red;
     }
     .containerGroup{
 
@@ -5126,6 +5152,8 @@ input:focus{
     .masVendidoElement,.masVendidoElement_two{
         height: 560px;
         width: 290px;
+
+        box-shadow: 0 0 5px rgba(0,0,0,0.8);
     }
 
     .containerMasVendidos_one,
@@ -5154,7 +5182,7 @@ input:focus{
         justify-content: space-evenly;
         align-items: center;
         padding:10px 20px;
-        box-shadow: 0 0 7.5px rgba(0,0,0,0.4);
+        box-shadow: 0 0 5px rgba(0,0,0,0.8);
     }
     .masVendidoElement:hover,.masVendidoElement_two:hover{
         transition: all 0.3s ease-in-out;
@@ -5684,7 +5712,7 @@ input:focus{
         justify-content: space-evenly;
         align-items: center;
         padding:10px 20px;
-        box-shadow: 0 0 7.5px rgba(0,0,0,0.4);
+        box-shadow: 0 0 5px rgba(0,0,0,0.8);
     }
     .masVendidoElement:hover,.masVendidoElement_two:hover{
         transition: all 0.3s ease-in-out;
@@ -6263,7 +6291,7 @@ input:focus{
         justify-content: space-evenly;
         align-items: center;
         padding:10px 20px;
-        box-shadow: 0 0 7.5px rgba(0,0,0,0.4);
+        box-shadow: 0 0 5px rgba(0,0,0,0.8);
     }
     .masVendidoElement:hover,.masVendidoElement_two:hover{
         transition: all 0.3s ease-in-out;
@@ -6394,7 +6422,6 @@ input:focus{
         filter: opacity(0.6);
     }
 }
-
 @media (min-width: 1441px) and (max-width:1536px){
     .marca>div{
         font-size: 60px;
@@ -6826,7 +6853,7 @@ input:focus{
         align-items: center;
         padding:10px 20px;
         width: 290px;
-        box-shadow: 0 0 7.5px rgba(0,0,0,0.4);
+        box-shadow: 0 0 5px rgba(0,0,0,0.8);
     }
     .masVendidoElement:hover,.masVendidoElement_two:hover{
         transition: all 0.3s ease-in-out;
@@ -7409,7 +7436,7 @@ input:focus{
         justify-content: space-evenly;
         align-items: center;
         padding:20px;
-        box-shadow: 0 0 7.5px rgba(0,0,0,0.4);
+        box-shadow: 0 0 5px rgba(0,0,0,0.8);
         /*display: none;*/
     }
     .masVendidoElement:hover,.masVendidoElement_two:hover{

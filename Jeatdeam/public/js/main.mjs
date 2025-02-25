@@ -11,8 +11,9 @@ import {asignarNombresHeader} from "./listaProducts.mjs";
 import {menuSmallWindowEvents} from "./menuSmall.mjs";
 import {ocultarMenuSmall} from "./moveElements.mjs";
 import {marcaEvent} from "./cascadaText.js"
+import {eventsPhone} from "./eventosPhone.js"
 
-
+eventsPhone();
 marcaEvent();
 apiladoInfoProductSmall();
 
@@ -1154,8 +1155,8 @@ document.addEventListener('click',(e)=>{
         }else{
             window.location.href=`/${title}/${categoria}`;
         }
-
     }
+
 })
 /*contador de productos repetidos*/
 function ordenGroup(){

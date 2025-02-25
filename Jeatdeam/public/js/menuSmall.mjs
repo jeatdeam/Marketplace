@@ -51,22 +51,45 @@ export function menuSmallWindowEvents(){
     })
 
 
-
-
-
     document.addEventListener('click',e=>{
 
-        const titulo=e.target.closest('.listaMarcaIcon>b')
+        const titleListSmall=e.target.closest('.listaMarcaIcon>b')
 
-        if(titulo){
-            const nombre=titulo.textContent.toLowerCase();
-
-            console.log(nombre.toLowerCase());
-
-            window.location.href=`/${nombre}`
+        if(titleListSmall){
+            const name=titleListSmall.textContent.toLowerCase();
+            console.log(name);
+            if(name==="otras marcas"){
+                console.log('ups este no es un enlace');
+            } else{
+                window.location.href=`/${name}`
+            }
 
         }
 
+        if(e.target.matches('.listaSmall>ul>li')){
+            console.log(e.target);
+            const categoria=e.target.textContent;
+            const ul= e.target.parentNode;
+            const containerName= ul.previousElementSibling
+            const name=containerName.querySelector('b').textContent.toLowerCase();
+            if(name==="otras marcas"){
+                window.location.href=`/${categoria}`;
+            }else{
+                window.location.href=`/${name}/${categoria}`;
+            }
+
+        }
+
+        const allLi=document.querySelectorAll('.listaSmall>ul>li')
+
+        allLi.forEach((li)=>{
+            li.addEventListener('touchstart',e=>{
+                li.style.boxShadow="0 0 5px rgba(0,0,0,0.5)";
+            })
+            li.addEventListener('touchend',e=>{
+                li.style.boxShadow="";
+            })
+        })
     })
 
 }

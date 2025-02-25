@@ -14,6 +14,7 @@ export function marcaEvent() {
 
   document.addEventListener("click", () => {});
 }
+
 export function opacityBrand(target) {
   const allSpan = target.querySelectorAll("div>span");
 
