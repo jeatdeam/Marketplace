@@ -6,26 +6,71 @@ export function marcaEvent() {
       brand.addEventListener("mouseenter", (e) => {
         cascadaBrand(e.target);
       });
-      brand.addEventListener("mouseleave", (e) => {});
+      brand.addEventListener("mouseleave", (e) => {
+        opacityBrand(e.target);
+      });
     });
   }
 
   document.addEventListener("click", () => {});
 }
+export function opacityBrand(target) {
+  const allSpan = target.querySelectorAll("div>span");
+
+  let contador = 0;
+
+  allSpan.forEach((span) => {
+    const computedOpacity = getComputedStyle(span).opacity;
+
+    if (computedOpacity === "1") contador++;
+  });
+
+  if (contador === allSpan.length) {
+    for (let i = allSpan.length - 1; i >= 0; i--) {
+      setTimeout(
+        () => {
+          allSpan[i].style.transform = "translateY(50px)";
+          allSpan[i].style.opacity = "0";
+        },
+        25 * (allSpan.length - 1 - i),
+      );
+    }
+  } else {
+    // allSpan.forEach((span, index) => {
+    //   const computedOpacity = getComputedStyle(span).opacity;
+    //
+    //   if (computedOpacity === "1") span.style.opacity = "0";
+    // });
+    setTimeout(
+      () => {
+        target.textContent = "";
+      },
+      contador * 75, //agregamos 50 po la transicion de cada span
+    );
+  }
+}
+//
+// [...allSpan].reverse().forEach((span, index) => {
+//   setTimeout(() => {
+//     span.style.transform = "translateY(70px)";
+//     span.style.opacity = "0";
+//   }, 50 * index);
+// });
 
 export function cascadaBrand(target) {
   const brand = target.dataset.name;
   const arrayBrand = brand.split("");
+
+  target.style.transition = "all 0.25 ease-in-out";
   target.textContent = "";
 
   const contenedorTxt = document.createElement("div");
   contenedorTxt.style.position = "absolute";
   contenedorTxt.style.width = "100%";
-  // contenedorTxt.style.opacity = "0";
-  // contenedorTxt.style.height = "30px";
   contenedorTxt.style.transform = "translateY(-50%)";
-
   contenedorTxt.style.top = "50%";
+  contenedorTxt.style.pointerEvents = "none";
+  // contenedorTxt.style.fontSize = "100px";
 
   target.style.position = "relative";
   target.appendChild(contenedorTxt);
@@ -35,10 +80,13 @@ export function cascadaBrand(target) {
   arrayBrand.forEach((word, indice) => {
     const span = document.createElement("span");
     span.textContent = word;
-    span.style.transition = "all 0.50s linear";
+    span.style.color = "white";
+    span.style.transition = "all 0.25s linear";
     span.style.display = "inline-block";
     span.style.transform = `translateY(-100%)`;
     span.style.opacity = `0`;
+    span.style.whiteSpace = "pre";
+    span.style.fontWeight = "bold";
 
     contenedorTxt.appendChild(span);
 
@@ -47,14 +95,18 @@ export function cascadaBrand(target) {
 
   if (activeEvent) {
     const allSpan = target.querySelectorAll("span");
-
-    console.log(allSpan);
-
     allSpan.forEach((span, indice) => {
       setTimeout(() => {
         span.style.transform = "translateY(10px)";
         span.style.opacity = "1";
-      }, indice * 50);
+      }, indice * 25);
+      if (indice === allSpan.length - 1)
+        setTimeout(
+          () => {
+            contenedorTxt.style.color = "red";
+          },
+          indice * 25 + 250,
+        );
     });
   }
 }

@@ -15,6 +15,12 @@ body{
 button{
     transition: all 0.15s linear;
 }
+
+.marca{
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
 .containerMarcas{
     transition: all 0.3s linear;
     /*opacity: 0;*/
@@ -2585,7 +2591,6 @@ input:focus{
     .marca:hover{
         font-size: 65px;
         transition: font-size 0.3s ease, background-color 0.3s ease;
-        background: lightblue;
     }
 
 
@@ -2638,9 +2643,8 @@ input:focus{
 
     .masVendidoElement,.masVendidoElement_two{
         border-radius: 15px;
-        min-width: 275px;
-        height: 425px;
-        width: 275px;
+        width: 290px;
+        height: 560px;
         display: flex;
         flex-direction: column;
         justify-content: space-evenly;
@@ -3316,7 +3320,6 @@ input:focus{
     .marca:hover{
         font-size: 65px;
         transition: font-size 0.3s ease, background-color 0.3s ease;
-        background: lightblue;
     }
 
 
@@ -3373,9 +3376,8 @@ input:focus{
 
     .masVendidoElement,.masVendidoElement_two{
         border-radius: 15px;
-        min-width: 275px;
-        height: 425px;
-        width: 275px;
+        width: 290px;
+        height: 560px;
         display: flex;
         flex-direction: column;
         justify-content: space-evenly;
@@ -3949,7 +3951,6 @@ input:focus{
     .marca:hover{
         font-size: 65px;
         transition: font-size 0.3s ease, background-color 0.3s ease;
-        background: lightblue;
     }
 
 
@@ -4008,9 +4009,8 @@ input:focus{
 
     .masVendidoElement,.masVendidoElement_two{
         border-radius: 15px;
-        min-width: 275px;
-        height: 425px;
-        width: 275px;
+        height: 560px;
+        width: 290px;
         display: flex;
         flex-direction: column;
         justify-content: space-evenly;
@@ -4151,6 +4151,15 @@ input:focus{
     }
 }
 @media (min-width: 641px) and (max-width:768px){
+    .marca>div{
+        font-size: 50px;
+        /*border: 5px solid red;*/
+    }
+    .marca:nth-of-type(3){
+        display: flex;
+        flex-direction: column;
+        /*border: 10px solid orange;*/
+    }
     .buttonsFinalizar{
         width: 90%;
     }
@@ -4521,7 +4530,6 @@ input:focus{
     .marca:hover{
         font-size: 65px;
         transition: font-size 0.3s ease, background-color 0.3s ease;
-        background: lightblue;
     }
 
 
@@ -4579,9 +4587,8 @@ input:focus{
 
     .masVendidoElement,.masVendidoElement_two{
         border-radius: 15px;
-        min-width: 275px;
-        height: 425px;
-        width: 275px;
+        width: 290px;
+        height: 560px;
         display: flex;
         flex-direction: column;
         justify-content: space-evenly;
@@ -4722,6 +4729,15 @@ input:focus{
 }
 @media (min-width: 769px) and (max-width:1024px){
 
+    .marca>div{
+        font-size: 50px;
+        /*border: 5px solid red;*/
+    }
+    .marca:nth-of-type(3){
+        display: flex;
+        flex-direction: column;
+        /*border: 10px solid red;*/
+    }
     .containerGroup{
 
     }
@@ -5074,7 +5090,6 @@ input:focus{
     .marca:hover{
         font-size: 65px;
         transition: font-size 0.3s ease, background-color 0.3s ease;
-        background: lightblue;
     }
 
 
@@ -5109,9 +5124,8 @@ input:focus{
         padding: 0 25px;
     }
     .masVendidoElement,.masVendidoElement_two{
-        min-width: 275px;
-        height: 425px;
-        width: 275px;
+        height: 560px;
+        width: 290px;
     }
 
     .containerMasVendidos_one,
@@ -5133,9 +5147,8 @@ input:focus{
 
     .masVendidoElement,.masVendidoElement_two{
         border-radius: 15px;
-        min-width: 275px;
-        height: 425px;
-        width: 275px;
+        height: 560px;
+        width: 290px;
         display: flex;
         flex-direction: column;
         justify-content: space-evenly;
@@ -5274,7 +5287,9 @@ input:focus{
     }
 }
 @media (min-width: 1025px) and (max-width:1280px){
-
+    .marca>div{
+        font-size: 60px;
+    }
     /*-----pasarelaPago-----*/
     .productsAndPay{
         width: 80%;
@@ -5606,7 +5621,6 @@ input:focus{
     .marca:hover{
         font-size: 65px;
         transition: font-size 0.3s ease, background-color 0.3s ease;
-        background: lightblue;
     }
 
 
@@ -5663,14 +5677,13 @@ input:focus{
 
     .masVendidoElement,.masVendidoElement_two{
         border-radius: 15px;
-        min-width: 275px;
-        height: 425px;
+        width: 290px;
+        height: 560px;
         display: flex;
         flex-direction: column;
         justify-content: space-evenly;
         align-items: center;
         padding:10px 20px;
-        width: 275px;
         box-shadow: 0 0 7.5px rgba(0,0,0,0.4);
     }
     .masVendidoElement:hover,.masVendidoElement_two:hover{
@@ -5803,7 +5816,13 @@ input:focus{
         filter: opacity(0.6);
     }
 }
+
+
+
 @media (min-width: 1281px) and (max-width:1440px){
+    .marca>div{
+        font-size: 60px;
+    }
     .productsAndPay{
         width: 80%;
         gap: 25px;
@@ -6180,7 +6199,6 @@ input:focus{
     .marca:hover{
         font-size: 65px;
         transition: font-size 0.3s ease, background-color 0.3s ease;
-        background: lightblue;
     }
 
 
@@ -6238,14 +6256,13 @@ input:focus{
 
     .masVendidoElement,.masVendidoElement_two{
         border-radius: 15px;
-        min-width: 275px;
-        height: 425px;
+        width: 290px;
+        height: 560px;
         display: flex;
         flex-direction: column;
         justify-content: space-evenly;
         align-items: center;
         padding:10px 20px;
-        width: 275px;
         box-shadow: 0 0 7.5px rgba(0,0,0,0.4);
     }
     .masVendidoElement:hover,.masVendidoElement_two:hover{
@@ -6377,7 +6394,12 @@ input:focus{
         filter: opacity(0.6);
     }
 }
+
 @media (min-width: 1441px) and (max-width:1536px){
+    .marca>div{
+        font-size: 60px;
+    }
+
     .productsAndPay{
         width: 80%;
         gap: 50px;
@@ -6741,7 +6763,6 @@ input:focus{
     .marca:hover{
         font-size: 65px;
         transition: font-size 0.3s ease, background-color 0.3s ease;
-        background: lightblue;
     }
 
 
@@ -6798,14 +6819,13 @@ input:focus{
 
     .masVendidoElement,.masVendidoElement_two{
         border-radius: 15px;
-        min-width: 275px;
-        height: 425px;
+        height: 560px;
         display: flex;
         flex-direction: column;
         justify-content: space-evenly;
         align-items: center;
         padding:10px 20px;
-        width: 275px;
+        width: 290px;
         box-shadow: 0 0 7.5px rgba(0,0,0,0.4);
     }
     .masVendidoElement:hover,.masVendidoElement_two:hover{
@@ -6939,6 +6959,11 @@ input:focus{
     }
 }
 @media (min-width: 1537px){
+
+    .marca>div{
+        font-size: 65px;
+    }
+
     .productsAndPay{
         width: 70%;
         gap: 50px;
@@ -7320,7 +7345,6 @@ input:focus{
     .marca:hover{
         font-size: 65px;
         transition: font-size 0.3s ease, background-color 0.3s ease;
-        background: lightblue;
     }
 
 
@@ -7377,7 +7401,7 @@ input:focus{
 
     .masVendidoElement,.masVendidoElement_two{
         border-radius: 15px;
-        min-width: 290px;
+        width: 290px;
         height: 560px;
         display: flex;
         gap: 10px;
@@ -7385,7 +7409,6 @@ input:focus{
         justify-content: space-evenly;
         align-items: center;
         padding:20px;
-        width: 290px;
         box-shadow: 0 0 7.5px rgba(0,0,0,0.4);
         /*display: none;*/
     }
