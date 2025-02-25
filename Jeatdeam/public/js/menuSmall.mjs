@@ -3,7 +3,6 @@ import {extraerHeaders} from './listaProducts.mjs'
 export function menuSmallWindowEvents(){
 
     extraerHeaders().then((seccionProducts)=>{
-        console.log(seccionProducts);
 
         const $listaSmall=document.querySelectorAll('.listaMarcaIcon');
 
@@ -30,9 +29,7 @@ export function menuSmallWindowEvents(){
                     const title=$listaSmall[indice].querySelector('b');
                     title.textContent='OTRAS MARCAS';
 
-                    console.log(indice)
                     const ul=$listaSmall[indice].nextElementSibling;
-                    console.log(ul)
                     keysProducts.forEach((marca,index)=>{
 
                         if($listaSmall.length-1+index<keysProducts.length){
@@ -47,7 +44,6 @@ export function menuSmallWindowEvents(){
                     })
 
                 }
-                console.log(indice);
                 return;
             }
 

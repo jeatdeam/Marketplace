@@ -256,10 +256,10 @@ let seccionProducts={
         subtitle:"lorem ipsum dolor sit amet, consetetur->lorem ipsum dolor sit amet, consetetur",
         price: 155,
         name: "bloqueador en barra",
-        category:"bloqueador",
+        category:"bloqueadores",
         completed: true,
         brand:"tocobo",
-        img:["/img/tocobo/bloqueadorBarra.webp","/img/tocobo/bloqueadorBarra.webp","/img/tocobo/bloqueadorBarra.webp","/img/tocobo/bloqueadorBarra.webp"]
+        img:["/img/tocobo/bloqueador-barra/tocoboBarraOne.png","/img/tocobo/bloqueador-barra/tocoboBarraTwo.png","/img/tocobo/bloqueador-barra/tocoboBarraThree.png","/img/tocobo/bloqueador-barra/tocoboBarraFour.png"]
     },
     {
 
@@ -268,32 +268,32 @@ let seccionProducts={
         subtitle:"lorem ipsum dolor sit amet, consetetur->lorem ipsum dolor sit amet, consetetur",
         price: 255,
         name: "bloqueador en crema",
-        category:"bloqueador",
+        category:"bloqueadores",
         completed: true,
         brand:"tocobo",
-        img:["/img/tocobo/bloqueadorBarra.webp","/img/tocobo/bloqueadorBarra.webp","/img/tocobo/bloqueadorBarra.webp","/img/tocobo/bloqueadorBarra.webp"]
+        img:["/img/tocobo/bloqueador-crema/tocoboCremaOne.png","/img/tocobo/bloqueador-crema/tocoboCremaTwo.png","/img/tocobo/bloqueador-crema/tocoboCremaThree.png","/img/tocobo/bloqueador-crema/tocoboCremaFour.png"]
     },
     {
         id: 3,
         title: "Jeatdeam",
         subtitle:"lorem ipsum dolor sit amet, consetetur->lorem ipsum dolor sit amet, consetetur",
         price: 305,
-        name: "bloqueador en barra",
-        category:"bloqueador",
+        name: "contorno de ojos",
+        category:"contorno de ojos",
         completed: true,
-        brand:"boj",
-        img:["/img/tocobo/bloqueadorBarra.webp","/img/tocobo/bloqueadorBarra.webp","/img/tocobo/bloqueadorBarra.webp","/img/tocobo/bloqueadorBarra.webp"]
+        brand:"tocobo",
+        img:["/img/tocobo/contorno-de-ojos/tocoboContornoOjosOne.png","/img/tocobo/contorno-de-ojos/tocoboContornoOjosTwo.png","/img/tocobo/contorno-de-ojos/tocoboContornoOjosThree.png","/img/tocobo/contorno-de-ojos/tocoboContornoOjosFour.png"]
     },
     {
         id: 4,
         title: "Jeatdeam",
         subtitle:"lorem ipsum dolor sit amet, consetetur->lorem ipsum dolor sit amet, consetetur",
         price: 425,
-        name: "bloqueador en crema",
-        category:"bloqueador",
+        name: "bifida biome essence",
+        category:"serum",
         completed: true,
-        brand:"boj",
-        img:["/img/tocobo/bloqueadorBarra.webp","/img/tocobo/bloqueadorBarra.webp","/img/tocobo/bloqueadorBarra.webp","/img/tocobo/bloqueadorBarra.webp"]
+        brand:"tocobo",
+        img:["/img/tocobo/serum/tocoboSerumOne.png","/img/tocobo/serum/tocoboSerumTwo.png","/img/tocobo/serum/tocoboSerumThree.png","/img/tocobo/serum/tocoboSerumFour.png"]
 
     },
     {
@@ -302,10 +302,10 @@ let seccionProducts={
         subtitle:"lorem ipsum dolor sit amet, consetetur->lorem ipsum dolor sit amet, consetetur",
         price: 585,
         name: "bloqueador en barra",
-        category:"bloqueador",
+        category:"bloqueadores",
         completed: true,
-        brand:"skinni1004",
-        img:["/img/tocobo/bloqueadorBarra.webp","/img/tocobo/bloqueadorBarra.webp","/img/tocobo/bloqueadorBarra.webp","/img/tocobo/bloqueadorBarra.webp"]
+        brand:"boj",
+        img:["/img/beautyofjoseon/bloqueador-barra/bojBarraOne.png","/img/beautyofjoseon/bloqueador-barra/bojBarraTwo.png","/img/beautyofjoseon/bloqueador-barra/bojBarraThree.png","/img/beautyofjoseon/bloqueador-barra/bojBarraFour.png"]
     },
     {
         id: 6,
@@ -313,10 +313,10 @@ let seccionProducts={
         subtitle:"lorem ipsum dolor sit amet, consetetur->lorem ipsum dolor sit amet, consetetur",
         price: 685,
         name: "bloqueador en crema",
-        category:"bloqueador",
+        category:"bloqueadores",
         completed: false,
-        brand: 'skinni1004',
-        img:["/img/tocobo/bloqueadorBarra.webp","/img/tocobo/bloqueadorBarra.webp","/img/tocobo/bloqueadorBarra.webp","/img/tocobo/bloqueadorBarra.webp"]
+        brand: 'boj',
+        img:["/img/beautyofjoseon/bloqueador-crema/bojCremaOne.png","/img/beautyofjoseon/bloqueador-crema/bojCremaTwo.png","/img/beautyofjoseon/bloqueador-crema/bojCremaThree.png","/img/beautyofjoseon/bloqueador-bcrema/bojCremaFour.png"]
 
     },
     {
@@ -324,22 +324,22 @@ let seccionProducts={
         title: "MasVendidos",
         subtitle:"lorem ipsum dolor sit amet, consetetur->lorem ipsum dolor sit amet, consetetur",
         price: 785,
-        name: "bloqueador en barra",
-        category:"bloqueador",
+        name: "contorno de ojos",
+        category:"contorno de ojos",
         completed: false,
-        brand: 'numbuzin',
-        img:["/img/tocobo/bloqueadorBarra.webp","/img/tocobo/bloqueadorBarra.webp","/img/tocobo/bloqueadorBarra.webp","/img/tocobo/bloqueadorBarra.webp"]
+        brand: 'boj',
+        img:["/img/beautyofjoseon/contorno-de-ojos/bojContornoOjosOne.png","/img/beautyofjoseon/contorno-de-ojos/bojContornoOjosTwo.png","/img/beautyofjoseon/contorno-de-ojos/bojContornoOjosThree.png","/img/beautyofjoseon/contorno-de-ojos/bojContornoOjosFour.png"]
     },
     {
         id: 8,
         title: "MasVendidos",
         subtitle:"lorem ipsum dolor sit amet, consetetur->lorem ipsum dolor sit amet, consetetur",
         price: 885,
-        name: "bloqueador en crema",
-        category:"bloqueador",
+        name: "jabon",
+        category:"jabon",
         completed: false,
-        brand: 'numbuzin',
-        img:["/img/tocobo/bloqueadorBarra.webp","/img/tocobo/bloqueadorBarra.webp","/img/tocobo/bloqueadorBarra.webp","/img/tocobo/bloqueadorBarra.webp"]
+        brand: 'boj',
+        img:["/img/beautyofjoseon/jabon/bojJabonOne.png","/img/beautyofjoseon/jabon/bojJabonTwo.png","/img/beautyofjoseon/jabon/bojJabonThree.png","/img/beautyofjoseon/jabon/bojJabonFour.png"]
     },
     {
         id: 9,
@@ -347,54 +347,54 @@ let seccionProducts={
         subtitle:"lorem ipsum dolor sit amet, consetetur->lorem ipsum dolor sit amet, consetetur",
         price: 985,
         name: "bloqueador en barra",
-        category:"bloqueador",
+        category:"mascarilla",
         completed: false,
-        brand: 'cosrx',
-        img:["/img/tocobo/bloqueadorBarra.webp","/img/tocobo/bloqueadorBarra.webp","/img/tocobo/bloqueadorBarra.webp","/img/tocobo/bloqueadorBarra.webp"]
+        brand: 'boj',
+        img:["/img/beautyofjoseon/mascarilla/bojMascarillaOne.png","/img/beautyofjoseon/mascarilla/bojMascarillaTwo.png","/img/beautyofjoseon/mascarilla/bojMascarillaThree.png","/img/beautyofjoseon/mascarilla/bojMascarillaFour.png"]
     },
     {
         id: 10,
         title: "MasVendidos",
         subtitle:"lorem ipsum dolor sit amet, consetetur->lorem ipsum dolor sit amet, consetetur",
         price: 1085,
-        name: "bloqueador en crema",
-        category:"bloqueador",
+        name: "serum",
+        category:"serum",
         completed: false,
-        brand: 'cosrx',
-        img:["/img/tocobo/bloqueadorBarra.webp","/img/tocobo/bloqueadorBarra.webp","/img/tocobo/bloqueadorBarra.webp","/img/tocobo/bloqueadorBarra.webp"]
+        brand: 'boj',
+        img:["/img/beautyofjoseon/serum/bojSerumOne.png","/img/beautyofjoseon/serum/bojSerumTwo.png","/img/beautyofjoseon/serum/bojSerumThree.png","/img/beautyofjoseon/serum/bojSerumFour.png"]
     },
     {
         id: 11,
         title: "MasVendidos",
         subtitle:"lorem ipsum dolor sit amet, consetetur->lorem ipsum dolor sit amet, consetetur",
         price: 1185,
-        name: "limpiador facial",
-        category:"limpiador",
+        name: "bloqueador en crema",
+        category:"bloqueadores",
         completed: false,
-        brand: 'tocobo',
-        img:["/img/tocobo/bloqueadorBarra.webp","/img/tocobo/bloqueadorBarra.webp","/img/tocobo/bloqueadorBarra.webp","/img/tocobo/bloqueadorBarra.webp"]
+        brand: 'celimax',
+        img:["/img/celimax/bloqueador-crema/celimaxCremaOne.png","/img/celimax/bloqueador-crema/celimaxCremaTwo.png","/img/celimax/bloqueador-crema/celimaxCremaThree.png","/img/celimax/bloqueador-crema/celimaxCremaFour.png"]
     },
     {
         id: 12,
         title: "MasVendidos",
         subtitle:"lorem ipsum dolor sit amet, consetetur->lorem ipsum dolor sit amet, consetetur",
         price: 1285,
-        name: "limpiador facial",
-        category:"limpiador",
+        name: "contorno de ojos",
+        category:"contorno de ojos",
         completed: false,
         brand: 'celimax',
-        img:["/img/tocobo/bloqueadorBarra.webp","/img/tocobo/bloqueadorBarra.webp","/img/tocobo/bloqueadorBarra.webp","/img/tocobo/bloqueadorBarra.webp"]
+        img:["/img/celimax/contorno-de-ojos/celimaxContornoOjosOne.png","/img/celimax/contorno-de-ojos/celimaxContornoOjosTwo.png","/img/celimax/contorno-de-ojos/celimaxContornoOjosThree.png","/img/celimax/contorno-de-ojos/celimaxContornoOjosFour.png"]
     },
     {
         id: 13,
         title: "MasVendidos",
         subtitle:"lorem ipsum dolor sit amet, consetetur->lorem ipsum dolor sit amet, consetetur",
         price: 1385,
-        name: "limpiador facial",
-        category:"limpiador",
+        name: "espuma facial",
+        category:"jabon",
         completed: false,
-        brand: 'skin1004',
-        img:["/img/tocobo/bloqueadorBarra.webp","/img/tocobo/bloqueadorBarra.webp","/img/tocobo/bloqueadorBarra.webp","/img/tocobo/bloqueadorBarra.webp"]
+        brand: 'celimax',
+        img:["/img/celimax/jabon/celimaxJabonOne.png","/img/celimax/jabon/celimaxJabonTwo.png","/img/celimax/jabon/celimaxJabonThree.png","/img/celimax/jabon/celimaxJabonFour.png"]
     },
     {
         id: 14,
@@ -404,10 +404,20 @@ let seccionProducts={
         name: "serum antimanchas",
         category:"serum",
         completed: false,
-        brand: 'centella',
-        img:["/img/tocobo/bloqueadorBarra.webp","/img/tocobo/bloqueadorBarra.webp","/img/tocobo/bloqueadorBarra.webp","/img/tocobo/bloqueadorBarra.webp"]
+        brand: 'celimax',
+        img:["/img/celimax/mascarilla/celimaxMascarillaOne.png","/img/celimax/mascarilla/celimaxMascarillaTwo.png","/img/celimax/mascarilla/celimaxMascarillaThree.png","/img/celimax/mascarilla/celimaxMascarillaFour.png"]
     },
-
+    // {
+    //      id: 15,
+    //      title: "MasVendidos",
+    //      subtitle:"lorem ipsum dolor sit amet, consetetur->lorem ipsum dolor sit amet, consetetur",
+    //      price: 1485,
+    //      name: "noni ampoule",
+    //      category:"serum",
+    //      completed: false,
+    //      brand: 'celimax',
+    //      img:["/img/celimax/serum/celimaxSerumOne.png","/img/celimax/serum/celimaxSerumTwo.png","/img/celimax/serum/celimaxSerumThree.png","/img/celimax/serum/celimaxSerumFour.png"]
+    // },
 
 ]
 
@@ -520,28 +530,44 @@ const catalogoProducts=(req,res)=>{
 }
 
 const marcaProducts=(req, res)=>{
+
     const brand=req.params.name;
     const productosPorMarca=baseDatos.filter((product)=>product.brand===brand)
 
     res.render('marca',{title: `${brand}`, productosPorMarca,carrito})
 
 }
+
 const detailProduct=(req,res)=>{
+
     const brand=req.params.brand;
-    const name=req.params.producto;
+    const categoria=req.params.categoria;
+    const name=req.params.product;
+
+    console.log(brand,name,categoria);
 
     const producto=baseDatos.find((item)=>item.brand===brand&&item.name===name)
+
 
     if(!producto){
         return res.status(404).render('error',{title: 'producto no encontrado',carrito})
     }
 
-
-
-
-
     res.render('product_detail',{name:`${name}`,producto,baseDatos,carrito})
 }
+
+const categoriaProduct=(req,res)=>{
+
+    const {brand, categoria} = req.params;
+
+    if(brand && categoria) {
+        res.render('categoria',{title: 'cuacksito'})
+    }else{
+
+    }
+
+}
+
 const finalizarCompra=(req,res)=>{
 
     res.render('compra',{carrito})
@@ -765,6 +791,8 @@ const controllerQr = async (req, res) => {
     }
 };
 
+
+
 const getAllTask = (req, res) => {
 }
 const getAddTaskForm = (req, res) => {
@@ -783,6 +811,7 @@ const deleteTask = (req, res) => {
 }
 
 export default {
+    categoriaProduct,
     extraerMarcas,
     deleteDatos,
     verificarDatos,

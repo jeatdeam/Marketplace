@@ -55,7 +55,7 @@ export function asignarNombresHeader(){
 
 }
 export function extraerHeaders(){
-    const url="/extraer/datos/marcas";
+    const url="/extraer/datos/marcas/products";
     return fetch(url)
         .then(response=>response.json())
         .then(result=>{

@@ -57,10 +57,13 @@ app.get("/", taskController.index);
 app.get("/catalogoProducts", taskController.catalogoProducts);
 app.get("/producto", taskController.product);
 app.get("/:name", taskController.marcaProducts);
-app.get("/:brand/:producto", taskController.detailProduct);
-app.get("/compra/compra/compra", taskController.finalizarCompra);
-app.get("/datos/cliente/compra",taskController.verificarDatos);
-app.get("/extraer/datos/marcas",taskController.extraerMarcas)
+app.get("/:brand/:categoria",taskController.categoriaProduct)
+
+app.get("/:brand/:categoria/:product", taskController.detailProduct);
+
+app.get("/compra/compra/compra/compra", taskController.finalizarCompra);
+// app.get("/datos/cliente/compra",taskController.verificarDatos);
+app.get("/extraer/datos/marcas/products",taskController.extraerMarcas)
 
 
 app.get('/carrito/estado/cuack/cuack',taskController.estadoCarrito);
@@ -68,7 +71,7 @@ app.get('/carrito/estado/cuack/cuack',taskController.estadoCarrito);
 app.get('/base/datos/json',taskController.baseDatosProducts)
 
 // Ruta para agregar al carrito
-app.post('/compra/compra/compra', taskController.agregarCarrito);
+app.post('/compra/compra/compra/compra', taskController.agregarCarrito);
 
 app.post('/datos/cliente/compra/short',taskController.recibirDatosShort);
 app.post('/datos/cliente/compra/complete',taskController.recibirDatosComplete);
@@ -78,7 +81,7 @@ app.post('/create-checkout-session',taskController.redireccionamientoToPay);
 app.post("/generar-qr",taskController.controllerQr)
 
 //RUTAS DELETE
-app.delete('/compra/compra/compra',taskController.deleteCarrito);
+app.delete('/compra/compra/compra/compra',taskController.deleteCarrito);
 app.delete('/datos/cliente/compra',taskController.deleteDatos)
 
 const PORT=process.env.PORT||5000;

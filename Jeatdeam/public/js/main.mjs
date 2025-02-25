@@ -2,13 +2,22 @@
 // import { loadStripe } from "https://js.stripe.com/v3/";
 // import stripe from './stripe.mjs';
 // import Stripe from "stripe";
-import {moveBottomInfo, moveSpan} from './moveElements.mjs'
+import {apiladoInfoProductSmall} from './moveElements.mjs'
 import keysFromStripe from './keysFromStripe.mjs';
 import {masVendidosElement} from './masVendidos.mjs';
 import {redirectMarca} from './redireccionamientos.mjs'
 import {redirectMasVendidoElement} from './masVendidos.mjs'
 import {asignarNombresHeader} from "./listaProducts.mjs";
 import {menuSmallWindowEvents} from "./menuSmall.mjs";
+import {ocultarMenuSmall} from "./moveElements.mjs";
+import {marcaEvent} from "./cascadaText.js"
+
+
+marcaEvent();
+apiladoInfoProductSmall();
+
+window.addEventListener('resize',apiladoInfoProductSmall)
+window.addEventListener('resize', ocultarMenuSmall);
 // moveSpan();
 
 redirectMarca();
@@ -20,8 +29,8 @@ document.addEventListener('DOMContentLoaded',()=>{
     menuSmallWindowEvents();
 })
 
-window.addEventListener('resize',moveSpan);
-window.addEventListener('resize',moveBottomInfo)
+// window.addEventListener('resize',moveSpan);
+// window.addEventListener('resize',moveBottomInfo)
 
 masVendidosElement();
 asignarNombresHeader();
@@ -179,7 +188,7 @@ function insertCheck() {
 
     productsAndPay.appendChild(clone);
 
-    console.log("✅ Elemento insertado correctamente");
+    console.log("Elemento insertado correctamente");
 
 
 
@@ -319,14 +328,12 @@ function enviarDatosCliente() {
         console.log(computedUser);
 
         if (computedUser === "none") {
-            // ❌ Usar `removeAttribute` en lugar de `setAttribute('required', 'false')`
             $form.direccion.removeAttribute('required');
             $form.departamento.removeAttribute('required');
             $form.distrito.removeAttribute('required');
             $form.infoCourier.removeAttribute('required');
 
         } else {
-            // ✅ Asegurar que los campos sean visibles antes de requerirlos
             $form.direccion.setAttribute('required', 'true');
             $form.departamento.setAttribute('required', 'true');
             $form.distrito.setAttribute('required', 'true');
@@ -374,8 +381,8 @@ function enviarDatosCliente() {
         try {
             const response = await fetch(url, options);
             const result = await response.json();
-            console.log("✅ Datos enviados correctamente:", result);
-            // alert("✅ Datos enviados correctamente.");
+            console.log(" Datos enviados correctamente:", result);
+            // alert("Datos enviados correctamente.");
 
             const verificar = await verificarDatosCliente();
             if (verificar.length > 0) {
@@ -384,8 +391,8 @@ function enviarDatosCliente() {
                 AfterSendData();
             }
         } catch (error) {
-            console.error("❌ Error al enviar datos:", error);
-            alert("❌ Hubo un error al enviar los datos.");
+            console.error("Error al enviar datos:", error);
+            alert("Hubo un error al enviar los datos.");
         }
     });
 }
@@ -717,50 +724,20 @@ function carritoContadorDOM() {
         console.log('longitudCarrito->', longitudCarrito);
 
         if (!longitudCarrito) {
-            // 🔹 Reducir opacidad y tamaño gradualmente antes de eliminar el contenido
             $contador_carrito.style.opacity = "0";
-            $contador_carrito.style.transform = "scale(0)"; // Reduce el tamaño a 0
+            $contador_carrito.style.transform = "scale(0)";
 
             setTimeout(() => {
-                $contador_carrito.textContent = ""; // Elimina el contenido después de la transición
-            }, 500); // Tiempo de transición
+                $contador_carrito.textContent = "";
+            }, 500);
             clearInterval(controllerInterval);
         } else {
             $contador_carrito.textContent = longitudCarrito;
             $contador_carrito.style.opacity = "1";
-            $contador_carrito.style.transform = "scale(1)"; // Restaura el tamaño
+            $contador_carrito.style.transform = "scale(1)";
             $contador_carrito.style.transition="all 0.25s linear"
             $contador_carrito.style.textAlign = "center";
 
-
-            // clearInterval(controllerInterval);
-
-            // controllerInterval=setInterval(() => {
-            //     // Obtener el valor computado del background
-            //     const backgroundColor = getComputedStyle($contador_carrito).backgroundColor;
-            //     const transformMatrix = getComputedStyle($contador_carrito).transform;
-            //
-            //     // Cambiar color de fondo
-            //     if (backgroundColor === "rgb(255, 192, 203)") { // "pink" en formato RGB
-            //         $contador_carrito.style.background = "lightblue";
-            //     } else {
-            //         $contador_carrito.style.background = "lightblue";
-            //     }
-            //
-            //     // Cambiar escala
-            //     if (transformMatrix === "none") {
-            //         // Si no hay transformación aplicada, considerar como escala 1
-            //         $contador_carrito.style.transform = "scale(1.10)";
-            //     } else {
-            //         // Extraer el valor de la escala desde la matriz
-            //         const scaleX = parseFloat(transformMatrix.split(",")[0].replace("matrix(", "").trim());
-            //         if (scaleX === 1) {
-            //             $contador_carrito.style.transform = "scale(1.10)";
-            //         } else {
-            //             $contador_carrito.style.transform = "scale(1)";
-            //         }
-            //     }
-            // }, 2000);
 
         }
     };
@@ -800,10 +777,13 @@ document.addEventListener('click', async (e) => {
     if(!isActive){
         if (elementProduct) {
 
-            const dataBrand = elementProduct.dataset.brand; // Tomar los datos del contenedor, no del target
+            const dataBrand = elementProduct.dataset.brand;
+            const categoria=elementProduct.dataset.categoria;
             const dataName = elementProduct.dataset.name;
 
-            window.location.href = `/${dataBrand}/${dataName}`;
+            console.log(dataBrand,categoria,dataName);
+
+            window.location.href = `/${dataBrand}/${categoria}/${dataName}`;
         }
     }
 
@@ -828,7 +808,7 @@ document.addEventListener('click', async (e) => {
             price: parseFloat(price),
             name,
         }
-        const url = "/compra/compra/compra";
+        const url = "/compra/compra/compra/compra";
         const options = {
             method: "POST",
             headers: {"Content-Type": "application/json"},
@@ -872,7 +852,7 @@ document.addEventListener('click', async (e) => {
         }
 
         const {id,brand,img,price,name}=e.target.dataset;
-        const url="/compra/compra/compra"
+        const url="/compra/compra/compra/compra"
         const product={
             id,
             idCompra:parseInt(idCompra),
@@ -899,11 +879,11 @@ document.addEventListener('click', async (e) => {
         }
         peticionCompra();
         carritoContadorDOM();
-        window.location.href="/compra/compra/compra";
+        window.location.href="/compra/compra/compra/compra";
     }
 
     if(e.target.classList.contains('deleteAllProducts')){
-        const url="/compra/compra/compra";
+        const url="/compra/compra/compra/compra";
         const products={
 
         }
@@ -955,7 +935,7 @@ export async function addProduct(node){
                 const {id, brand, img, price, name} = node.dataset;
 
 
-                const url = "/compra/compra/compra"
+                const url = "/compra/compra/compra/compra"
                 const product = {
                     id,
                     idCompra: parseInt(idCompra),
@@ -994,7 +974,7 @@ export async function addProduct(node){
 
                 console.log(id,idCompra,brand, img, price, name)
 
-                const url = "/compra/compra/compra"
+                const url = "/compra/compra/compra/compra"
                 const product = {
                     id,
                     idCompra: parseInt(idCompra),
@@ -1021,11 +1001,71 @@ export async function addProduct(node){
                 }
                 peticionCompra();
                 carritoContadorDOM();
-                window.location.href="/compra/compra/compra"
+                window.location.href="/compra/compra/compra/compra"
             }
 
 }
+function eventsProductMarcaAddCarrito(){
+    //active=false;
+    const $buttonAddAll=document.querySelectorAll('.elementProduct>div>button:nth-of-type(1)')
 
+    $buttonAddAll.forEach(button=>{
+
+        button.addEventListener('mouseenter',e=>{
+            isActive=true;
+        })
+        button.addEventListener('mouseleave',e=>{
+            isActive=false;
+        })
+
+    })
+
+    document.addEventListener('click',async e=>{
+
+        if(e.target.matches('.elementProduct>div>button:nth-of-type(1)')){
+
+            const  url="/compra/compra/compra/compra";
+
+            const {id,brand,img,price,name}=e.target.dataset;
+
+            let lastId=await lastIdCompra();
+
+            let idCompra= lastId ? lastId + 1 : 1;
+
+            const product={
+                id,
+                idCompra: parseInt(idCompra),
+                brand,
+                img,
+                price: parseFloat(price),
+                name,
+            }
+            const options={
+                method: 'POST',
+                headers: {'Content-Type':'application/json'},
+                body: JSON.stringify(product),
+            }
+
+            const enviarProduct= async ()=>{
+                const response=await fetch(url,options);
+
+                if(!response.ok) throw new Error(`error en la peticion->${response.statusText}`);
+
+                const result = await response.json();
+
+
+            }
+            enviarProduct();
+            carritoContadorDOM();
+
+        }
+
+
+
+    })
+
+}
+eventsProductMarcaAddCarrito()
 function eventsProductMarcaComprar(){
 
     const $buttonComprarAll=document.querySelectorAll('.elementProduct>div>button:nth-of-type(2)');
@@ -1053,7 +1093,7 @@ function eventsProductMarcaComprar(){
 
                     const {id, brand, img, price, name} = e.target.dataset;
 
-                    const url = "/compra/compra/compra";
+                    const url = "/compra/compra/compra/compra";
 
                     let lastId=await lastIdCompra()
 
@@ -1082,13 +1122,10 @@ function eventsProductMarcaComprar(){
 
                         const result = await response.json();
 
-                        console.log('tamaño del carrito->', result.carrito);
-                        console.log(result.allProduct);
-                        console.log(result.baseDatos);
                     }
                     peticionCompraMarca();
 
-                    window.location.href="/compra/compra/compra";
+                    window.location.href="/compra/compra/compra/compra";
                 }
             }
         })
@@ -1103,14 +1140,24 @@ document.addEventListener('click',(e)=>{
     if(e.target.classList.contains('nombreElement')){
         const marcaDirection=e.target.textContent.trim().toLowerCase();
 
-            window.location.href=`/${marcaDirection}`;
+            if(marcaDirection==="otras marcas"){
+                console.warn('ups otras marcas no tiene redireccion')
+            }else{
+                window.location.href=`/${marcaDirection}`;
+            }
+    }
+    if(e.target.matches('.listaInicio>li')){
+        const categoria=e.target.textContent.trim().toLowerCase();
+        const title=e.target.closest('.listaInicio').previousElementSibling.textContent.toLowerCase();
+        if(title==="otras marcas") {
+            window.location.href=`/${categoria}`;
+        }else{
+            window.location.href=`/${title}/${categoria}`;
+        }
 
     }
-
 })
-
 /*contador de productos repetidos*/
-
 function ordenGroup(){
 
     const allElements=document.querySelectorAll('.compraElement');
@@ -1424,7 +1471,7 @@ export async function lastIdCompra(){
 
 document.addEventListener('click',async(e)=>{
     if(e.target.id==='carrito'){
-        window.location.href="/compra/compra/compra"
+        window.location.href="/compra/compra/compra/compra"
     }
 
     if(e.target.id==="deleteElementCompra"){
@@ -1436,7 +1483,7 @@ document.addEventListener('click',async(e)=>{
 
         console.log(parentElement.parentNode);
 
-        const url="/compra/compra/compra";
+        const url="/compra/compra/compra/compra";
         const bodyElements={
             id,
             idCompra:null,
@@ -1472,7 +1519,7 @@ document.addEventListener('click',async(e)=>{
     if (e.target.closest( "#arrowLeft")) {
         const svg=e.target.closest('svg');
         const idCompra = svg.dataset.idCompra;
-        const url = "/compra/compra/compra";
+        const url = "/compra/compra/compra/compra";
         const producto = {
             idCompra: parseInt(idCompra),
         };
@@ -1524,7 +1571,7 @@ document.addEventListener('click',async(e)=>{
         }
 
 
-        const url = "/compra/compra/compra";
+        const url = "/compra/compra/compra/compra";
 
         let idCompra=await lastIdCompra();
 
@@ -1665,7 +1712,7 @@ function deleteAddProducts() {
                     body: JSON.stringify(productDelete),
                 };
 
-                const url = '/compra/compra/compra';
+                const url = '/compra/compra/compra/compra';
 
                 try {
                     // Petición DELETE
@@ -2674,7 +2721,7 @@ async function carritoDesplegado() {
     });
     document.addEventListener('click',e=>{
         if(e.target.matches(".containerBox~button")){
-            window.location.href="/compra/compra/compra";
+            window.location.href="/compra/compra/compra/compra";
         }
     })
 }

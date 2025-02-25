@@ -7,26 +7,33 @@
     padding: 0;
     box-sizing: border-box;
 }
+body{
+    /*background: rgb(235,255,255);*/
+    /*background: linear-gradient(0deg, rgba(235,255,255,1) 0%, rgba(121,201,255,0.5368522408963585) 100%);*/
+}
 
 button{
     transition: all 0.15s linear;
 }
-
-.containerCheck{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-    width: 200px;
-    height: 200px;
-    box-shadow: 0 0 15px rgba(0,0,0,0.2);
-    border: 1.5px solid rgba(0,0,0,0.4);
+.containerMarcas{
     transition: all 0.3s linear;
-    opacity: 0;
+    /*opacity: 0;*/
     padding: 10px;
     gap: 5px;
 }
+.containerCheck{
+    border: 1px solid black;
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 200px;
+    min-height: 200px;
+    justify-content: center;
+
+    /*padding: 20px;*/
+}
+
 .containerCheck>svg{
     width: 60px;
     height: 60px;
@@ -106,7 +113,10 @@ html{
 .titleAndExist>svg path{
 }
 .containerMenuSmallWindow{
-    background: white;
+    /*background: rgb(255,255,255);*/
+    /*background: radial-gradient(circle, rgba(255,255,255,0.8281687675070029) 0%, rgba(75,196,255,0.5830707282913166) 0%, rgba(104,205,255,0.4962359943977591) 92%, rgba(145,218,255,0.7959558823529411) 92%);*/
+    background: rgba(145,218,255,0.9);
+
     border-radius: 12px;
     position: absolute;
     top: 200px;
@@ -259,7 +269,7 @@ input[type="search"]::-moz-search-clear-button {
 
 main{
 }
-.containerCards {
+.containeCards {
     display: grid;
     width: 80%;
     margin: 25px auto;
@@ -317,13 +327,17 @@ main{
 .c_partOne{
     min-width: 120%;
     text-align: center;
-    background: lightblue;
+    /*background: white;*/
+    /*background: rgb(255,255,255);*/
+    background: rgb(255,255,255);
+    background: radial-gradient(circle, rgba(255,255,255,0.8281687675070029) 0%, rgba(75,196,255,0.5830707282913166) 0%, rgba(104,205,255,0.4962359943977591) 52%, rgba(145,218,255,0.7959558823529411) 92%);
+
     display: flex;
-    gap: 0 15px;
+    gap: 0 10px;
     padding: 5px 0;
     justify-content: center;
     align-items: center;
-    font-size:17.5px;
+    font-size:19px;
     font-weight: 100;
     /*border-bottom: 1px solid black;*/
     /*border-top: 1px solid black;*/
@@ -652,6 +666,7 @@ main{
     border-radius: 50%;
     border: 1px solid lightblue;
     position: absolute;
+    z-index: -1;
 
     animation: crecimiento 1s infinite linear;
 }
@@ -662,7 +677,7 @@ main{
     background: lightblue;
     border-radius: 50%;
     position: absolute;
-    /*z-index: -2;*/
+    z-index: -2;
 
     animation: pulse 1s infinite linear;
 }
@@ -849,7 +864,6 @@ main{
     overflow: hidden;
     position: relative;
     width: 100%;
-    outline: 1.5px solid black; /* Borde fuera del elemento */
     /*outline-offset: 5px; !* Controla la distancia del borde *!*/
 }
 
@@ -1020,14 +1034,14 @@ main{
     /*grid-auto-rows: 450px;*/
 }
 .elementProduct{
-    width: 275px;
-    height: 425px;
+    width: 290px;
+    height: 560px;
     border-radius: 12px;
     display: flex;
     flex-direction: column;
     gap: 10px 0;
     align-items: center;
-    padding: 15px;
+    padding: 20px;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
     transition: all 0.25s ease-in-out;
 }
@@ -1036,8 +1050,12 @@ main{
     transition: all 0.25s ease-in-out;
 }
 .elementProduct>img{
-    width: 250px;
-    height: 250px;
+    /*width: 250px;*/
+    /*height: 250px;*/
+    width: 100%;
+    border-radius: 7.5px;
+    aspect-ratio: 2/3;
+    object-fit: cover;
 }
 .elementProduct>div{
     display: flex;
@@ -1172,18 +1190,18 @@ main{
 /*    padding: 0 40px;*/
 /*    transition: all 0.35s ease-in-out;*/
 /*}*/
+.containerElementsRecomended{
+}
 .containerElementsRecomended>div{
     display: flex;
-    width: 275px;
-    height: 425px;
-    min-width: 275px;
+    width: 290px;
+    height: 560px;
     flex-direction: column;
     align-items: center;
     gap: 10px 0;
-    min-height: 425px;
     border: 1px solid rgba(0,0,0,0.4);
     border-radius: 12px;
-    padding: 15px;
+    padding:20px;
     box-shadow: 0 0 15px rgba(0,0,0,0.2);
     transition: box-shadow 0.25s ease-in-out;
 }
@@ -1193,9 +1211,10 @@ main{
     border-color: gray;
 }
 .containerElementsRecomended>div>img{
-    width: 250px;
-    height: 250px;
-
+   width: 100%;
+    aspect-ratio: 2/3;
+    object-fit: cover;
+    border-radius: 7.5px ;
 }
 .productRecomendent>div{
     width: 100%;
@@ -1547,7 +1566,7 @@ input:focus{
     flex-direction: column;
     justify-content: space-evenly;
     width: 200px;
-    height: 275px;
+    height: 300px;
     padding: 0 12px 7.5px 12px;
     border: 1px solid rgba(0,0,0,0.2);
     border-radius: 12px;
@@ -1601,6 +1620,8 @@ input:focus{
 .compraElement>img{
     width: 100%;
     object-fit: cover;
+    border-radius: 7.5px;
+    aspect-ratio: 1/1;
 }
 #deleteElementCompra{
     width: 25px;
@@ -1951,6 +1972,7 @@ input:focus{
 }
 .elementInfo_one>div,.elementInfo_two>div{
     box-shadow: 0 0 10px rgba(0,0,0,0.8);
+    background: white;
 }
 
 /*.infoCenter{*/
@@ -1990,8 +2012,53 @@ input:focus{
 /*    width: 55px;*/
 /*    height: 55px;*/
 /*}*/
+/*------------masVendidosElement------------------*/
+.masVendidoElement>img,.masVendidoElement_two>img{
+    aspect-ratio: 2/3;
+    /*border: 1px solid black;*/
+}
+.masVendidoElement,.masVendidoElement_two{
+}
+
 
 @media (max-width: 320px){
+    /*---------containeCaito----------------------*/
+
+    .c_partOne{
+        min-width: 200%;
+        font-size: 17.5px;
+    }
+    @keyframes carrito {
+        0%{
+            transform: translateX(0);
+        }
+        100%{
+            transform: translateX(-200%);
+        }
+    }
+    /*-------containeAows-----------*/
+    #containerArrows{
+        justify-content: space-between;
+        padding: 0 10px;
+    }
+    #containerArrows>li{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 30px;
+        height: 30px;
+    }
+    #containerArrows>li>svg{
+        width: 30px;
+        height: 30px;
+    }
+    #containerArrows>li:nth-of-type(1)>svg:nth-of-type(1){
+        /*padding-left: 5px;*/
+        transform: translateX(25%);
+    }
+    #lista_circulos{
+
+    }
     /*--------cajitaCompas---------*/
     .cajitaCompras{
         width: 250px;
@@ -2001,7 +2068,7 @@ input:focus{
     /*------compraPage-----------*/
     .compraPage>div>h1{
         white-space: nowrap;
-        font-size: 22.5px;
+        font-size: 21px;
     }
 
 
@@ -2254,7 +2321,7 @@ input:focus{
         grid-template-columns: repeat(auto-fit,250px);
         justify-content: center;
         margin: 0 auto;
-        gap: 55px;
+        gap: 37.5px 75px;
         /*padding: 0 40px;*/
         transition: all 0.35s ease-in-out;
     }
@@ -2592,6 +2659,7 @@ input:focus{
         width: 100%;
         object-fit: cover;
         border-radius: 15px;
+        /*aspect-ratio: 2/3;*/
     }
 
     .masVendidoElement>div,.masVendidoElement_two>div{
@@ -2681,10 +2749,10 @@ input:focus{
     }
     .catalogoElements>div{
 
-        border: 1px solid rgba(0,0,0,0.2);
+        border: 10px solid rgba(0,0,0,0.2);
         border-radius: 15px;
         height: 550px;
-        width: 300px;
+        width: 275px;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -2713,6 +2781,49 @@ input:focus{
     }
 }
 @media (min-width: 321px) and (max-width: 480px){
+
+    /*-------compa page---------------*/
+    .compraPage>div>h1{
+        white-space: nowrap;
+        font-size: 21px;
+    }
+    /*-------------------*/
+    .c_partOne{
+        min-width: 200%;
+        font-size: 15px;
+    }
+    @keyframes carrito {
+        0%{
+            transform: translateX(0);
+        }
+        100%{
+            transform: translateX(-200%);
+        }
+    }
+    /*-------containeAows-----------*/
+    #containerArrows{
+        justify-content: space-between;
+        padding: 0 10px;
+    }
+    #containerArrows>li{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 30px;
+        height: 30px;
+    }
+    #containerArrows>li>svg{
+        width: 30px;
+        height: 30px;
+    }
+    #containerArrows>li:nth-of-type(1)>svg:nth-of-type(1){
+        /*padding-left: 5px;*/
+        transform: translateX(25%);
+    }
+    #lista_circulos{
+
+    }
+
     /*-------nav-------*/
     .navegador{
         width: 100%;
@@ -2959,7 +3070,7 @@ input:focus{
         grid-template-columns: repeat(auto-fit,250px);
         justify-content: center;
         margin: 0 auto;
-        gap: 55px;
+        gap: 37.5px 75px;
         /*padding: 0 40px;*/
         transition: all 0.35s ease-in-out;
     }
@@ -3403,6 +3514,22 @@ input:focus{
     }
 }
 @media (min-width: 481px) and (max-width: 640px){
+    /*-------containeArrows----------*/
+    #containerArrows{
+        padding: 0 10px;
+    }
+    #containerArrows>li{
+        width: 40px;
+        height: 40px;
+    }
+    #containerArrows>li>svg{
+        width: 40px;
+        height: 40px;
+    }
+    #containerArrows>li:nth-of-type(2)>svg{
+        transform: translateX(25%);
+    }
+    /*-------------------*/
     .containerYapePlin{
         width: 450px;
         min-width: 450px;
@@ -3547,7 +3674,7 @@ input:focus{
         grid-template-columns: repeat(auto-fit,250px);
         justify-content: center;
         margin: 0 auto;
-        gap: 55px;
+        gap: 37.5px 75px;
         /*padding: 0 40px;*/
         transition: all 0.35s ease-in-out;
     }
@@ -4127,7 +4254,7 @@ input:focus{
         grid-template-columns: repeat(auto-fit,250px);
         justify-content:center;
         margin: 0 auto;
-        gap: 55px;
+        gap:37.5px  75px;
         /*padding: 0 40px;*/
         transition: all 0.35s ease-in-out;
     }
@@ -4595,7 +4722,13 @@ input:focus{
 }
 @media (min-width: 769px) and (max-width:1024px){
 
-    .containerGroup
+    .containerGroup{
+
+    }
+    .menu{
+        width: 100%;
+        gap: 0;
+    }
 
     .buttonsFinalizar{
         width: 75%;
@@ -4670,7 +4803,7 @@ input:focus{
         grid-template-columns: repeat(auto-fit,250px);
         justify-content: center;
         margin: 0 auto;
-        gap: 55px;
+        gap: 37.5px 75px;
         /*padding: 0 40px;*/
         transition: all 0.35s ease-in-out;
     }
@@ -5140,7 +5273,6 @@ input:focus{
         filter: opacity(0.6);
     }
 }
-
 @media (min-width: 1025px) and (max-width:1280px){
 
     /*-----pasarelaPago-----*/
@@ -5213,7 +5345,7 @@ input:focus{
         grid-template-columns: repeat(auto-fit,250px);
         justify-content: center;
         margin: 0 auto;
-        gap: 55px;
+        gap: 37.5px 75px;
         /*padding: 0 40px;*/
         transition: all 0.35s ease-in-out;
     }
@@ -5742,7 +5874,7 @@ input:focus{
         grid-template-columns: repeat(auto-fit,250px);
         justify-content: center;
         margin: 0 auto;
-        gap: 55px;
+        gap: 37.5px 75px;
         /*padding: 0 40px;*/
         transition: all 0.35s ease-in-out;
     }
@@ -5940,8 +6072,8 @@ input:focus{
     #containerArrows>li:hover{
     }
     #containerArrows>li>svg{
-        height: 50px;
-        width: 50px;
+        height: 60px;
+        width: 60px;
         /*pointer-events: none;*/
     }
     /*-----infoCenter------*/
@@ -6308,7 +6440,7 @@ input:focus{
         grid-template-columns: repeat(auto-fit,250px);
         justify-content: center;
         margin: 0 auto;
-        gap: 55px;
+        gap: 37.5px 75px;
         /*padding: 0 40px;*/
         transition: all 0.35s ease-in-out;
     }
@@ -6503,8 +6635,8 @@ input:focus{
     #containerArrows>li:hover{
     }
     #containerArrows>li>svg{
-        height: 50px;
-        width: 50px;
+        height: 60px;
+        width: 60px;
         /*pointer-events: none;*/
     }
     /*-----infoCenter------*/
@@ -6871,8 +7003,7 @@ input:focus{
         justify-content: center;
         justify-items: center;
         margin: 0 auto;
-        gap: 55px;
-        /*padding: 0 40px;*/
+        gap: 37.5px 75px;
         transition: all 0.35s ease-in-out;
     }
 
@@ -7073,8 +7204,8 @@ input:focus{
     #containerArrows>li:hover{
     }
     #containerArrows>li>svg{
-        height: 50px;
-        width: 50px;
+        height: 60px;
+        width: 60px;
         /*pointer-events: none;*/
     }
 
@@ -7246,14 +7377,15 @@ input:focus{
 
     .masVendidoElement,.masVendidoElement_two{
         border-radius: 15px;
-        min-width: 275px;
-        height: 425px;
+        min-width: 290px;
+        height: 560px;
         display: flex;
+        gap: 10px;
         flex-direction: column;
         justify-content: space-evenly;
         align-items: center;
-        padding:10px 20px;
-        width: 275px;
+        padding:20px;
+        width: 290px;
         box-shadow: 0 0 7.5px rgba(0,0,0,0.4);
         /*display: none;*/
     }

@@ -72,15 +72,15 @@ export function redirectMasVendidoElement(){
             if(e.target.closest('.masVendidoElement')){
                     const element = e.target.closest('.masVendidoElement')
                 if(element) {
-                    const {brand,name}=element.dataset;
-                    window.location.href=`/${brand}/${name}`;
+                    const {categoria, brand,name}=element.dataset;
+                    window.location.href=`/${brand}/${categoria}/${name}`;
                 }
             }
             if(e.target.closest('.masVendidoElement_two')){
                 const element =e.target.closest('.masVendidoElement_two')
                if(element){
-                   const {brand,name}=element.dataset;
-                   window.location.href=`/${brand}/${name}`;
+                   const {categoria, brand,name}=element.dataset;
+                   window.location.href=`/${brand}/${categoria}/${name}`;
                }
             }
         }
