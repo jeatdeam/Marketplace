@@ -1254,7 +1254,7 @@ main{
 /*}*/
 
 .productsRecomended{
-  padding: 55px 0;
+  padding: 25px 0;
 }
 .productsRecomended>h1{
     text-align: center;
@@ -1275,6 +1275,7 @@ main{
 /*    transition: all 0.35s ease-in-out;*/
 /*}*/
 .containerElementsRecomended{
+    gap: 50px;
 }
 .containerElementsRecomended>div{
     display: flex;
@@ -2419,7 +2420,7 @@ input:focus{
         grid-template-columns: repeat(auto-fit,290px);
         justify-content: center;
         margin: 0 auto;
-        gap: 37.5px 75px;
+        /*gap: 37.5px 75px;*/
         /*padding: 0 40px;*/
         transition: all 0.35s ease-in-out;
     }
@@ -2458,6 +2459,9 @@ input:focus{
         width: 100%;
         border-radius: 12px;
         transition: all 0.35s ease-in-out;
+        aspect-ratio: 1/1;
+        object-position: center;
+        object-fit: cover;
     }
     .botLeft{
         display: flex;
@@ -2469,10 +2473,10 @@ input:focus{
         transition: all 0.35s ease-in-out;
     }
     .botLeft>img{
-        width:30%;
+        width: 30%;
         object-fit: cover;
+        aspect-ratio: 1/1;
         border-radius: 12px;
-        transition: all 0.35s ease-in-out;
     }
     .sideRight{
         display: flex;
@@ -2506,8 +2510,9 @@ input:focus{
         flex-direction: column;
         gap: 15px 0;
         justify-content: center;
-        width: 80%;
-        margin: 50px auto 0 auto;
+        width: 90%;
+        margin: 25px auto 0 auto;
+        background: green;
     }
     .bottomInfo>ul{
         display: flex;
@@ -3166,7 +3171,7 @@ input:focus{
         grid-template-columns: repeat(auto-fit,290px);
         justify-content: center;
         margin: 0 auto;
-        gap: 37.5px 75px;
+        /*gap: 37.5px 75px;*/
         /*padding: 0 40px;*/
         transition: all 0.35s ease-in-out;
     }
@@ -3205,6 +3210,9 @@ input:focus{
         width: 100%;
         border-radius: 12px;
         transition: all 0.35s ease-in-out;
+        aspect-ratio: 1/1;
+        object-position: center;
+        object-fit: cover;
     }
     .botLeft{
         display: flex;
@@ -3216,10 +3224,10 @@ input:focus{
         transition: all 0.35s ease-in-out;
     }
     .botLeft>img{
-        width:30%;
+        width: 30%;
         object-fit: cover;
+        aspect-ratio: 1/1;
         border-radius: 12px;
-        transition: all 0.35s ease-in-out;
     }
     .sideRight{
         display: flex;
@@ -3253,8 +3261,9 @@ input:focus{
         flex-direction: column;
         gap: 15px 0;
         justify-content: center;
-        width: 80%;
-        margin: 50px auto 0 auto;
+        width: 90%;
+        margin: 25px auto 0 auto;
+        background: pink;
     }
     .bottomInfo>ul{
         display: flex;
@@ -3285,6 +3294,7 @@ input:focus{
 
 
     .productsRecomended{
+        background: greenyellow;
     }
 
 
@@ -3607,6 +3617,7 @@ input:focus{
         filter: opacity(0.6);
     }
 }
+
 @media (min-width: 481px) and (max-width: 640px){
     /*-------containeArrows----------*/
     #containerArrows{
@@ -3768,7 +3779,7 @@ input:focus{
         grid-template-columns: repeat(auto-fit,290px);
         justify-content: center;
         margin: 0 auto;
-        gap: 37.5px 75px;
+        /*gap: 37.5px 75px;*/
         /*padding: 0 40px;*/
         transition: all 0.35s ease-in-out;
     }
@@ -3808,9 +3819,17 @@ input:focus{
     }
     .topLeft>img{
         /*width: 100%;*/
-        width: 350px;
+        /*width: 350px;*/
+        /*border-radius: 12px;*/
+        /*transition: all 0.35s ease-in-out;*/
+
+
+        width: 100%;
         border-radius: 12px;
         transition: all 0.35s ease-in-out;
+        aspect-ratio: 1/1;
+        object-position: center;
+        object-fit: cover;
     }
     .botLeft{
         display: flex;
@@ -3823,15 +3842,17 @@ input:focus{
         transition: all 0.35s ease-in-out;
     }
     .botLeft>img{
-        width: 100px;
-        height: 100px;
+        width: 30%;
         object-fit: cover;
+        aspect-ratio: 1/1;
         border-radius: 12px;
-        transition: all 0.35s ease-in-out;
+    }
+    .arrwsLeftSide{
+        width: 110%;
     }
     .arrowsLeftSide>svg{
-        width: 30px;
-        height: 30px;
+        width: 40px;
+        height: 40px;
     }
     .sideRight{
         display: flex;
@@ -3866,8 +3887,9 @@ input:focus{
         flex-direction: column;
         gap: 15px 0;
         justify-content: center;
-        width: 80%;
-        margin: 50px auto 0 auto;
+        width: 90%;
+        margin: 25px auto 0 auto;
+        background:blueviolet;
     }
     .bottomInfo>ul{
         display: flex;
@@ -3899,6 +3921,7 @@ input:focus{
 
 
     .productsRecomended{
+        background: blue;
     }
 
     /*-------nav-------*/
@@ -4242,7 +4265,7 @@ input:focus{
         filter: opacity(0.6);
     }
 }
-@media (min-width: 641px) and (max-width:768px){
+@media (min-width: 641px) and (max-width: 768px){
     .marca>div{
         font-size: 50px;
         border: 5px solid red;
@@ -4355,7 +4378,7 @@ input:focus{
         grid-template-columns: repeat(auto-fit,290px);
         justify-content:center;
         margin: 0 auto;
-        gap:37.5px  75px;
+        /*gap:37.5px  75px;*/
         /*padding: 0 40px;*/
         transition: all 0.35s ease-in-out;
     }
@@ -4364,11 +4387,12 @@ input:focus{
 
     }
     .info_productDetail{
-        width:90%;
+        width:80%;
         margin: 0 auto;
         border-radius: 12px;
         display: flex;
-        gap: 0 50px;
+        flex-wrap: wrap;
+        gap: 75px;
         padding: 25px;
         position: relative;
         /*box-shadow: 0 0 250px rgba(91, 209, 252, 0.3);*/
@@ -4384,7 +4408,7 @@ input:focus{
         display: flex;
         flex-direction: column;
         gap: 10px 0;
-        width: 50%;
+        /*width: 50%;*/
         align-self: center;
     }
     .topLeft{
@@ -4393,6 +4417,10 @@ input:focus{
     .topLeft>img{
         width: 100%;
         border-radius: 12px;
+        transition: all 0.35s ease-in-out;
+        aspect-ratio: 1/1;
+        object-position: center;
+        object-fit: cover;
     }
     .botLeft{
         display: flex;
@@ -4405,20 +4433,21 @@ input:focus{
 
     }
     .botLeft>img{
-        width:30%;
+        width: 30%;
         object-fit: cover;
+        aspect-ratio: 1/1;
         border-radius: 12px;
 
     }
     .arrowsLeftSide{
-        width: 115%;
+        width: 110%;
     }
     .arrowsLeftSide>svg{
-        width: 30px;
-        height: 30px;
+        width: 40px;
+        height: 40px;
     }
     .sideRight{
-        width:50%;
+        /*width:50%;*/
         display: flex;
         flex-direction: column;
         gap: 15px 0;
@@ -4453,8 +4482,9 @@ input:focus{
         min-height: 350px;
         justify-content: center;
         padding: 0 25px;
-        width: 80%;
+        width: 90%;
         margin: 50px auto 0 auto;
+        background: burlywood;
     }
     .bottomInfo>ul{
         display: flex;
@@ -4485,6 +4515,7 @@ input:focus{
 
 
     .productsRecomended{
+        background: pink;
     }
 
     /*-------nav-------*/
@@ -4821,7 +4852,7 @@ input:focus{
 }
 
 
-@media (min-width: 769px) and (max-width:1024px){
+@media (min-width: 769px) and (max-width: 1024px){
 
     .marca>div{
         font-size: 50px;
@@ -4908,14 +4939,15 @@ input:focus{
 
     /*-----productsRecomended-------*/
     .containerElementsRecomended{
-        width: 80%;
+        width: 90%;
         display: grid;
         grid-template-columns: repeat(auto-fit,290px);
         justify-content: center;
         margin: 0 auto;
-        gap: 37.5px 75px;
+        /*gap: 37.5px 75px;*/
         /*padding: 0 40px;*/
         transition: all 0.35s ease-in-out;
+        border: 5px solid black;
     }
     /*---------detailProduct------------------*/
     .container_productDetail{
@@ -4951,7 +4983,10 @@ input:focus{
     .topLeft>img{
         width: 100%;
         border-radius: 12px;
-
+        transition: all 0.35s ease-in-out;
+        aspect-ratio: 1/1;
+        object-position: center;
+        object-fit: cover;
     }
 
     .botLeft{
@@ -4965,8 +5000,9 @@ input:focus{
     }
 
     .botLeft>img{
-        width:30%;
+        width: 30%;
         object-fit: cover;
+        aspect-ratio: 1/1;
         border-radius: 12px;
     }
     .arrowsLeftSide{
@@ -5008,13 +5044,11 @@ input:focus{
         display: flex;
         flex-direction: column;
         gap: 15px 0;
-        top: 92.5%;
-        left: 0;
-        min-height: 350px;
         justify-content: center;
-        padding: 0 25px;
-        width: 80%;
+        /*padding: 0 25px;*/
+        width: 85%;
         margin: 50px auto 0 auto;
+        background: orchid;
     }
     .bottomInfo>ul{
         display: flex;
@@ -5045,6 +5079,7 @@ input:focus{
 
 
     .productsRecomended{
+        background: yellow;
     }
 
     /*-------nav-------*/
@@ -5382,7 +5417,7 @@ input:focus{
         filter: opacity(0.6);
     }
 }
-@media (min-width: 1025px) and (max-width:1280px){
+@media (min-width: 1025px) and (max-width: 1280px){
     .marca>div{
         font-size: 60px;
     }
@@ -5451,12 +5486,12 @@ input:focus{
 
     /*-----productsRecomended-------*/
     .containerElementsRecomended{
-        width: 80%;
+        width: 90%;
         display: grid;
         grid-template-columns: repeat(auto-fit,290px);
         justify-content: center;
         margin: 0 auto;
-        gap: 37.5px 75px;
+        /*gap: 37.5px 75px;*/
         /*padding: 0 40px;*/
         transition: all 0.35s ease-in-out;
     }
@@ -5492,6 +5527,10 @@ input:focus{
     .topLeft>img{
         width: 100%;
         border-radius: 12px;
+        transition: all 0.35s ease-in-out;
+        aspect-ratio: 1/1;
+        object-position: center;
+        object-fit: cover;
 
     }
     .botLeft{
@@ -5504,8 +5543,9 @@ input:focus{
         border-radius: 12px;
     }
     .botLeft>img{
-        width:30%;
+        width: 30%;
         object-fit: cover;
+        aspect-ratio: 1/1;
         border-radius: 12px;
 
     }
@@ -5915,7 +5955,11 @@ input:focus{
 
 
 
-@media (min-width: 1281px) and (max-width:1440px){
+@media (min-width: 1281px) and (max-width: 1440px){
+    .productsRecomended{
+        background: greenyellow;
+        margin-top: 50px;
+    }
     .marca>div{
         font-size: 60px;
     }
@@ -5989,7 +6033,7 @@ input:focus{
         grid-template-columns: repeat(auto-fit,290px);
         justify-content: center;
         margin: 0 auto;
-        gap: 37.5px 75px;
+        /*gap: 37.5px 75px;*/
         /*padding: 0 40px;*/
         transition: all 0.35s ease-in-out;
     }
@@ -6025,6 +6069,10 @@ input:focus{
     .topLeft>img{
         width: 100%;
         border-radius: 12px;
+        transition: all 0.35s ease-in-out;
+        aspect-ratio: 1/1;
+        object-position: center;
+        object-fit: cover;
 
     }
     .botLeft{
@@ -6038,8 +6086,9 @@ input:focus{
 
     }
     .botLeft>img{
-        width:30%;
+        width: 30%;
         object-fit: cover;
+        aspect-ratio: 1/1;
         border-radius: 12px;
     }
     .arrowsLeftSide{
@@ -6490,7 +6539,11 @@ input:focus{
         filter: opacity(0.6);
     }
 }
-@media (min-width: 1441px) and (max-width:1536px){
+@media (min-width: 1441px) and (max-width: 1536px){
+    .productsRecomended{
+        background: greenyellow;
+        margin-top: 50px;
+    }
     .marca>div{
         font-size: 60px;
     }
@@ -6557,7 +6610,7 @@ input:focus{
         grid-template-columns: repeat(auto-fit,290px);
         justify-content: center;
         margin: 0 auto;
-        gap: 37.5px 75px;
+        /*gap: 37.5px 75px;*/
         /*padding: 0 40px;*/
         transition: all 0.35s ease-in-out;
     }
@@ -6595,7 +6648,10 @@ input:focus{
     .topLeft>img{
         width: 100%;
         border-radius: 12px;
-
+        transition: all 0.35s ease-in-out;
+        aspect-ratio: 1/1;
+        object-position: center;
+        object-fit: cover;
     }
     .botLeft{
         display: flex;
@@ -6607,10 +6663,10 @@ input:focus{
 
     }
     .botLeft>img{
-        width:30%;
+        width: 30%;
         object-fit: cover;
+        aspect-ratio: 1/1;
         border-radius: 12px;
-
     }
     .sideRight{
         width:50%;
@@ -7055,6 +7111,11 @@ input:focus{
 }
 @media (min-width: 1537px){
 
+    .productsRecomended{
+        background: greenyellow;
+        margin-top: 50px;
+    }
+
     .marca>div{
         font-size: 65px;
     }
@@ -7123,7 +7184,7 @@ input:focus{
         justify-content: center;
         justify-items: center;
         margin: 0 auto;
-        gap: 37.5px 75px;
+        /*gap: 37.5px 75px;*/
         transition: all 0.35s ease-in-out;
     }
 
@@ -7159,9 +7220,12 @@ input:focus{
         justify-content: center;
     }
     .topLeft>img{
-        width: 500px;
+        width: 100%;
         border-radius: 12px;
-
+        transition: all 0.35s ease-in-out;
+        aspect-ratio: 1/1;
+        object-position: center;
+        object-fit: cover;
     }
     .botLeft{
         display: flex;
@@ -7173,9 +7237,11 @@ input:focus{
         gap: 25px;
     }
     .botLeft>img{
-        width:150px;
-        height: 150px;
+        /*width:150px;*/
+        /*height: 150px;*/
+        width: 30%;
         object-fit: cover;
+        aspect-ratio: 1/1;
         border-radius: 12px;
         /*flex: 1;*/
     }
