@@ -3,28 +3,6 @@
 
 export function moveSpan(){
 
-    //
-    // if(window.innerWidth<=480){
-    //     const spanAll=document.querySelectorAll('.searchAndOptions>ul>li>span:nth-of-type(1)')
-    //     const divAll=document.querySelectorAll('.searchAndOptions>ul>li>div');
-    //     divAll.forEach( (div,index)=>{
-    //
-    //         if(spanAll[index]){
-    //             div.appendChild(spanAll[index]);
-    //         }
-    //
-    //     })
-    // }
-    //
-    // if(window.innerWidth>=481){
-    //     const spanAll=document.querySelectorAll('.searchAndOptions>ul>li>div>span:nth-of-type(3)')
-    //     const divAll=document.querySelectorAll('.searchAndOptions>ul>li>div')
-    //
-    //     divAll.forEach( (div,index)=>{
-    //         div.insertAdjacentElement('afterend',spanAll[index])
-    //     })
-    // }
-
 }
 
 export function moveBottomInfo(){
@@ -32,40 +10,46 @@ export function moveBottomInfo(){
     const media_1=matchMedia('(max-width: 320px)')
     if(media_1.matches){
         const bottomInfo=document.querySelector('.bottomInfo');
-        const infoProductDetails=document.querySelector('.info_productDetail');
-
-        infoProductDetails.insertAdjacentElement('afterend',bottomInfo)
+        if(bottomInfo){
+            const infoProductDetails=document.querySelector('.info_productDetail');
+            infoProductDetails.insertAdjacentElement('afterend',bottomInfo)
+        }
     }
     const media_2=matchMedia('(min-width: 321px) and (max-width: 480px)');
     if(media_2.matches){
         const bottomInfo=document.querySelector('.bottomInfo');
-        const infoProductDetails=document.querySelector('.info_productDetail');
-
-        infoProductDetails.insertAdjacentElement('afterend',bottomInfo)
+        if(bottomInfo){
+            const infoProductDetails=document.querySelector('.info_productDetail');
+            infoProductDetails.insertAdjacentElement('afterend',bottomInfo)
+        }
     }
     const media_3=matchMedia('(min-width: 481px) and (max-width: 640px)');
     if(media_3.matches){
         const bottomInfo=document.querySelector('.bottomInfo');
-        const infoProductDetails=document.querySelector('.info_productDetail');
 
-        infoProductDetails.insertAdjacentElement('afterend',bottomInfo)
+        if(bottomInfo){
+            const infoProductDetails=document.querySelector('.info_productDetail');
+            infoProductDetails.insertAdjacentElement('afterend',bottomInfo)
+        }
     }
     const media_4=matchMedia('(min-width: 641px) and (max-width:768px)');
     if(media_4.matches){
         const bottomInfo=document.querySelector('.bottomInfo');
-        const infoProductDetails=document.querySelector('.info_productDetail');
 
-        infoProductDetails.insertAdjacentElement('afterend',bottomInfo)
+        if(bottomInfo){
+            const infoProductDetails=document.querySelector('.info_productDetail');
+            infoProductDetails.insertAdjacentElement('afterend',bottomInfo)
+        }
     }
 
     const mediaOne=matchMedia('(min-width: 769px) and (max-width:1024px)');
 
     if(mediaOne.matches){
         const bottomInfo=document.querySelector('.bottomInfo');
-        const infoProductDetails=document.querySelector('.info_productDetail');
-
-        infoProductDetails.insertAdjacentElement('afterend',bottomInfo)
-
+        if(bottomInfo){
+            const infoProductDetails=document.querySelector('.info_productDetail');
+            infoProductDetails.insertAdjacentElement('afterend',bottomInfo)
+        }
     }
 
 
@@ -73,31 +57,38 @@ export function moveBottomInfo(){
 
     if(mediaTwo.matches){
         const bottomInfo=document.querySelector('.bottomInfo');
-        const lastMove=document.querySelector('.lastMove');
-
-        lastMove.insertAdjacentElement('beforebegin',bottomInfo)
+        if(bottomInfo) {
+            const lastMove=document.querySelector('.lastMove');
+            lastMove.insertAdjacentElement('beforebegin',bottomInfo)
+        }
     }
 
     const mediaThree=matchMedia('(min-width: 1281px) and (max-width:1440px)')
     if(mediaThree.matches){
         const bottomInfo=document.querySelector('.bottomInfo');
-        const lastMove=document.querySelector('.lastMove');
 
-        lastMove.insertAdjacentElement('beforebegin',bottomInfo)
+        if(bottomInfo){
+            const lastMove=document.querySelector('.lastMove');
+            lastMove.insertAdjacentElement('beforebegin',bottomInfo)
+        }
     }
     const mediaFour=matchMedia('(min-width: 1441px) and (max-width:1536px)');
     if(mediaFour.matches){
         const bottomInfo=document.querySelector('.bottomInfo');
-        const lastMove=document.querySelector('.lastMove');
 
-        lastMove.insertAdjacentElement('beforebegin',bottomInfo)
+        if(bottomInfo){
+            const lastMove=document.querySelector('.lastMove');
+            lastMove.insertAdjacentElement('beforebegin',bottomInfo)
+        }
     }
     const mediaFive=matchMedia('(min-width: 1537px)');
     if(mediaFive.matches){
         const bottomInfo=document.querySelector('.bottomInfo');
-        const lastMove=document.querySelector('.lastMove');
 
-        lastMove.insertAdjacentElement('beforebegin',bottomInfo)
+        if(bottomInfo){
+            const lastMove=document.querySelector('.lastMove');
+            lastMove.insertAdjacentElement('beforebegin',bottomInfo)
+        }
     }
 }
 

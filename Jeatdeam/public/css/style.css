@@ -39,6 +39,7 @@ main{
     display: flex;
     flex-wrap: wrap;
     gap: 50px;
+    justify-content: space-evenly;
 }
 .categoryElement{
     width: 290px;
@@ -808,11 +809,12 @@ main{
     transform: translateX(50%);
     border: 2px solid gray;
     font-size: 13px;
-    font-weight: bold;
+    font-weight: 100;
     padding: 10px;
     position: absolute;
-    top: 100%;
+    top: 105%;
     z-index: 4;
+    display: flex;
     transition: opacity 0.35s ease-in-out;
 }
 
@@ -836,12 +838,17 @@ main{
 .productCarrito>img{
     border-radius: 7.5px;
     box-shadow: 0 0 2.5px rgba(0,0,0,0.8);
+    aspect-ratio: 1;
+    object-fit: cover;
 }
 .productCarrito>div{
     width: 80%;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
+}
+.productCarrito>div>span:nth-of-type(2){
+    font-weight: bold;
 }
 
 .product-image{
@@ -2121,6 +2128,15 @@ input:focus{
 
 
 @media (max-width: 320px){
+
+    .cajitaCompras{
+        right: -10%;
+    }
+    .sinCompras{
+        right: 50%;
+    }
+
+
     /*---------containeCaito----------------------*/
 
     .c_partOne{
@@ -2329,41 +2345,58 @@ input:focus{
     /*infoCenter*/
     .infoCenter{
         /*width: calc(70vw + 25px);*/
-        width: 90%;
+        width: 100%;
         margin: 0 auto;
-        display: grid;
+        display: flex;
         align-items: center;
         /*grid-template-columns: repeat(auto-fit,minmax(300px,1fr));*/
         justify-content: center;
-        padding: 35px 25px;
-        gap: 25px;
+        padding: 20px 10px;
+        gap: 10px;
     }
     .elementInfo_one,.elementInfo_two{
         display: flex;
-        gap: 25px;
+        gap: 10px;
         flex-direction: column;
+        border: 5px solid black;
     }
 
     .elementInfo_one>div,
     .elementInfo_two>div{
+        background: lightblue;
         display: flex;
-        width: 250px;
-        height: 250px;
+        width: clamp(120px, 40vw, 150px);
+        height: clamp(120px, 40vw , 150px);
         margin: 0 auto;
         flex-direction: column;
         flex-wrap: wrap;
         align-items: center;
         text-align: center;
-        gap: 15px;
+        gap: 10px;
         /*border: 5px solid gray;*/
         border-radius: 15px;
         justify-content: center;
-        padding: 0 15px;
+        padding: 0 5px;
+    }
+    .elementInfo_one>div>small,
+    .elementInfo_two>div>small{
+        display: none;
+    }
+    .elementInfo_one>div>b,
+    .elementInfo_two>div>b{
+        font-size: 15px;
+    }
+    .elementInfo_one>div>small,
+    .elementInfo_two>div>small{
     }
     .elementInfo_one>div>svg,
     .elementInfo_two>div>svg{
-        width: 55px;
-        height: 55px;
+        width: 35px;
+        height: 35px;
+    }
+
+    .elementInfo_one>div small,.elementInfo_two>div small{
+        display: none;
     }
 
 
@@ -2436,7 +2469,7 @@ input:focus{
         display: flex;
         flex-wrap: wrap;
         gap:35px;
-        padding: 25px;
+        padding: 0 25px 25px 25px;
         /*box-shadow: 0 0 250px rgba(91, 209, 252, 0.3);*/
     }
 
@@ -2523,7 +2556,7 @@ input:focus{
 
     .lastMove {
         display: flex;
-        width: 80%;
+        width: 95%;
         transform: translateY(50%);
         margin: 0 auto;
         justify-content: space-between;
@@ -2531,11 +2564,12 @@ input:focus{
         gap: calc(5vw + 15px);
     }
     .lastMove>button{
-        padding: 10px 7.5px;
+        padding: 0 20px;
         border: 1px solid transparent;
         border-radius: 7.5px;
         transition: border 0.35s ease-in-out;
-        width: 110px;
+        width: 105px;
+        height: 35px;
     }
     .lastMove>button:hover{
         border: 1px solid gray;
@@ -2610,7 +2644,7 @@ input:focus{
         text-align: center;
         /*line-height:2;*/
         font-size: 35px;
-        padding: 25px 0;
+        /*padding: 25px 0;*/
         font-weight: 100;
     }
     .containerMarcas{
@@ -2882,7 +2916,12 @@ input:focus{
     }
 }
 @media (min-width: 321px) and (max-width: 480px){
-
+    .cajitaCompras{
+        right: -10%;
+    }
+    .sinCompras{
+        right: 50%;
+    }
     /*-------compa page---------------*/
     .compraPage>div>h1{
         white-space: nowrap;
@@ -3087,41 +3126,54 @@ input:focus{
     /*center*/
     .infoCenter{
         /*width: calc(70vw + 25px);*/
-        width: 90%;
+        width: 100%;
         margin: 0 auto;
-        display: grid;
+        display: flex;
         align-items: center;
         /*grid-template-columns: repeat(auto-fit,minmax(300px,1fr));*/
         justify-content: center;
-        padding: 35px 25px;
-        gap: 25px;
+        padding: 35px 10px;
+        gap: 10px;
     }
     .elementInfo_one,.elementInfo_two{
         display: flex;
-        gap: 25px;
+        gap: 10px;
         flex-direction: column;
+        border: 5px solid black;
     }
 
     .elementInfo_one>div,
     .elementInfo_two>div{
+        background: lightblue;
         display: flex;
-        width: 275px;
-        height: 275px;
+        width: clamp(140px, 40vw, 210px);
+        height: clamp(140px, 40vw , 210px);
         margin: 0 auto;
         flex-direction: column;
         flex-wrap: wrap;
         align-items: center;
         text-align: center;
-        gap: 15px;
+        gap: 10px;
         /*border: 5px solid gray;*/
         border-radius: 15px;
         justify-content: center;
         padding: 0 15px;
     }
+    .elementInfo_one>div>small,
+    .elementInfo_two>div>small{
+        display: none;
+    }
+    .elementInfo_one>div>b,
+    .elementInfo_two>div>b{
+        font-size: 18px;
+    }
+    .elementInfo_one>div>small,
+    .elementInfo_two>div>small{
+    }
     .elementInfo_one>div>svg,
     .elementInfo_two>div>svg{
-        width: 55px;
-        height: 55px;
+        width: 35px;
+        height: 35px;
     }
 
 
@@ -3187,7 +3239,7 @@ input:focus{
         display: flex;
         flex-wrap: wrap;
         gap:35px;
-        padding: 25px;
+        padding: 0 25px 25px 25px;
         /*box-shadow: 0 0 250px rgba(91, 209, 252, 0.3);*/
     }
 
@@ -3274,7 +3326,7 @@ input:focus{
 
     .lastMove {
         display: flex;
-        width: 80%;
+        width: 90%;
         transform: translateY(50%);
         margin: 0 auto;
         justify-content: space-between;
@@ -3282,11 +3334,12 @@ input:focus{
         gap: calc(5vw + 15px);
     }
     .lastMove>button{
-        padding: 10px 7.5px;
+        padding: 0 20px;
         border: 1px solid transparent;
         border-radius: 7.5px;
         transition: border 0.35s ease-in-out;
-        width: 110px;
+        width: 105px;
+        height: 35px;
     }
     .lastMove>button:hover{
         border: 1px solid gray;
@@ -3341,20 +3394,22 @@ input:focus{
 
     }
     .marcas>h1{
+        width: 90%;
+        margin: 0 auto;
+        border: 5px solid black;
         text-align: center;
-        /*line-height:2;*/
         font-size: 35px;
-        padding: 25px 0;
         font-weight: 100;
     }
     .containerMarcas{
         /*height: 500px;*/
+        background: pink;
         padding: 25px 0;
         width: 80%;
         margin: 0 auto;
         display: grid;
         gap: 25px;
-        grid-template-columns: repeat(auto-fit,275px);
+        grid-template-columns: repeat(auto-fit,minmax(290px,1fr));
         justify-content: center;
         grid-template-areas:
         "marca_1"
@@ -3687,36 +3742,44 @@ input:focus{
     /*----------infoCenter-----------*/
     .infoCenter{
         /*width: calc(70vw + 25px);*/
-        width: 80%;
+        width: 90%;
         margin: 0 auto;
-        display: grid;
+        display: flex;
         align-items: center;
         /*grid-template-columns: repeat(auto-fit,minmax(300px,1fr));*/
         justify-content: center;
         padding: 35px 25px 25px 25px;
-        gap: 35px;
+        gap: calc(10px + 1vw);
     }
     .elementInfo_one,.elementInfo_two{
         display: flex;
-        gap: 35px;
+        gap: calc(10px + 1vw);
         flex-direction: column;
+        border: 5px solid red;
     }
 
     .elementInfo_one>div,
     .elementInfo_two>div{
         display: flex;
-        width: 275px;
-        height: 275px;
+        width: calc(150px + 10vw);
+        height: calc(150px + 10vw);
         margin: 0 auto;
         flex-direction: column;
         flex-wrap: wrap;
         align-items: center;
         text-align: center;
-        gap: 15px;
-        /*border: 5px solid gray;*/
+        gap: 5px;
         border-radius: 15px;
         justify-content: center;
         padding: 0 15px;
+    }
+    .elementInfo_one>div>b,
+    .elementInfo_two>div>b{
+        font-size: 19px;
+    }
+    .elementInfo_one>div>small,
+    .elementInfo_two>div>small{
+        font-size: 13.5px;
     }
     .elementInfo_one>div>svg,
     .elementInfo_two>div>svg{
@@ -3795,7 +3858,7 @@ input:focus{
         display: flex;
         flex-wrap: wrap;
         gap:35px;
-        padding: 25px;
+        padding: 0 25px 25px 25px;
         /*box-shadow: 0 0 250px rgba(91, 209, 252, 0.3);*/
     }
 
@@ -3909,11 +3972,12 @@ input:focus{
         gap: calc(5vw + 15px);
     }
     .lastMove>button{
-        padding: 10px 7.5px;
+        padding: 0 20px;
         border: 1px solid transparent;
         border-radius: 7.5px;
         transition: border 0.35s ease-in-out;
-        width: 110px;
+        width: 105px;
+        height: 35px;
     }
     .lastMove>button:hover{
         border: 1px solid gray;
@@ -3988,16 +4052,18 @@ input:focus{
         margin: 0 auto;
         /*line-height:2;*/
         font-size: 40px;
-        padding: 25px 0;
+        padding: 10px 0;
     }
     .containerMarcas{
         /*height: 500px;*/
+        background: green;
+        justify-items: center;
         padding: 25px 0;
         width: 80%;
         margin: 0 auto;
         display: grid;
         gap: 25px;
-        grid-template-columns: repeat(auto-fit,350px);
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
         justify-content: center;
         grid-template-areas:
         "marca_1"
@@ -4307,39 +4373,47 @@ input:focus{
         /*width: calc(70vw + 25px);*/
         width: 90%;
         margin: 0 auto;
-        display: grid;
+        display: flex;
         align-items: center;
         /*grid-template-columns: repeat(auto-fit,minmax(300px,1fr));*/
         justify-content: center;
         padding: 35px 25px 25px 25px;
-        gap: 35px;
+        gap: calc(10px + 2vw);
     }
     .elementInfo_one,.elementInfo_two{
         display: flex;
-        gap: 35px;
-        /*flex-direction: column;*/
+        gap: calc(10px + 2vw);
+        flex-direction: column;
+        border: 5px solid purple;
     }
 
     .elementInfo_one>div,
     .elementInfo_two>div{
         display: flex;
-        width: 275px;
-        height: 275px;
+        width: calc(175px + 10vw);
+        height: calc(175px + 10vw);
         margin: 0 auto;
         flex-direction: column;
         flex-wrap: wrap;
         align-items: center;
         text-align: center;
-        gap: 15px;
-        /*border: 5px solid gray;*/
+        gap: 10px;
         border-radius: 15px;
         justify-content: center;
-        padding: 0 15px;
+        padding: 0 10px;
+    }
+    .elementInfo_one>div>b,
+    .elementInfo_two>div>b{
+        font-size: 22.5px;
+    }
+    .elementInfo_one>div>small,
+    .elementInfo_two>div>small{
+        font-size: 17px;
     }
     .elementInfo_one>div>svg,
     .elementInfo_two>div>svg{
-        width: 55px;
-        height: 55px;
+        width: 60px;
+        height: 60px;
     }
 
     /*--------------------*/
@@ -4393,7 +4467,7 @@ input:focus{
         display: flex;
         flex-wrap: wrap;
         gap: 75px;
-        padding: 25px;
+        padding: 0 25px 25px 25px;
         position: relative;
         /*box-shadow: 0 0 250px rgba(91, 209, 252, 0.3);*/
     }
@@ -4477,14 +4551,10 @@ input:focus{
         display: flex;
         flex-direction: column;
         gap: 15px 0;
-        top: 92.5%;
-        left: 0;
-        min-height: 350px;
         justify-content: center;
         padding: 0 25px;
         width: 90%;
-        margin: 50px auto 0 auto;
-        background: burlywood;
+        margin: 25px auto 0 auto;
     }
     .bottomInfo>ul{
         display: flex;
@@ -4496,15 +4566,16 @@ input:focus{
 
     .lastMove {
         display: flex;
-        width: 90%;
+        width: 80%;
         transform: translateY(50%);
         margin: 0 auto;
         justify-content: space-between;
-        /*gap: 300px;*/
-        gap: calc(5vw + 15px);
     }
     .lastMove>button{
-        padding: 7.5px;
+        /*flex: 1;*/
+        width: 105px;
+        height: 35px;
+        padding: 0 20px;
         border: 1px solid transparent;
         border-radius: 7.5px;
         transition: border 0.35s ease-in-out;
@@ -4885,39 +4956,47 @@ input:focus{
         /*width: calc(70vw + 25px);*/
         width: 90%;
         margin: 0 auto;
-        display: grid;
+        display: flex;
         align-items: center;
         /*grid-template-columns: repeat(auto-fit,minmax(300px,1fr));*/
         justify-content: center;
         padding: 35px 25px 25px 25px;
-        gap: 35px;
+        gap: calc(10px + 2vw);
     }
     .elementInfo_one,.elementInfo_two{
         display: flex;
-        gap: 35px;
-        /*flex-direction: column;*/
+        gap: calc(10px + 2vw);
+        flex-direction: column;
+        border: 5px solid yellow;
     }
 
     .elementInfo_one>div,
     .elementInfo_two>div{
         display: flex;
-        width: 300px;
-        height: 300px;
+        width: calc(175px + 5vw);
+        height: calc(175px + 5vw);
         margin: 0 auto;
         flex-direction: column;
         flex-wrap: wrap;
         align-items: center;
         text-align: center;
-        gap: 15px;
-        /*border: 5px solid gray;*/
+        gap: 5px;
         border-radius: 15px;
         justify-content: center;
-        padding: 0 15px;
+        padding: 0 10px;
+    }
+    .elementInfo_one>div>b,
+    .elementInfo_two>div>b{
+        font-size: 22.5px;
+    }
+    .elementInfo_one>div>small,
+    .elementInfo_two>div>small{
+        font-size: 17px;
     }
     .elementInfo_one>div>svg,
     .elementInfo_two>div>svg{
-        width: 55px;
-        height: 55px;
+        width: 60px;
+        height: 60px;
     }
 
     /*--------------------*/
@@ -4959,7 +5038,7 @@ input:focus{
         border-radius: 12px;
         display: flex;
         gap: 0 50px;
-        padding: 25px;
+        padding: 0 25px 25px 25px;
         position: relative;
         /*box-shadow: 0 0 250px rgba(91, 209, 252, 0.3);*/
     }
@@ -5060,18 +5139,20 @@ input:focus{
 
     .lastMove {
         display: flex;
-        width: 90%;
+        width: 95%;
         transform: translateY(50%);
         margin: 0 auto;
         justify-content: space-between;
-        /*gap: 300px;*/
-        gap: calc(5vw + 15px);
+        gap: 50px;
+        border: 5px solid blueviolet;
     }
     .lastMove>button{
-     padding: 7.5px;
+     padding: 0 20px;
+     height: 35px;
+     width: 105px;
      border: 1px solid transparent;
-        border-radius: 7.5px;
-        transition: border 0.35s ease-in-out;
+     border-radius: 7.5px;
+     transition: border 0.35s ease-in-out;
     }
     .lastMove>button:hover{
         border: 1px solid gray;
@@ -5439,39 +5520,47 @@ input:focus{
         /*width: calc(70vw + 25px);*/
         width: 90%;
         margin: 0 auto;
-        display: grid;
+        display: flex;
         align-items: center;
         /*grid-template-columns: repeat(auto-fit,minmax(300px,1fr));*/
         justify-content: center;
         padding: 35px 25px 25px 25px;
-        gap: 35px;
+        gap: calc(10px + 2vw);
     }
     .elementInfo_one,.elementInfo_two{
         display: flex;
-        gap: 35px;
-        /*flex-direction: column;*/
+        gap: calc(10px + 2vw);
+        flex-direction: column;
+        border: 5px solid green;
     }
 
     .elementInfo_one>div,
     .elementInfo_two>div{
         display: flex;
-        width: 325px;
-        height: 325px;
+        width: calc(175px + 5vw);
+        height: calc(175px + 5vw);
         margin: 0 auto;
         flex-direction: column;
         flex-wrap: wrap;
         align-items: center;
         text-align: center;
-        gap: 15px;
-        /*border: 5px solid gray;*/
+        gap: 10px;
         border-radius: 15px;
         justify-content: center;
-        padding: 0 15px;
+        padding: 0 5px;
+    }
+    .elementInfo_one>div>b,
+    .elementInfo_two>div>b{
+        font-size: 22.5px;
+    }
+    .elementInfo_one>div>small,
+    .elementInfo_two>div>small{
+        font-size: 18px;
     }
     .elementInfo_one>div>svg,
     .elementInfo_two>div>svg{
-        width: 55px;
-        height: 55px;
+        width: 60px;
+        height: 60px;
     }
 
     /*--------------------*/
@@ -5505,7 +5594,7 @@ input:focus{
         border-radius: 12px;
         display: flex;
         gap: 0 50px;
-        padding: 25px;
+        padding: 0 25px 25px 25px;
         /*box-shadow: 0 0 250px rgba(91, 209, 252, 0.3);*/
     }
     .container_productDetail>h1{
@@ -5597,18 +5686,19 @@ input:focus{
     }
     .lastMove {
         display: flex;
-        width: 90%;
+        width: 80%;
         transform: translateY(50%);
         margin: 0 auto;
         justify-content: space-between;
         /*gap: 300px;*/
-        gap: calc(5vw + 15px);
+        /*gap: calc(4vw + 15px);*/
     }
     .lastMove>button{
-        padding: 15px 10px;
-        border-radius: 12px;
+        padding: 0 20px;
+        border-radius: 7.5px;
         border: 1px solid transparent;
-        flex: 1;
+        height: 35px;
+        width: 105px;
         transition: all 0.35s ease-in-out;
     }
     .lastMove>button:hover{
@@ -5982,39 +6072,47 @@ input:focus{
         /*width: calc(70vw + 25px);*/
         width: 90%;
         margin: 0 auto;
-        display: grid;
+        display: flex;
         align-items: center;
         /*grid-template-columns: repeat(auto-fit,minmax(300px,1fr));*/
         justify-content: center;
-        padding: 35px 25px 25px 25px;
-        gap: 35px;
+        padding: 50px 25px 25px 25px;
+        gap: calc(10px + 2vw);
     }
     .elementInfo_one,.elementInfo_two{
         display: flex;
-        gap: 35px;
+        gap: calc(10px + 2vw);
         /*flex-direction: column;*/
+        border: 10px solid orangered;
     }
 
     .elementInfo_one>div,
     .elementInfo_two>div{
         display: flex;
-        width: 350px;
-        height: 350px;
+        width: calc(175px + 5vw);
+        height: calc(175px + 5vw);
         margin: 0 auto;
         flex-direction: column;
         flex-wrap: wrap;
         align-items: center;
         text-align: center;
-        gap: 15px;
-        /*border: 5px solid gray;*/
+        gap: 10px;
         border-radius: 15px;
         justify-content: center;
         padding: 0 15px;
     }
+    .elementInfo_one>div>b,
+    .elementInfo_two>div>b{
+        font-size: 22.5px;
+    }
+    .elementInfo_one>div>small,
+    .elementInfo_two>div>small{
+        font-size: 18px;
+    }
     .elementInfo_one>div>svg,
     .elementInfo_two>div>svg{
-        width: 55px;
-        height: 55px;
+        width: 60px;
+        height: 60px;
     }
 
     /*--------------------*/
@@ -6047,7 +6145,7 @@ input:focus{
         border-radius: 12px;
         display: flex;
         gap: 0 50px;
-        padding: 25px;
+        padding: 0 25px 25px 25px;
         /*box-shadow: 0 0 250px rgba(91, 209, 252, 0.3);*/
     }
     .container_productDetail>h1{
@@ -6146,10 +6244,11 @@ input:focus{
         gap: calc(5vw + 15px);
     }
     .lastMove>button{
-        padding: 15px 10px;
-        border-radius: 12px;
+        padding: 0 20px;
+        border-radius: 7.5px;
         border: 1px solid transparent;
-        flex: 1;
+        /*flex: 1;*/height: 35px;
+        width: 105px;
         transition: all 0.35s ease-in-out;
     }
     .lastMove>button:hover{
@@ -6555,42 +6654,51 @@ input:focus{
     }
     /*----------infoCenter-----------*/
     .infoCenter{
-        width: 70%;
+        /*width: calc(70vw + 25px);*/
+        width: 80%;
         margin: 0 auto;
         display: flex;
+        /*flex-wrap: nowrap;*/
         align-items: center;
         /*grid-template-columns: repeat(auto-fit,minmax(300px,1fr));*/
         justify-content: center;
-        padding: 35px 25px 25px 25px;
-        gap: 40px;
-        flex-wrap: wrap;
+        padding: 50px 25px 25px 25px;
+        gap: calc(10px + 2vw);
     }
     .elementInfo_one,.elementInfo_two{
         display: flex;
-        gap: 40px;
+        gap: calc(10px + 2vw);
         /*flex-direction: column;*/
+        border: 20px solid cornflowerblue;
     }
 
     .elementInfo_one>div,
     .elementInfo_two>div{
         display: flex;
-        width: 325px;
-        height: 325px;
+        width: calc(200px + 5vw);
+        height: calc(200px + 5vw);
         margin: 0 auto;
         flex-direction: column;
         flex-wrap: wrap;
         align-items: center;
         text-align: center;
         gap: 15px;
-        /*border: 5px solid gray;*/
         border-radius: 15px;
         justify-content: center;
         padding: 0 15px;
     }
+    .elementInfo_one>div>b,
+    .elementInfo_two>div>b{
+        font-size: 25px;
+    }
+    .elementInfo_one>div>small,
+    .elementInfo_two>div>small{
+        font-size: 20px;
+    }
     .elementInfo_one>div>svg,
     .elementInfo_two>div>svg{
-        width: 55px;
-        height: 55px;
+        width: 60px;
+        height: 60px;
     }
 
     /*--------------------*/
@@ -6630,7 +6738,7 @@ input:focus{
         border-radius: 12px;
         display: flex;
         /*gap: cal(5wh+20px);*/
-        padding: 25px;
+        padding: 0 25px 25px 25px;
         gap: 0 45px;
         /*box-shadow: 0 0 250px rgba(91, 209, 252, 0.3);*/
     }
@@ -6718,10 +6826,11 @@ input:focus{
     }
 
     .lastMove>button{
-        padding: 15px 10px;
-        border-radius: 12px;
+        padding: 0 20px;
+        border-radius: 7.5px;
+        width: 105px;
+        height: 35px;
         border: 1px solid transparent;
-        flex: 1;
         transition: all 0.35s ease-in-out;
     }
     .lastMove>button:hover{
@@ -7127,42 +7236,51 @@ input:focus{
     }
     /*----------infoCenter-----------*/
     .infoCenter{
+        /*width: calc(70vw + 25px);*/
         width: 90%;
         margin: 0 auto;
         display: flex;
         align-items: center;
         /*grid-template-columns: repeat(auto-fit,minmax(300px,1fr));*/
         justify-content: center;
-        padding: 50px;
-        gap: 50px;
-        flex-wrap: wrap;
+        padding: 50px 25px 35px 25px;
+        gap: calc(10px + 2vw);
     }
     .elementInfo_one,.elementInfo_two{
         display: flex;
-        gap: 50px;
+        gap: calc(10px + 2vw);
         /*flex-direction: column;*/
+        border: 5px solid lightseagreen;
     }
 
     .elementInfo_one>div,
     .elementInfo_two>div{
         display: flex;
-        width: 300px;
-        height: 300px;
+        width: calc(200px + 5vw);
+        height: calc(200px + 5vw);
         margin: 0 auto;
         flex-direction: column;
         flex-wrap: wrap;
         align-items: center;
         text-align: center;
-        gap: 15px;
-        /*border: 5px solid gray;*/
+        gap: 20px;
         border-radius: 15px;
         justify-content: center;
         padding: 0 15px;
     }
+    .elementInfo_one>div>b,
+    .elementInfo_two>div>b{
+        font-size: 25px;
+    }
+    .elementInfo_one>div>small,
+    .elementInfo_two>div>small{
+        font-size: 20px;
+    }
+
     .elementInfo_one>div>svg,
     .elementInfo_two>div>svg{
-        width: 55px;
-        height: 55px;
+        width: 65px;
+        height: 65px;
     }
 
     /*--------------------*/
@@ -7205,7 +7323,7 @@ input:focus{
         border-radius: 12px;
         display: flex;
         gap: 0 50px;
-        padding: 25px;
+        padding: 0 25px 25px 25px;
         /*box-shadow: 0 0 250px rgba(91, 209, 252, 0.3);*/
     }
     .sideLeft{
@@ -7294,12 +7412,13 @@ input:focus{
         gap: calc(5vw + 15px);
     }
     .lastMove>button{
-        padding: 12.5px 5px;
-        border-radius: 12px;
+        padding: 0 20px;
+        border-radius: 7.5px;
         border: 1px solid transparent;
         /*flex: 1;*/
         transition: all 0.35s ease-in-out;
-        min-width: 125px;
+        width: 105px;
+        height: 35px;
         /*white-space: nowrap;*/
     }
     .lastMove>button:hover{

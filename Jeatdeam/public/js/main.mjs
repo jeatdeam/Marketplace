@@ -2603,7 +2603,7 @@ export async function datosCarrito(){
 
 /*-----------------Interfaz de carrito en todas las paginas---------------------*/
 
-async function carritoDesplegado() {
+export async function carritoDesplegado() {
     const $iconCarrito = document.querySelector('#carrito');
     const $carritoBoxTemplate = document.getElementById('carritoBox').content;
     const fragment = document.createDocumentFragment();
@@ -2625,13 +2625,9 @@ async function carritoDesplegado() {
 
         const $nombreElement=document.querySelectorAll('.nombreElement');
         $nombreElement.forEach(b=>{
-
             b.style.pointerEvents="none";
-
         })
-
     }
-
     function hideCajita() {
         if (!isInside) {
             $cajitaCompras.style.opacity = "0";
@@ -2647,8 +2643,7 @@ async function carritoDesplegado() {
         }
     }
 
-    $iconCarrito.addEventListener('mouseenter', async () => {
-
+   async function mostrarCompras(){
         const nuevosDatos=await datosCarrito()
 
         if(nuevosDatos.length>0){
@@ -2671,11 +2666,11 @@ async function carritoDesplegado() {
 
             nuevosDatos.forEach((product, index) => {
 
-                       if($containerBox) {
+                if($containerBox) {
 
-                           const $section = document.createElement('section');
+                    const $section = document.createElement('section');
 
-                           $section.innerHTML = `
+                    $section.innerHTML = `
                    <section class="productCarrito productCarrito_${index}">
                        <div>
                            <span><b>${product.brand}</b> ${product.name}</span>
@@ -2684,9 +2679,9 @@ async function carritoDesplegado() {
                        <img src="${product.img}" class="product-image">
                    </section>
                `;
-                           $containerBox.appendChild($section);
-                       }
-                   });
+                    $containerBox.appendChild($section);
+                }
+            });
             isInside = true;
             showCajita();
         }else{
@@ -2698,27 +2693,30 @@ async function carritoDesplegado() {
             isInside = true;
             showCajita();
         }
+    }
 
-    });
+    $iconCarrito.addEventListener('touchstart',mostrarCompras);
+    $iconCarrito.addEventListener('mouseenter', mostrarCompras);
 
     // Ocultar la caja si el mouse sale del ícono
+
+
     $iconCarrito.addEventListener('mouseleave', () => {
-
-
         isInside = false;
         setTimeout(hideCajita, 100); // Espera para verificar si el mouse entra en la caja
     });
-
+    $iconCarrito.addEventListener('touchstart',()=>{
+        isInside = false;
+        setTimeout(hideCajita, 100);
+    })
     // Mantener la caja visible si el mouse está dentro de ella
     $cajitaCompras.addEventListener('mouseenter', () => {
         isInside = true;
     });
+    $cajitaCompras.addEventListener('touchend', () => {
+        isInside = true;
+    })
 
-    // Ocultar la caja si el mouse sale de ella
-    $cajitaCompras.addEventListener('mouseleave', () => {
-        isInside = false;
-        setTimeout(hideCajita, 100); // Verifica si el mouse no regresa al ícono
-    });
     document.addEventListener('click',e=>{
         if(e.target.matches(".containerBox~button")){
             window.location.href="/compra/compra/compra/compra";
