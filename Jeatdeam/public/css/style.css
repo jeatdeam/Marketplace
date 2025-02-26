@@ -27,6 +27,61 @@ main{
     /*background: rgb(224,246,255);*/
     /*background: linear-gradient(0deg, rgba(224,246,255,0.8393732492997199) 10%, rgba(139,210,255,0.7511379551820728) 54%, rgba(79,178,244,0.7231267507002801) 100%);*/
 }
+
+.containerCategorias{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 25px 0;
+    gap: 25px;
+}
+.category{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 50px;
+}
+.categoryElement{
+    width: 290px;
+    height: 560px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    gap: 10px;
+    box-shadow: 0 0 5px rgba(0,0,0,0.8);
+    border-radius: 7.5px;
+    font-size: 20px;
+    transition: all 0.25s ease-in-out;
+
+    background: rgb(255,255,255);
+    background: radial-gradient(circle, rgba(255,255,255,0.3617822128851541) 6%, rgba(75,196,255,0.29735644257703087) 49%, rgba(145,218,255,0.6026785714285714) 93%);
+}
+.categoryElement>img{
+    width: 100%;
+    border-radius: 7.5px;
+    aspect-ratio: 3/4;
+    object-fit: cover;
+}
+.categoryElement>div{
+    display: flex;
+    justify-content: space-between;
+    gap: 50px;
+}
+.categoryElement>div>button{
+    border-radius: 7.5px;
+    flex: 1;
+    padding: 5px;
+    outline: none;
+    border: 2px solid transparent;
+    transition: all 0.25s ease-in-out;
+}
+.categoryElement>div>button:hover{
+    border: 2px solid gray;
+}
+
+
+
+
 .marca{
     background-size: cover;
     background-position: center;
@@ -728,7 +783,7 @@ main{
     width: 300px;
     border: 2px solid black;
     border-radius: 12px;
-    background: lightblue;
+    background: rgba(145,218,255,1);
     padding: 15px;
     position: absolute;
     top: 150%;
@@ -741,6 +796,7 @@ main{
     opacity: 0;
     transition: opacity 0.35s ease-in-out;
 }
+
 .sinCompras{
     justify-content: center;
     align-items: center;
@@ -775,6 +831,11 @@ main{
     border-radius: 7.5px;
     padding: 10px 15px;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    background: rgba(255, 255, 255, 0.8);
+}
+.productCarrito>img{
+    border-radius: 7.5px;
+    box-shadow: 0 0 2.5px rgba(0,0,0,0.8);
 }
 .productCarrito>div{
     width: 80%;
@@ -1048,17 +1109,18 @@ main{
     /*align-content: center;*/
     justify-content: center;
     display: grid;
-    gap: 25px;
-    grid-template-columns: repeat(auto-fit,350px);
+    gap: 50px;
+    grid-template-columns: repeat(auto-fit,290px);
     /*grid-auto-rows: 450px;*/
 }
 .elementProduct{
     width: 290px;
     height: 560px;
-    border-radius: 12px;
+    justify-content: space-evenly;
+    border-radius: 7.5px;
     display: flex;
     flex-direction: column;
-    gap: 10px 0;
+    gap: 10px;
     align-items: center;
     padding: 20px;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.8);
@@ -1373,13 +1435,15 @@ main{
     display: flex;
     margin: 0 auto;
     flex-direction: column;
+
+
     /*gap: 25px;*/
 }
 .compraPage>div:nth-of-type(1){
     display: flex;
     justify-content: space-around;
     align-items: center;
-    background: lightblue;
+    background: rgba(145,218,255,1);
     height: 50px;
     gap: 10px;
 }
@@ -1450,6 +1514,7 @@ main{
     justify-content: center;
     transition: all 0.25s linear;
     box-shadow: 0 0 15px rgba(0,0,0,0.2);
+    background: white;
 }
 
 .compraElement>div>i{
@@ -1599,10 +1664,12 @@ input:focus{
     opacity: 1;
     transform: scale(1) translateY(0);
     transition: all 0.35s linear;
-    box-shadow:  0 0 15px transparent;
+    box-shadow:  0 0 5px transparent;
+    background: white;
+    z-index: 1;
 }
 .compraElement:hover{
-    box-shadow: 0 0 15px lightblue;
+    box-shadow: 0 0 5px black;
 }
 @keyframes blinkAnimation {
     0% { opacity: 1; }
@@ -1662,7 +1729,7 @@ input:focus{
     position: absolute;
     top: 7.5px;
     right: 7.5px;
-    z-index: 2;
+    z-index: 5;
     transition: background 0.35s ease-in-out;
 }
 #deleteElementCompra:hover{
@@ -1952,6 +2019,7 @@ input:focus{
     box-shadow:  0 0 5px rgba(0,0,0,0.2);
     padding: 15px 20px;
     border-radius: 12px;
+    background: white;
 }
 .buttonsFinalizar>button{
     /*width: 185px;*/
@@ -2348,7 +2416,7 @@ input:focus{
     .containerElementsRecomended{
         width: 90%;
         display: grid;
-        grid-template-columns: repeat(auto-fit,250px);
+        grid-template-columns: repeat(auto-fit,290px);
         justify-content: center;
         margin: 0 auto;
         gap: 37.5px 75px;
@@ -3095,7 +3163,7 @@ input:focus{
     .containerElementsRecomended{
         width: 90%;
         display: grid;
-        grid-template-columns: repeat(auto-fit,250px);
+        grid-template-columns: repeat(auto-fit,290px);
         justify-content: center;
         margin: 0 auto;
         gap: 37.5px 75px;
@@ -3697,7 +3765,7 @@ input:focus{
     .containerElementsRecomended{
         width: 90%;
         display: grid;
-        grid-template-columns: repeat(auto-fit,250px);
+        grid-template-columns: repeat(auto-fit,290px);
         justify-content: center;
         margin: 0 auto;
         gap: 37.5px 75px;
@@ -4284,7 +4352,7 @@ input:focus{
     .containerElementsRecomended{
         width: 80%;
         display: grid;
-        grid-template-columns: repeat(auto-fit,250px);
+        grid-template-columns: repeat(auto-fit,290px);
         justify-content:center;
         margin: 0 auto;
         gap:37.5px  75px;
@@ -4842,7 +4910,7 @@ input:focus{
     .containerElementsRecomended{
         width: 80%;
         display: grid;
-        grid-template-columns: repeat(auto-fit,250px);
+        grid-template-columns: repeat(auto-fit,290px);
         justify-content: center;
         margin: 0 auto;
         gap: 37.5px 75px;
@@ -5385,7 +5453,7 @@ input:focus{
     .containerElementsRecomended{
         width: 80%;
         display: grid;
-        grid-template-columns: repeat(auto-fit,250px);
+        grid-template-columns: repeat(auto-fit,290px);
         justify-content: center;
         margin: 0 auto;
         gap: 37.5px 75px;
@@ -5918,7 +5986,7 @@ input:focus{
     .containerElementsRecomended{
         width: 80%;
         display: grid;
-        grid-template-columns: repeat(auto-fit,250px);
+        grid-template-columns: repeat(auto-fit,290px);
         justify-content: center;
         margin: 0 auto;
         gap: 37.5px 75px;
@@ -6486,7 +6554,7 @@ input:focus{
     .containerElementsRecomended{
         width: 80%;
         display: grid;
-        grid-template-columns: repeat(auto-fit,250px);
+        grid-template-columns: repeat(auto-fit,290px);
         justify-content: center;
         margin: 0 auto;
         gap: 37.5px 75px;
@@ -7051,7 +7119,7 @@ input:focus{
     .containerElementsRecomended{
         width: 80%;
         display: grid;
-        grid-template-columns: repeat(auto-fit,250px);
+        grid-template-columns: repeat(auto-fit,290px);
         justify-content: center;
         justify-items: center;
         margin: 0 auto;

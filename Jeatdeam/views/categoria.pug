@@ -2,4 +2,15 @@ extends layout
 
 block content
     main.containerCategorias
-        h1 #{title}
+        if categoria
+            h1 #{categoria.toUpperCase()}
+            if productos
+                div(class=`category category_${categoria}`)
+                    each element,indice in productos
+                        div(class=`categoryElement categoryElement_${indice+1}`, data-categoria=element.category, data-brand=element.brand, data-name=element.name)
+                            img(src=element.img[0])
+                            b #{element.subtitle}
+                            small S/.#{element.price}
+                            div
+                                button(class="btn-carrito", data-id=element.id, data-brand=element.brand, data-img=element.img[0], data-price=element.price, data-name=element.name) agregar al carrito
+                                button( data-id=element.id, data-brand=element.brand, data-img=element.img[0], data-price=element.price, data-name=element.name) comprar

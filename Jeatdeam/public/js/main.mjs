@@ -687,7 +687,7 @@ const create_circles_carousel = () => {
 
 let controllerInterval;
 
-function carritoContadorDOM() {
+export function carritoContadorDOM() {
     const $carrito = document.getElementById('carrito').parentNode;
     const $contador_carrito = document.getElementById('contador-carrito');
 
@@ -760,7 +760,7 @@ if(window.location.pathname==="/"){
 /*---LOGICA DE REDIRECCIONAMIENTO CUANDO HACEMOS CLICK A UN ELEMENTO*/
 /*---LOGICA DE REDIRECCIONAMIENTO DE ACUERDO A LA MARCA*/
 
-let isActive=false;
+export let isActive=false;
 
 
 document.addEventListener('click', async (e) => {
@@ -781,9 +781,7 @@ document.addEventListener('click', async (e) => {
             const dataBrand = elementProduct.dataset.brand;
             const categoria=elementProduct.dataset.categoria;
             const dataName = elementProduct.dataset.name;
-
             console.log(dataBrand,categoria,dataName);
-
             window.location.href = `/${dataBrand}/${categoria}/${dataName}`;
         }
     }

@@ -560,11 +560,16 @@ const categoriaProduct=(req,res)=>{
 
     const {brand, categoria} = req.params;
 
-    if(brand && categoria) {
-        res.render('categoria',{title: 'cuacksito'})
-    }else{
+    console.log('brand: ',brand);
+    console.log('categoria: ',categoria)
 
-    }
+    const productos=baseDatos.filter(producto=>producto.brand===brand&&producto.category===categoria)
+
+    console.log('productos filtrados: ',productos);
+
+        if(productos){
+            res.render('categoria',{productos, categoria})
+        }
 
 }
 
