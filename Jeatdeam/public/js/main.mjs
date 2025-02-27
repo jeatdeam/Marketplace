@@ -3,6 +3,7 @@
 // import stripe from './stripe.mjs';
 // import Stripe from "stripe";
 import {apiladoInfoProductSmall} from './moveElements.mjs'
+import {masVendidosScroll} from "./eventosEscritorio.mjs";
 import keysFromStripe from './keysFromStripe.mjs';
 import {masVendidosElement} from './masVendidos.mjs';
 import {redirectMarca} from './redireccionamientos.mjs'
@@ -13,6 +14,7 @@ import {ocultarMenuSmall, moveBottomInfo} from "./moveElements.mjs";
 import {marcaEvent} from "./cascadaText.js"
 import {eventsPhone} from "./eventosPhone.js"
 
+masVendidosScroll();
 eventsPhone();
 marcaEvent();
 apiladoInfoProductSmall();

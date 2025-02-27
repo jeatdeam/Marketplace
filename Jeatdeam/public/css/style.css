@@ -11,8 +11,20 @@
     box-sizing: border-box;
 }
 body{
+
+    /*overflow-x: hidden;*/
+    /*overflow: hidden;*/
     /*background: rgb(235,255,255);*/
     /*background: linear-gradient(0deg, rgba(235,255,255,1) 0%, rgba(121,201,255,0.5368522408963585) 100%);*/
+}
+body *{
+    /*border: 5px solid orange;*/
+}
+header{
+}
+main{
+}
+footer{
 }
 
 button{
@@ -26,6 +38,10 @@ main{
 
     /*background: rgb(224,246,255);*/
     /*background: linear-gradient(0deg, rgba(224,246,255,0.8393732492997199) 10%, rgba(139,210,255,0.7511379551820728) 54%, rgba(79,178,244,0.7231267507002801) 100%);*/
+}
+.navegador>div:nth-of-type(2){
+    /*width: 100%;*/
+    width: fit-content;
 }
 
 .containerCategorias{
@@ -2118,6 +2134,62 @@ input:focus{
 /*    width: 55px;*/
 /*    height: 55px;*/
 /*}*/
+.containerMasVendidos_one,
+.containerMasVendidos_two{
+
+    animation: movimientoHorizontal 20s linear infinite;
+}
+
+
+
+.movimientoMasVendidos:hover .containerMasVendidos_one,.movimientoMasVendidos:hover .containerMasVendidos_two{
+    /*animation-play-state: paused;*/
+}
+.movimientoMasVendidos:hover .masVendidoElement:not(:hover){
+
+}
+
+.masVendidoElement,.masVendidoElement_two{
+
+}
+.masVendidoElement:hover,.masVendidoElement_two:hover{
+    transform: scale(1.02)
+}
+
+
+
+
+.movimientoMasVendidos_2:hover .containerMasVendidos_2_one,.movimientoMasVendidos_2:hover .containerMasVendidos_2_two{
+}
+
+.movimientoMasVendidos_2:hover .masVendidoElement_two:not(:hover){
+    filter: grayscale(100%);
+    transition: filter 0.5s ease-in-out;
+}
+
+
+
+.containerMasVendidos_2_one,.containerMasVendidos_2_two{
+    display: flex;
+    gap: 0 45px;
+    transition: all 1s linear;
+    animation: movimientoHorizontal 20s linear infinite;
+}
+
+.masVendidoElement_two>img{
+    /*width: 100%;*/
+}
+@keyframes movimientoHorizontal_2{
+    0%{
+        transform: translateX(0);
+    }
+    100%{
+        transform: translateX(-100%);
+    }
+
+}
+
+
 /*------------masVendidosElement------------------*/
 .masVendidoElement>img,.masVendidoElement_two>img{
     aspect-ratio: 2/3;
@@ -2762,13 +2834,13 @@ input:focus{
         justify-content: space-around;
         gap: 0 45px;
         transition: all 1s linear;
-        animation: movimientoHorizontal 25s linear infinite;
+        animation: movimientoHorizontal 20s linear infinite;
     }
 
 
 
     .movimientoMasVendidos:hover .containerMasVendidos_one,.movimientoMasVendidos:hover .containerMasVendidos_two{
-        animation-play-state: paused;
+        /*animation-play-state: paused;*/
     }
     .movimientoMasVendidos:hover .masVendidoElement:not(:hover){
         filter: grayscale(100%);
@@ -2791,7 +2863,7 @@ input:focus{
     }
     .masVendidoElement:hover,.masVendidoElement_two:hover{
         transition: all 0.3s ease-in-out;
-        transform: scale(1.08)
+        transform: scale(1.02)
     }
 
 
@@ -2837,7 +2909,6 @@ input:focus{
         transition: all 0.5s ease-in-out;
     }
     .movimientoMasVendidos_2:hover .containerMasVendidos_2_one,.movimientoMasVendidos_2:hover .containerMasVendidos_2_two{
-        animation-play-state: paused;
     }
 
     .movimientoMasVendidos_2:hover .masVendidoElement_two:not(:hover){
@@ -2851,8 +2922,6 @@ input:focus{
         display: flex;
         gap: 0 45px;
         transition: all 1s linear;
-        animation: movimientoHorizontal_2 25s linear infinite;
-        animation-play-state: running;
     }
 
     .masVendidoElement_two>img{
@@ -3521,13 +3590,12 @@ input:focus{
         justify-content: space-around;
         gap: 0 45px;
         transition: all 1s linear;
-        animation: movimientoHorizontal 25s linear infinite;
     }
 
 
 
     .movimientoMasVendidos:hover .containerMasVendidos_one,.movimientoMasVendidos:hover .containerMasVendidos_two{
-        animation-play-state: paused;
+        /*animation-play-state: paused;*/
     }
     .movimientoMasVendidos:hover .masVendidoElement:not(:hover){
         filter: grayscale(100%);
@@ -3549,7 +3617,6 @@ input:focus{
     }
     .masVendidoElement:hover,.masVendidoElement_two:hover{
         transition: all 0.3s ease-in-out;
-        transform: scale(1.08)
     }
 
 
@@ -3594,7 +3661,6 @@ input:focus{
         transition: all 0.5s ease-in-out;
     }
     .movimientoMasVendidos_2:hover .containerMasVendidos_2_one,.movimientoMasVendidos_2:hover .containerMasVendidos_2_two{
-        animation-play-state: paused;
     }
 
     .movimientoMasVendidos_2:hover .masVendidoElement_two:not(:hover){
@@ -3608,8 +3674,6 @@ input:focus{
         display: flex;
         gap: 0 45px;
         transition: all 1s linear;
-        animation: movimientoHorizontal_2 25s linear infinite;
-        animation-play-state: running;
     }
 
     .masVendidoElement_two>img{
@@ -4178,13 +4242,13 @@ input:focus{
         justify-content: space-around;
         gap: 0 45px;
         transition: all 1s linear;
-        animation: movimientoHorizontal 25s linear infinite;
+        animation: movimientoHorizontal 20s linear infinite;
     }
 
 
 
     .movimientoMasVendidos:hover .containerMasVendidos_one,.movimientoMasVendidos:hover .containerMasVendidos_two{
-        animation-play-state: paused;
+        /*animation-play-state: paused;*/
     }
     .movimientoMasVendidos:hover .masVendidoElement:not(:hover){
         filter: grayscale(100%);
@@ -4206,7 +4270,7 @@ input:focus{
     }
     .masVendidoElement:hover,.masVendidoElement_two:hover{
         transition: all 0.3s ease-in-out;
-        transform: scale(1.08)
+        transform: scale(1.02)
     }
 
 
@@ -4251,7 +4315,6 @@ input:focus{
         transition: all 0.5s ease-in-out;
     }
     .movimientoMasVendidos_2:hover .containerMasVendidos_2_one,.movimientoMasVendidos_2:hover .containerMasVendidos_2_two{
-        animation-play-state: paused;
     }
 
     .movimientoMasVendidos_2:hover .masVendidoElement_two:not(:hover){
@@ -4265,8 +4328,6 @@ input:focus{
         display: flex;
         gap: 0 45px;
         transition: all 1s linear;
-        animation: movimientoHorizontal_2 25s linear infinite;
-        animation-play-state: running;
     }
 
     .masVendidoElement_two>img{
@@ -4771,11 +4832,11 @@ input:focus{
         justify-content: space-around;
         gap: 0 45px;
         transition: all 1s linear;
-        animation: movimientoHorizontal 25s linear infinite;
+        animation: movimientoHorizontal 20s linear infinite;
     }
 
     .movimientoMasVendidos:hover .containerMasVendidos_one,.movimientoMasVendidos:hover .containerMasVendidos_two{
-        animation-play-state: paused;
+        /*animation-play-state: paused;*/
     }
     .movimientoMasVendidos:hover .masVendidoElement:not(:hover){
         filter: grayscale(100%);
@@ -4797,7 +4858,7 @@ input:focus{
     }
     .masVendidoElement:hover,.masVendidoElement_two:hover{
         transition: all 0.3s ease-in-out;
-        transform: scale(1.08)
+        transform: scale(1.02)
     }
 
 
@@ -4840,7 +4901,6 @@ input:focus{
         transition: all 0.5s ease-in-out;
     }
     .movimientoMasVendidos_2:hover .containerMasVendidos_2_one,.movimientoMasVendidos_2:hover .containerMasVendidos_2_two{
-        animation-play-state: paused;
     }
 
     .movimientoMasVendidos_2:hover .masVendidoElement_two:not(:hover){
@@ -4854,8 +4914,6 @@ input:focus{
         display: flex;
         gap: 0 45px;
         transition: all 1s linear;
-        animation: movimientoHorizontal_2 25s linear infinite;
-        animation-play-state: running;
     }
 
     .masVendidoElement_two>img{
@@ -5351,11 +5409,11 @@ input:focus{
         justify-content: space-around;
         gap: 0 45px;
         transition: all 1s linear;
-        animation: movimientoHorizontal 25s linear infinite;
+        animation: movimientoHorizontal 20s linear infinite;
     }
 
     .movimientoMasVendidos:hover .containerMasVendidos_one,.movimientoMasVendidos:hover .containerMasVendidos_two{
-        animation-play-state: paused;
+        /*animation-play-state: paused;*/
     }
     .movimientoMasVendidos:hover .masVendidoElement:not(:hover){
         filter: grayscale(100%);
@@ -5375,7 +5433,7 @@ input:focus{
     }
     .masVendidoElement:hover,.masVendidoElement_two:hover{
         transition: all 0.3s ease-in-out;
-        transform: scale(1.08)
+        transform: scale(1.02)
     }
 
 
@@ -5418,7 +5476,6 @@ input:focus{
         transition: all 0.5s ease-in-out;
     }
     .movimientoMasVendidos_2:hover .containerMasVendidos_2_one,.movimientoMasVendidos_2:hover .containerMasVendidos_2_two{
-        animation-play-state: paused;
     }
 
     .movimientoMasVendidos_2:hover .masVendidoElement_two:not(:hover){
@@ -5432,8 +5489,6 @@ input:focus{
         display: flex;
         gap: 0 45px;
         transition: all 1s linear;
-        animation: movimientoHorizontal_2 25s linear infinite;
-        animation-play-state: running;
     }
 
     .masVendidoElement_two>img{
@@ -5893,11 +5948,11 @@ input:focus{
         justify-content: space-around;
         gap: 0 45px;
         transition: all 1s linear;
-        animation: movimientoHorizontal 25s linear infinite;
+        animation: movimientoHorizontal 20s linear infinite;
     }
 
     .movimientoMasVendidos:hover .containerMasVendidos_one,.movimientoMasVendidos:hover .containerMasVendidos_two{
-        animation-play-state: paused;
+        /*animation-play-state: paused;*/
     }
     .movimientoMasVendidos:hover .masVendidoElement:not(:hover){
         filter: grayscale(100%);
@@ -5919,7 +5974,7 @@ input:focus{
     }
     .masVendidoElement:hover,.masVendidoElement_two:hover{
         transition: all 0.3s ease-in-out;
-        transform: scale(1.08)
+        transform: scale(1.02)
     }
 
 
@@ -5977,7 +6032,6 @@ input:focus{
         gap: 0 45px;
         transition: all 1s linear;
         animation: movimientoHorizontal_2 25s linear infinite;
-        animation-play-state: running;
     }
 
     .masVendidoElement_two>img{
@@ -6490,11 +6544,11 @@ input:focus{
         justify-content: space-around;
         gap: 0 45px;
         transition: all 1s linear;
-        animation: movimientoHorizontal 25s linear infinite;
+        animation: movimientoHorizontal 20s linear infinite;
     }
 
     .movimientoMasVendidos:hover .containerMasVendidos_one,.movimientoMasVendidos:hover .containerMasVendidos_two{
-        animation-play-state: paused;
+        /*animation-play-state: paused;*/
     }
     .movimientoMasVendidos:hover .masVendidoElement:not(:hover){
         filter: grayscale(100%);
@@ -6516,7 +6570,7 @@ input:focus{
     }
     .masVendidoElement:hover,.masVendidoElement_two:hover{
         transition: all 0.3s ease-in-out;
-        transform: scale(1.08)
+        transform: scale(1.02)
     }
 
 
@@ -6559,7 +6613,6 @@ input:focus{
         transition: all 0.5s ease-in-out;
     }
     .movimientoMasVendidos_2:hover .containerMasVendidos_2_one,.movimientoMasVendidos_2:hover .containerMasVendidos_2_two{
-        animation-play-state: paused;
     }
 
     .movimientoMasVendidos_2:hover .masVendidoElement_two:not(:hover){
@@ -6574,7 +6627,6 @@ input:focus{
         gap: 0 45px;
         transition: all 1s linear;
         animation: movimientoHorizontal_2 25s linear infinite;
-        animation-play-state: running;
     }
 
     .masVendidoElement_two>img{
@@ -7069,11 +7121,11 @@ input:focus{
         justify-content: space-around;
         gap: 0 45px;
         transition: all 1s linear;
-        animation: movimientoHorizontal 25s linear infinite;
+        animation: movimientoHorizontal 20s linear infinite;
     }
 
     .movimientoMasVendidos:hover .containerMasVendidos_one,.movimientoMasVendidos:hover .containerMasVendidos_two{
-        animation-play-state: paused;
+        /*animation-play-state: paused;*/
     }
     .movimientoMasVendidos:hover .masVendidoElement:not(:hover){
         filter: grayscale(100%);
@@ -7095,7 +7147,7 @@ input:focus{
     }
     .masVendidoElement:hover,.masVendidoElement_two:hover{
         transition: all 0.3s ease-in-out;
-        transform: scale(1.08)
+        transform: scale(1.02)
     }
 
 
@@ -7153,7 +7205,6 @@ input:focus{
         gap: 0 45px;
         transition: all 1s linear;
         animation: movimientoHorizontal_2 25s linear infinite;
-        animation-play-state: running;
     }
 
     .masVendidoElement_two>img{
@@ -7671,11 +7722,13 @@ input:focus{
         justify-content: space-around;
         gap: 0 45px;
         transition: all 1s linear;
-        animation: movimientoHorizontal 25s linear infinite;
+
+
+        animation: movimientoHorizontal 20s linear infinite;
     }
 
     .movimientoMasVendidos:hover .containerMasVendidos_one,.movimientoMasVendidos:hover .containerMasVendidos_two{
-        animation-play-state: paused;
+        /*animation-play-state: paused;*/
     }
     .movimientoMasVendidos:hover .masVendidoElement:not(:hover){
         filter: grayscale(100%);
@@ -7699,7 +7752,7 @@ input:focus{
     }
     .masVendidoElement:hover,.masVendidoElement_two:hover{
         transition: all 0.3s ease-in-out;
-        transform: scale(1.08)
+        transform: scale(1.02)
     }
 
 
@@ -7742,7 +7795,6 @@ input:focus{
         transition: all 0.5s ease-in-out;
     }
     .movimientoMasVendidos_2:hover .containerMasVendidos_2_one,.movimientoMasVendidos_2:hover .containerMasVendidos_2_two{
-        animation-play-state: paused;
     }
 
     .movimientoMasVendidos_2:hover .masVendidoElement_two:not(:hover){
@@ -7757,7 +7809,6 @@ input:focus{
         gap: 0 45px;
         transition: all 1s linear;
         animation: movimientoHorizontal_2 25s linear infinite;
-        animation-play-state: running;
     }
 
     .masVendidoElement_two>img{
