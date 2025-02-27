@@ -373,7 +373,12 @@ main{
 /*---------------------------------------------header-----------------------------------------*/
 #header{
     /*overflow: hidden;*/
+    user-select: none;
 }
+.carouselImages{
+    user-select: none;
+}
+
 .cPartOne>svg{
     background: #000;
     color:#000;
@@ -4404,11 +4409,11 @@ input:focus{
     }
     .elementInfo_one>div>b,
     .elementInfo_two>div>b{
-        font-size: 22.5px;
+        font-size: 20px;
     }
     .elementInfo_one>div>small,
     .elementInfo_two>div>small{
-        font-size: 17px;
+        font-size: 15px;
     }
     .elementInfo_one>div>svg,
     .elementInfo_two>div>svg{
@@ -4987,11 +4992,11 @@ input:focus{
     }
     .elementInfo_one>div>b,
     .elementInfo_two>div>b{
-        font-size: 22.5px;
+        font-size: 20px;
     }
     .elementInfo_one>div>small,
     .elementInfo_two>div>small{
-        font-size: 17px;
+        font-size: 15px;
     }
     .elementInfo_one>div>svg,
     .elementInfo_two>div>svg{
@@ -5551,11 +5556,11 @@ input:focus{
     }
     .elementInfo_one>div>b,
     .elementInfo_two>div>b{
-        font-size: 22.5px;
+        font-size: 20px;
     }
     .elementInfo_one>div>small,
     .elementInfo_two>div>small{
-        font-size: 18px;
+        font-size: 15px;
     }
     .elementInfo_one>div>svg,
     .elementInfo_two>div>svg{
@@ -6099,7 +6104,7 @@ input:focus{
         gap: 10px;
         border-radius: 15px;
         justify-content: center;
-        padding: 0 15px;
+        padding: 0 10px;
     }
     .elementInfo_one>div>b,
     .elementInfo_two>div>b{
@@ -6107,7 +6112,7 @@ input:focus{
     }
     .elementInfo_one>div>small,
     .elementInfo_two>div>small{
-        font-size: 18px;
+        font-size: 15px;
     }
     .elementInfo_one>div>svg,
     .elementInfo_two>div>svg{
@@ -6689,11 +6694,11 @@ input:focus{
     }
     .elementInfo_one>div>b,
     .elementInfo_two>div>b{
-        font-size: 25px;
+        font-size: 22.5px;
     }
     .elementInfo_one>div>small,
     .elementInfo_two>div>small{
-        font-size: 20px;
+        font-size: 15px;
     }
     .elementInfo_one>div>svg,
     .elementInfo_two>div>svg{
@@ -7270,11 +7275,11 @@ input:focus{
     }
     .elementInfo_one>div>b,
     .elementInfo_two>div>b{
-        font-size: 25px;
+        font-size: 22.5px;
     }
     .elementInfo_one>div>small,
     .elementInfo_two>div>small{
-        font-size: 20px;
+        font-size: 15px;
     }
 
     .elementInfo_one>div>svg,

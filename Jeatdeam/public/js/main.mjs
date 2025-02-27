@@ -2646,6 +2646,7 @@ export async function carritoDesplegado() {
    async function mostrarCompras(){
         const nuevosDatos=await datosCarrito()
 
+
         if(nuevosDatos.length>0){
             console.log('aqui estan los nuevos datos',nuevosDatos);
 
@@ -2695,7 +2696,7 @@ export async function carritoDesplegado() {
         }
     }
 
-    $iconCarrito.addEventListener('touchstart',mostrarCompras);
+    // $iconCarrito.addEventListener('touchstart',mostrarCompras);
     $iconCarrito.addEventListener('mouseenter', mostrarCompras);
 
     // Ocultar la caja si el mouse sale del ícono
@@ -2705,17 +2706,17 @@ export async function carritoDesplegado() {
         isInside = false;
         setTimeout(hideCajita, 100); // Espera para verificar si el mouse entra en la caja
     });
-    $iconCarrito.addEventListener('touchstart',()=>{
-        isInside = false;
-        setTimeout(hideCajita, 100);
-    })
+    // $iconCarrito.addEventListener('touchstart',()=>{
+    //     isInside = false;
+    //     setTimeout(hideCajita, 100);
+    // })
     // Mantener la caja visible si el mouse está dentro de ella
     $cajitaCompras.addEventListener('mouseenter', () => {
         isInside = true;
     });
-    $cajitaCompras.addEventListener('touchend', () => {
-        isInside = true;
-    })
+    // $cajitaCompras.addEventListener('touchend', () => {
+    //     isInside = true;
+    // })
 
     document.addEventListener('click',e=>{
         if(e.target.matches(".containerBox~button")){
