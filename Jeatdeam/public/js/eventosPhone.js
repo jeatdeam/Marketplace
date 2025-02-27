@@ -24,6 +24,7 @@ export function mostrarCarritoCompras() {
   const bagShopping = document.querySelector("#iconsNav>li:nth-of-type(2)");
 
   let activeCajita = false;
+  let activeSecondCajita = false;
 
   async function manejarTouchStart(e) {
     e.stopPropagation();
@@ -63,25 +64,6 @@ export function mostrarCarritoCompras() {
         }
       });
 
-      // const productCarritoAll = document.querySelectorAll(".productCarrito");
-      //
-      // if (productCarritoAll.length > 0) {
-      //   productCarritoAll.forEach((product) => {
-      //     product.addEventListener("touchstart", (e) => {
-      //       e.stopPropagation();
-      //       console.log("ingresamos en el evento touchstart product");
-      //       product.style.border = "5px solid black";
-      //       product.style.transition = "all 0.25s ease-in-out";
-      //       // activeCajita = true;
-      //     });
-      //     product.addEventListener("touchend", (e) => {
-      //       e.stopPropagation();
-      //       console.log("salimos del evento touchend product");
-      //       product.style.border = "";
-      //     });
-      //   });
-      // }
-
       cajitaCompras.style.opacity = "1";
       cajitaCompras.style.pointerEvents = "auto";
       console.log("antes de invertir el valor: ", activeCajita);
@@ -91,19 +73,25 @@ export function mostrarCarritoCompras() {
       cajitaCompras.addEventListener("touchstart", (e) => {
         e.stopPropagation();
         activeCajita = false;
-        console.log("entramos en el touchstart->", activeCajita);
+        activeSecondCajita = true;
+        console.log("entramos en el touchstart cajitaCompras->", activeCajita);
         cajitaCompras.style.opacity = "1";
         cajitaCompras.style.pointerEvents = "auto";
       });
       cajitaCompras.addEventListener("touchend", (e) => {
         e.stopPropagation();
-
+        activeSecondCajita = false;
         setTimeout(() => {
-          if (!activeCajita) {
-            cajitaCompras.style.opacity = "0";
-            cajitaCompras.style.pointerEvents = "none";
-            activeCajita = true;
-            console.log("entramos en el touchend->", activeCajita);
+          if (!activeSecondCajita) {
+            if (!activeCajita) {
+              cajitaCompras.style.opacity = "0";
+              cajitaCompras.style.pointerEvents = "none";
+              activeCajita = true;
+              console.log(
+                "entramos en el touchend cajitaCompras->",
+                activeCajita,
+              );
+            }
           }
         }, 500);
       });
@@ -114,6 +102,7 @@ export function mostrarCarritoCompras() {
       activeCajita = true;
     }
   }
+
   async function manejarTouchEnd(e) {
     e.stopPropagation();
     const cajitaCompras = document.querySelector(".cajitaCompras");
@@ -130,121 +119,90 @@ export function mostrarCarritoCompras() {
   bagShopping.addEventListener("touchstart", manejarTouchStart);
 
   bagShopping.addEventListener("touchend", manejarTouchEnd);
-
-  // bagShopping.addEventListener("touchend", manejarTouchEnd);
 }
 
-//  export async function carritoDesplegadoPhone() {
-//   const $iconCarrito = document.querySelector('#carrito');
-//   const $carritoBoxTemplate = document.getElementById('carritoBox').content;
-//   const fragment = document.createDocumentFragment();
-//   const clone = document.importNode($carritoBoxTemplate, true);
+// export function mostrarCarritoCompras() {
+//   const bagShopping = document.querySelector("#iconsNav>li:nth-of-type(2)");
+//   const cajitaCompras = document.querySelector(".cajitaCompras");
 //
-//   // Añade el clon al fragment y luego al contenedor
-//   fragment.appendChild(clone);
-//   $iconCarrito.parentElement.appendChild(fragment);
+//   let isCartOpen = false;
+//   let isTouchingCart = false;
 //
-//
-//   const $cajitaCompras = document.querySelector('.cajitaCompras');
-//   $cajitaCompras.style.pointerEvents = 'none';
-//
-//   let isInside = false;
-//
-//   function showCajita() {
-//     $cajitaCompras.style.opacity = "1";
-//     $cajitaCompras.style.pointerEvents="auto";
-//
-//     const $nombreElement=document.querySelectorAll('.nombreElement');
-//     $nombreElement.forEach(b=>{
-//
-//       b.style.pointerEvents="none";
-//
-//     })
-//
+//   function toggleCartDisplay(show) {
+//     cajitaCompras.style.opacity = show ? "1" : "0";
+//     cajitaCompras.style.pointerEvents = show ? "auto" : "none";
 //   }
 //
-//   function hideCajita() {
-//     if (!isInside) {
-//       $cajitaCompras.style.opacity = "0";
-//       $cajitaCompras.style.pointerEvents="none";
+//   async function manejarTouchStart(e) {
+//     e.stopPropagation();
+//     const datosProducts = await datosCarrito();
 //
-//       const $nombreElement=document.querySelectorAll('.nombreElement');
-//       $nombreElement.forEach(b=>{
-//
-//         b.style.pointerEvents="auto";
-//
-//       })
-//
+//     if (datosProducts.length > 0) {
+//       renderCarrito(datosProducts);
+//       isCartOpen = true;
+//     } else {
+//       cajitaCompras.innerHTML = "Carrito vacío";
+//       cajitaCompras.classList.add("sinCompras");
+//       isCartOpen = true;
 //     }
+//
+//     toggleCartDisplay(true);
 //   }
 //
-//   $iconCarrito.addEventListener('touchstart', async () => {
+//   function manejarTouchEnd(e) {
+//     e.stopPropagation();
+//     setTimeout(() => {
+//       if (!isTouchingCart) {
+//         isCartOpen = false;
+//         toggleCartDisplay(false);
+//       }
+//     }, 500);
+//   }
 //
-//     const nuevosDatos=await datosCarrito()
+//   function renderCarrito(productos) {
+//     cajitaCompras.innerHTML = `
+//       <div class="containerBox"></div>
+//       <div style="font-weight: bold">
+//         <span></span>
+//         <span></span>
+//       </div>
+//       <button style="padding: 7.5px; border-radius: 7.5px;">Ir al carrito</button>
+//     `;
 //
-//     if(nuevosDatos.length>0){
-//       console.log('aqui estan los nuevos datos',nuevosDatos);
+//     const containerBox = cajitaCompras.querySelector(".containerBox");
 //
-//       const $cajitaCompras=document.querySelector('.cajitaCompras');
-//       $cajitaCompras.classList.remove('sinCompras');
-//       $cajitaCompras.style.pointerEvents="auto";
-//       $cajitaCompras.innerHTML=`
-//                             <div class="containerBox">
-//                             </div>
-//                             <div style="font-weight: bold">
-//                                 <span>Total: </span>
-//                                 <span >S/.11234<span>
-//                             </div>
-//                             <button style="padding: 7.5px; border-radius: 7.5px;"> ir al carrito</button>
-//                        `
-//       const $containerBox=document.querySelector('.containerBox');
+//     productos.forEach((product, index) => {
+//       const section = document.createElement("section");
+//       section.classList.add("productCarrito", `productCarrito_${index + 1}`);
+//       section.innerHTML = `
+//         <div>
+//           <span><b>${product.brand}</b> ${product.name}</span>
+//           <span>S/.${product.price}</span>
+//         </div>
+//         <img src="${product.img}" class="product-image">
+//       `;
+//       containerBox.appendChild(section);
+//     });
 //
+//     cajitaCompras.addEventListener("touchstart", (e) => {
+//       e.stopPropagation();
+//       isCartOpen = false;
+//       isTouchingCart = true;
+//       toggleCartDisplay(true);
+//     });
 //
-//       nuevosDatos.forEach((product, index) => {
-//
-//         if($containerBox) {
-//
-//           const $section = document.createElement('section');
-//
-//           $section.innerHTML = `
-//                    <section class="productCarrito productCarrito_${index}">
-//                        <div>
-//                            <span><b>${product.brand}</b> ${product.name}</span>
-//                            <span>S/.${product.price}</span>
-//                        </div>
-//                        <img src="${product.img}" class="product-image">
-//                    </section>
-//                `;
-//           $containerBox.appendChild($section);
+//     cajitaCompras.addEventListener("touchend", (e) => {
+//       e.stopPropagation();
+//       isTouchingCart = false;
+//       setTimeout(() => {
+//         if (!isTouchingCart && !isCartOpen) {
+//           toggleCartDisplay(false);
+//           isCartOpen = true;
 //         }
-//       });
-//       isInside = true;
-//       showCajita();
-//     }else{
-//       const $cajitaCompras=document.querySelector('.cajitaCompras');
-//       $cajitaCompras.innerHTML="0"
-//       $cajitaCompras.classList.add('sinCompras');
+//       }, 500);
+//     });
+//   }
 //
-//
-//       isInside = true;
-//       showCajita();
-//     }
-//
-//   });
-//
-//   // Mantener la caja visible si el mouse está dentro de ella
-//   $cajitaCompras.addEventListener('touchstart', () => {
-//     isInside = true;
-//   });
-//
-//   // Ocultar la caja si el mouse sale de ella
-//   $cajitaCompras.addEventListener('touchend', () => {
-//     isInside = false;
-//     setTimeout(hideCajita, 100); // Verifica si el mouse no regresa al ícono
-//   });
-//   document.addEventListener('click',e=>{
-//     if(e.target.matches(".containerBox~button")){
-//       window.location.href="/compra/compra/compra/compra";
-//     }
-//   })
+//   bagShopping.addEventListener("touchstart", manejarTouchStart);
+//   bagShopping.addEventListener("touchend", manejarTouchEnd);
 // }
