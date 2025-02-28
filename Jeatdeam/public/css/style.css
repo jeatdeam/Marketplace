@@ -39,6 +39,13 @@ main{
     /*background: rgb(224,246,255);*/
     /*background: linear-gradient(0deg, rgba(224,246,255,0.8393732492997199) 10%, rgba(139,210,255,0.7511379551820728) 54%, rgba(79,178,244,0.7231267507002801) 100%);*/
 }
+
+
+.catalogoElements{
+
+}
+
+
 .navegador>div:nth-of-type(2){
     /*width: 100%;*/
     width: fit-content;
@@ -51,6 +58,9 @@ main{
     padding: 25px 0;
     gap: 25px;
 }
+.containerCategorias>h1{
+    font-size: 27.5px;
+}
 .category{
     display: flex;
     flex-wrap: wrap;
@@ -58,16 +68,16 @@ main{
     justify-content: space-evenly;
 }
 .categoryElement{
-    width: 290px;
-    height: 560px;
-    padding: 20px;
+    width: 275px;
+    height: 450px;
+    padding: 0 20px;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
-    gap: 10px;
+    /*gap: 10px;*/
     box-shadow: 0 0 5px rgba(0,0,0,0.8);
     border-radius: 7.5px;
-    font-size: 20px;
+    font-size: 15px;
     transition: all 0.25s ease-in-out;
 
     background: rgb(255,255,255);
@@ -76,7 +86,7 @@ main{
 .categoryElement>img{
     width: 100%;
     border-radius: 7.5px;
-    aspect-ratio: 3/4;
+    aspect-ratio: 1;
     object-fit: cover;
 }
 .categoryElement>div{
@@ -84,10 +94,19 @@ main{
     justify-content: space-between;
     gap: 50px;
 }
+.categoryElement>small{
+    width: 90%;
+    margin: 0 auto;
+    font-weight: bold;
+    font-size: 15px;
+    text-align: end;
+}
 .categoryElement>div>button{
+    font-size: 12.5px;
     border-radius: 7.5px;
     flex: 1;
-    padding: 5px;
+    padding: 0 5px;
+    height: 35px;
     outline: none;
     border: 2px solid transparent;
     transition: all 0.25s ease-in-out;
@@ -1142,18 +1161,16 @@ main{
     /*grid-auto-rows: 450px;*/
 }
 .elementProduct{
-    width: 290px;
-    height: 560px;
+    width: 275px;
+    height: 450px;
     justify-content: space-evenly;
     border-radius: 7.5px;
     display: flex;
     flex-direction: column;
-    gap: 10px;
     align-items: center;
-    padding: 20px;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.8);
     transition: all 0.25s ease-in-out;
-
+    padding: 0 20px;
     background: rgb(255,255,255);
     background: radial-gradient(circle, rgba(255,255,255,0.3617822128851541) 6%, rgba(75,196,255,0.29735644257703087) 49%, rgba(145,218,255,0.6026785714285714) 93%);
 }
@@ -1166,8 +1183,15 @@ main{
     /*height: 250px;*/
     width: 100%;
     border-radius: 7.5px;
-    aspect-ratio: 2/3;
+    aspect-ratio: 1;
     object-fit: cover;
+}
+.elementProduct>small{
+    width: 80%;
+    margin: 0 auto;
+    text-align: end;
+    font-weight: bold;
+    font-size: 15px;
 }
 .elementProduct>div{
     display: flex;
@@ -1176,10 +1200,11 @@ main{
     gap: 0 35px;
 }
 .elementProduct>div>button{
-    padding: 2.5px 15px;
+    padding: 0 15px;
     border-radius: 7.5px;
     border: 1px solid transparent;
     flex: 1;
+    height: 35px;
 }
 .elementProduct>div>button:hover{
     border-color: gray;
@@ -1307,14 +1332,14 @@ main{
 }
 .containerElementsRecomended>div{
     display: flex;
-    width: 290px;
-    height: 560px;
+    width: 275px;
+    height: 450px;
     flex-direction: column;
     align-items: center;
-    gap: 10px 0;
+    justify-content: space-evenly;
     border: 1px solid rgba(0,0,0,0.4);
     border-radius: 12px;
-    padding:20px;
+    padding:0 20px;
     box-shadow: 0 0 15px rgba(0,0,0,0.2);
     transition: box-shadow 0.25s ease-in-out;
 
@@ -1328,9 +1353,18 @@ main{
 }
 .containerElementsRecomended>div>img{
    width: 100%;
-    aspect-ratio: 2/3;
     object-fit: cover;
+    aspect-ratio: 1;
     border-radius: 7.5px ;
+}
+.containerElementsRecomended>div>b:nth-of-type(2){
+    width: 80%;
+    margin: 0 auto;
+    text-align: end;
+}
+.productsRecomended{
+
+
 }
 .productRecomendent>div{
     width: 100%;
@@ -1339,10 +1373,13 @@ main{
     border-radius: 7.5px;
     gap: 0 35px;
 }
-
+.productsRecomended>img{
+}
 
 .productRecomendent>div:nth-of-type(1)>button{
-    padding: 2.5px 15px;
+    padding: 0 15px;
+    height: 35px;
+    font-size: 12.5px;
     border-radius: 7.5px;
     border: 1.5px solid transparent;
     flex: 1;
@@ -2175,6 +2212,10 @@ input:focus{
     transition: all 1s linear;
     animation: movimientoHorizontal 20s linear infinite;
 }
+.containerMasVendidos button,.containerMasVendidos_two button{
+    font-size: 12.5px;
+    height: 35px;
+}
 
 .masVendidoElement_two>img{
     /*width: 100%;*/
@@ -2192,7 +2233,7 @@ input:focus{
 
 /*------------masVendidosElement------------------*/
 .masVendidoElement>img,.masVendidoElement_two>img{
-    aspect-ratio: 2/3;
+    aspect-ratio: 1;
     /*border: 1px solid black;*/
 }
 .masVendidoElement,.masVendidoElement_two{
@@ -2202,6 +2243,13 @@ input:focus{
     /*background: rgb(224,246,255);*/
     /*background: linear-gradient(0deg, rgba(224,246,255,0.8393732492997199) 10%, rgba(139,210,255,0.7511379551820728) 54%, rgba(79,178,244,0.7231267507002801) 100%);*/
 }
+.masVendidoElement>small,.masVendidoElement_two>small{
+    width: 80%;
+    margin: 0 auto;
+    text-align: end;
+    font-weight: bold;
+}
+
 
 
 @media (max-width: 320px){
@@ -2851,13 +2899,13 @@ input:focus{
 
     .masVendidoElement,.masVendidoElement_two{
         border-radius: 15px;
-        width: 290px;
-        height: 560px;
+        width: 275px;
+        height: 450px;
         display: flex;
         flex-direction: column;
         justify-content: space-evenly;
         align-items: center;
-        padding:10px 20px;
+        padding:0 20px;
 
         box-shadow: 0 0 5px rgba(0,0,0,0.8);
     }
@@ -2869,6 +2917,7 @@ input:focus{
 
     .masVendidoElement>img,.masVendidoElement_two>img{
         width: 100%;
+        aspect-ratio: 1;
         object-fit: cover;
         border-radius: 15px;
         /*aspect-ratio: 2/3;*/
@@ -2917,7 +2966,6 @@ input:focus{
     }
 
 
-
     .containerMasVendidos_2_one,.containerMasVendidos_2_two{
         display: flex;
         gap: 0 45px;
@@ -2943,6 +2991,8 @@ input:focus{
         padding-bottom: 30px;
     }
     .catalogo>h1{
+        margin: 0 auto;
+        width: 90%;
         font-size: 35px;
         padding: 55px 0;
         font-weight: 100;
@@ -3606,13 +3656,13 @@ input:focus{
 
     .masVendidoElement,.masVendidoElement_two{
         border-radius: 15px;
-        width: 290px;
-        height: 560px;
+        width: 275px;
+        height: 450px;
         display: flex;
         flex-direction: column;
         justify-content: space-evenly;
         align-items: center;
-        padding:10px 20px;
+        padding:0 20px;
         box-shadow: 0 0 5px rgba(0,0,0,0.8);
     }
     .masVendidoElement:hover,.masVendidoElement_two:hover{
@@ -3622,6 +3672,7 @@ input:focus{
 
     .masVendidoElement>img,.masVendidoElement_two>img{
         width: 100%;
+        aspect-ratio: 1;
         object-fit: cover;
         border-radius: 15px;
     }
@@ -3695,6 +3746,8 @@ input:focus{
         padding-bottom: 55px;
     }
     .catalogo>h1{
+        width: 90%;
+        margin: 0 auto;
         font-size: 35px;
         padding: 55px 0;
         font-weight: 100;
@@ -4259,13 +4312,13 @@ input:focus{
 
     .masVendidoElement,.masVendidoElement_two{
         border-radius: 15px;
-        height: 560px;
-        width: 290px;
+        height: 450px;
+        width: 275px;
         display: flex;
         flex-direction: column;
         justify-content: space-evenly;
         align-items: center;
-        padding:10px 20px;
+        padding:0 20px;
         box-shadow: 0 0 5px rgba(0,0,0,0.8);
     }
     .masVendidoElement:hover,.masVendidoElement_two:hover{
@@ -4276,6 +4329,7 @@ input:focus{
 
     .masVendidoElement>img,.masVendidoElement_two>img{
         width: 100%;
+        aspect-ratio: 1;
         object-fit: cover;
         border-radius: 15px;
     }
@@ -4847,13 +4901,13 @@ input:focus{
 
     .masVendidoElement,.masVendidoElement_two{
         border-radius: 15px;
-        width: 290px;
-        height: 560px;
+        width: 275px;
+        height: 450px;
         display: flex;
         flex-direction: column;
         justify-content: space-evenly;
         align-items: center;
-        padding:10px 20px;
+        padding:0 20px;
         box-shadow: 0 0 5px rgba(0,0,0,0.8);
     }
     .masVendidoElement:hover,.masVendidoElement_two:hover{
@@ -4864,6 +4918,7 @@ input:focus{
 
     .masVendidoElement>img,.masVendidoElement_two>img{
         width: 100%;
+        aspect-ratio: 1;
         object-fit: cover;
         border-radius: 15px;
     }
@@ -4936,7 +4991,7 @@ input:focus{
     }
     .catalogo>h1{
         font-size: 40px;
-        width: 90%;
+        width: 70%;
         margin: 0 auto;
         padding: 55px 0;
         font-weight: 100;
@@ -5396,12 +5451,6 @@ input:focus{
         min-width: 100%;
         padding: 0 25px;
     }
-    .masVendidoElement,.masVendidoElement_two{
-        height: 560px;
-        width: 290px;
-
-        box-shadow: 0 0 5px rgba(0,0,0,0.8);
-    }
 
     .containerMasVendidos_one,
     .containerMasVendidos_two{
@@ -5422,13 +5471,13 @@ input:focus{
 
     .masVendidoElement,.masVendidoElement_two{
         border-radius: 15px;
-        height: 560px;
-        width: 290px;
+        height: 450px;
+        width: 275px;
         display: flex;
         flex-direction: column;
         justify-content: space-evenly;
         align-items: center;
-        padding:10px 20px;
+        padding:0 20px;
         box-shadow: 0 0 5px rgba(0,0,0,0.8);
     }
     .masVendidoElement:hover,.masVendidoElement_two:hover{
@@ -5439,6 +5488,7 @@ input:focus{
 
     .masVendidoElement>img,.masVendidoElement_two>img{
         width: 100%;
+        aspect-ratio: 1;
         object-fit: cover;
         border-radius: 15px;
     }
@@ -5511,7 +5561,7 @@ input:focus{
     }
     .catalogo>h1{
         font-size: 45px;
-        width: 80%;
+        width: 70%;
         margin: 0 auto;
         padding: 25px 0 55px 0;
         font-weight: 100;
@@ -5963,13 +6013,13 @@ input:focus{
 
     .masVendidoElement,.masVendidoElement_two{
         border-radius: 15px;
-        width: 290px;
-        height: 560px;
+        width: 275px;
+        height: 450px;
         display: flex;
         flex-direction: column;
         justify-content: space-evenly;
         align-items: center;
-        padding:10px 20px;
+        padding:0 20px;
         box-shadow: 0 0 5px rgba(0,0,0,0.8);
     }
     .masVendidoElement:hover,.masVendidoElement_two:hover{
@@ -5980,6 +6030,7 @@ input:focus{
 
     .masVendidoElement>img,.masVendidoElement_two>img{
         width: 100%;
+        aspect-ratio: 1;
         object-fit: cover;
         border-radius: 15px;
     }
@@ -6055,7 +6106,7 @@ input:focus{
     .catalogo>h1{
         font-size: 45px;
         padding: 25px 0 55px 0;
-        width: 80%;
+        width: 70%;
         margin: 0 auto;
         font-weight: 100;
         text-align: center;
@@ -6559,13 +6610,13 @@ input:focus{
 
     .masVendidoElement,.masVendidoElement_two{
         border-radius: 15px;
-        width: 290px;
-        height: 560px;
+        width: 275px;
+        height: 450px;
         display: flex;
         flex-direction: column;
         justify-content: space-evenly;
         align-items: center;
-        padding:10px 20px;
+        padding:0 20px;
         box-shadow: 0 0 5px rgba(0,0,0,0.8);
     }
     .masVendidoElement:hover,.masVendidoElement_two:hover{
@@ -6576,6 +6627,7 @@ input:focus{
 
     .masVendidoElement>img,.masVendidoElement_two>img{
         width: 100%;
+        aspect-ratio: 1;
         object-fit: cover;
         border-radius: 15px;
     }
@@ -6648,8 +6700,8 @@ input:focus{
         padding-bottom: 55px;
     }
     .catalogo>h1{
-        font-size: 50px;
-        width: 80%;
+        font-size: 45px;
+        width: 70%;
         margin: 0 auto;
         padding: 25px 0 55px 0;
         font-weight: 100;
@@ -7136,13 +7188,13 @@ input:focus{
 
     .masVendidoElement,.masVendidoElement_two{
         border-radius: 15px;
-        height: 560px;
+        height: 450px;
         display: flex;
         flex-direction: column;
         justify-content: space-evenly;
         align-items: center;
-        padding:10px 20px;
-        width: 290px;
+        padding:0 20px;
+        width: 275px;
         box-shadow: 0 0 5px rgba(0,0,0,0.8);
     }
     .masVendidoElement:hover,.masVendidoElement_two:hover{
@@ -7153,6 +7205,7 @@ input:focus{
 
     .masVendidoElement>img,.masVendidoElement_two>img{
         width: 100%;
+        aspect-ratio: 1;
         object-fit: cover;
         border-radius: 15px;
     }
@@ -7226,8 +7279,8 @@ input:focus{
         padding-bottom: 55px;
     }
     .catalogo>h1{
-        font-size: 50px;
-        width: 80%;
+        font-size: 45px;
+        width: 70%;
         margin: 0 auto;
         padding: 25px 0 55px 0;
         font-weight: 100;
@@ -7739,14 +7792,14 @@ input:focus{
 
     .masVendidoElement,.masVendidoElement_two{
         border-radius: 15px;
-        width: 290px;
-        height: 560px;
+        width: 275px;
+        height: 450px;
         display: flex;
-        gap: 10px;
+        /*gap: 10px;*/
         flex-direction: column;
         justify-content: space-evenly;
         align-items: center;
-        padding:20px;
+        padding:0;
         box-shadow: 0 0 5px rgba(0,0,0,0.8);
         /*display: none;*/
     }
@@ -7758,6 +7811,7 @@ input:focus{
 
     .masVendidoElement>img,.masVendidoElement_two>img{
         width: 100%;
+        aspect-ratio: 1;
         object-fit: cover;
         border-radius: 15px;
     }
@@ -7830,8 +7884,8 @@ input:focus{
         padding-bottom: 55px;
     }
     .catalogo>h1{
-        font-size: 50px;
-        width: 80%;
+        font-size: 45px;
+        width: 70%;
         margin: 0 auto;
         padding: 25px 0 55px 0;
         font-weight: 100;

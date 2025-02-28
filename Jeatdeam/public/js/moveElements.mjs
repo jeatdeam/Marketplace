@@ -3,6 +3,21 @@
 
 export function moveSpan(){
 
+    const width=window.innerWidth;
+
+
+    if(width<=480){
+        const allDiv=document.querySelectorAll('.searchAndOptions>ul>li>div');
+        allDiv.forEach(div=>{
+            const spanPrice=div.nextElementSibling;
+            spanPrice.style.fontWeight="bold"
+            div.insertAdjacentElement('beforeend',spanPrice);
+        })
+
+    }
+
+    console.log(width,"<- aqui esta el width");
+
 }
 
 export function moveBottomInfo(){
@@ -19,9 +34,11 @@ export function moveBottomInfo(){
     if(media_2.matches){
         const bottomInfo=document.querySelector('.bottomInfo');
         if(bottomInfo){
+
             const infoProductDetails=document.querySelector('.info_productDetail');
             infoProductDetails.insertAdjacentElement('afterend',bottomInfo)
         }
+
     }
     const media_3=matchMedia('(min-width: 481px) and (max-width: 640px)');
     if(media_3.matches){
@@ -92,6 +109,8 @@ export function moveBottomInfo(){
     }
 }
 
+
+
 export function apiladoInfoProductSmall(){
 
     const media=window.matchMedia('(max-width: 320px)');
@@ -99,17 +118,19 @@ export function apiladoInfoProductSmall(){
     if(media.matches) {
 
         const allDiv=document.querySelectorAll('.searchAndOptions>ul>li>div');
+        const ulBusqueda=document.querySelector('.searchAndOptions>ul');
 
+        if(ulBusqueda.children.length>0) {
+            console.log(ulBusqueda.children,'aqui esta la cantidad de hijos 2')
+            allDiv.forEach(div => {
 
-        allDiv.forEach(div=>{
+                const spanPrice = div.nextElementSibling;
+                spanPrice.style.fontWeight = "bold"
+                div.insertAdjacentElement('beforeend', spanPrice);
 
-            const spanPrice=div.nextElementSibling;
-            spanPrice.style.fontWeight="bold"
-            div.insertAdjacentElement('beforeend',spanPrice);
+            })
 
-        })
-
-
+        }
 
     }
     const mediaTwo=window.matchMedia('(min-width: 321px) and (max-width: 480px)');
@@ -117,19 +138,22 @@ export function apiladoInfoProductSmall(){
     if(mediaTwo.matches){
 
         const allDiv=document.querySelectorAll('.searchAndOptions>ul>li>div');
+        const ulBusqueda=document.querySelector('.searchAndOptions>ul');
 
 
-        allDiv.forEach(div=>{
+if(ulBusqueda) {
+    if (ulBusqueda.children.length > 0) {
+        console.log(ulBusqueda.children, 'aqui esta la cantidad de hijos 2')
+        allDiv.forEach(div => {
 
-            const spanPrice=div.nextElementSibling;
-            if(spanPrice){
-                spanPrice.style.fontWeight="bold"
-                div.insertAdjacentElement('beforeend',spanPrice);
-            }
-
+            const spanPrice = div.nextElementSibling;
+            spanPrice.style.fontWeight = "bold"
+            div.insertAdjacentElement('beforeend', spanPrice);
 
         })
 
+    }
+}
     }
 
     const mediaThree=window.matchMedia('(min-width: 481px) and (max-width: 640px)');

@@ -10,19 +10,28 @@ import {redirectMarca} from './redireccionamientos.mjs'
 import {redirectMasVendidoElement} from './masVendidos.mjs'
 import {asignarNombresHeader} from "./listaProducts.mjs";
 import {menuSmallWindowEvents} from "./menuSmall.mjs";
-import {ocultarMenuSmall, moveBottomInfo} from "./moveElements.mjs";
+import {ocultarMenuSmall, moveBottomInfo, moveSpan} from "./moveElements.mjs";
 import {marcaEvent} from "./cascadaText.js"
 import {eventsPhone} from "./eventosPhone.js"
 
 masVendidosScroll();
 eventsPhone();
 marcaEvent();
-apiladoInfoProductSmall();
+moveSpan();
 
 window.addEventListener('resize',apiladoInfoProductSmall)
 window.addEventListener('resize', ocultarMenuSmall);
 window.addEventListener('resize', moveBottomInfo);
 // moveSpan();
+window.onload=()=>{
+    apiladoInfoProductSmall();
+}
+
+function checkAndApplyStyles(){
+    apiladoInfoProductSmall();
+}
+
+window.addEventListener('load', checkAndApplyStyles);
 
 redirectMarca();
 
@@ -31,6 +40,8 @@ document.addEventListener('DOMContentLoaded',()=>{
     // moveSpan();
     moveBottomInfo();
     menuSmallWindowEvents();
+    apiladoInfoProductSmall();
+    moveSpan();
 })
 
 // window.addEventListener('resize',moveSpan);
@@ -2264,7 +2275,6 @@ async function addPriceAndImg(text,textoIngresado){
             element.name.split(' ').forEach((word,indice)=>{
                 const span=document.createElement('span');
                 span.textContent=word;
-                console.log(span.textContent);
 
                 spanName.appendChild(span);
             })
@@ -2284,11 +2294,15 @@ async function addPriceAndImg(text,textoIngresado){
             li.appendChild(fragmentLi);
             fragmentUL.appendChild(li);
 
+
     }else{
         console.log('creo que el nodo no fue restituido correctamente')
     }
     $ul.appendChild(fragmentUL)
 
+    // console.log('contador de li');
+
+    setTimeout(apiladoInfoProductSmall,150);
 }
 function pintarTexto(textoIngresado){
 

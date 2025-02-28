@@ -50,6 +50,19 @@ export function menuSmallWindowEvents(){
         })
     })
 
+    // const listaMenuSmall=document.querySelectorAll('.')
+
+    document.addEventListener('touchstart',e=>{
+        if(e.target.matches('.listaSmall>ul>li')){
+            e.target.style.boxShadow="0 0 5px rgba(0, 0, 0, 0.8)";
+        }
+    })
+    document.addEventListener('touchend',e=>{
+        if(e.target.matches('.listaSmall>ul>li')){
+            e.target.style.boxShadow="";
+        }
+    })
+
 
     document.addEventListener('click',e=>{
 

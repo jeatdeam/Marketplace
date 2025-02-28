@@ -93,7 +93,7 @@ app.post("/generar-qr",taskController.controllerQr)
 app.delete('/compra/compra/compra/compra',taskController.deleteCarrito);
 app.delete('/datos/cliente/compra',taskController.deleteDatos)
 
-const PORT=process.env.PORT||5000;
+const PORT=process.env.PORT||3000;
 app.listen(PORT, () => console.log(`Servidor corriendo en el puerto ${PORT}`))
 
 // app.listen(port, () => {
