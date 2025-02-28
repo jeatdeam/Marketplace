@@ -567,7 +567,7 @@ main{
     list-style: none;
     display: flex;
     flex-direction: column;
-    gap: 15px 0;
+    gap: 10px;
     padding: 0 12.5px;
     transition: all 0.25s linear;
 
@@ -579,7 +579,7 @@ main{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px 20px;
+    padding: 10px;
     box-shadow: 0 0 5px rgba(0,0,0,0.8);
     border: 3px solid transparent;
     border-radius: 7.5px;
@@ -587,7 +587,7 @@ main{
     height: 80px;
     min-height: 80px;
     transition: all 0.15s ease-in-out;
-    gap: 30px;
+    gap: 10px;
 }
 .searchAndOptions>ul>li>img{
     min-width: 75px;
@@ -2415,55 +2415,48 @@ input:focus{
     /*-----------searchAndOptions-------------------*/
     .iconsBusqueda{
         width: 95%;
+        margin: 0 auto;
     }
     .searchAndOptions>ul>li{
-        /*gap: 10px;*/
-        padding: 10px 10px;
-        justify-content: center;
         gap: 15px;
+        padding: 10px ;
     }
     .searchAndOptions>ul>li>div{
         flex-direction: column;
         align-items: start;
-        overflow:hidden;
+        overflow: hidden;
         text-overflow: ellipsis;
     }
     .searchAndOptions>ul>li>div>span:nth-of-type(2){
         width: 100%;
-        /*display: flex;*/
-        /*gap: 5px;*/
         display: block;
-        /*overflow:hidden;*/
-        /*text-overflow: ellipsis;*/
         white-space: nowrap;
-        overflow:hidden;
+        overflow: hidden;
         text-overflow: ellipsis;
-    }
-    .searchAndOptions>ul>li>div>span:nth-of-type(2)>span{
-        /*background: pink;*/
-        /*display: inline-block;*/
-        /*white-space: nowrap;*/
-        /*width: 100%;*/
-        display: inline-block;
-        /*overflow:hidden;*/
-        /*text-overflow: ellipsis;*/
-        /*width: 100%;*/
-
+        font-size: 17px;
     }
     .searchAndOptions>ul>li>div>span:nth-of-type(2)>span:nth-of-type(1)~span{
         margin-left: 5px;
+    }
+    .searchAndOptions>ul>li>div{
+        border: 2px solid black;
+    }
+    .searchAndOptions>ul>li>div>span:nth-of-type(1){
+        font-size: 18px;
+    }
+    .searchAndOptions>ul>li>div>span:nth-of-type(3){
+        font-size: 16px;
+    }
+    .searchAndOptions>ul>li>div{
+        align-self: start;
+    }
+    .searchAndOptons>ul>li>span:nth-of-type(1){
+
     }
     .searchAndOptions>ul>li>div>span:nth-of-type(3){
         font-weight: bold;
     }
 
-    /*searAndProducts*/
-
-    .searchAndOptions>ul>li>span:nth-of-type(1){
-        align-self: end;
-        transform: translateY(-70%);
-        white-space: nowrap;
-    }
     /*--------------------------------*/
     /*-----busquedaInteractiva-------*/
     .busquedaInteractiva{
@@ -3234,16 +3227,35 @@ input:focus{
         margin: 0 auto;
     }
     .searchAndOptions>ul>li{
-        gap: 20px;
-        padding: 10px 20px;
+        gap: 15px;
+        padding: 10px ;
     }
     .searchAndOptions>ul>li>div{
         flex-direction: column;
         align-items: start;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
-    /*.searchAndOptions>ul>li>span:nth-of-type(1){*/
-    /*    white-space: nowrap;*/
-    /*}*/
+    .searchAndOptions>ul>li>div>span:nth-of-type(2){
+        width: 100%;
+        display: block;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        font-size: 17px;
+    }
+    .searchAndOptions>ul>li>div>span:nth-of-type(2)>span:nth-of-type(1)~span{
+    margin-left: 5px;
+    }
+    .searchAndOptions>ul>li>div{
+        border: 2px solid black;
+    }
+    .searchAndOptions>ul>li>div>span:nth-of-type(1){
+        font-size: 18px;
+    }
+    .searchAndOptions>ul>li>div>span:nth-of-type(3){
+        font-size: 16px;
+    }
     .searchAndOptions>ul>li>div{
         align-self: start;
     }
@@ -3252,11 +3264,6 @@ input:focus{
     }
     .searchAndOptions>ul>li>div>span:nth-of-type(3){
         font-weight: bold;
-    }
-    /*searAndProducts*/
-    .searchAndOptions>ul>li>span:nth-of-type(1){
-        align-self: end;
-        transform: translateY(-70%);
     }
 
     /*-----busquedaInteractiva-------*/
