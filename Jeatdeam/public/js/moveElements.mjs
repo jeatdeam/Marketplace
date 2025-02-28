@@ -141,19 +141,19 @@ export function apiladoInfoProductSmall(){
         const ulBusqueda=document.querySelector('.searchAndOptions>ul');
 
 
-if(ulBusqueda) {
-    if (ulBusqueda.children.length > 0) {
-        console.log(ulBusqueda.children, 'aqui esta la cantidad de hijos 2')
-        allDiv.forEach(div => {
+        if(ulBusqueda) {
+            if (ulBusqueda.children.length > 0) {
+                console.log(ulBusqueda.children, 'aqui esta la cantidad de hijos 2')
+                allDiv.forEach(div => {
 
-            const spanPrice = div.nextElementSibling;
-            spanPrice.style.fontWeight = "bold"
-            div.insertAdjacentElement('beforeend', spanPrice);
+                    const spanPrice = div.nextElementSibling;
+                    spanPrice.style.fontWeight = "bold"
+                    div.insertAdjacentElement('beforeend', spanPrice);
 
-        })
+                })
 
-    }
-}
+            }
+        }
     }
 
     const mediaThree=window.matchMedia('(min-width: 481px) and (max-width: 640px)');

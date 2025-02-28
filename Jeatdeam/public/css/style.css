@@ -1234,13 +1234,13 @@ main{
     top: 50%;
     display: flex;
     justify-content: space-between;
-    width: 110%;
+    width: 115%;
     transform: translateY(-50%);
 }
 .arrowsLeftSide>svg{
-
-    width: 40px;
-    height: 40px;
+    /*background: orange;*/
+    width: 35px;
+    height: 35px;
 }
 .arrowsLeftSide>svg:nth-of-type(1)>path{
     transform: translateX(25%);
@@ -1329,6 +1329,7 @@ main{
 /*}*/
 .containerElementsRecomended{
     gap: 50px;
+    justify-items: center;
 }
 .containerElementsRecomended>div{
     display: flex;
@@ -2254,6 +2255,21 @@ input:focus{
 
 @media (max-width: 320px){
 
+    .arrowsLeftSide{
+        position: absolute;
+        top: 50%;
+        display: flex;
+        justify-content: space-between;
+        width: 115%;
+        transform: translateY(-50%);
+    }
+    .arrowsLeftSide>svg{
+        /*background: orange;*/
+        width: 35px;
+        height: 35px;
+    }
+
+
     .cajitaCompras{
         right: -10%;
     }
@@ -3040,6 +3056,22 @@ input:focus{
     }
 }
 @media (min-width: 321px) and (max-width: 480px){
+
+    .arrowsLeftSide{
+        position: absolute;
+        top: 50%;
+        display: flex;
+        justify-content: space-between;
+        width: 112.5%;
+        transform: translateY(-50%);
+    }
+    .arrowsLeftSide>svg{
+        /*background: orange;*/
+        width: 35px;
+        height: 35px;
+    }
+
+
     .cajitaCompras{
         right: -10%;
     }
@@ -3374,6 +3406,8 @@ input:focus{
     }
 
     .sideLeft{
+        /*width: 90%;*/
+        margin: 0 auto;
         display: flex;
         flex-direction: column;
         gap: 15px 0;
@@ -3854,7 +3888,7 @@ input:focus{
         top: 50%;
         display: flex;
         justify-content: space-between;
-        width: 110%;
+        width: 115%;
         transform: translateY(-50%);
     }
     .iconsBusqueda{
@@ -3991,6 +4025,7 @@ input:focus{
     }
 
     .sideLeft{
+        width: 85%;
         display: flex;
         flex-direction: column;
         gap: 15px 0;
@@ -4032,12 +4067,13 @@ input:focus{
         aspect-ratio: 1/1;
         border-radius: 12px;
     }
-    .arrwsLeftSide{
-        width: 110%;
+    .arrowsLeftSide{
+        width: 112.5%;
+        background: purple;
     }
     .arrowsLeftSide>svg{
-        width: 40px;
-        height: 40px;
+        width: 35px;
+        height: 35px;
     }
     .sideRight{
         display: flex;
@@ -4485,8 +4521,14 @@ input:focus{
         top: 50%;
         display: flex;
         justify-content: space-between;
-        width: 115%;
+        width: 112.5%;
         transform: translateY(-50%);
+        background: green;
+    }
+    .arrowsLeftSide>svg{
+        background: pink;
+        width: 35px;
+        height: 35px;
     }
     /*----------infoCenter-----------*/
     .infoCenter{
@@ -4599,6 +4641,8 @@ input:focus{
     }
 
     .sideLeft{
+        width: 90%;
+        margin: 0 auto;
         display: flex;
         flex-direction: column;
         gap: 10px 0;
@@ -5203,11 +5247,11 @@ input:focus{
         border-radius: 12px;
     }
     .arrowsLeftSide{
-        width: 110%;
+        width: 112.5%;
     }
     .arrowsLeftSide>svg{
-        width: 30px;
-        height: 30px;
+        width: 35px;
+        height: 35px;
     }
     .sideRight{
         width:50%;
@@ -5749,11 +5793,11 @@ input:focus{
 
     }
     .arrowsLeftSide{
-        width: 110%;
+        width: 115%;
     }
     .arrowsLeftSide>svg{
-        width: 35px;
-        height: 35px;
+        width: 40px;
+        height: 40px;
     }
     .sideRight{
         width:50%;
@@ -6300,10 +6344,12 @@ input:focus{
         border-radius: 12px;
     }
     .arrowsLeftSide{
-
+        width: 110%;
+        background: yellow;
     }
     .arrowsLeftSide>svg{
-
+        width: 40px;
+        height: 40px;
     }
     .sideRight{
         width:50%;
@@ -6885,6 +6931,12 @@ input:focus{
         aspect-ratio: 1/1;
         border-radius: 12px;
     }
+    .arrowsLeftSide{
+        width: 110%
+    }
+    .arrowsLeftSide>svg{
+        background: gray;
+    }
     .sideRight{
         width:50%;
         display: flex;
@@ -7134,12 +7186,6 @@ input:focus{
         transition: font-size 0.3s ease, background-color 0.3s ease;
     }
 
-
-
-
-
-
-
     /*-----------Productos más vendidos---*/
     .masVendidos{
         display: flex;
@@ -7328,6 +7374,15 @@ input:focus{
     }
 }
 @media (min-width: 1537px){
+
+    .arrowsLeftSide{
+        width: 110%;
+    }
+    .arrowsLeftSide>svg{
+        width: 40px;
+        height: 40px;
+    }
+
 
     .productsRecomended{
         background: greenyellow;

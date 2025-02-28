@@ -146,25 +146,21 @@ function activeEnvio() {
             const isHidden = $nameUser.style.display === "none";
 
             if (isHidden) {
-                // 🔹 Mostrar los campos
                 $nameUser.style.display = "flex";
                 $nameCountry.style.display = "flex";
                 $couriersContainer.style.display = "flex";
                 button.style.backgroundColor = "";
 
-                // 🔹 Hacer que los campos sean requeridos
                 $form.direccion.setAttribute('required', 'true');
                 $form.departamento.setAttribute('required', 'true');
                 $form.distrito.setAttribute('required', 'true');
                 $form.infoCourier.setAttribute('required', 'true');
             } else {
-                // 🔹 Ocultar los campos
                 $nameUser.style.display = "none";
                 $nameCountry.style.display = "none";
                 $couriersContainer.style.display = "none";
                 button.style.backgroundColor = colorActivo;
 
-                // 🔹 Remover el atributo required de los campos ocultos
                 $form.direccion.removeAttribute('required');
                 $form.departamento.removeAttribute('required');
                 $form.distrito.removeAttribute('required');
@@ -2245,7 +2241,6 @@ async function addPriceAndImg(text,textoIngresado){
     const $ul=$searchAndOptions.querySelector('ul');
     const fragmentUL=document.createDocumentFragment();
     if($ul){
-            // console.log(text);
             let textoLimpio=limpiarTexto(text)
             const element=baseDatos.find(element=>{
 
@@ -2265,10 +2260,6 @@ async function addPriceAndImg(text,textoIngresado){
 
             spanBrand.textContent=element.brand;
             spanBrand.style.fontWeight="bold";
-            // spanBrand.style.border="1px solid black";
-            // spanBrand.style.padding="2.5px 5px";
-            // spanBrand.style.borderRadius="7.5px"
-            // spanBrand.style.background="rgba(0, 0, 0, 0.2)";
 
         const spanName=document.createElement('span');
 
@@ -2284,25 +2275,42 @@ async function addPriceAndImg(text,textoIngresado){
             const price=document.createElement("span");
             price.textContent="S/. "+element.price;
 
+
+
+            fragmentLi.appendChild(img);
             div.appendChild(spanBrand)
             div.appendChild(spanName)
 
-            fragmentLi.appendChild(img);
-            fragmentLi.appendChild(div);
-            fragmentLi.appendChild(price);
+            const width= window.innerWidth;
+            if(width<=480) {
+                fragmentLi.appendChild(img);
+                div.appendChild(spanBrand);
+                div.appendChild(spanName);
+                div.appendChild(price)
+                fragmentLi.appendChild(div);
+                li.appendChild(fragmentLi);
+                fragmentUL.appendChild(li);
+            }else{
+                fragmentLi.appendChild(img);
+                div.appendChild(spanBrand);
+                div.appendChild(spanName);
+                fragmentLi.appendChild(div);
+                fragmentLi.appendChild(price)
+                li.appendChild(fragmentLi)
+                fragmentUL.appendChild(li);
+            }
 
-            li.appendChild(fragmentLi);
-            fragmentUL.appendChild(li);
-
+            console.log(li,"elemento agregado")
 
     }else{
         console.log('creo que el nodo no fue restituido correctamente')
     }
+
     $ul.appendChild(fragmentUL)
+    console.log(`${$ul.children.length}->la cantidad de veces que pasamos po la lista`);
 
-    // console.log('contador de li');
 
-    setTimeout(apiladoInfoProductSmall,150);
+
 }
 function pintarTexto(textoIngresado){
 
@@ -2465,11 +2473,11 @@ async function searchProducts() {
 
                 setTimeout(()=>{
                     li.style.opacity="0";
-                },500)
+                },100)
                 setTimeout(()=>{
                     li.remove();
                     active=!active;
-                },750)
+                },350)
                 return;
             }
             const textoArray = textoIngresado.split(/\s+/); // Manejar múltiples espacios
@@ -2483,63 +2491,40 @@ async function searchProducts() {
 
             if ($liExistente.length > 0) {
 
-                if (arrayFiltrado.length < $liExistente.length) {
-                    $liExistente.forEach((li, indice) => {
-                        // const preTxt=$liExistente[indice].querySelector('span:nth-of-type(1)');
-                        const span = li.querySelector('span:nth-of-type(1)');
+                    if (arrayFiltrado.length < $liExistente.length) {
+                        $liExistente.forEach((li, indice) => {
+                            // const preTxt=$liExistente[indice].querySelector('span:nth-of-type(1)');
+                            const span = li.querySelector('span:nth-of-type(1)');
 
-                        if (arrayFiltrado[indice] !== span.textContent) li.remove();
+                            if (arrayFiltrado[indice] !== span.textContent) li.remove();
 
-                    })
-                }
-                if (arrayFiltrado.length > $liExistente.length) {
+                        })
+                    }
+                    if (arrayFiltrado.length > $liExistente.length) {
 
-                    arrayFiltrado.forEach((text, indice) => {
+                        arrayFiltrado.forEach((text, indice) => {
 
-                        if ($liExistente[indice]) {
-                            const span = $liExistente[indice].querySelector('span:nth-of-type(1)');
-                        } else {
-                            addPriceAndImg(text,textoIngresado);
-                            arrayExistente.push(text);
-                        }
-
-                    })
-                    //previo filtro
-                    // if (arrayFiltrado.length > 0) {
-                    //     arrayFiltrado.forEach((filtrado, indice) => {
-                    //         let textoResaltado = filtrado;
-                    //
-                    //         textoArray.forEach(word => {
-                    //             // Crear una expresión regular para buscar palabras completas
-                    //             const regex = new RegExp(`\\b(${word})\\b`, 'gi');
-                    //             // textoResaltado = textoResaltado.replace(regex, match => {
-                    //             //     return `<span style="background:gray; padding: 7.5px 5px; border-radius:7.5px;">${match}</span>`;
-                    //             textoResaltado=textoResaltado.replace(regex,word);
-                    //
-                    //             });
-                    //
-                    //          addPriceAndImg(textoResaltado);
-                    //         });
-                    //
-                    //
-                    //
-                    //
-                    // } else {
-                    //     $ul.innerHTML="";
-                    //     const li = document.createElement('li');
-                    //     li.style.padding="10px"
-                    //     li.textContent = 'No se encontraron coincidencias, pruebe otra vez';
-                    //         $ul.appendChild(li);
-                    // }
-
-                }
+                            if ($liExistente[indice]) {
+                                const span = $liExistente[indice].querySelector('span:nth-of-type(1)');
+                            } else {
+                                addPriceAndImg(text,textoIngresado);
+                                arrayExistente.push(text);
+                            }
+                        })
+                        // if($liExistente.length>0) apiladoInfoProductSmall()
+                    }
             } else {
                     arrayFiltrado.forEach(filtrado => {
 
                         addPriceAndImg(filtrado,textoIngresado)
                         arrayExistente.push(filtrado);
-                    })
-            }
+
+                        const $liExistente = $ul.querySelectorAll('li')
+
+                        // if($liExistente.length>0) apiladoInfoProductSmall()
+            })
+
+        }
         }
     });
 
