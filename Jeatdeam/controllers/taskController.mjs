@@ -6,25 +6,156 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 
-console.log('EMAIL_USER:->', process.env.EMAIL_USER);
-console.log('EMAIL_PASS:=', process.env.EMAIL_PASS ? 'cargado':'no cargado');
+const stripe = new Stripe(process.env.SECRET_KEY);
 
-const transporter=nodemailer.createTransport({
-    service: "gmail",
-    auth: {
-        user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASS,
+
+async function verificarMoneda() {
+    try {
+        const precios = await stripe.prices.list({ limit: 10 });
+
+        precios.data.forEach(precio => {
+            console.log(`ID: ${precio.id}, Moneda: ${precio.currency}, Monto: ${precio.unit_amount / 100}`);
+        });
+    } catch (error) {
+        console.error("Error al obtener precios desde Stripe:", error.message);
     }
-})
+}
+verificarMoneda();
 
-transporter.verify((error,success)=>{
-    if(error){
-        console.error('Error en el transporte de correo',error);
-    }else{
-        console.log('servidor de correo listo para enviar mensajes');
+
+const productsToPay=()=>{
+
+    let products=[]
+    carrito.forEach((element,index)=>{
+        let quantity=0;
+        let price=element.id;
+        carrito.forEach((el,index)=>{
+            if(element.id===el.id){
+                quantity++;
+            }
+
+        })
+        if(products.price){
+            console.log('ya existe el grupo con idPrice->',price)
+        }else{
+            products.push({price: price,quantity});
+        }
+
+    })
+    console.log('aqui esta los productos comprimidos->',products);
+
+    let   array=products.reduce((acc, el)=>{
+        if(!acc.some(element=>element.price===el.price)){
+            acc.push(el);
+        }
+        return acc;
+    },[])
+
+    console.log('aqui esta los productos filtrados->',array);
+
+    return array;
+}
+function getProducts() {
+    const urlProducts="https://api.stripe.com/v1/products?limit=100";
+    const urlPrices = "https://api.stripe.com/v1/prices?limit=100";
+
+    const options={
+        headers:{
+            Authorization:`Bearer ${process.env.SECRET_KEY}`
+        }
+    }
+    const peticionId = async () => {
+        const response=await fetch(urlPrices,options);
+
+        if(!response.ok){
+            throw new Error(`Hubo un error en la peticion -> ${response.statusText}`);
+        }
+        const result=await response.json();
+
+
+        const productData=result.data;
+
+        if(productData){
+            // productData.forEach(el=>console.log(el.id))
+        }
+        baseDatos.forEach((product, indice) => {
+            product.id = productData[indice].id;  // Actualiza el id de cada producto
+        });
+
+    }
+    peticionId();
+}
+getProducts();
+
+function getPrices(){
+    const urlProducts="https://api.stripe.com/v1/products?limit=100";
+    const urlPrices = "https://api.stripe.com/v1/prices?limit=100";
+
+
+    const options={
+        headers:{
+            authorization:`Bearer ${process.env.SECRET_KEY}`
+        }
+    }
+    const peticionPrice=async()=>{
+        const response=await fetch(urlPrices,options);
+
+        if(!response.ok){
+            throw new Error(`Hubo un error en la peticion -> ${response.statusText}`);
+        }
+        const result=await response.json();
+        const resultData=result.data
+
+        baseDatos.forEach((product,indice)=>{
+
+            product.price=result.data[indice].unit_amount;
+
+        })
+    }
+    peticionPrice();
+
+}
+getPrices();
+
+
+const redireccionamientoToPay= async (req,res)=> {
+
+    try {
+        // Crear la sesión de Checkout en Stripe
+        const session = await stripe.checkout.sessions.create({
+            payment_method_types: ['card'],
+            line_items: productsToPay(),
+            mode: 'payment',
+            success_url: `http://localhost:5000/catalogoProducts`,
+            cancel_url: `http://localhost:5000/carrito/estado`,
+        });
+
+        // Enviar la URL de la sesión de Stripe
+        res.json({ url: session.url });
+    } catch (error) {
+        console.error('Error creando la sesión de Stripe:', error.message);
+        console.error(error.stack);
+        res.status(500).send('Error interno del servidor');
     }
 
-})
+};
+
+
+// const productsToPay = () => [
+//     {
+//         price_data: {
+//             currency: 'usd',
+//             product_data: {
+//                 name: 'Camiseta Negra',
+//                 description: 'Talla M',
+//             },
+//             unit_amount: 2500, // 25.00 USD
+//         },
+//         quantity: 2, // Cantidad de productos
+//     },
+// ];
+
+
 
 let seccionProducts={
     boj: {
@@ -430,73 +561,22 @@ let datosCliente=[
 
 
 ]
-
- function getProducts() {
-
-    const secretKey="sk_test_51QanTtLhyJyLDtVvyz4Iwnm3SoX9uVsoKlvQs40nJ3xsTzvSLGQ4BBekJ5skqMOKRm7w6KZNpJCT6Vgf38JAo2ub00xvmMzFjJ";
-    const publicKey="sk_test_51QanTtLhyJyLDtVvyz4Iwnm3SoX9uVsoKlvQs40nJ3xsTzvSLGQ4BBekJ5skqMOKRm7w6KZNpJCT6Vgf38JAo2ub00xvmMzFjJ";
-    const urlProducts="https://api.stripe.com/v1/products?limit=100";
-     const urlPrices = "https://api.stripe.com/v1/prices?limit=100";
-
-     const options={
-             headers:{
-                 Authorization:`Bearer ${secretKey}`
-             }
+const transporter=nodemailer.createTransport({
+    service: "gmail",
+    auth: {
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS,
     }
-    const peticionId = async () => {
-        const response=await fetch(urlPrices,options);
+})
 
-        if(!response.ok){
-            throw new Error(`Hubo un error en la peticion -> ${response.statusText}`);
-        }
-        const result=await response.json();
-
-
-        const productData=result.data;
-
-        if(productData){
-            // productData.forEach(el=>console.log(el.id))
-        }
-        baseDatos.forEach((product, indice) => {
-            product.id = productData[indice].id;  // Actualiza el id de cada producto
-        });
-
-     }
-     peticionId();
- }
- getProducts();
-
-function getPrices(){
-    const secretKey="sk_test_51QanTtLhyJyLDtVvyz4Iwnm3SoX9uVsoKlvQs40nJ3xsTzvSLGQ4BBekJ5skqMOKRm7w6KZNpJCT6Vgf38JAo2ub00xvmMzFjJ";
-    const publicKey="sk_test_51QanTtLhyJyLDtVvyz4Iwnm3SoX9uVsoKlvQs40nJ3xsTzvSLGQ4BBekJ5skqMOKRm7w6KZNpJCT6Vgf38JAo2ub00xvmMzFjJ";
-    const urlProducts="https://api.stripe.com/v1/products?limit=100";
-    const urlPrices = "https://api.stripe.com/v1/prices?limit=100";
-
-
-    const options={
-        headers:{
-            authorization:`Bearer ${secretKey}`
-        }
+transporter.verify((error,success)=>{
+    if(error){
+        console.error('Error en el transporte de correo',error);
+    }else{
+        console.log('servidor de correo listo para enviar mensajes');
     }
-    const peticionPrice=async()=>{
-        const response=await fetch(urlPrices,options);
 
-        if(!response.ok){
-            throw new Error(`Hubo un error en la peticion -> ${response.statusText}`);
-        }
-        const result=await response.json();
-        const resultData=result.data
-
-        baseDatos.forEach((product,indice)=>{
-
-            product.price=result.data[indice].unit_amount;
-
-        })
-    }
-    peticionPrice();
-
-}
-getPrices();
+})
 
 const extraerMarcas=(req,res)=>{
 
@@ -650,13 +730,6 @@ const deleteCarrito=(req,res)=>{
 
 
 }
-const deleteElementCarrito=(req,res)=>{}
-
-
-const public2="pk_test_51QanTtLhyJyLDtVv34AWEc4azCeKb5Ldg4KRfU1k2kewEYVziB7YSCgnROMYfis9xpsPXhxg1yf7QSJhjGwnNAh800CDZmMelK";
-const secret2="sk_test_51QanTtLhyJyLDtVvyz4Iwnm3SoX9uVsoKlvQs40nJ3xsTzvSLGQ4BBekJ5skqMOKRm7w6KZNpJCT6Vgf38JAo2ub00xvmMzFjJ";
-
- const stripe=Stripe(secret2)
 
 
 const recibirDatosShort = async (req, res) => {
@@ -722,63 +795,6 @@ const verificarDatos=(req,res)=>{
      })
 }
 
-
-
-const productsToPay=()=>{
-
-    let products=[]
-    carrito.forEach((element,index)=>{
-        let quantity=0;
-        let price=element.id;
-        carrito.forEach((el,index)=>{
-            if(element.id===el.id){
-                quantity++;
-            }
-
-        })
-        if(products.price){
-            console.log('ya existe el grupo con idPrice->',price)
-        }else{
-            products.push({price: price,quantity});
-        }
-
-    })
-    console.log('aqui esta los productos comprimidos->',products);
-
-    let   array=products.reduce((acc, el)=>{
-        if(!acc.some(element=>element.price===el.price)){
-            acc.push(el);
-        }
-        return acc;
-    },[])
-
-    console.log('aqui esta los productos filtrados->',array);
-
-    return array;
-}
-
-
-const redireccionamientoToPay= async (req,res)=> {
-
-    try {
-        // Crear la sesión de Checkout en Stripe
-        const session = await stripe.checkout.sessions.create({
-            payment_method_types: ['card'],
-            line_items: productsToPay(),
-            mode: 'payment',
-            success_url: `http://localhost:5000/catalogoProducts`,
-            cancel_url: `http://localhost:5000/carrito/estado`,
-        });
-
-        // Enviar la URL de la sesión de Stripe
-        res.json({ url: session.url });
-    } catch (error) {
-        console.error('Error creando la sesión de Stripe:', error.message);
-        console.error(error.stack);
-        res.status(500).send('Error interno del servidor');
-    }
-
-};
 const controllerQr = async (req, res) => {
     const { monto, numero } = req.body;
     if (!monto || !numero) {

@@ -427,7 +427,7 @@ function AfterSendData(){
 
 async function verificarDatosCliente(){
 
-    const url="/datos/cliente/compra";
+    const url="/datos/cliente/compra/estatic";
     const options={
         method: 'GET',
         headers:{"Content-Type":"application/json"}
@@ -731,8 +731,6 @@ export function carritoContadorDOM() {
         }
         const result = await response.json();
         const longitudCarrito = result.carritoL;
-
-        console.log('longitudCarrito->', longitudCarrito);
 
         if (!longitudCarrito) {
             $contador_carrito.style.opacity = "0";
@@ -1236,7 +1234,6 @@ function renderAllProducts(){
         });
         containerElementsCompra.appendChild(groupProducts);
     });
-    console.log(mapProducts);
 }
 
 async function deleteProductRender(node){
@@ -2300,23 +2297,24 @@ async function addPriceAndImg(text,textoIngresado){
                 fragmentUL.appendChild(li);
             }
 
-            console.log(li,"elemento agregado")
+        // fragmentLi.appendChild(img);
+        // div.appendChild(spanBrand);
+        // div.appendChild(spanName);
+        // fragmentLi.appendChild(div);
+        // fragmentLi.appendChild(price)
+        // li.appendChild(fragmentLi)
+        // fragmentUL.appendChild(li);
+        //
 
     }else{
         console.log('creo que el nodo no fue restituido correctamente')
     }
-
     $ul.appendChild(fragmentUL)
-    console.log(`${$ul.children.length}->la cantidad de veces que pasamos po la lista`);
-
-
-
 }
 function pintarTexto(textoIngresado){
 
     const textoFiltrado=textoIngresado.split(' ');
 
-    console.log(textoFiltrado,"->ga2");
 
     const $ul=document.querySelector('.searchAndOptions');
     const $liAll=$ul.querySelectorAll('li');
@@ -2327,13 +2325,12 @@ function pintarTexto(textoIngresado){
 
         // arrayText.push(node.querySelector('span:nth-of-type').textContent);
         const spanOne=node.querySelector('div>span:nth-of-type(1)');
-        let txtOne=spanOne.textContent;
+        // let txtOne=spanOne.textContent;
         const spanTwo=node.querySelectorAll('div>span:nth-of-type(2)>span');
-        let txtTwo=spanTwo.textContent;
+        // let txtTwo=spanTwo.textContent;
 
         spanTwo.forEach(span=>{
             span.style.color="";
-            // span.style.fontWeight="";
         })
 
         textoFiltrado.forEach(word=>{
@@ -2647,7 +2644,6 @@ export async function carritoDesplegado() {
    async function mostrarCompras(){
         const nuevosDatos=await datosCarrito()
 
-
         if(nuevosDatos.length>0){
             console.log('aqui estan los nuevos datos',nuevosDatos);
 
@@ -2658,32 +2654,58 @@ export async function carritoDesplegado() {
                             <div class="containerBox">                       
                             </div>
                             <div style="font-weight: bold">
-                                <span>Total: </span>
-                                <span >S/.11234<span>
+                                <span >Total: </span>
+                                <span class="cuentaTotal">S/0.00<span>
                             </div>
-                            <button style="padding: 7.5px; border-radius: 7.5px;"> ir al carrito</button>                          
+                            <button style="padding: 7.5px; border-radius: 7.5px;
+                             transition: all 0.25s ease-in-out;"> ir al carrito</button>                          
                        `
             const $containerBox=document.querySelector('.containerBox');
 
+            // redireccionamiento ir al carrito
+            const botonCarrito=document.querySelector('.cajitaCompras>button')
 
+            if(botonCarrito){
+
+                botonCarrito.addEventListener('mouseenter',e=>{
+                    botonCarrito.style.background = "rgb(251,254,255);";
+                    botonCarrito.style.background = "radial-gradient(circle, rgba(251,254,255,0.9164040616246498) 23%, rgba(150,211,249,0.8883928571428571) 68%, rgba(79,178,244,0.6138830532212884) 92%)";
+                    botonCarrito.style.transition="all 0.25s ease-in-out";
+                })
+                botonCarrito.addEventListener('mouseleave',e=>{
+                    botonCarrito.style.background=""
+                })
+            }
             nuevosDatos.forEach((product, index) => {
 
                 if($containerBox) {
 
                     const $section = document.createElement('section');
-
-                    $section.innerHTML = `
-                   <section class="productCarrito productCarrito_${index}">
+                    $section.classList.add(
+                        `productCarrito`,
+                        `productCarrito_${index + 1}`,
+                    );
+                    $section.dataset.price = `${product.id}`;
+                    $section.innerHTML = `                 
                        <div>
-                           <span><b>${product.brand}</b> ${product.name}</span>
+                           <b>${product.brand}</b>
+                           <span>${product.name}</span>
                            <span>S/.${product.price}</span>
+                           <span class="countProduct">7</span>
                        </div>
                        <img src="${product.img}" class="product-image">
-                   </section>
                `;
                     $containerBox.appendChild($section);
+
                 }
             });
+
+            if($containerBox){
+                flatListProducts();
+            }else{
+                console.log('ups se creo muy rapido los elementos')
+            }
+
             isInside = true;
             showCajita();
         }else{
@@ -2695,29 +2717,23 @@ export async function carritoDesplegado() {
             isInside = true;
             showCajita();
         }
-    }
+   }
 
-    // $iconCarrito.addEventListener('touchstart',mostrarCompras);
     $iconCarrito.addEventListener('mouseenter', mostrarCompras);
-
-    // Ocultar la caja si el mouse sale del ícono
-
 
     $iconCarrito.addEventListener('mouseleave', () => {
         isInside = false;
-        setTimeout(hideCajita, 100); // Espera para verificar si el mouse entra en la caja
+
+            setTimeout(hideCajita, 200);
     });
-    // $iconCarrito.addEventListener('touchstart',()=>{
-    //     isInside = false;
-    //     setTimeout(hideCajita, 100);
-    // })
-    // Mantener la caja visible si el mouse está dentro de ella
+
     $cajitaCompras.addEventListener('mouseenter', () => {
         isInside = true;
     });
-    // $cajitaCompras.addEventListener('touchend', () => {
-    //     isInside = true;
-    // })
+    $cajitaCompras.addEventListener('mouseleave',()=>{
+        isInside=false;
+        setTimeout(hideCajita,200);
+    })
 
     document.addEventListener('click',e=>{
         if(e.target.matches(".containerBox~button")){
@@ -2727,6 +2743,58 @@ export async function carritoDesplegado() {
 }
 
 carritoDesplegado();
+
+
+export function flatListProducts() {
+    const cajitaCompras = document.querySelector('.cajitaCompras');
+    const containerBox = document.querySelector('.containerBox');
+    const allProductCarrito = document.querySelectorAll('.productCarrito');
+
+    const mapProducts = new Map();
+
+    allProductCarrito.forEach(product => {
+        if (mapProducts.has(product.dataset.price)) {
+            mapProducts.get(product.dataset.price).push(product);
+        } else {
+            mapProducts.set(product.dataset.price, [product]);
+        }
+    });
+
+    console.log(mapProducts);
+
+    let total=0;
+
+    mapProducts.forEach((products, price) => {
+        products.forEach((element, index) => {
+            if (index === 0) {
+                element.style.opacity = "1";
+            } else {
+                element.style.display = "none";
+            }
+
+            const elementPrice=element.querySelector('div>span:nth-of-type(2)')
+
+            if(elementPrice){
+                total+=parseInt(elementPrice.textContent.replace(/\D/g,''));
+                console.log(total);
+            }
+            // console.log(element);
+            // console.log(elementPrice.textContent.replace(/\D/g,''));
+
+            const contador = element.querySelector('.countProduct');
+            if (contador) {
+                contador.textContent = `${products.length}`;
+            }
+        });
+    });
+
+    const mostrador=document.querySelector('.cuentaTotal')
+
+    if(mostrador) mostrador.textContent=total;
+
+}
+
+
 
 
 /*---------------------menu<@media 640px---------------------------*/

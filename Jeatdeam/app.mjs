@@ -16,7 +16,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 const app = express();
-const port = 5000;
+// const port = 5000;
 
 app.use(cors());
 app.use(helmet());
@@ -61,18 +61,18 @@ app.use((req,res, next) =>{
    next();
 })
 
-// Rutas
+
+// Rutas estaticas
 app.get("/", taskController.index);
 app.get("/catalogoProducts", taskController.catalogoProducts);
 app.get("/producto", taskController.product);
+app.get("/compra/compra/compra/compra", taskController.finalizarCompra);
+app.get("/datos/cliente/compra/estatic",taskController.verificarDatos);
+app.get("/extraer/datos/marcas/products",taskController.extraerMarcas)
+//rutas dinamicas
 app.get("/:name", taskController.marcaProducts);
 app.get("/:brand/:categoria",taskController.categoriaProduct)
-
 app.get("/:brand/:categoria/:product", taskController.detailProduct);
-
-app.get("/compra/compra/compra/compra", taskController.finalizarCompra);
-// app.get("/datos/cliente/compra",taskController.verificarDatos);
-app.get("/extraer/datos/marcas/products",taskController.extraerMarcas)
 
 
 app.get('/carrito/estado/cuack/cuack',taskController.estadoCarrito);
@@ -92,6 +92,7 @@ app.post("/generar-qr",taskController.controllerQr)
 //RUTAS DELETE
 app.delete('/compra/compra/compra/compra',taskController.deleteCarrito);
 app.delete('/datos/cliente/compra',taskController.deleteDatos)
+
 
 const PORT=process.env.PORT||3000;
 app.listen(PORT, () => console.log(`Servidor corriendo en el puerto ${PORT}`))

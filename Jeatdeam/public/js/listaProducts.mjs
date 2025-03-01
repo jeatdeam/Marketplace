@@ -8,8 +8,6 @@ export function asignarNombresHeader(){
             const $nombreElement=document.querySelectorAll('.nombreElement')
             const keysMarca=Object.keys(seccionProducts)
 
-            console.log($nombreElement,"<-todo aqui")
-
             keysMarca.forEach((marca,indice)=> {
 
                 const seccion = $nombreElement[indice];

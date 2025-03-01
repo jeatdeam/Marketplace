@@ -40,12 +40,26 @@ main{
     /*background: linear-gradient(0deg, rgba(224,246,255,0.8393732492997199) 10%, rgba(139,210,255,0.7511379551820728) 54%, rgba(79,178,244,0.7231267507002801) 100%);*/
 }
 
+.countProduct{
+    width: 100%;
+    display: block;
+    position: absolute;
+    right: -10px;
+    text-align: center;
+    font-size: 120px;
+    align-self: center;
+    font-weight: 900;
+    font-stretch: expanded;
+    /*color: grey;*/
+    opacity: 0.2;
 
-.catalogoElements{
-
+    background: linear-gradient(to bottom, black 20%, rgba(0, 0, 0, 0.5) 50%, transparent 90%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
-
+.catalogoElements{
+}
 .navegador>div:nth-of-type(2){
     /*width: 100%;*/
     width: fit-content;
@@ -130,7 +144,8 @@ main{
     gap: 5px;
 }
 .containerCheck{
-    border: 1px solid black;
+    /*box-shadow: 0 0 5px rgba(0,0,0,0.8);*/
+    border: 3px solid rgba(0,0,0,0.6);
     border-radius: 50%;
     display: flex;
     flex-direction: column;
@@ -138,7 +153,7 @@ main{
     min-width: 200px;
     min-height: 200px;
     justify-content: center;
-
+    background: white;
     /*padding: 20px;*/
 }
 
@@ -450,7 +465,7 @@ main{
     padding: 5px 0;
     justify-content: center;
     align-items: center;
-    font-size:19px;
+    font-size:17px;
     font-weight: 100;
     /*border-bottom: 1px solid black;*/
     /*border-top: 1px solid black;*/
@@ -490,6 +505,7 @@ main{
     box-shadow: 0 0 35px rgba(0, 0, 0, 1);
     opacity: 0;
     transition: opacity 0.35s linear;
+    width: 500px;
 }
 .activeBusqueda{
     opacity: 1;
@@ -554,7 +570,6 @@ main{
     position: relative;
     padding: 12.5px 0;
     /*transform: translateX(-50%);*/
-
 }
 .searchAndOptions>input{
     /*position: absolute;*/
@@ -579,7 +594,7 @@ main{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px;
+    padding: 10px 20px;
     box-shadow: 0 0 5px rgba(0,0,0,0.8);
     border: 3px solid transparent;
     border-radius: 7.5px;
@@ -587,12 +602,22 @@ main{
     height: 80px;
     min-height: 80px;
     transition: all 0.15s ease-in-out;
-    gap: 10px;
+    gap: 20px;
+    border: 5px solid transparent;
 }
+.searchAndOptions>ul>li:hover{
+    /*box-shadow: 0 0 5px rgba(0,0,0,1);*/
+    border: 5px solid cornflowerblue;
+}
+
+
 .searchAndOptions>ul>li>img{
     min-width: 75px;
     min-height: 75px;
 }
+
+
+
 .searchAndOptions>ul>li>span:nth-of-type(2){
     font-weight: bold;
 }
@@ -607,6 +632,7 @@ main{
     flex: 1;
     font-size: 17.5px;
 }
+
 .searchAndOptions>ul>li>div>span:nth-of-type(2){
     display: flex;
     gap: 5px;
@@ -619,6 +645,7 @@ main{
 .searchAndOptions>ul>li>img{
     height: 75px;
     width: 75px;
+    object-fit: cover;
     /*border: 1px solid black;*/
     box-shadow: 0 0 5px rgba(0,0,0,0.6);
     border-radius: 7.5px;
@@ -628,11 +655,18 @@ main{
 }
 .searchAndOptions>ul>li:hover{
     /*background: rgba(145,218,255,0.5);*/
-    border-radius: 7.5px;
+    border-radius: 12px;
     transition: border 0.15s ease-in-out;
 }
 .searchAndOptions>ul>li:not(:hover){
     filter: blur(0.2px);
+}
+.iconsBusqueda>input{
+    /*background: purple;*/
+    height: 35px;
+    border: 1px solid lightblue;
+    border-radius: 7.5px;
+    padding: 0 10px;
 }
 
 .containerIcons>div>input{
@@ -652,9 +686,9 @@ main{
     /*width: 15%;*/
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    /*justify-content: space-between;*/
     list-style: none;
-    gap: 15px;
+    gap: 25px;
 }
 #iconsNav>li{
     font-size: 20px;
@@ -780,6 +814,7 @@ main{
     border: 1px solid lightblue;
     position: absolute;
     z-index: -1;
+    pointer-events: none;
 
     animation: crecimiento 1s infinite linear;
 }
@@ -791,6 +826,7 @@ main{
     border-radius: 50%;
     position: absolute;
     z-index: -2;
+    pointer-events: none;
 
     animation: pulse 1s infinite linear;
 }
@@ -836,8 +872,13 @@ main{
     gap: 10px 0;
     opacity: 0;
     transition: opacity 0.35s ease-in-out;
+    font-size: 17px;
 }
 
+
+.cajitaCompras *{
+    /*font-size: 17px;*/
+}
 .sinCompras{
     justify-content: center;
     align-items: center;
@@ -867,8 +908,10 @@ main{
     transition: opacity 0.5s ease-in-out;
 }
 .productCarrito{
+    position: relative;
     width: 100%;
     display: flex;
+    gap: 10px;
     border: 1px solid black;
     border-radius: 7.5px;
     padding: 10px 15px;
@@ -936,7 +979,6 @@ main{
     z-index: 2;
     /*padding: 5px 0;*/
     background: rgba(145,218,255,0.9);
-
     transition: all 0.35s ease-in-out;
     pointer-events: none;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.8);
@@ -950,7 +992,7 @@ main{
     border-radius: 7.5px;
     white-space: nowrap;
     transition: all 0.35s ease-in-out;
-    font-size: 18.5px;
+    font-size: 16px;
 }
 .listaInicio>li:hover{
     box-shadow: 0 0 5px rgba(0,0,0,1);
@@ -1068,6 +1110,7 @@ main{
     flex-direction: column;
     align-items: center;
     gap: 15px 0;
+    padding: 25px 0 0 0;
 }
 .descriptionTop{
     width: 70%;
@@ -1077,39 +1120,57 @@ main{
     flex-direction: column;
     align-items: center;
     gap: 15px 0;
-
+    /*padding: 15px 0;*/
+    /*justify-content: space-evenly;*/
 }
 .descriptionTop>h4{
     width: 80%;
     margin: 0 auto;
+    font-weight:100;
 }
 .descriptinTop>h5{
     width: 90%;
     margin: 0 auto;
 }
+.descriptionTop *{
+}
 .descriptionTop>a{
     text-decoration: none;
     color: black;
-    border: 1px solid orange;
+    box-shadow: 0 0 2px rgba(0,0,0,0.8);
     padding: 7.5px 15px;
     border-radius: 15px;
+    transition: background 0.35s ease-in-out;
+}
+.descriptionTop>a:hover{
+    background :rgba(79,178,244,0.8);
+}
+.descriptionMid *{
 }
 .descriptionMid{
     display: flex;
-    width: 100%;
-    background: red;
+    width: 90%;
     align-items: center;
-    gap:  0 15px;
-
+    gap:  0 10px;
+    /*padding: 0 25px;*/
+    justify-content: center;
 }
+
 .lineHorizontal{
     height: 1px;
+    /*width: 40%;*/
     width: 100%;
+    margin: 0 auto;
+    border: 1px solid rgba(0,0,0,0.4) ;
 }
 #socialMedia{
     list-style: none;
     display: flex;
-    gap: 0 15px;
+    gap: 0 5px;
+}
+#socialMedia>li>svg{
+    width: 45px;
+    height: 45px;
 }
 #categoriasFooter{
     list-style: none;
@@ -1119,6 +1180,93 @@ main{
     gap: 10px;
     justify-content: space-evenly;
 }
+#categoriasFooter>li{
+    position: relative;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    width: 120px;
+}
+#categoriasFooter>li::before{
+    position: absolute;
+    content:'';
+    height: 5px;
+    width: 0;
+    border-radius: 5px;
+    top: 105%;
+    /*left: 50%;*/
+    transition: all 0.35s ease-in-out;
+    display: flex;
+
+
+}
+
+#categoriasFooter>li:hover::before{
+    width: 100%;
+    animation: delineado 0.35s ease-in-out;
+    background: lightblue;
+}
+/*#categoriasFooter>li::after{*/
+/*    position: absolute;*/
+/*    content:'';*/
+/*    height: 5px;*/
+/*    background: black;*/
+/*    width: 0;*/
+/*    top: 105%;*/
+/*    left: 50%;*/
+/*    transition: background 0.35s ease-in-out;*/
+/*    !*display: flex;*!*/
+
+/*    animation: delineado_two 0.35s ease-in-out;*/
+/*}*/
+/*#categoriasFooter>li:hover::before {*/
+/*    background: green;*/
+/*    height: 10px;*/
+/*    width: 100%;*/
+
+/*    animation: delineado .35s ease-in-out;*/
+/*}*/
+@keyframes delineado{
+    0%{
+        width: 0;
+    }
+    25%{
+        width: 25%;
+    }
+    50%{
+        width: 50%;
+    }
+    75%{
+        width: 75%;
+    }
+    100%{
+        width: 100%;
+    }
+
+}
+/*#categoriasFooter>li:hover::after{*/
+/*    background: blue;*/
+/*    height: 10px;*/
+/*    width: 100%;*/
+
+/*    animation: delineado .35s ease-in-out;*/
+/*}*/
+/*@keyframes delineado_two{*/
+/*    0%{*/
+/*        width: 0;*/
+/*    }*/
+/*    50%{*/
+/*        width: 50%;*/
+/*    }*/
+/*    100%{*/
+/*        width: 100%;*/
+/*    }*/
+/*}*/
+
+
+
+
+
 #footer>h3{
     font-size: 17.5px;
     text-align: center;
@@ -1129,11 +1277,15 @@ main{
     background: lightblue;
     width: 100%;
     text-align: center;
+    /*white-space: nowrap;*/
 }
 .infoDev>a{
     text-decoration: none;
     color: #000;
-    font-size: 12.5px;
+    font-size: 17.5px;
+}
+.infoDev>small{
+    font-size: 17.5px;
 }
 
 /*----------------BRANDS---------------------------------*/
@@ -1973,6 +2125,7 @@ input:focus{
     box-shadow: 0 0 15px rgba(0,0,0,0.2);
     min-width: 500px;
     padding: 60px 50px;
+    background: white;
 }
 .containerYapePlin>img{
         width: 200px;
@@ -2282,7 +2435,6 @@ input:focus{
 
     .c_partOne{
         min-width: 200%;
-        font-size: 17.5px;
     }
     @keyframes carrito {
         0%{
@@ -2541,8 +2693,12 @@ input:focus{
     .containerMenuSmallWindow{
         width: 275px;
     }
+
+    .nameStore{
+        white-space: nowrap;
+    }
     #iconsNav{
-        gap: 5px;
+        gap: clamp(10px, 5vw ,15px);
     }
 
 
@@ -2735,9 +2891,6 @@ input:focus{
         justify-content: space-between;
     }
 
-    #iconsNav{
-        gap: 5px;
-    }
     #iconsNav>li{
         padding: 0;
     }
@@ -3079,7 +3232,6 @@ input:focus{
     /*-------------------*/
     .c_partOne{
         min-width: 200%;
-        font-size: 15px;
     }
     @keyframes carrito {
         0%{
@@ -3132,7 +3284,7 @@ input:focus{
     }
 
     #iconsNav{
-        gap: 7.5px;
+        gap: 20px;
     }
     #iconsNav>li{
         padding: 0;
@@ -3946,8 +4098,8 @@ input:focus{
     }
     .elementInfo_one>div>svg,
     .elementInfo_two>div>svg{
-        width: 55px;
-        height: 55px;
+        width: 45px;
+        height: 45px;
     }
 
 /*--------------------*/
@@ -4494,6 +4646,7 @@ input:focus{
         filter: opacity(0.6);
     }
 }
+
 @media (min-width: 641px) and (max-width: 768px){
     .marca>div{
         font-size: 50px;
@@ -4778,11 +4931,11 @@ input:focus{
         justify-content: space-between;
     }
     .busquedaInteractiva{
-        width: 550px;
-        min-width: 550px;
+        /*width: 550px;*/
+        /*min-width: 550px;*/
     }
     .iconsBusqueda>input{
-        width: 500px;
+        /*width: 500px;*/
     }
     .iconsBusqueda>svg{
     }
@@ -5350,11 +5503,11 @@ input:focus{
         justify-content: space-between;
     }
     .busquedaInteractiva{
-        width: 550px;
-        min-width: 550px;
+        /*width: 550px;*/
+        /*min-width: 550px;*/
     }
     .iconsBusqueda>input{
-        width: 500px;
+        /*width: 500px;*/
     }
     .iconsBusqueda>svg{
 
@@ -5887,11 +6040,11 @@ input:focus{
         justify-content: space-between;
     }
     .busquedaInteractiva{
-        width: 550px;
-        min-width: 550px;
+        /*width: 550px;*/
+        /*min-width: 550px;*/
     }
     .iconsBusqueda>input{
-        width: 550px;
+        /*width: 550px;*/
     }
     .iconsBusqueda>svg{
 
@@ -6438,11 +6591,11 @@ input:focus{
         justify-content: space-between;
     }
     .busquedaInteractiva{
-        width: 550px;
-        min-width: 550px;
+        /*width: 550px;*/
+        /*min-width: 550px;*/
     }
     .iconsBusqueda>input{
-        width: 550px;
+        /*width: 550px;*/
     }
     .iconsBusqueda>svg{
     }
@@ -7024,11 +7177,11 @@ input:focus{
         justify-content: space-between;
     }
     .busquedaInteractiva{
-        width: 550px;
-        min-width: 550px;
+        /*width: 550px;*/
+        /*min-width: 550px;*/
     }
     .iconsBusqueda>input{
-        width: 600px;
+        /*width: 600px;*/
     }
     .iconsBusqueda>svg{
 
@@ -7617,11 +7770,11 @@ input:focus{
         justify-content: space-between;
     }
     .busquedaInteractiva{
-        width: 550px;
-        min-width: 550px;
+        /*width: 550px;*/
+        /*min-width: 550px;*/
     }
     .iconsBusqueda>input{
-        width: 700px;
+        /*width: 700px;*/
     }
     .iconsBusqueda>svg{
 
@@ -7861,7 +8014,7 @@ input:focus{
         flex-direction: column;
         justify-content: space-evenly;
         align-items: center;
-        padding:0;
+        padding:0 20px;
         box-shadow: 0 0 5px rgba(0,0,0,0.8);
         /*display: none;*/
     }

@@ -15,9 +15,6 @@ export function moveSpan(){
         })
 
     }
-
-    console.log(width,"<- aqui esta el width");
-
 }
 
 export function moveBottomInfo(){
@@ -120,18 +117,21 @@ export function apiladoInfoProductSmall(){
         const allDiv=document.querySelectorAll('.searchAndOptions>ul>li>div');
         const ulBusqueda=document.querySelector('.searchAndOptions>ul');
 
-        if(ulBusqueda.children.length>0) {
-            console.log(ulBusqueda.children,'aqui esta la cantidad de hijos 2')
-            allDiv.forEach(div => {
+        if(ulBusqueda) {
 
-                const spanPrice = div.nextElementSibling;
-                spanPrice.style.fontWeight = "bold"
-                div.insertAdjacentElement('beforeend', spanPrice);
 
-            })
+            if (ulBusqueda.children.length > 0) {
+                console.log(ulBusqueda.children, 'aqui esta la cantidad de hijos 2')
+                allDiv.forEach(div => {
 
+                    const spanPrice = div.nextElementSibling;
+                    spanPrice.style.fontWeight = "bold"
+                    div.insertAdjacentElement('beforeend', spanPrice);
+
+                })
+
+            }
         }
-
     }
     const mediaTwo=window.matchMedia('(min-width: 321px) and (max-width: 480px)');
 

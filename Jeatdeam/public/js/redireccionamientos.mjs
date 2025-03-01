@@ -37,8 +37,6 @@ export function redirectMarca(){
 
     })
 
-
-
     document.addEventListener('click',async e=>{
         const categoryElement=e.target.closest('.categoryElement')
         if(!isActive) {
