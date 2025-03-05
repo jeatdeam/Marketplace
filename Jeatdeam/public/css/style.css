@@ -2,21 +2,70 @@
 /*@tailwind components;*/
 /*@tailwind utilities;*/
 
-
-
-
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 body{
-
-    /*overflow-x: hidden;*/
-    /*overflow: hidden;*/
-    /*background: rgb(235,255,255);*/
-    /*background: linear-gradient(0deg, rgba(235,255,255,1) 0%, rgba(121,201,255,0.5368522408963585) 100%);*/
 }
+.centerItem{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    /*transition: opacity 0.5s linear;*/
+}
+.animate-item{
+    animation: showPage 0.5s linear;
+}
+.animate-sub{
+    animation: mostrarSubtitle 1s linear;
+}
+.animate-color{
+    animation: vanishColor 0.5s linear;
+}
+.animate-showBody{
+    animation: bodyShow 0.5s linear;
+}
+
+@keyframes bodyShow{
+    0%{
+        opacity: 0;
+    }
+    100%{
+        opacity: 1;
+    }
+}
+
+@keyframes mostrarSubtitle{
+    0%{
+        opacity: 0;
+    }
+    100%{
+        opacity: 1;
+    }
+}
+@keyframes showPage {
+    0%{
+        opacity: 1;
+    }
+    100%{
+        opacity: 0;
+    }
+}
+@keyframes vanishColor {
+    0% {
+        background: rgba(173, 216, 230, 1); /* 🔵 lightblue en formato rgba */
+    }
+    100% {
+        background: rgba(173, 216, 230, .25); /* 🔥 lightblue completamente transparente */
+    }
+}
+
+
+
+
 body *{
     /*border: 5px solid orange;*/
 }
@@ -31,6 +80,12 @@ button{
     transition: all 0.15s linear;
     background: white;
 }
+
+.colorSection{
+    background: rgb(224,246,255);
+    background: radial-gradient(circle, rgba(224,246,255,0.9164040616246498) 21%, rgba(150,211,249,0.8883928571428571) 80%, rgba(79,178,244,0.8491771708683473) 100%);
+}
+
 main{
 
     background: rgb(224,246,255);
@@ -2404,6 +2459,12 @@ input:focus{
     font-weight: bold;
 }
 
+.marca{
+    /*display: none;*/
+    overflow: hidden;
+    /*text-overflow: ellipsis;*/
+}
+
 
 
 @media (max-width: 320px){
@@ -2591,7 +2652,7 @@ input:focus{
         margin-left: 5px;
     }
     .searchAndOptions>ul>li>div{
-        border: 2px solid black;
+        /*border: 2px solid black;*/
     }
     .searchAndOptions>ul>li>div>span:nth-of-type(1){
         font-size: 18px;
@@ -2644,12 +2705,11 @@ input:focus{
         display: flex;
         gap: 10px;
         flex-direction: column;
-        border: 5px solid black;
     }
 
     .elementInfo_one>div,
     .elementInfo_two>div{
-        background: lightblue;
+        /*background: lightblue;*/
         display: flex;
         width: clamp(120px, 40vw, 150px);
         height: clamp(120px, 40vw , 150px);
@@ -2835,7 +2895,6 @@ input:focus{
         justify-content: center;
         width: 90%;
         margin: 25px auto 0 auto;
-        background: green;
     }
     .bottomInfo>ul{
         display: flex;
@@ -2929,9 +2988,7 @@ input:focus{
     }
     .marcas>h1{
         text-align: center;
-        /*line-height:2;*/
         font-size: 35px;
-        /*padding: 25px 0;*/
         font-weight: 100;
     }
     .containerMarcas{
@@ -3400,7 +3457,7 @@ input:focus{
     margin-left: 5px;
     }
     .searchAndOptions>ul>li>div{
-        border: 2px solid black;
+        /*border: 2px solid black;*/
     }
     .searchAndOptions>ul>li>div>span:nth-of-type(1){
         font-size: 18px;
@@ -3454,12 +3511,10 @@ input:focus{
         display: flex;
         gap: 10px;
         flex-direction: column;
-        border: 5px solid black;
     }
 
     .elementInfo_one>div,
     .elementInfo_two>div{
-        background: lightblue;
         display: flex;
         width: clamp(140px, 40vw, 210px);
         height: clamp(140px, 40vw , 210px);
@@ -3632,7 +3687,6 @@ input:focus{
         justify-content: center;
         width: 90%;
         margin: 25px auto 0 auto;
-        background: pink;
     }
     .bottomInfo>ul{
         display: flex;
@@ -3664,7 +3718,6 @@ input:focus{
 
 
     .productsRecomended{
-        background: greenyellow;
     }
 
 
@@ -3713,14 +3766,12 @@ input:focus{
     .marcas>h1{
         width: 90%;
         margin: 0 auto;
-        border: 5px solid black;
         text-align: center;
         font-size: 35px;
         font-weight: 100;
     }
     .containerMarcas{
         /*height: 500px;*/
-        background: pink;
         padding: 25px 0;
         width: 80%;
         margin: 0 auto;
@@ -4056,12 +4107,10 @@ input:focus{
     }
     /*----------infoCenter-----------*/
     .infoCenter{
-        /*width: calc(70vw + 25px);*/
         width: 90%;
         margin: 0 auto;
         display: flex;
         align-items: center;
-        /*grid-template-columns: repeat(auto-fit,minmax(300px,1fr));*/
         justify-content: center;
         padding: 35px 25px 25px 25px;
         gap: calc(10px + 1vw);
@@ -4070,7 +4119,6 @@ input:focus{
         display: flex;
         gap: calc(10px + 1vw);
         flex-direction: column;
-        border: 5px solid red;
     }
 
     .elementInfo_one>div,
@@ -4228,7 +4276,6 @@ input:focus{
     }
     .arrowsLeftSide{
         width: 112.5%;
-        background: purple;
     }
     .arrowsLeftSide>svg{
         width: 35px;
@@ -4269,7 +4316,6 @@ input:focus{
         justify-content: center;
         width: 90%;
         margin: 25px auto 0 auto;
-        background:blueviolet;
     }
     .bottomInfo>ul{
         display: flex;
@@ -4302,7 +4348,6 @@ input:focus{
 
 
     .productsRecomended{
-        background: blue;
     }
 
     /*-------nav-------*/
@@ -4367,13 +4412,10 @@ input:focus{
         text-align: center;
         font-weight: 100;
         margin: 0 auto;
-        /*line-height:2;*/
         font-size: 40px;
         padding: 10px 0;
     }
     .containerMarcas{
-        /*height: 500px;*/
-        background: green;
         justify-items: center;
         padding: 25px 0;
         width: 80%;
@@ -4650,12 +4692,12 @@ input:focus{
 @media (min-width: 641px) and (max-width: 768px){
     .marca>div{
         font-size: 50px;
-        border: 5px solid red;
+        /*border: 5px solid red;*/
     }
     .marca:nth-of-type(3){
         display: flex;
         flex-direction: column;
-        border: 10px solid orange;
+        /*border: 10px solid orange;*/
     }
     .buttonsFinalizar{
         width: 90%;
@@ -4683,10 +4725,8 @@ input:focus{
         justify-content: space-between;
         width: 112.5%;
         transform: translateY(-50%);
-        background: green;
     }
     .arrowsLeftSide>svg{
-        background: pink;
         width: 35px;
         height: 35px;
     }
@@ -4706,7 +4746,6 @@ input:focus{
         display: flex;
         gap: calc(10px + 2vw);
         flex-direction: column;
-        border: 5px solid purple;
     }
 
     .elementInfo_one>div,
@@ -4910,7 +4949,6 @@ input:focus{
 
 
     .productsRecomended{
-        background: pink;
     }
 
     /*-------nav-------*/
@@ -4973,19 +5011,16 @@ input:focus{
         text-align: center;
         width: 90%;
         margin: 0 auto;
-        /*line-height:2;*/
         font-size: 48px;
         padding: 25px 0;
         font-weight: 100;
     }
     .containerMarcas{
-        /*height: 500px;*/
         padding: 25px 0;
         width: 80%;
         margin: 0 auto;
         display: grid;
         gap: 25px;
-        /*grid-template_rows: auto auto auto;*/
         grid-template-areas:
         "marca_1 marca_1 marca_3"
         "marca_4 marca_2 marca_3"
@@ -5249,12 +5284,12 @@ input:focus{
 
     .marca>div{
         font-size: 50px;
-        border: 5px solid red;
+        /*border: 5px solid red;*/
     }
     .marca:nth-of-type(3){
         display: flex;
         flex-direction: column;
-        border: 10px solid red;
+        /*border: 10px solid red;*/
     }
     .containerGroup{
 
@@ -5289,7 +5324,6 @@ input:focus{
         display: flex;
         gap: calc(10px + 2vw);
         flex-direction: column;
-        border: 5px solid yellow;
     }
 
     .elementInfo_one>div,
@@ -5449,7 +5483,6 @@ input:focus{
         /*padding: 0 25px;*/
         width: 85%;
         margin: 50px auto 0 auto;
-        background: orchid;
     }
     .bottomInfo>ul{
         display: flex;
@@ -5466,7 +5499,6 @@ input:focus{
         margin: 0 auto;
         justify-content: space-between;
         gap: 50px;
-        border: 5px solid blueviolet;
     }
     .lastMove>button{
      padding: 0 20px;
@@ -5482,7 +5514,6 @@ input:focus{
 
 
     .productsRecomended{
-        background: yellow;
     }
 
     /*-------nav-------*/
@@ -5545,7 +5576,6 @@ input:focus{
     }
     .marcas>h1{
         text-align: center;
-        /*line-height:2;*/
         font-size: 45px;
         width: 80%;
         margin: 0 auto;
@@ -5553,7 +5583,6 @@ input:focus{
         padding: 25px 0 25px 0;
     }
     .containerMarcas{
-        /*height: 500px;*/
         padding: 25px 0 0 0;
         width: 80%;
         margin: 0 auto;
@@ -5845,7 +5874,6 @@ input:focus{
         display: flex;
         gap: calc(10px + 2vw);
         flex-direction: column;
-        border: 5px solid green;
     }
 
     .elementInfo_one>div,
@@ -5866,10 +5894,12 @@ input:focus{
     .elementInfo_one>div>b,
     .elementInfo_two>div>b{
         font-size: 20px;
+        padding: 0 10px;
     }
     .elementInfo_one>div>small,
     .elementInfo_two>div>small{
         font-size: 15px;
+        padding: 0 10px;
     }
     .elementInfo_one>div>svg,
     .elementInfo_two>div>svg{
@@ -6084,7 +6114,6 @@ input:focus{
     }
     .marcas>h1{
         text-align: center;
-        /*line-height:2;*/
         font-size:40px;
         width: 80%;
         margin: 0 auto;
@@ -6361,7 +6390,6 @@ input:focus{
 
 @media (min-width: 1281px) and (max-width: 1440px){
     .productsRecomended{
-        background: greenyellow;
         margin-top: 50px;
     }
     .marca>div{
@@ -6396,8 +6424,6 @@ input:focus{
     .elementInfo_one,.elementInfo_two{
         display: flex;
         gap: calc(10px + 2vw);
-        /*flex-direction: column;*/
-        border: 10px solid orangered;
     }
 
     .elementInfo_one>div,
@@ -6505,7 +6531,6 @@ input:focus{
     }
     .arrowsLeftSide{
         width: 110%;
-        background: yellow;
     }
     .arrowsLeftSide>svg{
         width: 40px;
@@ -6955,7 +6980,6 @@ input:focus{
 }
 @media (min-width: 1441px) and (max-width: 1536px){
     .productsRecomended{
-        background: greenyellow;
         margin-top: 50px;
     }
     .marca>div{
@@ -6983,8 +7007,6 @@ input:focus{
     .elementInfo_one,.elementInfo_two{
         display: flex;
         gap: calc(10px + 2vw);
-        /*flex-direction: column;*/
-        border: 20px solid cornflowerblue;
     }
 
     .elementInfo_one>div,
@@ -7095,7 +7117,6 @@ input:focus{
         width: 110%
     }
     .arrowsLeftSide>svg{
-        background: gray;
     }
     .sideRight{
         width:50%;
@@ -7545,7 +7566,6 @@ input:focus{
 
 
     .productsRecomended{
-        background: greenyellow;
         margin-top: 50px;
     }
 
@@ -7573,8 +7593,6 @@ input:focus{
     .elementInfo_one,.elementInfo_two{
         display: flex;
         gap: calc(10px + 2vw);
-        /*flex-direction: column;*/
-        border: 5px solid lightseagreen;
     }
 
     .elementInfo_one>div,

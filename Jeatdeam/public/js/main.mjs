@@ -27,6 +27,81 @@ window.onload=()=>{
     apiladoInfoProductSmall();
 }
 
+if(window.location.pathname==="/"){
+    startApp()
+}
+// if (!sessionStorage.getItem("firstVisit")) {
+//     startApp();
+//     sessionStorage.setItem("firstVisit", "true");
+// }
+
+
+function startApp() {
+    const $body = document.querySelector('body');
+    const section=document.createElement('section');
+    const div = document.createElement('div');
+    const h1=document.createElement('h1')
+    const small=document.createElement('small');
+
+    $body.insertAdjacentElement('beforebegin', section);
+    $body.style.display="none";
+    section.appendChild(div)
+    section.classList.add('centerItem','colorSection');
+    div.appendChild(h1)
+    div.appendChild(small);
+    small.classList.add('animate-sub')
+
+
+    Object.assign(section.style,{
+        height: '100vh',
+        width: '100%',
+        position:'absolute',
+    })
+    Object.assign(div.style,{
+        width: '350px',
+        position: 'relative',
+    })
+    Object.assign(small.style,{
+        position: 'absolute',
+        right: '15px',
+        top: '100%',
+        // color: 'gray',
+        fontWeight: '100',
+    })
+    Object.assign(h1.style,{
+        fontSize: '100px',
+        textAlign: 'center'
+    })
+
+    small.textContent="by Jeatdeam"
+
+    const txt = "k-moon";
+    let render = "";
+
+    txt.split('').forEach((word, index) => {
+        setTimeout(() => {
+            render += word;
+            console.log(render);
+            h1.textContent = render+'|';
+            if (render.length === txt.length) {
+                h1.classList.add('animate-item');
+                section.classList.add('animate-color')
+                console.log('llegamos a pasa-la condicion');
+                $body.classList.add('animate-showBody')
+            }
+        }, index * 150);
+    });
+
+
+    h1.addEventListener("animationend", () => {
+        $body.style.opacity="1";
+        $body.style.display="block";
+        section.remove();
+    });
+
+}
+
+
 function checkAndApplyStyles(){
     apiladoInfoProductSmall();
 }
@@ -37,7 +112,6 @@ redirectMarca();
 
 
 document.addEventListener('DOMContentLoaded',()=>{
-    // moveSpan();
     moveBottomInfo();
     menuSmallWindowEvents();
     apiladoInfoProductSmall();

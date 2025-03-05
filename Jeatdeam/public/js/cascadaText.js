@@ -66,12 +66,14 @@ export function cascadaBrand(target) {
   target.textContent = "";
 
   const contenedorTxt = document.createElement("div");
+
   contenedorTxt.style.position = "absolute";
   contenedorTxt.style.width = "100%";
+  contenedorTxt.style.whiteSpace = "nowrap";
+  // contenedorTxt.style.overflowY = "hidden";
   contenedorTxt.style.transform = "translateY(-50%)";
   contenedorTxt.style.top = "50%";
   contenedorTxt.style.pointerEvents = "none";
-  // contenedorTxt.style.fontSize = "100px";
 
   target.style.position = "relative";
   target.appendChild(contenedorTxt);
