@@ -5,7 +5,6 @@ import helmet from 'helmet';
 import morgan from 'morgan';
 import expressSession from 'express-session';  // Importamos el middleware de sesión
 import Stripe from 'stripe';
-// import crypto from "crypto";
 
 import taskController from './controllers/taskController.mjs';
 
@@ -94,7 +93,7 @@ app.delete('/compra/compra/compra/compra',taskController.deleteCarrito);
 app.delete('/datos/cliente/compra',taskController.deleteDatos)
 
 
-const PORT=process.env.PORT||3000;
+const PORT=process.env.PORT||8080;
 app.listen(PORT, () => console.log(`Servidor corriendo en el puerto ${PORT}`))
 
 // app.listen(port, () => {

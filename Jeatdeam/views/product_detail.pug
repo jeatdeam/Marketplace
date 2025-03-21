@@ -59,13 +59,13 @@ block content
                                 li Lorem ipsum dolor sit amet, consectetur adipisicing elit. A alias aliquam aliquid distinctio dolorem ea eaque error eveniet explicabo id, illo laudantium libero nemo nesciunt quae quasi recusandae veritatis voluptatum!
                                 li Lorem ipsum dolor sit amet, consectetur adipisicing elit. A ad at consectetur culpa cum doloribus ea eveniet facilis iusto maiores molestiae mollitia, nesciunt nostrum odio omnis quas sapiente ut veniam?
                         div.lastMove
-                            button enviar al carrito
-                            button comprar
+                            button(data-id=producto.id, data-brand=producto.brand, data-img=producto.img[0], data-price=producto.price, data-name=producto.name) enviar al carrito
+                            button(data-id=producto.id, data-brand=producto.brand, data-img=producto.img[0], data-price=producto.price, data-name=producto.name) comprar
 
             section.productsRecomended
                 h1 Productos Recomendados
                 div.containerElementsRecomended
-                    each element,index in baseDatos
+                    each element,index in recomendados
                         div(class=`product${element.category} productRecomendent`)
                             img(src=element.img[0])
                             b #{element.subtitle}

@@ -1,4 +1,4 @@
-import { opacityBrand, cascadaBrand } from "./cascadaText.js";
+import { opacityBrand, cascadaBrand } from "./cascadaText.mjs";
 import { datosCarrito } from "./main.mjs";
 import { flatListProducts } from "./main.mjs";
 

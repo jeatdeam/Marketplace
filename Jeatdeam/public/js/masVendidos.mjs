@@ -1,16 +1,21 @@
 import {datosCarrito} from './main.mjs'
 import {lastIdCompra} from './main.mjs'
-import {addProduct} from './main.mjs'
+import {postProduct} from './peticionPost.js'
+import {carritoContadorDOM} from "./main.mjs";
+
 // import {activeButton} from './main.mjs';
 
 export async function masVendidosElement(){
 
     document.addEventListener('click',async e=>{
         if(e.target.closest('.masVendidoElement>div>button:nth-child(1)')||e.target.closest('.masVendidoElement_two>div>button:nth-child(1)')){
-            addProduct(e.target);
+            await postProduct(e);
+            carritoContadorDOM()
         }
         if(e.target.closest('.masVendidoElement>div>button:nth-child(2)')||e.target.closest('.masVendidoElement_two>div>button:nth-child(2)')){
-            addProduct(e.target);
+            await postProduct(e);
+            carritoContadorDOM()
+            window.location.href="/compra/compra/compra/compra"
         }
         if(e.target.closest('.masVendidoElement')){
 
@@ -45,10 +50,10 @@ export function redirectMasVendidoElement(){
             activeButton=true;
         })
     })
-    
+
     const $buttonAddCarritoAll_two=document.querySelectorAll('.masVendidoElement_two>div>button:nth-child(1)');
     const $buttonComprarAll_two=document.querySelectorAll('.masVendidoElement_two>div>button:nth-child(2)');
- 
+
     $buttonAddCarritoAll_two.forEach(button=>{
       button.addEventListener('mouseenter',e=>{
           activeButton=!activeButton;
@@ -64,7 +69,7 @@ export function redirectMasVendidoElement(){
         button.addEventListener('mouseleave',e=>{
             activeButton=true;
         })
-        
+
     })
 
     document.addEventListener('click',e=>{

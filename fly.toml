@@ -1,0 +1,23 @@
+# fly.toml app configuration file generated for marketplace-bold-wind-5305 on 2025-03-20T14:57:45-05:00
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
+
+app = 'marketplace-bold-wind-5305'
+primary_region = 'gru'
+
+[build]
+dockerfile = "Dockerfile"
+
+[http_service]
+internal_port = 8080
+force_https = true
+auto_stop_machines = 'stop'
+auto_start_machines = true
+min_machines_running = 0
+processes = ['app']
+
+[[vm]]
+memory = '1gb'
+cpu_kind = 'shared'
+cpus = 1

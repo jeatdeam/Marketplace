@@ -16,6 +16,11 @@ body{
 
     /*transition: opacity 0.5s linear;*/
 }
+
+.prePage{
+    /*font-size*/
+}
+
 .animate-item{
     animation: showPage 0.5s linear;
 }
@@ -1198,7 +1203,9 @@ main{
     transition: background 0.35s ease-in-out;
 }
 .descriptionTop>a:hover{
-    background :rgba(79,178,244,0.8);
+    /*background :rgba(79,178,244,0.8);*/
+    background: lightblue;
+    box-shadow: 0 0 4px rgba(0,0,0,0.9);
 }
 .descriptionMid *{
 }
@@ -1226,6 +1233,28 @@ main{
 #socialMedia>li>svg{
     width: 45px;
     height: 45px;
+    position: relative;
+}
+#socialMedia>li{
+    position:relative;
+    display: flex;
+    justify-content: center;
+}
+#socialMedia>li::before{
+    content: '';
+    width: 0;
+    height: 5px;
+    top: 95%;
+    background: lightblue;
+    position: absolute;
+    z-index: -1;
+    opacity: 0;
+    transition: all 0.35s ease-in-out;
+}
+#socialMedia>li:hover::before{
+    opacity: 1;
+    width: 45px;
+    transform-origin: center;
 }
 #categoriasFooter{
     list-style: none;
@@ -1261,26 +1290,7 @@ main{
     animation: delineado 0.35s ease-in-out;
     background: lightblue;
 }
-/*#categoriasFooter>li::after{*/
-/*    position: absolute;*/
-/*    content:'';*/
-/*    height: 5px;*/
-/*    background: black;*/
-/*    width: 0;*/
-/*    top: 105%;*/
-/*    left: 50%;*/
-/*    transition: background 0.35s ease-in-out;*/
-/*    !*display: flex;*!*/
 
-/*    animation: delineado_two 0.35s ease-in-out;*/
-/*}*/
-/*#categoriasFooter>li:hover::before {*/
-/*    background: green;*/
-/*    height: 10px;*/
-/*    width: 100%;*/
-
-/*    animation: delineado .35s ease-in-out;*/
-/*}*/
 @keyframes delineado{
     0%{
         width: 0;
@@ -1299,27 +1309,6 @@ main{
     }
 
 }
-/*#categoriasFooter>li:hover::after{*/
-/*    background: blue;*/
-/*    height: 10px;*/
-/*    width: 100%;*/
-
-/*    animation: delineado .35s ease-in-out;*/
-/*}*/
-/*@keyframes delineado_two{*/
-/*    0%{*/
-/*        width: 0;*/
-/*    }*/
-/*    50%{*/
-/*        width: 50%;*/
-/*    }*/
-/*    100%{*/
-/*        width: 100%;*/
-/*    }*/
-/*}*/
-
-
-
 
 
 #footer>h3{
@@ -1337,10 +1326,10 @@ main{
 .infoDev>a{
     text-decoration: none;
     color: #000;
-    font-size: 17.5px;
+    font-size: 15px;
 }
 .infoDev>small{
-    font-size: 17.5px;
+    font-size: 15px;
 }
 
 /*----------------BRANDS---------------------------------*/
@@ -1468,50 +1457,6 @@ main{
     border-radius: 50%;
     border: 1px solid black;
 }
-/*}*/
-/*.botLeft>img{*/
-/*    width:30%;*/
-/*    object-fit: cover;*/
-/*    border-radius: 12px;*/
-
-/*}*/
-/*.sideRight{*/
-/*    width:50%;*/
-/*    display: flex;*/
-/*    flex-direction: column;*/
-/*    gap: 15px 0;*/
-/*}*/
-/*.sideRight>h2{*/
-/*    !*width: 80%;*!*/
-/*    !*margin: 0 auto;*!*/
-
-/*}*/
-/*.priceStar{*/
-/*    display: flex;*/
-/*    justify-content: space-between;*/
-/*    padding: 0 15px;*/
-/*}*/
-/*#estrellas{*/
-/*    display: flex;*/
-/*    gap: 0 5px;*/
-/*    list-style: none;*/
-/*}*/
-
-/*.middleInfo{*/
-/*    display: flex;*/
-/*    justify-content: space-between;*/
-/*    !*gap: 0 50%;*!*/
-/*}*/
-/*.bottomInfo{*/
-/*    display: flex;*/
-/*    flex-direction: column;*/
-/*    gap: 15px 0;*/
-/*}*/
-/*.bottomInfo>ul{*/
-/*    display: flex;*/
-/*    flex-direction: column;*/
-/*    gap: 15px 0;*/
-/*}*/
 
 .productsRecomended{
   padding: 25px 0;
@@ -1523,17 +1468,7 @@ main{
     font-weight: 100;
     /*border: 5px solid black;*/
 }
-/*.containerElementsRecomended{*/
-/*    width: 80%;*/
-/*    display: grid;*/
-/*    grid-template-columns: repeat(auto-fit,minmax(300px,1fr));*/
-/*    justify-content: space-evenly;*/
-/*    justify-items: center;*/
-/*    margin: 0 auto;*/
-/*    gap: 55px 25px;*/
-/*    padding: 0 40px;*/
-/*    transition: all 0.35s ease-in-out;*/
-/*}*/
+
 .containerElementsRecomended{
     gap: 50px;
     justify-items: center;
@@ -1587,7 +1522,6 @@ main{
 .productRecomendent>div:nth-of-type(1)>button{
     padding: 0 15px;
     height: 35px;
-    font-size: 12.5px;
     border-radius: 7.5px;
     border: 1.5px solid transparent;
     flex: 1;
@@ -1596,7 +1530,10 @@ main{
 .productRecomendent>div:nth-of-type(1)>button:hover{
     border: 1.5px solid gray;
 }
-
+.productsRecomended>div>button{
+    /*height: 45px;*/
+    font-size: 15px;
+}
 
 .productHidratant{
 
@@ -1977,6 +1914,9 @@ input:focus{
     /*padding: 5px;*/
     width: 30px;
     height: 30px;
+}
+#arrowRight>path,#arrowLeft>path{
+    pointer-events: none;
 }
 #arrowLeft:hover,#arrowRight:hover{
     background: lightblue;
@@ -2466,8 +2406,15 @@ input:focus{
 }
 
 
+.prePage{
+    font-size: 100px;
+}
 
 @media (max-width: 320px){
+
+    .prePage{
+        font-size: 60px;
+    }
 
     .arrowsLeftSide{
         position: absolute;
@@ -3259,7 +3206,9 @@ input:focus{
     }
 }
 @media (min-width: 321px) and (max-width: 480px){
-
+    .prePage{
+        font-size: 70px;
+    }
     .arrowsLeftSide{
         position: absolute;
         top: 50%;

@@ -11,9 +11,13 @@ import {redirectMasVendidoElement} from './masVendidos.mjs'
 import {asignarNombresHeader} from "./listaProducts.mjs";
 import {menuSmallWindowEvents} from "./menuSmall.mjs";
 import {ocultarMenuSmall, moveBottomInfo, moveSpan} from "./moveElements.mjs";
-import {marcaEvent} from "./cascadaText.js"
+import {marcaEvent} from "./cascadaText.mjs"
 import {eventsPhone} from "./eventosPhone.js"
+import {postProduct} from "./peticionPost.js"
+import {productInfo} from "./productDescription.mjs";
 
+
+productInfo()
 masVendidosScroll();
 eventsPhone();
 marcaEvent();
@@ -47,6 +51,7 @@ function startApp() {
     $body.style.display="none";
     section.appendChild(div)
     section.classList.add('centerItem','colorSection');
+    h1.classList.add('prePage')
     div.appendChild(h1)
     div.appendChild(small);
     small.classList.add('animate-sub')
@@ -69,7 +74,7 @@ function startApp() {
         fontWeight: '100',
     })
     Object.assign(h1.style,{
-        fontSize: '100px',
+        // fontSize: '100px',
         textAlign: 'center'
     })
 
@@ -152,8 +157,8 @@ async function deleteDatos(){
 
 function textoDashed() {
     let active = true;
-    let txtOne = "Aylas De la Cruz, Paulo Smit.";
-    let txtTwo = "Front-end developer.";
+    let txtOne = "Lo mejor en skincare coreano.";
+    let txtTwo = "Tienda especializada en K-beauty.";
     let showTxt = active ? txtOne : txtTwo;
 
     const $navegador = document.querySelector(".navegador");
@@ -523,8 +528,6 @@ function absorberDatosFormulario(){
 
     const $form=document.getElementById('myForm');
 
-
-
     const $textarea=document.querySelector('.couriers~textarea')
 
 document.addEventListener('click',e=>{
@@ -871,94 +874,13 @@ document.addEventListener('click', async (e) => {
 
     if (e.target.nodeName === 'BUTTON' && e.target.classList.contains('btn-carrito')) {
 
-        let idCompra=await lastIdCompra();
-
-        if(idCompra===0){
-            idCompra=1;
-        }else{
-            idCompra=idCompra+1;
-        }
-
-        const {id, brand, img, price,name} = e.target.dataset;
-
-        const product = {
-            id,
-            idCompra: parseInt(idCompra),
-            brand,
-            img,
-            price: parseFloat(price),
-            name,
-        }
-        const url = "/compra/compra/compra/compra";
-        const options = {
-            method: "POST",
-            headers: {"Content-Type": "application/json"},
-            body: JSON.stringify(product)
-        };
-
-        const peticion = async () => {
-            try {
-                const response = await fetch(url, options);
-
-                if (response.ok) {
-                    const result = await response.json();
-                    console.log('producto enviado con exito: ', result.allProduct);
-
-                    // actualizarContadorCarrito(result.carrito.length)
-
-                    const contadorCarrito=document.getElementById('contador-carrito');
-                    contadorCarrito.textContent=result.carrito;
-
-                } else {
-                    console.error('Error al enviar el producto:', response.statusText)
-                }
-
-            } catch (error) {
-                console.error('Error en la peticion: ', error);
-            }
-        }
-        peticion();
+        await postProduct(e)
         carritoContadorDOM();
-
     }
 
     if(e.target.classList.contains('btn-comprar')){
 
-        let idCompra=await lastIdCompra();
-
-        if(idCompra===0){
-            idCompra=1;
-        }else{
-            idCompra=idCompra+1;
-        }
-
-        const {id,brand,img,price,name}=e.target.dataset;
-        const url="/compra/compra/compra/compra"
-        const product={
-            id,
-            idCompra:parseInt(idCompra),
-            brand,
-            img,
-            price:parseFloat(price),
-            name,
-        }
-
-        const options={
-            method: 'POST',
-            headers:{'Content-Type':'application/json'},
-            body: JSON.stringify(product)
-        }
-        const peticionCompra=async()=>{
-            const response=await fetch(url,options);
-            if(response.ok){
-                const result=await response.json();
-                console.log(result);
-            }
-            else{
-                console.error('Error al enviar el producto:', response.statusText)
-            }
-        }
-        peticionCompra();
+        await postProduct(e)
         carritoContadorDOM();
         window.location.href="/compra/compra/compra/compra";
     }
@@ -1005,87 +927,6 @@ document.addEventListener('click', async (e) => {
 });
 
 
-export async function addProduct(node){
-
-            if(node.matches(".masVendidoElement>div>button:nth-child(1)")||node.matches(".masVendidoElement_two>div>button:nth-child(1)")){
-
-                let lastId = await lastIdCompra();
-
-                let idCompra= lastId ? lastId+1 : 1;
-
-                const {id, brand, img, price, name} = node.dataset;
-
-
-                const url = "/compra/compra/compra/compra"
-                const product = {
-                    id,
-                    idCompra: parseInt(idCompra),
-                    brand,
-                    img,
-                    price: parseFloat(price),
-                    name,
-                }
-
-                const options = {
-                    method: 'POST',
-                    headers: {'Content-Type': 'application/json'},
-                    body: JSON.stringify(product)
-                }
-                const peticionCompra = async () => {
-                    const response = await fetch(url, options);
-                    if (!response.ok) {
-                        throw new Error(`error en la peticion->${response.statusText}`)
-                    }
-                    const result=await response.json();
-
-                    console.log(result.message,"->",result.allProduct);
-
-                }
-                peticionCompra();
-                carritoContadorDOM();
-            }else{
-
-                console.log(node)
-
-                let lastId = await lastIdCompra();
-
-                let idCompra= lastId ? lastId+1 : 1;
-
-                const {id, brand, img, price, name} = node.dataset;
-
-                console.log(id,idCompra,brand, img, price, name)
-
-                const url = "/compra/compra/compra/compra"
-                const product = {
-                    id,
-                    idCompra: parseInt(idCompra),
-                    brand,
-                    img,
-                    price: parseFloat(price),
-                    name,
-                }
-
-                const options = {
-                    method: 'POST',
-                    headers: {'Content-Type': 'application/json'},
-                    body: JSON.stringify(product)
-                }
-                const peticionCompra = async () => {
-                    const response = await fetch(url, options);
-                    if (!response.ok) {
-                        throw new Error(`error en la peticion->${response.statusText}`)
-                    }
-                    const result=await response.json();
-
-                    console.log(result.message,"->",result.allProduct);
-
-                }
-                peticionCompra();
-                carritoContadorDOM();
-                window.location.href="/compra/compra/compra/compra"
-            }
-
-}
 function eventsProductMarcaAddCarrito(){
     //active=false;
     const $buttonAddAll=document.querySelectorAll('.elementProduct>div>button:nth-of-type(1)')
@@ -1104,49 +945,15 @@ function eventsProductMarcaAddCarrito(){
     document.addEventListener('click',async e=>{
 
         if(e.target.matches('.elementProduct>div>button:nth-of-type(1)')){
-
-            const  url="/compra/compra/compra/compra";
-
-            const {id,brand,img,price,name}=e.target.dataset;
-
-            let lastId=await lastIdCompra();
-
-            let idCompra= lastId ? lastId + 1 : 1;
-
-            const product={
-                id,
-                idCompra: parseInt(idCompra),
-                brand,
-                img,
-                price: parseFloat(price),
-                name,
-            }
-            const options={
-                method: 'POST',
-                headers: {'Content-Type':'application/json'},
-                body: JSON.stringify(product),
-            }
-
-            const enviarProduct= async ()=>{
-                const response=await fetch(url,options);
-
-                if(!response.ok) throw new Error(`error en la peticion->${response.statusText}`);
-
-                const result = await response.json();
-
-
-            }
-            enviarProduct();
+            await postProduct(e);
             carritoContadorDOM();
-
         }
-
-
 
     })
 
 }
 eventsProductMarcaAddCarrito()
+
 function eventsProductMarcaComprar(){
 
     const $buttonComprarAll=document.querySelectorAll('.elementProduct>div>button:nth-of-type(2)');
@@ -1171,42 +978,9 @@ function eventsProductMarcaComprar(){
             if(e.target.closest('.elementProduct>div>button:nth-of-type(2)')) {
 
                 if (isActive) {
-
-                    const {id, brand, img, price, name} = e.target.dataset;
-
-                    const url = "/compra/compra/compra/compra";
-
-                    let lastId=await lastIdCompra()
-
-                    let idCompra= lastId ? lastId+1 : 1;
-
-                    const product = {
-                        id,
-                        idCompra: parseInt(idCompra),
-                        brand,
-                        img,
-                        price: parseFloat(price),
-                        name,
-                    }
-                    const options = {
-                        method: "POST",
-                        headers: {"Content-Type": "application/json"},
-                        body: JSON.stringify(product)
-                    }
-
-                    const peticionCompraMarca = async () => {
-                        const response = await fetch(url, options)
-
-                        if (!response.ok) {
-                            throw new Error(`ocurrio un error en la peticion->${response.statusText}`)
-                        }
-
-                        const result = await response.json();
-
-                    }
-                    peticionCompraMarca();
-
+                    await postProduct(e)
                     window.location.href="/compra/compra/compra/compra";
+
                 }
             }
         })
@@ -1622,11 +1396,6 @@ document.addEventListener('click',async(e)=>{
                 contadorCarrito.textContent = result.carritoLength;
                 totalCompra.textContent = `Total: S/${result.carrito.reduce((suma, el) => suma + el.price, 0)}.00`;
 
-                // Re-renderizar el carrito actualizado
-                // renderAfterAction(result.carrito);
-                // renderAllProducts();
-                // ordenGroup()
-
                 deleteProductRender(e.target);
                 ocultarContadorCarrito();
                 // ordenGroup()
@@ -1638,72 +1407,13 @@ document.addEventListener('click',async(e)=>{
     }
 
     if (e.target.closest("#arrowRight")) {
-        const svg=e.target.closest('svg');
+        // const svg=e.target.closest('svg');
 
+        await postProduct(e)
+        carritoContadorDOM()
+        addProductRender(e.target);
+        await carritoDesplegado();
 
-        console.log('datos del producto capturas desde el svg: ',svg.dataset)
-
-        const { id, brand, img, price,name } = svg.dataset;
-
-        if (!id || !brand || !img || !price || !name) {
-            console.error("Algunos datos están faltando:", { id, brand, img, price, name });
-            return; // Evita seguir si hay valores `undefined`
-        }
-
-
-        const url = "/compra/compra/compra/compra";
-
-        let idCompra=await lastIdCompra();
-
-        idCompra = idCompra ? idCompra + 1 : 1;
-
-
-        // Crear el objeto del producto con un nuevo idCompra
-        const product = {
-            id,
-            idCompra:parseInt(idCompra), // Incrementar dinámicamente el idCompra
-            brand,
-            img,
-            price: parseFloat(price),
-            name,
-        };
-
-        // Configurar la petición
-        const options = {
-            method: 'POST',
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(product),
-        };
-
-        // Función asincrónica para enviar la petición
-        const peticionAdd = async () => {
-            const response = await fetch(url, options);
-
-            if (response.ok) {
-                const result = await response.json();
-
-                console.log(result.allProduct); // Verificar la respuesta del backend
-
-                // Actualizar contador y total en el carrito
-                const carritoCompra = document.getElementById('contador-carrito');
-                carritoCompra.textContent = result.carrito;
-
-                const totalCompra = document.querySelector('.totalCompra');
-                totalCompra.textContent = `Total: S/.${result.allProduct.reduce((sum, el) => sum + el.price, 0)}.00`;
-
-                addProductRender(e.target);
-                // ordenGroup();
-                // renderAfterAction(result.allProduct)
-                // renderAllProducts();
-
-                await carritoDesplegado();
-            } else {
-                console.error('Error al agregar el producto al carrito');
-            }
-        };
-
-        // Llamar a la función para ejecutar la petición
-         peticionAdd();
     }
 
 })
@@ -1883,8 +1593,6 @@ document.addEventListener("click", async (e) => {
         //
 
     });
-
-
 
 
 /*----------------Pagos mediante QR---------------------------------------*/

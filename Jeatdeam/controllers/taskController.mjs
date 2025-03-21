@@ -6,8 +6,20 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 
+
+// Carga el archivo .env
+const result = dotenv.config();
+
+if (result.error) {
+    console.error("⚠️ Error al cargar .env:", result.error);
+} else {
+    console.log("✅ Archivo .env cargado correctamente.");
+}
+
+
 const stripe = new Stripe(process.env.SECRET_KEY);
 
+console.log("Stripe API Key:", process.env.SECRET_KEY);
 
 async function verificarMoneda() {
     try {
@@ -627,13 +639,13 @@ const detailProduct=(req,res)=>{
     console.log(brand,name,categoria);
 
     const producto=baseDatos.find((item)=>item.brand===brand&&item.name===name)
-
+    const recomendados = baseDatos.filter((item)=>item.brand===brand)
 
     if(!producto){
         return res.status(404).render('error',{title: 'producto no encontrado',carrito})
     }
 
-    res.render('product_detail',{name:`${name}`,producto,baseDatos,carrito})
+    res.render('product_detail',{name:`${name}`,producto,baseDatos,carrito,recomendados})
 }
 
 const categoriaProduct=(req,res)=>{
