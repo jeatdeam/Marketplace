@@ -15,7 +15,24 @@ import {marcaEvent} from "./cascadaText.mjs"
 import {eventsPhone} from "./eventosPhone.js"
 import {postProduct} from "./peticionPost.js"
 import {productInfo} from "./productDescription.mjs";
+import {movMasVendidos} from "./masVendidos.mjs";
 
+
+// Prevenir la selección y el arrastre de imágenes
+document.addEventListener('mousedown', e => {
+    e.preventDefault();  // Prevenir la selección en mousedown
+});
+
+// Prevenir el arrastre de cualquier imagen
+document.querySelectorAll('img').forEach(img => {
+    img.addEventListener('dragstart', e => {
+        e.preventDefault();  // Prevenir el arrastre de la imagen
+    });
+});
+
+
+
+setTimeout(movMasVendidos,4000)
 
 productInfo()
 masVendidosScroll();
@@ -26,7 +43,6 @@ moveSpan();
 window.addEventListener('resize',apiladoInfoProductSmall)
 window.addEventListener('resize', ocultarMenuSmall);
 window.addEventListener('resize', moveBottomInfo);
-// moveSpan();
 window.onload=()=>{
     apiladoInfoProductSmall();
 }
@@ -34,11 +50,6 @@ window.onload=()=>{
 if(window.location.pathname==="/"){
     startApp()
 }
-// if (!sessionStorage.getItem("firstVisit")) {
-//     startApp();
-//     sessionStorage.setItem("firstVisit", "true");
-// }
-
 
 function startApp() {
     const $body = document.querySelector('body');
@@ -63,35 +74,36 @@ function startApp() {
         position:'absolute',
     })
     Object.assign(div.style,{
-        width: '350px',
+        width: '550px',
         position: 'relative',
+        fontWeight: '100',
     })
     Object.assign(small.style,{
         position: 'absolute',
         right: '15px',
         top: '100%',
-        // color: 'gray',
+        fontFamily: 'Roboto Flex',
         fontWeight: '100',
     })
     Object.assign(h1.style,{
-        // fontSize: '100px',
-        textAlign: 'center'
+        textAlign: 'center',
+        fontWeight: '300',
     })
 
     small.textContent="by Jeatdeam"
 
-    const txt = "k-moon";
+    const txt = "K-moon";
     let render = "";
 
     txt.split('').forEach((word, index) => {
         setTimeout(() => {
             render += word;
-            console.log(render);
+            // console.log(render);
             h1.textContent = render+'|';
             if (render.length === txt.length) {
                 h1.classList.add('animate-item');
                 section.classList.add('animate-color')
-                console.log('llegamos a pasa-la condicion');
+                // console.log('llegamos a pasa-la condicion');
                 $body.classList.add('animate-showBody')
             }
         }, index * 150);
@@ -123,17 +135,12 @@ document.addEventListener('DOMContentLoaded',()=>{
     moveSpan();
 })
 
-// window.addEventListener('resize',moveSpan);
-// window.addEventListener('resize',moveBottomInfo)
-
 masVendidosElement();
 asignarNombresHeader();
-// export let activeButton=true;
 redirectMasVendidoElement();
-//193->active button despues del envio de datos
-
 
 window.addEventListener('unload', () => {});
+
 window.addEventListener('beforeunload', async()=>{
 
     deleteDatos();
@@ -165,17 +172,14 @@ function textoDashed() {
     const containerTxt = document.createElement("div");
 
     containerTxt.style.position = "absolute";
-    containerTxt.style.top = "70%";
+    containerTxt.style.top = "75.5%";
     containerTxt.style.left="20%";
-    containerTxt.style.color="gray";
-    containerTxt.style.fontSize="16.5px";
+    containerTxt.style.fontSize="clamp(11.5px, 5vw, 13.5px)";
     containerTxt.style.fontWeight="100";
 
     let txt = "";
 
     $navegador.appendChild(containerTxt);
-
-
 
     function escribirTexto() {
         txt = ""; // Reiniciar el texto
@@ -615,7 +619,7 @@ function navegationImgs() {
 
     $allCirclesNavegation[contador].style.background="black";
 
-    startInterval(); // Iniciar el intervalo cuando la función se ejecute
+    startInterval();
 
     document.addEventListener('click', e => {
         if (e.target.closest('.arrowsLeftSide > svg:nth-of-type(1)')) {
@@ -639,9 +643,7 @@ function navegationImgs() {
         }
 
         if (e.target.closest('.arrowsLeftSide > svg:nth-of-type(2)')) {
-            clearInterval(movAutomatico); // Detener el intervalo
-
-            console.log(contador,"<- aqui ta el contador numero 2");
+            clearInterval(movAutomatico);
             $allCirclesNavegation[(contador+totalImgs)%totalImgs].style.background = "";
 
             allImgs[0].src = array[((3 + (totalImgs - contador) % totalImgs)) % totalImgs];
@@ -2038,7 +2040,7 @@ async function addPriceAndImg(text,textoIngresado){
             const div=document.createElement('div');
 
             spanBrand.textContent=element.brand;
-            spanBrand.style.fontWeight="bold";
+            spanBrand.style.fontWeight="500";
 
         const spanName=document.createElement('span');
 
@@ -2052,9 +2054,8 @@ async function addPriceAndImg(text,textoIngresado){
             const img=document.createElement("img")
             img.src=element.img[0];
             const price=document.createElement("span");
-            price.textContent="S/. "+element.price;
-
-
+            price.style.fontWeight="500";
+            price.textContent="S/."+element.price;
 
             fragmentLi.appendChild(img);
             div.appendChild(spanBrand)
@@ -2078,15 +2079,6 @@ async function addPriceAndImg(text,textoIngresado){
                 li.appendChild(fragmentLi)
                 fragmentUL.appendChild(li);
             }
-
-        // fragmentLi.appendChild(img);
-        // div.appendChild(spanBrand);
-        // div.appendChild(spanName);
-        // fragmentLi.appendChild(div);
-        // fragmentLi.appendChild(price)
-        // li.appendChild(fragmentLi)
-        // fragmentUL.appendChild(li);
-        //
 
     }else{
         console.log('creo que el nodo no fue restituido correctamente')
@@ -2206,12 +2198,23 @@ eventoExitSearch()
 
 /*----------SearchProducts------------*/
 
+
+const $input_search = document.querySelector('input[type="search"]');
+const $iconsBusqueda = document.querySelector('.iconsBusqueda');
+
+$iconsBusqueda.addEventListener('click', () => {
+    $input_search.focus();
+});
+
+
+
 async function searchProducts() {
     const baseDatos = await extraerDatos();
 
     const $input_search = document.querySelector('input[type="search"]');
     const ul_search = document.createElement('ul');
     const $searchAndOptions = document.querySelector('.searchAndOptions');
+
 
 
     ul_search.style.opacity = "1";
@@ -2576,9 +2579,6 @@ export function flatListProducts() {
 
 }
 
-
-
-
 /*---------------------menu<@media 640px---------------------------*/
 
 function createTemplateMenuSmall(){
@@ -2618,8 +2618,6 @@ function createTemplateMenuSmall(){
                     listaCercana.style.opacity="1";
                     listaCercana.style.height="100%";
                     listaCercana.style.display="block";
-
-                    // listaCercana.style.padding="10px 40px";
 
                 }
             }
@@ -2721,8 +2719,6 @@ function menuMediaVerySmall() {
                         // $body.style.pointerEvents="none";
                         $menu.style.pointerEvents="none";
 
-
-
                         const $menu_events=getComputedStyle($menu).pointerEvents;
                         setTimeout(()=>{
 
@@ -2730,16 +2726,13 @@ function menuMediaVerySmall() {
                                 isActive=true;
                             }
                         },300)
-
                     }
-
                 }
             }else{
                 const $icon=document.querySelector('#iconsNav>li:nth-of-type(3)>svg')
                 const pointerState=getComputedStyle($icon).pointerEvents
                 if(pointerState){
 
-                    // console.log('el template small tiene el pointerState en ->',pointerState)
                 }
 
         }
