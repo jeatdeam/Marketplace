@@ -143,11 +143,6 @@ export function movMasVendidos() {
         let elementoTotalWidth = reftWidthElement + gapMasVendidosOne;
         let rightSlider = masVendidosOne.getBoundingClientRect().right;
 
-        console.log('positionrightSlider->',positionrightSlider)
-        console.log('rightSlider->',rightSlider)
-        console.log('positionLeftContainer->',positionLeftContainer)
-        console.log('positionLeftSlider->', positionLeftSlider);
-        console.log('reftLeftSlider->', reftLeftSlider);
         if (positionLeftSlider < -reftLeftSlider ) {
             let desplazamiento = Math.abs(reftLeftSlider + positionLeftSlider);
             let elementosMovidos = Math.floor(desplazamiento / elementoTotalWidth);
@@ -174,7 +169,6 @@ export function movMasVendidos() {
         }
 
     }
-
 
     function downSliderOne(e){
         if(!isMovingOne){
@@ -207,22 +201,68 @@ export function movMasVendidos() {
 
 
     masVendidosOne.addEventListener('mousedown',downSliderOne)
-    masVendidosOne.addEventListener('touchstart', downSliderOne)
     masVendidosOne.addEventListener('mouseup',upSliderOne)
+
+    masVendidosOne.addEventListener('touchstart', downSliderOne)
     masVendidosOne.addEventListener('touchend', upSliderOne);
 
-    movMasVendidos.addEventListener('mouseenter',e=>{
+
+    movMasVendidos.addEventListener('touchstart', e=>{
+        cancelAnimationFrame(idAnimateOne)
+    });
+    movMasVendidos.addEventListener('touchend',e=>{
+        if(!isMovingOne){
+            animate();
+        }
+    });
+
+    // movMasVendidos.addEventListener('mouseenter',e=>{
+    //     cancelAnimationFrame(idAnimateOne)
+    //     // isMovingOne = false;
+    //     // isUncompleteOne = false;
+    // })
+    // movMasVendidos.addEventListener('mouseleave', e=>{
+    //     if(!isMovingOne){
+    //         // if(!isUncompleteOne){
+    //             animate();
+    //         // }
+    //     }
+    // })
+
+    document.addEventListener('touchend', e=> {
+        if (isMovingOne) {
+            positionXFinal = e.type.includes('touch') ? e.changedTouches[0].clientX : e.clientX;
+            if (positionXFinal) {
+                let distance = positionXFinal - positionXInicial;
+                // distanciaEventoTwo = distance;
+                contador += distance;
+                masVendidosOne.style.transform = `translateX(${contador}px)`;
+
+                setTimeout(() => {
+                    reposicionamiento();
+                    masVendidosOne.classList.remove('addTransition');
+                    isMovingOne = false;
+                    if(!isMovingOne) animate();
+                }, 300);
+            }
+        }
+
+
+    })
+
+    movMasVendidos.addEventListener('mouseenter', e => {
         cancelAnimationFrame(idAnimateOne)
         isMovingOne = false;
         isUncompleteOne = false;
     })
-    movMasVendidos.addEventListener('mouseleave', e=>{
+    movMasVendidos.addEventListener('mouseleave', e =>{
         if(!isMovingOne){
             if(!isUncompleteOne){
-                animate();
+                animate()
             }
         }
     })
+
 
     document.addEventListener('mouseup', e=>{
         if (isMovingOne) {
@@ -243,6 +283,8 @@ export function movMasVendidos() {
         }
 
     });
+
+    // document.addEventListener('touchend', upSliderOne)
 
 
     function animateTwo() {
@@ -285,29 +327,20 @@ export function movMasVendidos() {
         if(positionLeftSlider < - halfWidthSlider) {
 
             let desplazamiento = Math.abs( positionLeftSlider + halfWidthSlider);
-            // console.log('el desplazamiento es->', desplazamiento)
             let elementosMovidos = Math.floor(desplazamiento / elementoTotalWidth);
-            // console.log('la cantidad de elementos a mover son->', elementosMovidos);
 
             for(let i = 0; i < elementosMovidos; i++){
-                // let firtsElement = masVendidosTwo.children[0];
-                // console.log('el contador es->', contadorTwo)
                 masVendidosTwo.appendChild(masVendidosTwo.children[0]);
                 contadorTwo += elementoTotalWidth;
-
             }
-            // contadorTwo += desplazamiento;
             masVendidosTwo.style.transform = `translateX(${contadorTwo}px)`;
-
         }
-
     }
 
     function downSliderTwo(e) {
         console.log('funcionooooo one')
         if (!isMovingTwo) {
             cancelAnimationFrame(idAnimateTwo);
-            // Detectar si es touch o mouse
             positionXInicialTwo = e.type.includes('touch') ? e.touches[0].clientX : e.clientX;
             masVendidosTwo.classList.add('addTransition');
             isMovingTwo = true;
@@ -325,9 +358,7 @@ export function movMasVendidos() {
                 distanciaEventoTwo = distance;
                 contadorTwo += distance;
                 masVendidosTwo.style.transform = `translateX(${contadorTwo}px)`;
-
                 // reposicionamiento_2();
-
                 setTimeout(() => {
                     reposicionamiento_2();
                     masVendidosTwo.classList.remove('addTransition');
@@ -342,8 +373,43 @@ export function movMasVendidos() {
 
     masVendidosTwo.addEventListener('mousedown', downSliderTwo)
     masVendidosTwo.addEventListener('mouseup', upSliderTwo)
+
     masVendidosTwo.addEventListener('touchstart', downSliderTwo)
     masVendidosTwo.addEventListener('touchend', upSliderTwo)
+
+
+    movMasVendidosTwo.addEventListener('touchstart', e=>{
+        cancelAnimationFrame(idAnimateTwo);
+        // isMovingTwo = false;
+        // isUncompleteTwo = false;
+    })
+    movMasVendidosTwo.addEventListener('touchend', e=>{
+        if(!isMovingTwo){
+            // if(!isUncompleteTwo){
+                animateTwo();
+            // }
+        }
+    })
+
+    document.addEventListener('touchend', e=>{
+        if (isMovingTwo) {
+            positionXFinalTwo = e.type.includes('touch') ? e.changedTouches[0].clientX : e.clientX;
+            if (positionXFinalTwo) {
+                let distance = positionXFinalTwo - positionXInicialTwo;
+                distanciaEventoTwo = distance;
+                contadorTwo += distance;
+                masVendidosTwo.style.transform = `translateX(${contadorTwo}px)`;
+
+                setTimeout(() => {
+                    reposicionamiento_2();
+                    masVendidosTwo.classList.remove('addTransition');
+                    isMovingTwo = false;
+                    if(!isMovingTwo) animateTwo();
+                }, 300);
+            }
+        }
+
+    })
 
 
     movMasVendidosTwo.addEventListener('mouseenter',e=>{
@@ -379,7 +445,8 @@ export function movMasVendidos() {
         }
 
     });
-    document.addEventListener('touchend', upSliderTwo);
+
+    // document.addEventListener('touchend', upSliderTwo);
 
 }
 
