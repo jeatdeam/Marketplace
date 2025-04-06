@@ -682,6 +682,10 @@ main{
     opacity: 0;
     transition: opacity 0.35s linear;
     width: 500px;
+    font-size: 16px;
+}
+.busquedaInteractiva > ul > li span{
+    font-size: 5px;
 }
 .activeBusqueda{
     opacity: 1;
@@ -1216,11 +1220,26 @@ main{
     display: flex;
     /*overflow:hidden;*/
     width: 100%;
+
+    /*transition: all 0.25s ease-in-out;*/
+}
+.animate-image{
+    animation: showImg 0.35s ease-in-out;
 }
 .containerImages>img{
     min-width: 100%;
     aspect-ratio: 16/9;
     object-fit: cover;
+}
+@keyframes showImg {
+    0%{
+        opacity: 0;
+    }
+    100%{
+        opacity: 1;
+    }
+
+
 }
 #lista_circulos{
     display: flex;
@@ -2434,7 +2453,6 @@ input:focus{
     /*padding: 0 25px;*/
 
     overflow: hidden;
-    outline : 5px solid orange;
 }
 
 
@@ -2442,17 +2460,10 @@ input:focus{
     display: flex;
     justify-content: space-around;
     gap: 45px;
-    border : 5px solid blueviolet;
-
-    /*transform: translateX(-50%);*/
+    padding: 5px 0;
 
 }
-.containerMasVendidos_one>:nth-child(1){
-    outline: 10px solid pink;
-}
-.containerMasVendidos_one>:nth-child(15){
-    outline: 10px solid pink;
-}
+
 .addTransition{
     transition: transform 0.300s linear;
 }
@@ -2509,8 +2520,7 @@ input:focus{
 .containerMasVendidos_2_one,.containerMasVendidos_2_two{
     display: flex;
     gap: 0 45px;
-    /*transition: all 1s linear;*/
-    animation: movimientoHorizontal 20s linear infinite;
+    padding: 5px 0;
 }
 
 .containerMasVendidos button,.containerMasVendidos_two button{
@@ -4155,9 +4165,6 @@ input:focus{
         flex-direction: column;
         /*border: 10px solid red;*/
     }
-    .containerGroup{
-
-    }
     .menu{
         width: 100%;
         gap: 0;
@@ -4904,12 +4911,18 @@ input:focus{
         /*overflow:hidden;*/
         width: 100%;
         height: 600px;
+
     }
     .containerImages>img{
         min-width: 100%;
         aspect-ratio: 16/9;
         object-fit: cover;
+
     }
+
+
+
+
     #lista_circulos{
         display: flex;
         list-style: none;

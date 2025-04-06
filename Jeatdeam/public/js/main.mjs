@@ -717,10 +717,10 @@ const create_circles_carousel = () => {
         contenedor_circulos.appendChild(elemento_circulo);
     });
 
-    if(contenedor_circulos){
+    if (contenedor_circulos) {
         $section_carousel.appendChild(contenedor_circulos);
-    }else{
-        console.log('no se ha podido agregar el contenedor de circulos')
+    } else {
+        console.log('no se ha podido agregar el contenedor de circulos');
     }
 
     const all_circles = document.querySelectorAll('.circulo_contador');
@@ -732,6 +732,25 @@ const create_circles_carousel = () => {
     const updateCarousel = (index) => {
         // Mover imágenes
         $container_imagenes.style.transform = `translateX(-${index * 100}%)`;
+        // $container_imagenes.classList.add('animate-image');
+        // setTimeout(()=>{
+        //     $container_imagenes.classList.remove('animate-image');
+        // },250)
+
+
+            $container_imagenes.classList.add('animate-image');
+        setTimeout(()=>{
+            $container_imagenes.classList.remove('animate-image');
+        },350)
+
+
+        // $container_imagenes.classList.toggle('animate-image');
+        // Quitar animación de todas las imágenes
+        // $imagenes_carousel.forEach(img => img.classList.remove('animate-image'));
+
+
+        // Agregar animación a la imagen actual
+        // $imagenes_carousel[index].classList.add('animate-image');
 
         // Actualizar estilos de los círculos
         all_circles.forEach(circle => circle.style.background = "");
@@ -773,6 +792,7 @@ const create_circles_carousel = () => {
     updateCarousel(currentIndex);
     startAutoSlide();
 };
+
 
 let controllerInterval;
 
@@ -2040,6 +2060,7 @@ async function addPriceAndImg(text,textoIngresado){
             const div=document.createElement('div');
 
             spanBrand.textContent=element.brand;
+            spanBrand.style.fontSize = "16px";
             spanBrand.style.fontWeight="500";
 
         const spanName=document.createElement('span');
@@ -2047,6 +2068,7 @@ async function addPriceAndImg(text,textoIngresado){
             element.name.split(' ').forEach((word,indice)=>{
                 const span=document.createElement('span');
                 span.textContent=word;
+                span.style.fontSize = "16px";
 
                 spanName.appendChild(span);
             })
@@ -2055,6 +2077,7 @@ async function addPriceAndImg(text,textoIngresado){
             img.src=element.img[0];
             const price=document.createElement("span");
             price.style.fontWeight="500";
+            price.style.fontSize="16px";
             price.textContent="S/."+element.price;
 
             fragmentLi.appendChild(img);
@@ -2070,6 +2093,8 @@ async function addPriceAndImg(text,textoIngresado){
                 fragmentLi.appendChild(div);
                 li.appendChild(fragmentLi);
                 fragmentUL.appendChild(li);
+
+
             }else{
                 fragmentLi.appendChild(img);
                 div.appendChild(spanBrand);

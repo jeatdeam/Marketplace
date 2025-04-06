@@ -100,6 +100,8 @@ export function movMasVendidos() {
 
     let isMovingOne = false;
     let isMovingTwo = false;
+    let isUncompleteOne = false;
+    let isUncompleteTwo = false;
 
     let contador = -(masVendidosOne.offsetWidth / 2)
     let contadorTwo= -(masVendidosTwo.offsetWidth / 2);
@@ -127,24 +129,26 @@ export function movMasVendidos() {
         masVendidosOne.style.transform = `translateX(${(contador)}px)`;
         reposicionamiento();
         idAnimateOne = requestAnimationFrame(animate);
-        // }
-        //     console.log(contador)
+
     }
         animate();
 
     function reposicionamiento() {
         let positionLeftSlider = masVendidosOne.getBoundingClientRect().left;
+        let positionrightSlider = masVendidosOne.getBoundingClientRect().right;
         let reftLeftSlider =   masVendidosOne.offsetWidth/2;
         let positionLeftContainer = movMasVendidos.getBoundingClientRect().left;
         let gapMasVendidosOne = parseInt(getComputedStyle(masVendidosOne).gap.replace(/\D/g, ""), 10);
         let reftWidthElement = masVendidosOne.children[0].offsetWidth;
         let elementoTotalWidth = reftWidthElement + gapMasVendidosOne;
+        let rightSlider = masVendidosOne.getBoundingClientRect().right;
 
-        // console.log('contador antes del condicional es->',contador)
-        // console.log('el positionLeftSlider es->',positionLeftSlider);
-        // console.log('el reftLeftSlider es->',reftLeftSlider);
-
-        if (positionLeftSlider < positionLeftContainer ) {
+        console.log('positionrightSlider->',positionrightSlider)
+        console.log('rightSlider->',rightSlider)
+        console.log('positionLeftContainer->',positionLeftContainer)
+        console.log('positionLeftSlider->', positionLeftSlider);
+        console.log('reftLeftSlider->', reftLeftSlider);
+        if (positionLeftSlider < -reftLeftSlider ) {
             let desplazamiento = Math.abs(reftLeftSlider + positionLeftSlider);
             let elementosMovidos = Math.floor(desplazamiento / elementoTotalWidth);
 
@@ -153,66 +157,49 @@ export function movMasVendidos() {
                 contador += elementoTotalWidth;
                 // console.log('el positionLeftSlider dentro del for es->',positionLeftSlider);
             }
-
             masVendidosOne.style.transform = `translateX(${contador}px)`;
-
         }
 
-        reposicionamientoOne(distanciaEventoOne)
+        if(positionrightSlider > reftLeftSlider){
+            let desplazamiento = Math.abs(positionrightSlider - reftLeftSlider);
+            let elementosMovidos = Math.floor(desplazamiento / elementoTotalWidth);
 
-    }
-
-
-    function reposicionamientoOne(distance) {
-
-        const widthElement = masVendidosOne.children[0].offsetWidth;
-        const gapElement = parseFloat(getComputedStyle(masVendidosOne).gap);
-        const widthMoreGap = widthElement + gapElement;
-        const elementosMovibles = Math.floor(Math.abs(distance) / widthMoreGap);
-        let extraDistance = Math.abs(distance);
-
-        // console.log('Moviendo elementos al inicio...');
-        // console.log('tamaño element es = ', widthMoreGap)
-        // console.log('la distancia actual del leftSlider es = ', masVendidosOne.getBoundingClientRect().left);
-
-        if (distance > 0) {
-            // console.log('moveremos: ',elementosMovibles);
-            for (let i = 0; i < elementosMovibles; i++) {
-                const lastElement = masVendidosOne.children[masVendidosOne.children.length-1];
+            for(let i = 0; i < elementosMovidos; i++) {
+                let lastElement = masVendidosOne.children[masVendidosOne.children.length - 1];
                 masVendidosOne.prepend(lastElement);
-                contador -= widthMoreGap;
-                // extraDistance -= widthMoreGap;
+                contador -= elementoTotalWidth
             }
-            // console.log('la distancia sobrante es = ',extraDistance)
-            //     contador += extraDistance;
             masVendidosOne.style.transform = `translateX(${contador}px)`;
+
         }
+
     }
 
 
     function downSliderOne(e){
         if(!isMovingOne){
             cancelAnimationFrame(idAnimateOne)
-            positionXInicial = e.clientX;
+            positionXInicial = e.type.includes('touch') ? e.touches[0].clientX : e.clientX;
             masVendidosOne.classList.add('addTransition');
             isMovingOne = true;
+            isUncompleteOne = true;
         }
     }
     function upSliderOne(e){
         if(isMovingOne) {
-            positionXFinal = e.clientX;
+            positionXFinal = e.type.includes('touch') ? e.changedTouches[0].clientX : e.clientX;
             if(positionXFinal) {
                 let distance = positionXFinal - positionXInicial;
                 distanciaEventoOne = distance;
 
                 contador+=distance;
-
                 masVendidosOne.style.transform = `translateX(${contador}px)`;
-
                 setTimeout(()=>{
+                    reposicionamiento();
                     masVendidosOne.classList.remove('addTransition');
-                    animate();
-                    isMovingOne=false;
+                    // animate();
+                    isMovingOne = false;
+                    isUncompleteOne = false;
                 },300)
             }
         }
@@ -224,7 +211,38 @@ export function movMasVendidos() {
     masVendidosOne.addEventListener('mouseup',upSliderOne)
     masVendidosOne.addEventListener('touchend', upSliderOne);
 
+    movMasVendidos.addEventListener('mouseenter',e=>{
+        cancelAnimationFrame(idAnimateOne)
+        isMovingOne = false;
+        isUncompleteOne = false;
+    })
+    movMasVendidos.addEventListener('mouseleave', e=>{
+        if(!isMovingOne){
+            if(!isUncompleteOne){
+                animate();
+            }
+        }
+    })
 
+    document.addEventListener('mouseup', e=>{
+        if (isMovingOne) {
+            positionXFinal = e.type.includes('touch') ? e.changedTouches[0].clientX : e.clientX;
+            if (positionXFinal) {
+                let distance = positionXFinal - positionXInicial;
+                // distanciaEventoTwo = distance;
+                contador += distance;
+                masVendidosOne.style.transform = `translateX(${contador}px)`;
+
+                setTimeout(() => {
+                    reposicionamiento();
+                    masVendidosOne.classList.remove('addTransition');
+                    isMovingOne = false;
+                    if(isUncompleteOne) animate();
+                }, 300);
+            }
+        }
+
+    });
 
 
     function animateTwo() {
@@ -233,10 +251,6 @@ export function movMasVendidos() {
                 contadorTwo = - (masVendidosTwo.offsetWidth / 2);
                 masVendidosTwo.style.transform = `translateX(${contadorTwo}px)`;
             }
-            // else if(contadorTwo < -masVendidosTwo.offsetWidth){
-            //     contadorTwo = - (masVendidosTwo.offsetWidth / 2);
-            //     masVendidosTwo.style.transform = `translateX(${contadorTwo}px)`;
-            // }
             masVendidosTwo.style.transform = `translateX(${contadorTwo}px)`;
             reposicionamiento_2()
             idAnimateTwo = requestAnimationFrame(animateTwo);
@@ -287,82 +301,85 @@ export function movMasVendidos() {
 
         }
 
-        // masVendidosTwo.style.transform = `translateX(${contadorTwo}px)`;
-
-
-        // reposicionamientoTwo(distanciaEventoTwo)
-
     }
 
-    function reposicionamientoTwo(distance) {
-
-        const widthElement = masVendidosTwo.children[0].offsetWidth;
-        const gapElement = parseFloat(getComputedStyle(masVendidosTwo).gap);
-        const widthMoreGap = widthElement + gapElement;
-        const elementosMovibles = Math.floor(Math.abs(distance) / widthMoreGap);
-        let extraDistance = Math.abs(distance);
-
-
-        console.log('contador two es->',contadorTwo);
-        console.log('distanceTwo es->', distanciaEventoTwo)
-
-        // console.log('Moviendo elementos al inicio...');
-        // console.log('tamaño element es = ', widthMoreGap)
-        // console.log('la distancia actual del leftSlider es = ', masVendidosTwo.getBoundingClientRect().left);
-
-        if (distance < 0) {
-            console.log('moveremos: ',elementosMovibles);
-            console.log('el contadorTwo antes de reordenar es: ',contadorTwo)
-            for (let i = 0; i < elementosMovibles; i++) {
-                let firtsElement= masVendidosTwo.children[0];
-                masVendidosTwo.appendChild(firtsElement);
-                contadorTwo += widthMoreGap;
-                // extraDistance -= widthMoreGap;
-                console.log('el contador ahoa es->', contadorTwo)
-            }
-            // console.log('la distancia sobrante es = ',extraDistance)
-            //     contador += extraDistance;
-            masVendidosTwo.style.transform = `translateX(${contadorTwo}px)`;
-
-            distanciaEventoTwo = 0;
-        }
-    }
-
-
-
-    function downSliderTwo(e){
-        if(!isMovingTwo){
-            cancelAnimationFrame(idAnimateTwo)
-            positionXInicialTwo = e.clientX;
+    function downSliderTwo(e) {
+        console.log('funcionooooo one')
+        if (!isMovingTwo) {
+            cancelAnimationFrame(idAnimateTwo);
+            // Detectar si es touch o mouse
+            positionXInicialTwo = e.type.includes('touch') ? e.touches[0].clientX : e.clientX;
             masVendidosTwo.classList.add('addTransition');
             isMovingTwo = true;
+            isUncompleteTwo = true;
         }
     }
 
-    function upSliderTwo(e){
-        if(isMovingTwo) {
-            positionXFinalTwo = e.clientX;
-            if(positionXFinalTwo) {
+    function upSliderTwo(e) {
+        console.log('funcionoooo two')
+        if (isMovingTwo) {
+            // Detectar si es touch o mouse
+            positionXFinalTwo = e.type.includes('touch') ? e.changedTouches[0].clientX : e.clientX;
+            if (positionXFinalTwo) {
                 let distance = positionXFinalTwo - positionXInicialTwo;
                 distanciaEventoTwo = distance;
-
-                contadorTwo+=distance;
-
+                contadorTwo += distance;
                 masVendidosTwo.style.transform = `translateX(${contadorTwo}px)`;
 
-                setTimeout(()=>{
+                // reposicionamiento_2();
+
+                setTimeout(() => {
+                    reposicionamiento_2();
                     masVendidosTwo.classList.remove('addTransition');
-                    animateTwo();
-                    isMovingTwo=false;
-                },300)
+                    // animateTwo();
+                    isMovingTwo = false;
+                    isUncompleteTwo = false;
+                }, 300);
             }
         }
     }
+
 
     masVendidosTwo.addEventListener('mousedown', downSliderTwo)
     masVendidosTwo.addEventListener('mouseup', upSliderTwo)
     masVendidosTwo.addEventListener('touchstart', downSliderTwo)
     masVendidosTwo.addEventListener('touchend', upSliderTwo)
+
+
+    movMasVendidosTwo.addEventListener('mouseenter',e=>{
+        cancelAnimationFrame(idAnimateTwo)
+        isMovingTwo = false;
+        isUncompleteTwo = false;
+
+    })
+    movMasVendidosTwo.addEventListener('mouseleave',e=>{
+        if(!isMovingTwo) {
+            if(!isUncompleteTwo){
+                animateTwo();
+            }
+        }
+    })
+
+    document.addEventListener('mouseup', e=>{
+        if (isMovingTwo) {
+            positionXFinalTwo = e.type.includes('touch') ? e.changedTouches[0].clientX : e.clientX;
+            if (positionXFinalTwo) {
+                let distance = positionXFinalTwo - positionXInicialTwo;
+                distanciaEventoTwo = distance;
+                contadorTwo += distance;
+                masVendidosTwo.style.transform = `translateX(${contadorTwo}px)`;
+
+                setTimeout(() => {
+                    reposicionamiento_2();
+                    masVendidosTwo.classList.remove('addTransition');
+                    isMovingTwo = false;
+                    if(isUncompleteTwo) animateTwo();
+                }, 300);
+            }
+        }
+
+    });
+    document.addEventListener('touchend', upSliderTwo);
 
 }
 
