@@ -16,7 +16,10 @@ import {eventsPhone} from "./eventosPhone.js"
 import {postProduct} from "./peticionPost.js"
 import {productInfo} from "./productDescription.mjs";
 import {movMasVendidos} from "./masVendidos.mjs";
+import {envio} from "./formularioEnvio.mjs"
 
+
+envio();
 
 // Prevenir la selección y el arrastre de imágenes
 document.addEventListener('mousedown', e => {
@@ -253,243 +256,243 @@ function activeEnvio() {
     });
 }
 
-activeEnvio();
+// activeEnvio();
 
 
-function insertCheck() {
-    const template = document.getElementById('checkDatos');
-
-    if (!template) {
-        console.error("❌ No se encontró el template con id 'checkDatos'.");
-        return;
-    }
-
-    const productsAndPay = document.querySelector('.productsAndPay');
-
-    if (!productsAndPay) {
-        console.error("❌ No se encontró el contenedor '.containerElementsCompra'.");
-        return;
-    }
-
-    // Clonamos el contenido del template con importNode
-    const clone = document.importNode(template.content, true);
-
-    // ✅ insertAdjacentElement necesita un elemento, no un fragmento
-
-    const $pasarelaPago=document.querySelector('.pasarelaPago')
-
-    // if(!$pasarelaPago)
-
-    productsAndPay.appendChild(clone);
-
-    console.log("Elemento insertado correctamente");
-
-
-
-    setTimeout(()=>{
-        const $containerCheck=document.querySelector('.containerCheck');
-        if($containerCheck) {
-            $containerCheck.style.opacity="1";
-        }
-    },200)
-
-
-
-
-    setTimeout(()=>{
-        const $containerCheck=document.querySelector('.containerCheck');
-
-        if($containerCheck){
-            // $containerCheck.style.transform="scale(0)";
-            $containerCheck.style.opacity="0";
-        }
-
-    },1200)
-    setTimeout(()=>{
-        const $containerCheck=document.querySelector('.containerCheck');
-
-        if($containerCheck){
-            $containerCheck.style.display="none";
-        }
-
-    },1400)
-
-    const $containerCheck=document.querySelector('.containerCheck');
-    const computedCheck=getComputedStyle($containerCheck).display;
-    const $formularioEnvio=document.getElementById('formularioEnvio');
-
-    if($formularioEnvio)  $formularioEnvio.style.display="none";
-
-
-
-}
-
-
-
-function activeBoton(){
-
-    const $payVirtualWallet = document.querySelector("#payVirtualWallet");
-    const $payCard = document.querySelector("#payCard");
-
-    const yapeBackground = "url(/img/yape.png)";
-    const plinBackground = "url(/img/plin.webp)";
-
-    const americanExpressBackground="url(/img/americanExpress.png)";
-    const mastercardBackground="url(/img/mastercard.jpg)";
-    const visaBackground="url(/img/visa.jpg)";
-
-
-    $payVirtualWallet.textContent="";
-
-
-    const $yape=document.querySelector('.yape');
-    const $plin=document.querySelector('.plin');
-
-    // Object.assign()
-
-
-    // Estilos iniciales
-    Object.assign($payVirtualWallet.style, {
-        opacity: "1",
-        width: "175px",
-        minWidth: "175px",
-        pointerEvents: "auto",
-        display: "block",
-        backgroundImage: yapeBackground,
-        backgroundSize: "cover",
-        backgroundRepeat: "no-repeat",
-        backgroundPosition: "center",
-    });
-
-    Object.assign($payCard.style, {
-        opacity: "1",
-        width: "175px",
-        minWidth: "175px",
-        pointerEvents: "auto",
-        display: "block",
-        backgroundImage: visaBackground,
-        backgroundSize: "cover",
-        backgroundRepeat: "no-repeat",
-        backgroundPosition: "center",
-
-    });
-
-    // Cambia la imagen cada 1.5 segundos
-    setInterval(() => {
-        if ($payVirtualWallet.style.backgroundImage.includes("yape.png")) {
-            $payVirtualWallet.style.backgroundImage = plinBackground;
-        } else {
-            $payVirtualWallet.style.backgroundImage = yapeBackground;
-        }
-    }, 1500);
-
-    $payCard.textContent="";
-
-    setInterval(()=>{
-        if($payCard.style.backgroundImage.includes('visa.jpg')){
-            $payCard.style.backgroundImage=mastercardBackground;
-        }else if($payCard.style.backgroundImage.includes('mastercard.jpg')){
-            $payCard.style.backgroundImage=americanExpressBackground;
-        }else{
-            $payCard.style.backgroundImage=visaBackground;
-        }
-    },1500)
+// function insertCheck() {
+//     const template = document.getElementById('checkDatos');
+//
+//     if (!template) {
+//         console.error("❌ No se encontró el template con id 'checkDatos'.");
+//         return;
+//     }
+//
+//     const productsAndPay = document.querySelector('.productsAndPay');
+//
+//     if (!productsAndPay) {
+//         console.error("❌ No se encontró el contenedor '.containerElementsCompra'.");
+//         return;
+//     }
+//
+//     // Clonamos el contenido del template con importNode
+//     const clone = document.importNode(template.content, true);
+//
+//     // ✅ insertAdjacentElement necesita un elemento, no un fragmento
+//
+//     const $pasarelaPago=document.querySelector('.pasarelaPago')
+//
+//     // if(!$pasarelaPago)
+//
+//     productsAndPay.appendChild(clone);
+//
+//     console.log("Elemento insertado correctamente");
+//
+//
+//
+//     setTimeout(()=>{
+//         const $containerCheck=document.querySelector('.containerCheck');
+//         if($containerCheck) {
+//             $containerCheck.style.opacity="1";
+//         }
+//     },200)
+//
+//
+//
+//
+//     setTimeout(()=>{
+//         const $containerCheck=document.querySelector('.containerCheck');
+//
+//         if($containerCheck){
+//             // $containerCheck.style.transform="scale(0)";
+//             $containerCheck.style.opacity="0";
+//         }
+//
+//     },1200)
+//     setTimeout(()=>{
+//         const $containerCheck=document.querySelector('.containerCheck');
+//
+//         if($containerCheck){
+//             $containerCheck.style.display="none";
+//         }
+//
+//     },1400)
+//
+//     const $containerCheck=document.querySelector('.containerCheck');
+//     const computedCheck=getComputedStyle($containerCheck).display;
+//     const $formularioEnvio=document.getElementById('formularioEnvio');
+//
+//     if($formularioEnvio)  $formularioEnvio.style.display="none";
+//
+//
+//
+// }
 
 
 
-    insertCheck();
+// function activeBoton(){
+//
+//     const $payVirtualWallet = document.querySelector("#payVirtualWallet");
+//     const $payCard = document.querySelector("#payCard");
+//
+//     const yapeBackground = "url(/img/yape.png)";
+//     const plinBackground = "url(/img/plin.webp)";
+//
+//     const americanExpressBackground="url(/img/americanExpress.png)";
+//     const mastercardBackground="url(/img/mastercard.jpg)";
+//     const visaBackground="url(/img/visa.jpg)";
+//
+//
+//     $payVirtualWallet.textContent="";
+//
+//
+//     const $yape=document.querySelector('.yape');
+//     const $plin=document.querySelector('.plin');
+//
+//     // Object.assign()
+//
+//
+//     // Estilos iniciales
+//     Object.assign($payVirtualWallet.style, {
+//         opacity: "1",
+//         width: "175px",
+//         minWidth: "175px",
+//         pointerEvents: "auto",
+//         display: "block",
+//         backgroundImage: yapeBackground,
+//         backgroundSize: "cover",
+//         backgroundRepeat: "no-repeat",
+//         backgroundPosition: "center",
+//     });
+//
+//     Object.assign($payCard.style, {
+//         opacity: "1",
+//         width: "175px",
+//         minWidth: "175px",
+//         pointerEvents: "auto",
+//         display: "block",
+//         backgroundImage: visaBackground,
+//         backgroundSize: "cover",
+//         backgroundRepeat: "no-repeat",
+//         backgroundPosition: "center",
+//
+//     });
+//
+//     // Cambia la imagen cada 1.5 segundos
+//     setInterval(() => {
+//         if ($payVirtualWallet.style.backgroundImage.includes("yape.png")) {
+//             $payVirtualWallet.style.backgroundImage = plinBackground;
+//         } else {
+//             $payVirtualWallet.style.backgroundImage = yapeBackground;
+//         }
+//     }, 1500);
+//
+//     $payCard.textContent="";
+//
+//     setInterval(()=>{
+//         if($payCard.style.backgroundImage.includes('visa.jpg')){
+//             $payCard.style.backgroundImage=mastercardBackground;
+//         }else if($payCard.style.backgroundImage.includes('mastercard.jpg')){
+//             $payCard.style.backgroundImage=americanExpressBackground;
+//         }else{
+//             $payCard.style.backgroundImage=visaBackground;
+//         }
+//     },1500)
+//
+//
+//
+//     insertCheck();
+//
+// }
 
-}
 
-
-function enviarDatosCliente() {
-    const $form = document.getElementById("myForm");
-    const $couriers = document.querySelectorAll('.couriers button');
-    let eleccionEmpresa;
-
-    // Guardar la empresa seleccionada
-    $couriers.forEach(button => {
-        button.addEventListener('click', function () {
-            eleccionEmpresa = button.dataset.empresa;
-            console.log(eleccionEmpresa);
-        });
-    });
-
-    $form.addEventListener('submit', async e => {
-        e.preventDefault();
-        const $user = document.querySelector('.nameUser');
-        const computedUser = getComputedStyle($user).display;
-        console.log(computedUser);
-
-        if (computedUser === "none") {
-            $form.direccion.removeAttribute('required');
-            $form.departamento.removeAttribute('required');
-            $form.distrito.removeAttribute('required');
-            $form.infoCourier.removeAttribute('required');
-
-        } else {
-            $form.direccion.setAttribute('required', 'true');
-            $form.departamento.setAttribute('required', 'true');
-            $form.distrito.setAttribute('required', 'true');
-            $form.infoCourier.setAttribute('required', 'true');
-
-            // Asegurar que el usuario pueda ver los errores antes de enviar
-            if (!$form.checkValidity()) {
-                console.log('Formulario inválido');
-                $form.reportValidity();
-                return;
-            }
-        }
-
-        // **Si pasa la validación, enviar los datos**
-        const correo = $form.correo.value.trim();
-        const nombre = $form.nombre.value.trim();
-        const numOne = $form.firtsPhone.value.trim();
-        const numTwo = $form.secondPhone.value.trim();
-        const direccion = $form.direccion.value.trim();
-        const departamento = $form.departamento.value.trim();
-        const distrito = $form.distrito.value.trim();
-        const infoExtra = $form.infoExtra.value.trim();
-        const infoCourier = $form.infoCourier.value.trim();
-
-        const url = computedUser === "none" ? "/datos/cliente/compra/short" : "/datos/cliente/compra/complete";
-        const datosCliente = {
-            correo,
-            nombre,
-            numOne: parseInt(numOne),
-            numTwo: parseInt(numTwo) || 123456789,
-            direccion: computedUser === "none" ? "" : direccion,
-            departamento: computedUser === "none" ? "" : departamento,
-            distrito: computedUser === "none" ? "" : distrito,
-            infoExtra: infoExtra || "Sin referencias",
-            infoCourier,
-            eleccionEmpresa
-        };
-
-        const options = {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(datosCliente),
-        };
-
-        try {
-            const response = await fetch(url, options);
-            const result = await response.json();
-            console.log(" Datos enviados correctamente:", result);
-            // alert("Datos enviados correctamente.");
-
-            const verificar = await verificarDatosCliente();
-            if (verificar.length > 0) {
-                console.log(verificar);
-                activeBoton();
-                AfterSendData();
-            }
-        } catch (error) {
-            console.error("Error al enviar datos:", error);
-            alert("Hubo un error al enviar los datos.");
-        }
-    });
-}
+// function enviarDatosCliente() {
+//     const $form = document.getElementById("myForm");
+//     const $couriers = document.querySelectorAll('.couriers button');
+//     let eleccionEmpresa;
+//
+//     // Guardar la empresa seleccionada
+//     $couriers.forEach(button => {
+//         button.addEventListener('click', function () {
+//             eleccionEmpresa = button.dataset.empresa;
+//             console.log(eleccionEmpresa);
+//         });
+//     });
+//
+//     $form.addEventListener('submit', async e => {
+//         e.preventDefault();
+//         const $user = document.querySelector('.nameUser');
+//         const computedUser = getComputedStyle($user).display;
+//         console.log(computedUser);
+//
+//         if (computedUser === "none") {
+//             $form.direccion.removeAttribute('required');
+//             $form.departamento.removeAttribute('required');
+//             $form.distrito.removeAttribute('required');
+//             $form.infoCourier.removeAttribute('required');
+//
+//         } else {
+//             $form.direccion.setAttribute('required', 'true');
+//             $form.departamento.setAttribute('required', 'true');
+//             $form.distrito.setAttribute('required', 'true');
+//             $form.infoCourier.setAttribute('required', 'true');
+//
+//             // Asegurar que el usuario pueda ver los errores antes de enviar
+//             if (!$form.checkValidity()) {
+//                 console.log('Formulario inválido');
+//                 $form.reportValidity();
+//                 return;
+//             }
+//         }
+//
+//         // **Si pasa la validación, enviar los datos**
+//         const correo = $form.correo.value.trim();
+//         const nombre = $form.nombre.value.trim();
+//         const numOne = $form.firtsPhone.value.trim();
+//         const numTwo = $form.secondPhone.value.trim();
+//         const direccion = $form.direccion.value.trim();
+//         const departamento = $form.departamento.value.trim();
+//         const distrito = $form.distrito.value.trim();
+//         const infoExtra = $form.infoExtra.value.trim();
+//         const infoCourier = $form.infoCourier.value.trim();
+//
+//         const url = computedUser === "none" ? "/datos/cliente/compra/short" : "/datos/cliente/compra/complete";
+//         const datosCliente = {
+//             correo,
+//             nombre,
+//             numOne: parseInt(numOne),
+//             numTwo: parseInt(numTwo) || 123456789,
+//             direccion: computedUser === "none" ? "" : direccion,
+//             departamento: computedUser === "none" ? "" : departamento,
+//             distrito: computedUser === "none" ? "" : distrito,
+//             infoExtra: infoExtra || "Sin referencias",
+//             infoCourier,
+//             eleccionEmpresa
+//         };
+//
+//         const options = {
+//             method: "POST",
+//             headers: { "Content-Type": "application/json" },
+//             body: JSON.stringify(datosCliente),
+//         };
+//
+//         try {
+//             const response = await fetch(url, options);
+//             const result = await response.json();
+//             console.log(" Datos enviados correctamente:", result);
+//             // alert("Datos enviados correctamente.");
+//
+//             const verificar = await verificarDatosCliente();
+//             if (verificar.length > 0) {
+//                 console.log(verificar);
+//                 activeBoton();
+//                 AfterSendData();
+//             }
+//         } catch (error) {
+//             console.error("Error al enviar datos:", error);
+//             alert("Hubo un error al enviar los datos.");
+//         }
+//     });
+// }
 
 
 
@@ -528,56 +531,56 @@ async function verificarDatosCliente(){
 }
 
 
-function absorberDatosFormulario(){
-
-    const $form=document.getElementById('myForm');
-
-    const $textarea=document.querySelector('.couriers~textarea')
-
-document.addEventListener('click',e=>{
-
-    if(e.target.closest('.couriers>button')){
-
-        const computedOpacityTextArea=getComputedStyle($textarea).display;
-        $textarea.value=""
-
-        if(computedOpacityTextArea==="flex"||computedOpacityTextArea==="block"){
-            $textarea.style.display="none";
-        }
-
-        const allButton=document.querySelectorAll('.couriers>button');
-        if(allButton.length>0){
-            allButton.forEach(button=>button.style.background="");
-        }
-        if(e.target.closest('.couriers>button:nth-of-type(1)')){
-
-            e.target.style.background="red";
-            $textarea.placeholder="Ejemplo:\n\nEmpresa: shalom - Agencia: parque industrial.";
-            $textarea.style.display="block";
-        }
-
-        if(e.target.closest('.couriers>button:nth-of-type(2)')) {
-            e.target.style.background = "yellow";
-            $textarea.placeholder="Ejemplo:\n\nEmpresa: olva courier - Agencia: sumar.";
-            $textarea.style.display="block";
-        }
-        if(e.target.closest('.couriers>button:nth-of-type(3)')) {
-            e.target.style.background = "green";
-            $textarea.placeholder="Delivery solo en Lima metropolitana y el callao";
-            $textarea.style.display="block"
-        }
-        if(e.target.closest('.couriers>button:nth-of-type(4)')) {
-            e.target.style.background = "gray";
-            $textarea.placeholder="Ejemplo:\n\nEmpresa: Expreso nacional - Agencia: ciudad universitaria."
-            $textarea.style.display="block"
-        }
-
-
-    }
-})
-
-}
-absorberDatosFormulario()
+// function absorberDatosFormulario(){
+//
+//     const $form=document.getElementById('myForm');
+//
+//     const $textarea=document.querySelector('.couriers~textarea')
+//
+// document.addEventListener('click',e=>{
+//
+//     if(e.target.closest('.couriers>button')){
+//
+//         const computedOpacityTextArea=getComputedStyle($textarea).display;
+//         $textarea.value=""
+//
+//         if(computedOpacityTextArea==="flex"||computedOpacityTextArea==="block"){
+//             $textarea.style.display="none";
+//         }
+//
+//         const allButton=document.querySelectorAll('.couriers>button');
+//         if(allButton.length>0){
+//             allButton.forEach(button=>button.style.background="");
+//         }
+//         if(e.target.closest('.couriers>button:nth-of-type(1)')){
+//
+//             e.target.style.background="red";
+//             $textarea.placeholder="Ejemplo:\n\nEmpresa: shalom - Agencia: parque industrial.";
+//             $textarea.style.display="block";
+//         }
+//
+//         if(e.target.closest('.couriers>button:nth-of-type(2)')) {
+//             e.target.style.background = "yellow";
+//             $textarea.placeholder="Ejemplo:\n\nEmpresa: olva courier - Agencia: sumar.";
+//             $textarea.style.display="block";
+//         }
+//         if(e.target.closest('.couriers>button:nth-of-type(3)')) {
+//             e.target.style.background = "green";
+//             $textarea.placeholder="Delivery solo en Lima metropolitana y el callao";
+//             $textarea.style.display="block"
+//         }
+//         if(e.target.closest('.couriers>button:nth-of-type(4)')) {
+//             e.target.style.background = "gray";
+//             $textarea.placeholder="Ejemplo:\n\nEmpresa: Expreso nacional - Agencia: ciudad universitaria."
+//             $textarea.style.display="block"
+//         }
+//
+//
+//     }
+// })
+//
+// }
+// absorberDatosFormulario()
 
 
 
@@ -694,14 +697,8 @@ async function ocultarContadorCarrito(){
             $contadorCarrito.style.opacity="0";
         }
     }
-
-
 }
-
 ocultarContadorCarrito();
-
-/*------carrito  1204---------*/
-/*-Logica de redireccionamiento por marca index->150---*/
 
 const create_circles_carousel = () => {
     const $section_carousel = document.querySelector('.carouselImages');
@@ -732,11 +729,6 @@ const create_circles_carousel = () => {
     const updateCarousel = (index) => {
         // Mover imágenes
         $container_imagenes.style.transform = `translateX(-${index * 100}%)`;
-        // $container_imagenes.classList.add('animate-image');
-        // setTimeout(()=>{
-        //     $container_imagenes.classList.remove('animate-image');
-        // },250)
-
 
             $container_imagenes.classList.add('animate-image');
         setTimeout(()=>{
@@ -744,15 +736,6 @@ const create_circles_carousel = () => {
         },350)
 
 
-        // $container_imagenes.classList.toggle('animate-image');
-        // Quitar animación de todas las imágenes
-        // $imagenes_carousel.forEach(img => img.classList.remove('animate-image'));
-
-
-        // Agregar animación a la imagen actual
-        // $imagenes_carousel[index].classList.add('animate-image');
-
-        // Actualizar estilos de los círculos
         all_circles.forEach(circle => circle.style.background = "");
         all_circles[index].style.background = "black";
     };
@@ -908,6 +891,7 @@ document.addEventListener('click', async (e) => {
     }
 
     if(e.target.classList.contains('deleteAllProducts')){
+        console.log('si tamos funcioanando')
         const url="/compra/compra/compra/compra";
         const products={
 
@@ -1184,11 +1168,15 @@ async function addProductRender(node) {
         // Aplica la animación de parpadeo a todo el grupo de productos
         $groupProducts.classList.add("blinkEffect");
 
+
+
+
         setTimeout(() => {
             $groupProducts.classList.remove("blinkEffect");
         }, 125);
 
         ordenGroup();
+
     } else {
         console.log('El nodo no existe');
     }
@@ -1423,7 +1411,6 @@ document.addEventListener('click',async(e)=>{
                 // ordenGroup()
             }
         };
-
         peticionArrowLeft();
         carritoDesplegado();
     }
@@ -1431,7 +1418,21 @@ document.addEventListener('click',async(e)=>{
     if (e.target.closest("#arrowRight")) {
         // const svg=e.target.closest('svg');
 
-        await postProduct(e)
+        await postProduct(e);
+        const url = "/carrito/estado/cuack/cuack";
+        const options = {
+            method: "GET",
+        };
+        const refreshCount = async () => {
+                const response = await fetch(url,options);
+
+            if(response) {
+                const result = await response.json();
+                const totalCompra = document.querySelector('.totalCompra');
+                totalCompra.textContent = `Total: S/${result.carrito.reduce((suma, el) => suma + el.price, 0)}.00`;
+            }
+        }
+        await refreshCount();
         carritoContadorDOM()
         addProductRender(e.target);
         await carritoDesplegado();
@@ -1494,88 +1495,6 @@ container_group.forEach(container => {
     });
 });
 
-
-/*-----------busqueda de productos-----------------*/
-
-function deleteAddProducts() {
-    const all_elements = document.querySelectorAll('.compraElement');
-
-    all_elements.forEach(el => {
-        const lessIcon = el.querySelector('svg:nth-of-type(1)');
-        const addIcon = el.querySelector('svg:nth-of-type(2)');
-
-
-        // Definir la función handler
-        const lessIconHandler = async (e) => {
-                const idCompra = e.target.parentNode.previousElementSibling.dataset.idCompra;
-            if (e.target === lessIcon) {
-                const idProduct = e.target.parentNode.parentNode.dataset.id;
-
-                console.log('Soy el data-id del botón less:', idCompra);
-
-                // Datos para la petición DELETE
-                const productDelete = {
-                    idCompra: parseInt(idCompra),
-                };
-
-                const options = {
-                    method: 'DELETE',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(productDelete),
-                };
-
-                const url = '/compra/compra/compra/compra';
-
-                try {
-                    // Petición DELETE
-                    const response = await fetch(url, options);
-
-                    if (response.ok) {
-                        const result = await response.json();
-                        console.log(result);
-
-                        const parentContainer = e.target.parentNode.parentNode;
-                        console.log('El elemento a eliminar será ->', parentContainer);
-
-                        setTimeout(() => {
-                            // Eliminar el event listener antes de remover el nodo
-                            lessIcon.removeEventListener('click', lessIconHandler);
-
-                            // Eliminar el nodo del DOM
-                            parentContainer.remove();
-                            console.log('Nodo del DOM eliminado exitosamente ->', parentContainer);
-
-                            // Verificar si el nodo sigue conectado al DOM
-                            if (!document.contains(parentContainer)) {
-                                console.log('El elemento fue eliminado del DOM exitosamente ->', parentContainer);
-                            } else {
-                                console.log('El elemento sigue existiendo en memoria, pero ya no está en el DOM.');
-                            }
-                        }, 0);
-
-                        // Actualizar la UI
-                        const controllerCount = document.querySelector('.controllerCountProducts');
-                        const totalCompra = document.querySelector('.totalCompra');
-                        const contadorCarrito = document.getElementById('contador-carrito');
-
-                        // Actualizar elementos visuales con los datos de la respuesta
-                        contadorCarrito.textContent = result.carritoLength;
-                        totalCompra.textContent = `Total: S/${result.carrito.reduce((sum, el) => sum + el.price, 0)}.00`;
-                        controllerCount.textContent = `${result}`;
-                    } else {
-                        console.error('Ocurrió un problema al intentar eliminar el producto.');
-                    }
-                } catch (error) {
-                    console.error('Error en la petición:', error);
-                }
-            }
-        };
-
-        // Asignar el event listener
-        lessIcon.addEventListener('click', lessIconHandler);
-    });
-}
-
 /*---------------redireccionamiento de stripe-------------------*/
 
 document.addEventListener("click", async (e) => {
@@ -1603,7 +1522,7 @@ document.addEventListener("click", async (e) => {
                         console.log('Error en el proceso de pago:',error);
                     }
                 }
-                checkout();
+                await checkout();
                 console.log("Lo hicimos bien");
             }else{
                 alert('Es requerido ingresar los datos para proceder con la compra')
@@ -1662,355 +1581,359 @@ function generarCodigoQr(){
     peticionCarrito();
 }
 
-function selectOption(target){
-    const $button=document.querySelector('.boxYapePlin~button');
-    const $colorButton=getComputedStyle($button).backgroundColor;
-
-    // if (bgColor === "rgb(128, 0, 128)" || bgColor === "rgb(0, 128, 0)") { // Purple y Green en RGB
-
-    if(target==="yape"){
-        if($colorButton==="rgb(128, 0, 128)"){
-            $button.style.background=""
-        }else{
-            $button.style.background="purple";
-        }
-    }else{
-        if($colorButton==="rgb(0, 128, 0)"){
-            $button.style.background="";
-        }else{
-            $button.style.background="green";
-        }
-    }
-
-}
-function codigoQr() {
-    const $button = document.querySelector('.boxYapePlin~button');
-    const bgColor = window.getComputedStyle($button).backgroundColor; // Obtener el color real
-
-    if (bgColor === "rgb(128, 0, 128)" || bgColor === "rgb(0, 128, 0)") { // Purple y Green en RGB
-        const $containerYapePlin = document.querySelector('.containerYapePlin');
-        const $boxYapePlin = document.querySelector('.boxYapePlin');
-
-        if ($boxYapePlin) {
-            // $boxYapePlin.remove();
-            $boxYapePlin.style.display="none";
-        }
-
-        // Estilos del botón
-        $button.style.padding = "12.5px";
-        $button.style.borderRadius = "10px";
-        $button.style.minWidth="100px";
-        $button.style.width="125px";
-        $button.textContent = "Enviar";
-
-        // Agregar QR al DOM
-        // $containerYapePlin.prepend(containerQr);
-
-        peticionQr(275,'999888777');
-
-
-        // Esperar a que el contenedor esté en el DOM antes de generar el QR
-    } else {
-        alert('Selecciona una opción');
-    }
-
-
-}
-function returnYapePlin(){
-
-    const $boxYapePlin=document.querySelector('.boxYapePlin');
-    const $returnYapePlin=document.querySelector('.returnYapePlin');
-    // const computedDisplay=getComputedStyle($boxYapePlin).display;
-    const textoDashed=document.querySelector('.textContainer>h1:nth-of-type(2)')
-    if(textoDashed){
-        const computedDisplay=getComputedStyle(textoDashed).display;
-        if(computedDisplay==='none'){
-            $returnYapePlin.style.display="block";
-        }
-    }
-
-}
-
-document.addEventListener('click',e=>{
-    const $boxYapePlin=document.querySelector('.boxYapePlin');
-    const textoDashed=document.querySelector('.textContainer>h1:nth-of-type(2)')
-    const titleYapePlin=document.querySelector('.textContainer>h1:nth-of-type(1)');
-    const img=document.querySelector('.containerYapePlin>img');
-    const $containerYapePlin=document.querySelector('.containerYapePlin')
-    const button=document.querySelector('.containerYapePlin>button');
-
-    if(e.target.closest(".containerYapePlin>svg:nth-of-type(2)")){
-
-        const svg=e.target.closest('svg');
-        titleYapePlin.textContent="Escoja el medio de pago";
-        textoDashed.style.display="block";
-        textoDashed.textContent="";
-        $containerYapePlin.style.alignItems="";
-        $boxYapePlin.style.display="flex";
-        img.remove();
-        svg.style.display="none";
-        button.textContent="Generar código de pago"
-        button.style.background="";
-        button.style.width="200px";
-    }
-})
-
-
-function peticionQr(monto,numero){
-    const url="/generar-qr"
-    const options={
-        method: 'POST',
-        headers:{'Content-Type':'application/json'},
-        body: JSON.stringify({monto,numero}),
-    }
-    const qr=async()=> {
-        const response =await fetch(url, options);
-        if (!response.ok) {
-            throw new Error('hubo un error con la peticion de qr->', response.status);
-        } else {
-            const result =await response.json();
-            console.log(result.qr);
-
-            const $containerYapePlin=document.querySelector('.containerYapePlin');
-            const cajaQR=document.createElement('img');
-            const $button=$containerYapePlin.querySelector('button')
-            const $h1=$containerYapePlin.querySelector('h1');
-
-            const computedStyleButton=window.getComputedStyle($button).backgroundColor;
-
-            const $textContainer=document.querySelector('.textContainer');
-
-            cajaQR.src=result.qr;
-
-            if(computedStyleButton==="rgb(128, 0 ,128)"){
-                $h1.textContent="Yape";
-            }else{
-                $h1.textContent="Plin"
-            }
-
-
-            const textDashed=document.querySelector('.textContainer>h1:nth-of-type(2)')
-            $textContainer.insertAdjacentElement('afterend',cajaQR);
-
-            if(textDashed) {
-                $containerYapePlin.style.alignItems="center";
-                textDashed.style.display="none";
-                returnYapePlin()
-            }
-
-
-        }
-    }
-
-    qr();
-}
-function rellenarDatos(){
-
-
-    document.addEventListener('click',e=>{
-
-        const $pasarelaPago=document.querySelector('.pasarelaPago');
-        // const computedPasarela=getComputedStyle($pasarelaPago);
-
-        if(e.target.id==="formularioEnvio"){
-
-            $pasarelaPago.style.pointerEvents="auto";
-            enviarDatosCliente();
-            const $containerYapePlin=document.querySelector('.containerYapePlin');
-
-
-            if($containerYapePlin){
-                const computedStyleYapePlin=getComputedStyle($containerYapePlin);
-
-                console.log('aqui ta todo->',computedStyleYapePlin)
-                console.log($pasarelaPago,"<-pasarelaPago")
-
-                $containerYapePlin.remove();
-
-
-                if($pasarelaPago){
-                    // $pasarelaPago.style.opacity="1";
-                    // $pasarelaPago.style.minWidth="500px";
-                    // $pasarelaPago.style.width="500px";
-                    $pasarelaPago.style.height="100%";
-                    $pasarelaPago.style.pointerEvents="auto";
-                    $pasarelaPago.style.display="flex";
-                }
-
-            }else{
-                const computedOpacityPasarela=getComputedStyle($pasarelaPago).display;
-
-                if(computedOpacityPasarela==="flex"){
-                    // $pasarelaPago.style.opacity="0";
-                    // $pasarelaPago.style.width="0";
-                    // $pasarelaPago.style.minWidth="0";
-                    // $pasarelaPago.style.height="0";
-                    $pasarelaPago.style.pointerEvents="none";
-                    $pasarelaPago.style.display="none";
-                }else {
-                    // $pasarelaPago.style.opacity = "1";
-                    // $pasarelaPago.style.width = "500px";
-                    // $pasarelaPago.style.minWidth = "500px";
-                    $pasarelaPago.style.height = "100%";
-                    $pasarelaPago.style.pointerEvents="auto";
-                    $pasarelaPago.style.display="flex";
-                }
-            }
-
-        }
-
-
-    })
-}
-rellenarDatos()
-
-
-document.addEventListener('click',async e=>{
-    if(e.target.id==="payVirtualWallet") {
-
-        const verificarData= await verificarDatosCliente();
-
-        if(verificarData.length>0){
-            const $containerYapePlin = document.querySelector('.containerYapePlin');
-            const $pasarelaPago=document.querySelector('.pasarelaPago');
-
-            if($pasarelaPago){
-                const computedOpacityPasarela=getComputedStyle($pasarelaPago).display;
-
-                if(computedOpacityPasarela==="flex"){
-                    $pasarelaPago.style.display="none";
-                    $pasarelaPago.style.pointerEvents="none";
-                }
-            }
-
-            if($containerYapePlin){
-                const computedOpacityYapePlin=getComputedStyle($containerYapePlin).opacity;
-
-                if(computedOpacityYapePlin==="1"){
-                    $containerYapePlin.style.opacity="0";
-                    $containerYapePlin.style.width="0";
-                    $containerYapePlin.style.minWidth="0";
-                    $containerYapePlin.style.height="0";
-                    $containerYapePlin.style.pointerEvents="none";
-                }else{
-                    $containerYapePlin.style.opacity="1";
-                    // $containerYapePlin.style.width="500px";
-                    // $containerYapePlin.style.minWidth="500px";
-                    $containerYapePlin.style.height="800px";
-                    $containerYapePlin.style.pointerEvents="auto";
-                }
-
-            }else{
-                generarCodigoQr()
-            }
-        }else{
-            alert('usted no ha rellenados los datos de envio');
-        }
-
-
-    }
-
-
-    if(e.target.closest('.containerYapePlin>svg:nth-of-type(1)')){
-
-        const $containerYapePlin = document.querySelector('.containerYapePlin');
-
-        if($containerYapePlin){
-            $containerYapePlin.remove();
-        }
-
-    }
-
-    if(e.target.classList.contains("yape")){
-        selectOption("yape");
-    }
-    if(e.target.classList.contains("plin")){
-        selectOption("plin")
-    }
-    if(e.target.matches(".boxYapePlin ~ button")){
-        codigoQr();
-    }
-
-
-})
-
-function textoDashedYapePlin(){
-    const textYapePlin = document.querySelector('.textContainer>h1:nth-of-type(2)');
-    let textOne="Te damos la opcion de elegir tu billetera digital favorita.";
-    let textTwo="Yapea o Plinea en Jeatdeam."
-    let changeText = true;
-    let textShow = changeText ? textOne : textTwo;
-    let showText = "";
-
-    function escribirText() {
-        textShow.split('').forEach((letra, indice) => {
-            setTimeout(() => {
-                showText = showText + letra;
-                textYapePlin.textContent = showText + "|";  // Mostrar el texto con el cursor "|"
-            }, 50 * indice);
-        });
-
-        setTimeout(deleteText, textShow.length * 50 + 500); // Ajustamos el tiempo de espera después de la escritura
-    }
-
-    escribirText();
-
-    function deleteText() {
-        const handleInterval = setInterval(() => {
-            if (showText.length > 0) {
-                showText = showText.slice(0, -1);
-                textYapePlin.textContent = showText + "|";  // Mostrar el texto con el cursor "|"
-            } else {
-                // Aquí cambiamos el texto y luego reiniciamos el ciclo
-                changeText = !changeText;
-                textYapePlin.textContent = ""; // Limpiar el texto de la pantalla
-                clearInterval(handleInterval);
-                // Cambiar el texto y escribirlo después de un pequeño retraso
-                setTimeout(() => {
-                    textShow = changeText ? textOne: textTwo;
-                    escribirText();
-                }, 200); // Esperar un momento antes de comenzar a escribir el nuevo texto
-            }
-        }, 50);
-    }
-}
-
-
-
-function colorYapePlin(){
-
-    const $buttonYape=document.querySelector('.yape')
-    const $buttonPlin=document.querySelector('.plin')
-
-    if($buttonYape) {
-        $buttonYape.addEventListener('mouseenter', e => {
-            $buttonYape.style.boxShadow="0 0 5px rgba(0,0,0,0.8)"
-            $buttonYape.style.transform="scale(1.10)"
-            $buttonYape.style.transition="all 0.25s linear"
-        })
-        $buttonYape.addEventListener('mouseleave', e => {
-            $buttonYape.style.filter="";
-            $buttonYape.style.transform="";
-            $buttonYape.style.boxShadow="0 0 5px rgba(0,0,0,0.5)";
-        })
-    }
-
-    if($buttonPlin){
-        $buttonPlin.addEventListener('mouseenter',e=>{
-            $buttonPlin.style.boxShadow="0 0 5px rgba(0,0,0,0.8)"
-            $buttonPlin.style.transform="scale(1.10)";
-            $buttonPlin.style.transition="all 0.25s linear";
-        })
-        $buttonPlin.addEventListener('mouseleave',e=>{
-            $buttonPlin.style.boxShadow="0 0 5px rgba(0,0,0,0.5)"
-            $buttonPlin.style.filter="";
-            $buttonPlin.style.transform="";
-        })
-
-
-    }
-
-}
+// function selectOption(target){
+//     const $button=document.querySelector('.boxYapePlin~button');
+//     const $colorButton=getComputedStyle($button).backgroundColor;
+//
+//     // if (bgColor === "rgb(128, 0, 128)" || bgColor === "rgb(0, 128, 0)") { // Purple y Green en RGB
+//
+//     if(target==="yape"){
+//         if($colorButton==="rgb(128, 0, 128)"){
+//             $button.style.background=""
+//         }else{
+//             $button.style.background="purple";
+//         }
+//     }else{
+//         if($colorButton==="rgb(0, 128, 0)"){
+//             $button.style.background="";
+//         }else{
+//             $button.style.background="green";
+//         }
+//     }
+//
+// }
+// function codigoQr() {
+//     const $button = document.querySelector('.boxYapePlin~button');
+//     const bgColor = window.getComputedStyle($button).backgroundColor; // Obtener el color real
+//
+//     if (bgColor === "rgb(128, 0, 128)" || bgColor === "rgb(0, 128, 0)") { // Purple y Green en RGB
+//         const $containerYapePlin = document.querySelector('.containerYapePlin');
+//         const $boxYapePlin = document.querySelector('.boxYapePlin');
+//
+//         if ($boxYapePlin) {
+//             // $boxYapePlin.remove();
+//             $boxYapePlin.style.display="none";
+//         }
+//
+//         // Estilos del botón
+//         $button.style.padding = "12.5px";
+//         $button.style.borderRadius = "10px";
+//         $button.style.minWidth="100px";
+//         $button.style.width="125px";
+//         $button.textContent = "Enviar";
+//
+//         // Agregar QR al DOM
+//         // $containerYapePlin.prepend(containerQr);
+//
+//         peticionQr(275,'999888777');
+//
+//
+//         // Esperar a que el contenedor esté en el DOM antes de generar el QR
+//     } else {
+//         alert('Selecciona una opción');
+//     }
+//
+//
+// }
+// function returnYapePlin(){
+//
+//     const $boxYapePlin=document.querySelector('.boxYapePlin');
+//     const $returnYapePlin=document.querySelector('.returnYapePlin');
+//     // const computedDisplay=getComputedStyle($boxYapePlin).display;
+//     const textoDashed=document.querySelector('.textContainer>h1:nth-of-type(2)')
+//     if(textoDashed){
+//         const computedDisplay=getComputedStyle(textoDashed).display;
+//         if(computedDisplay==='none'){
+//             $returnYapePlin.style.display="block";
+//         }
+//     }
+//
+// }
+
+// document.addEventListener('click',e=>{
+//     const $boxYapePlin=document.querySelector('.boxYapePlin');
+//     const textoDashed=document.querySelector('.textContainer>h1:nth-of-type(2)')
+//     const titleYapePlin=document.querySelector('.textContainer>h1:nth-of-type(1)');
+//     const img=document.querySelector('.containerYapePlin>img');
+//     const $containerYapePlin=document.querySelector('.containerYapePlin')
+//     const button=document.querySelector('.containerYapePlin>button');
+//
+//     if(e.target.closest(".containerYapePlin>svg:nth-of-type(2)")){
+//
+//         const svg=e.target.closest('svg');
+//         titleYapePlin.textContent="Escoja el medio de pago";
+//         textoDashed.style.display="block";
+//         textoDashed.textContent="";
+//         $containerYapePlin.style.alignItems="";
+//         $boxYapePlin.style.display="flex";
+//         img.remove();
+//         svg.style.display="none";
+//         button.textContent="Generar código de pago"
+//         button.style.background="";
+//         button.style.width="200px";
+//     }
+// })
+
+
+// function peticionQr(monto,numero){
+//     const url="/generar-qr"
+//     const options={
+//         method: 'POST',
+//         headers:{'Content-Type':'application/json'},
+//         body: JSON.stringify({monto,numero}),
+//     }
+//     const qr=async()=> {
+//         const response =await fetch(url, options);
+//         if (!response.ok) {
+//             throw new Error('hubo un error con la peticion de qr->', response.status);
+//         } else {
+//             const result =await response.json();
+//             console.log(result.qr);
+//
+//             const $containerYapePlin=document.querySelector('.containerYapePlin');
+//             const cajaQR=document.createElement('img');
+//             const $button=$containerYapePlin.querySelector('button')
+//             const $h1=$containerYapePlin.querySelector('h1');
+//
+//             const computedStyleButton=window.getComputedStyle($button).backgroundColor;
+//
+//             const $textContainer=document.querySelector('.textContainer');
+//
+//             cajaQR.src=result.qr;
+//
+//             if(computedStyleButton==="rgb(128, 0 ,128)"){
+//                 $h1.textContent="Yape";
+//             }else{
+//                 $h1.textContent="Plin"
+//             }
+//
+//
+//             const textDashed=document.querySelector('.textContainer>h1:nth-of-type(2)')
+//             $textContainer.insertAdjacentElement('afterend',cajaQR);
+//
+//             if(textDashed) {
+//                 $containerYapePlin.style.alignItems="center";
+//                 textDashed.style.display="none";
+//                 returnYapePlin()
+//             }
+//
+//
+//         }
+//     }
+//
+//     qr();
+// }
+// function rellenarDatos(){
+//
+//
+//     document.addEventListener('click',e=>{
+//
+//         const $pasarelaPago=document.querySelector('.pasarelaPago');
+//         // const computedPasarela=getComputedStyle($pasarelaPago);
+//
+//         if(e.target.id==="formularioEnvio"){
+//             const input = $pasarelaPago.querySelectorAll('input');
+//             if(input){
+//                 input.forEach((el)=>{
+//                     el.style.backgroundColor="red"
+//                     el.focus();
+//                 })
+//                 // input.style.background = "orange"
+//                 console.log('gaaaaa')
+//                 // input.focus()
+//             }
+//
+//             $pasarelaPago.style.pointerEvents="auto";
+//
+//             enviarDatosCliente();
+//             const $containerYapePlin=document.querySelector('.containerYapePlin');
+//             const form = $pasarelaPago.querySelector('form')
+//             // form.style.pointerEvents="auto";
+//             form.focus()
+//             if($containerYapePlin){
+//                 const computedStyleYapePlin=getComputedStyle($containerYapePlin);
+//
+//                 console.log('aqui ta todo->',computedStyleYapePlin)
+//                 console.log($pasarelaPago,"<-pasarelaPago")
+//
+//                 $containerYapePlin.remove();
+//
+//                 if($pasarelaPago){
+//
+//                     $pasarelaPago.style.height="100%";
+//                     // $pasarelaPago.style.pointerEvents="auto";
+//                     $pasarelaPago.style.display="flex";
+//                 }
+//
+//             }else{
+//                 const computedOpacityPasarela=getComputedStyle($pasarelaPago).display;
+//
+//                 if(computedOpacityPasarela==="flex"){
+//
+//                     // $pasarelaPago.style.pointerEvents="none";
+//                     $pasarelaPago.style.display="none";
+//                 }else {
+//                     $pasarelaPago.style.height = "100%";
+//                     // $pasarelaPago.style.pointerEvents="auto";
+//                     $pasarelaPago.style.display="flex";
+//                     // form.style.pointerEvents="auto";
+//                 }
+//             }
+//
+//         }
+//
+//
+//     })
+// }
+// rellenarDatos()
+
+
+// document.addEventListener('click',async e=>{
+//     if(e.target.id==="payVirtualWallet") {
+//
+//         const verificarData= await verificarDatosCliente();
+//
+//         if(verificarData.length>0){
+//             const $containerYapePlin = document.querySelector('.containerYapePlin');
+//             const $pasarelaPago=document.querySelector('.pasarelaPago');
+//
+//             if($pasarelaPago){
+//                 const computedOpacityPasarela=getComputedStyle($pasarelaPago).display;
+//
+//                 if(computedOpacityPasarela==="flex"){
+//                     $pasarelaPago.style.display="none";
+//                     $pasarelaPago.style.pointerEvents="none";
+//                 }
+//             }
+//
+//             if($containerYapePlin){
+//                 const computedOpacityYapePlin=getComputedStyle($containerYapePlin).opacity;
+//
+//                 if(computedOpacityYapePlin==="1"){
+//                     $containerYapePlin.style.opacity="0";
+//                     $containerYapePlin.style.width="0";
+//                     $containerYapePlin.style.minWidth="0";
+//                     $containerYapePlin.style.height="0";
+//                     $containerYapePlin.style.pointerEvents="none";
+//                 }else{
+//                     $containerYapePlin.style.opacity="1";
+//                     // $containerYapePlin.style.width="500px";
+//                     // $containerYapePlin.style.minWidth="500px";
+//                     $containerYapePlin.style.height="800px";
+//                     $containerYapePlin.style.pointerEvents="auto";
+//                 }
+//
+//             }else{
+//                 generarCodigoQr()
+//             }
+//         }else{
+//             alert('usted no ha rellenados los datos de envio');
+//         }
+//
+//
+//     }
+//
+//
+//     if(e.target.closest('.containerYapePlin>svg:nth-of-type(1)')){
+//
+//         const $containerYapePlin = document.querySelector('.containerYapePlin');
+//
+//         if($containerYapePlin){
+//             $containerYapePlin.remove();
+//         }
+//
+//     }
+//
+//     if(e.target.classList.contains("yape")){
+//         selectOption("yape");
+//     }
+//     if(e.target.classList.contains("plin")){
+//         selectOption("plin")
+//     }
+//     if(e.target.matches(".boxYapePlin ~ button")){
+//         codigoQr();
+//     }
+//
+//
+// })
+
+// function textoDashedYapePlin(){
+//     const textYapePlin = document.querySelector('.textContainer>h1:nth-of-type(2)');
+//     let textOne="Te damos la opcion de elegir tu billetera digital favorita.";
+//     let textTwo="Yapea o Plinea en Jeatdeam."
+//     let changeText = true;
+//     let textShow = changeText ? textOne : textTwo;
+//     let showText = "";
+//
+//     function escribirText() {
+//         textShow.split('').forEach((letra, indice) => {
+//             setTimeout(() => {
+//                 showText = showText + letra;
+//                 textYapePlin.textContent = showText + "|";  // Mostrar el texto con el cursor "|"
+//             }, 50 * indice);
+//         });
+//
+//         setTimeout(deleteText, textShow.length * 50 + 500); // Ajustamos el tiempo de espera después de la escritura
+//     }
+//
+//     escribirText();
+
+//     function deleteText() {
+//         const handleInterval = setInterval(() => {
+//             if (showText.length > 0) {
+//                 showText = showText.slice(0, -1);
+//                 textYapePlin.textContent = showText + "|";  // Mostrar el texto con el cursor "|"
+//             } else {
+//                 // Aquí cambiamos el texto y luego reiniciamos el ciclo
+//                 changeText = !changeText;
+//                 textYapePlin.textContent = ""; // Limpiar el texto de la pantalla
+//                 clearInterval(handleInterval);
+//                 // Cambiar el texto y escribirlo después de un pequeño retraso
+//                 setTimeout(() => {
+//                     textShow = changeText ? textOne: textTwo;
+//                     escribirText();
+//                 }, 200); // Esperar un momento antes de comenzar a escribir el nuevo texto
+//             }
+//         }, 50);
+//     }
+// }
+//
+
+
+// function colorYapePlin(){
+//
+//     const $buttonYape=document.querySelector('.yape')
+//     const $buttonPlin=document.querySelector('.plin')
+//
+//     if($buttonYape) {
+//         $buttonYape.addEventListener('mouseenter', e => {
+//             $buttonYape.style.boxShadow="0 0 5px rgba(0,0,0,0.8)"
+//             $buttonYape.style.transform="scale(1.10)"
+//             $buttonYape.style.transition="all 0.25s linear"
+//         })
+//         $buttonYape.addEventListener('mouseleave', e => {
+//             $buttonYape.style.filter="";
+//             $buttonYape.style.transform="";
+//             $buttonYape.style.boxShadow="0 0 5px rgba(0,0,0,0.5)";
+//         })
+//     }
+//
+//     if($buttonPlin){
+//         $buttonPlin.addEventListener('mouseenter',e=>{
+//             $buttonPlin.style.boxShadow="0 0 5px rgba(0,0,0,0.8)"
+//             $buttonPlin.style.transform="scale(1.10)";
+//             $buttonPlin.style.transition="all 0.25s linear";
+//         })
+//         $buttonPlin.addEventListener('mouseleave',e=>{
+//             $buttonPlin.style.boxShadow="0 0 5px rgba(0,0,0,0.5)"
+//             $buttonPlin.style.filter="";
+//             $buttonPlin.style.transform="";
+//         })
+//
+//
+//     }
+//
+// }
 
 
 async function extraerDatos() {
@@ -2032,7 +1955,7 @@ async function extraerDatos() {
 }
 
 
-async function addPriceAndImg(text,textoIngresado){
+async function addPriceAndImg(oracionesFiltradas,textoIngresado){
 
     const baseDatos=await extraerDatos();
 
@@ -2040,75 +1963,132 @@ async function addPriceAndImg(text,textoIngresado){
     const $searchAndOptions=document.querySelector('.searchAndOptions')
 
     const $ul=$searchAndOptions.querySelector('ul');
+
     const fragmentUL=document.createDocumentFragment();
-    if($ul){
-            let textoLimpio=limpiarTexto(text)
-            const element=baseDatos.find(element=>{
 
-                if([element.brand,element.name].join(' ')===textoLimpio){
-                    return element;
-                }
-            })
-
-        const regex = new RegExp(`\\b\\w*${textoIngresado}\\w*\\b`, 'gi');
-        const coincidencias = text.match(regex);
+    if($ul) {
 
 
-            const fragmentLi=document.createDocumentFragment();
-            const li=document.createElement('li');
-            const spanBrand=document.createElement('span');
-            const div=document.createElement('div');
+        oracionesFiltradas.forEach((oracion, indice) => {
 
-            spanBrand.textContent=element.brand;
+            const element = baseDatos.find(el => [el.brand.toLowerCase(), el.name.toLowerCase()].join(' ') === oracion)
+
+            const fragmentLi = document.createDocumentFragment();
+            const liProduct = document.createElement('li');
+            const spanBrand = document.createElement('span');
+            const containerName = document.createElement('span');
+            const imgProduct = document.createElement('img');
+            imgProduct.dataset.category = element.category;
+            const spanPrice = document.createElement('span');
+            const containerBrandName = document.createElement('div');
+
+            spanBrand.textContent = element.brand;
             spanBrand.style.fontSize = "16px";
-            spanBrand.style.fontWeight="500";
+            spanBrand.style.fontWeight = "500";
 
-        const spanName=document.createElement('span');
 
-            element.name.split(' ').forEach((word,indice)=>{
-                const span=document.createElement('span');
-                span.textContent=word;
-                span.style.fontSize = "16px";
+            element.name.split(' ').forEach((word, indice) => {
 
-                spanName.appendChild(span);
+                const spanWord = document.createElement('span');
+
+                spanWord.textContent = word;
+                spanWord.style.fontSize = "16px";
+                containerName.appendChild(spanWord);
+
             })
 
-            const img=document.createElement("img")
-            img.src=element.img[0];
-            const price=document.createElement("span");
-            price.style.fontWeight="500";
-            price.style.fontSize="16px";
-            price.textContent="S/."+element.price;
-
-            fragmentLi.appendChild(img);
-            div.appendChild(spanBrand)
-            div.appendChild(spanName)
-
-            const width= window.innerWidth;
-            if(width<=480) {
-                fragmentLi.appendChild(img);
-                div.appendChild(spanBrand);
-                div.appendChild(spanName);
-                div.appendChild(price)
-                fragmentLi.appendChild(div);
-                li.appendChild(fragmentLi);
-                fragmentUL.appendChild(li);
+            containerBrandName.appendChild(spanBrand);
+            containerBrandName.appendChild(containerName);
 
 
-            }else{
-                fragmentLi.appendChild(img);
-                div.appendChild(spanBrand);
-                div.appendChild(spanName);
-                fragmentLi.appendChild(div);
-                fragmentLi.appendChild(price)
-                li.appendChild(fragmentLi)
-                fragmentUL.appendChild(li);
-            }
+            imgProduct.src = element.img[0];
 
-    }else{
-        console.log('creo que el nodo no fue restituido correctamente')
+            spanPrice.textContent = `S/. ${element.price}`;
+            spanPrice.style.fontWeight = "500";
+            spanPrice.style.fontSize = "16px";
+
+            fragmentLi.appendChild(imgProduct);
+            fragmentLi.appendChild(containerBrandName)
+            fragmentLi.appendChild(spanPrice);
+
+            liProduct.appendChild(fragmentLi);
+            fragmentUL.appendChild(liProduct)
+        })
+
+        return fragmentUL;
+
+        // $ul.appendChild(fragmentUL);
+
+
+        // let textoLimpio=limpiarTexto(oracionesFiltradas)
+        // const element=baseDatos.find(element=>{
+        //
+        //     if([element.brand.toLowerCase(),element.name.toLowerCase()].join(' ')===textoLimpio){
+        //         // console.log('brand: ',element.brand);
+        //         // console.log('name: ',element.name);
+        //         return element;
+        //     }
+        // })
+
+
+        //     const regex = new RegExp(`\\b\\w*${textoIngresado}\\w*\\b`, 'gi');
+        //     const coincidencias = textoIngresado.match(regex);
+        //
+        //         // const fragmentLi=document.createDocumentFragment();
+        //         // const li=document.createElement('li');
+        //         // const spanBrand=document.createElement('span');
+        //         // const div=document.createElement('div');
+        //         //
+        //         // spanBrand.textContent= element.brand;
+        //         // spanBrand.style.fontSize = "16px";
+        //         // spanBrand.style.fontWeight="500";
+        //     // const spanName=document.createElement('span');
+        //     //
+        //     //     element.name.split(' ').forEach((word,indice)=>{
+        //     //         const span=document.createElement('span');
+        //     //         span.textContent=word;
+        //     //         span.style.fontSize = "16px";
+        //     //
+        //     //         spanName.appendChild(span);
+        //     //     })
+        //
+        //         // const img=document.createElement("img")
+        //         // img.src=element.img[0];
+        //         // const price=document.createElement("span");
+        //         // price.style.fontWeight="500";
+        //         // price.style.fontSize="16px";
+        //         // price.textContent="S/."+element.price;
+        //
+        //         fragmentLi.appendChild(img);
+        //         div.appendChild(spanBrand)
+        //         div.appendChild(spanName)
+        //
+        //         const width= window.innerWidth;
+        //         if(width<=480) {
+        //             fragmentLi.appendChild(img);
+        //             div.appendChild(spanBrand);
+        //             div.appendChild(spanName);
+        //             div.appendChild(price)
+        //             fragmentLi.appendChild(div);
+        //             li.appendChild(fragmentLi);
+        //             fragmentUL.appendChild(li);
+        //
+        //
+        //         }else{
+        //             fragmentLi.appendChild(img);
+        //             div.appendChild(spanBrand);
+        //             div.appendChild(spanName);
+        //             fragmentLi.appendChild(div);
+        //             fragmentLi.appendChild(price)
+        //             li.appendChild(fragmentLi)
+        //             fragmentUL.appendChild(li);
+        //         }
+        //
+        // }else{
+        //     console.log('creo que el nodo no fue restituido correctamente')
+        // }
+        // $ul.appendChild(fragmentUL)
     }
-    $ul.appendChild(fragmentUL)
 }
 function pintarTexto(textoIngresado){
 
@@ -2148,8 +2128,7 @@ function pintarTexto(textoIngresado){
 
 function limpiarTexto(texto){
 
-    const onlyText=texto.replace(/\d+\.+/,"").trim();
-
+    const onlyText=texto.replace(/\d+\.+/g,"").trim();
     return onlyText;
 }
 
@@ -2234,13 +2213,12 @@ $iconsBusqueda.addEventListener('click', () => {
 
 
 async function searchProducts() {
+
     const baseDatos = await extraerDatos();
 
     const $input_search = document.querySelector('input[type="search"]');
     const ul_search = document.createElement('ul');
     const $searchAndOptions = document.querySelector('.searchAndOptions');
-
-
 
     ul_search.style.opacity = "1";
 
@@ -2249,7 +2227,6 @@ async function searchProducts() {
         $searchAndOptions.appendChild(ul_search);
 
     }
-
     const oraciones = baseDatos.map(cadena => {
         return [
             cadena.brand.toLowerCase(),
@@ -2257,81 +2234,193 @@ async function searchProducts() {
         ].join(' ');
     });
 
+    // console.log(oraciones)
 
-    $input_search.addEventListener('input', e => {
+    let arrayExistente = [];
+    let aux = [];
+
+    $input_search.addEventListener('input', async e => {
+
         if (e.target.tagName === "INPUT" && e.target.type === "search") {
 
             const $ul = $searchAndOptions.querySelector('ul');
-            const textoIngresado = e.target.value.toLowerCase().trim();
-            let arrayExistente = [];
-            let active=true;
 
-            // $ul.innerHTML = "";
+            // if(e.target.value.length > 3){
 
-            pintarTexto(textoIngresado);
+                const textoIngresado = e.target.value.toLowerCase().trim();
+                // let arrayExistente = [];
+                let active=true;
 
-            if (!textoIngresado) {
-                const li = document.createElement('li');
-                while($ul.firstChild) $ul.removeChild($ul.firstChild);
-                li.textContent = 'Ingrese texto para buscar';
-                li.style.padding = "10px"
-                li.style.transition="all 0.25s ease-in-out";
-                $ul.appendChild(li);
+                // $ul.innerHTML = "";
 
-                setTimeout(()=>{
-                    li.style.opacity="0";
-                },100)
-                setTimeout(()=>{
-                    li.remove();
-                    active=!active;
-                },350)
-                return;
-            }
-            const textoArray = textoIngresado.split(/\s+/); // Manejar múltiples espacios
-            const arrayFiltrado = oraciones.filter(cadena =>
-                textoArray.every(word => cadena.includes(word))
-            );
+                // pintarTexto(textoIngresado);
+
+                // if (!textoIngresado) {
+                //     const li = document.createElement('li');
+                //     while($ul.firstChild) $ul.removeChild($ul.firstChild);
+                //     li.textContent = 'Ingrese texto para buscar';
+                //     li.style.padding = "10px"
+                //     li.style.transition="all 0.25s ease-in-out";
+                //     $ul.appendChild(li);
+                //
+                //     setTimeout(()=>{
+                //         li.style.opacity="0";
+                //     },100)
+                //     setTimeout(()=>{
+                //         li.remove();
+                //         active=!active;
+                //     },350)
+                //     return;
+                // }
+                const textoArray = textoIngresado.split(/\s+/); // Manejar múltiples espacios
+                const arrayFiltrado = oraciones.filter(cadena =>
+                    textoArray.every(word => cadena.includes(word))
+                );
+
+                const $liExistente = $ul.querySelectorAll('li')
+
+                if(textoIngresado === ""){
+                    $ul.textContent = "";
+                    arrayExistente = [];
+                    aux = [];
+                } else {
+                    $ul.textContent = "";
+
+                    // setTimeout(async () => {
+                        if ($ul.children.length > 0) {
+                            // const allDiv = $ul.querySelectorAll('li>div');
+                            // if (allDiv.length > 0) {
+                            //
+                            //     const prevProducts = $ul.querySelectorAll('li > div')
+                            //
+                            //     prevProducts.forEach(el => {
+                            //         const arrayText = []
+                            //         Array.from(el.children).forEach(node => {
+                            //             if (node.children.length === 0) {
+                            //                 arrayText.push(node.textContent.split(' '))
+                            //             } else {
+                            //                 Array.from(node.children).forEach(word => {
+                            //                     arrayText.push(word.textContent.split(' '));
+                            //                 })
+                            //             }
+                            //         })
+                            //         arrayExistente.push(arrayText.flat().join(' '))
+                            //     })
+                            //     // console.log(arrayExistente)
+                            //
+                            //     const listaFiltrada = await addPriceAndImg(arrayFiltrado, textoIngresado);
+                            //
+                            //     const allDiv = listaFiltrada.querySelectorAll('li > div');
+                            //     allDiv.forEach(el => {
+                            //         const arrayTextTwo = [];
+                            //         Array.from(el.children).forEach(node => {
+                            //
+                            //             if (node.children.length === 0) {
+                            //                 arrayTextTwo.push(node.textContent.split(' '));
+                            //             } else {
+                            //                 Array.from(node.children).forEach(word => {
+                            //                     arrayTextTwo.push(word.textContent.split(' '));
+                            //                 })
+                            //             }
+                            //         })
+                            //         aux.push(arrayTextTwo.flat().join(' '))
+                            //     })
+                            //
+                            //     console.log('los elementos previos -> ', arrayExistente)
+                            //     console.log('los elementos nuevos -> ', aux);
+                            //
+                            //     const indiceCoincidencias = [];
+                            //
+                            //     arrayExistente.forEach((producto, indice) => {
+                            //
+                            //         aux.forEach((productoTwo, index) => {
+                            //             if (producto !== productoTwo) {
+                            //                 // $ul.children[indice].remove();
+                            //             } else {
+                            //                 console.log('encontramos coincidencia : ', producto, "-", productoTwo)
+                            //                 indiceCoincidencias.push(indice);
+                            //             }
+                            //
+                            //         })
+                            //     })
+                            //
+                            //     Array.from(prevProducts).forEach((el, indice) => {
+                            //         if (!indiceCoincidencias.includes(indice)) {
+                            //             el.parentElement.remove(); // O $ul.children[indice].remove();
+                            //         }
+                            //     });
+                            // }
+                        } else {
+                            const listaMostrada = await addPriceAndImg(arrayFiltrado, textoIngresado);
+                            $ul.classList.add('show-animation-busqueda');
+                            $ul.appendChild(listaMostrada)
+                            setTimeout(()=>{$ul.classList.remove('show-animation-busqueda')},250)
+                            console.log('gaaaaaaaaaaaaaaaaaa')
+                        }
+                    // },200)
+
+                }
+
+                // if($liExistente.length > 0 ) {
+
+                    // console.log('ya hay elementos aqui')
 
 
-            //nuevo filtro
-            const $liExistente = $ul.querySelectorAll('li')
 
-            if ($liExistente.length > 0) {
+                // }else{
 
-                    if (arrayFiltrado.length < $liExistente.length) {
-                        $liExistente.forEach((li, indice) => {
-                            // const preTxt=$liExistente[indice].querySelector('span:nth-of-type(1)');
-                            const span = li.querySelector('span:nth-of-type(1)');
+                // }
+                //
+                // arrayFiltrado.forEach((oracion,indice) => {
+                //
+                //     addPriceAndImg(oracion, textoIngresado);
+                //
+                //
+                // })
 
-                            if (arrayFiltrado[indice] !== span.textContent) li.remove();
+                // if ($liExistente.length > 0) {
+                //     // if (arrayFiltrado.length < $liExistente.length) {
+                //     //
+                //     //     $liExistente.forEach((li, indice) => {
+                //     //         // const preTxt=$liExistente[indice].querySelector('span:nth-of-type(1)');
+                //     //         const span = li.querySelector('span:nth-of-type(1)');
+                //     //
+                //     //         if (arrayFiltrado[indice] !== span.textContent) li.remove();
+                //     //
+                //     //         console.log('si funciona')
+                //     //     })
+                //     // }
+                //     if (arrayFiltrado.length > $liExistente.length) {
+                //
+                //         arrayFiltrado.forEach((text, indice) => {
+                //
+                //             if ($liExistente[indice]) {
+                //                 const span = $liExistente[indice].querySelector('span:nth-of-type(1)');
+                //             } else {
+                //                 addPriceAndImg(text,textoIngresado);
+                //                 arrayExistente.push(text);
+                //             }
+                //         })
+                //         // if($liExistente.length>0) apiladoInfoProductSmall()
+                //     }
+                //
+                // } else {
+                //     arrayFiltrado.forEach(filtrado => {
+                //
+                //         addPriceAndImg(filtrado,textoIngresado)
+                //         arrayExistente.push(filtrado);
+                //
+                //         const $liExistente = $ul.querySelectorAll('li')
+                //
+                //         // if($liExistente.length>0) apiladoInfoProductSmall()
+                //     })
+                //
+                // }
 
-                        })
-                    }
-                    if (arrayFiltrado.length > $liExistente.length) {
+            // }else{
+            //     console.log('aun no ha ingresado mas de 3 letras');
+            // }
 
-                        arrayFiltrado.forEach((text, indice) => {
-
-                            if ($liExistente[indice]) {
-                                const span = $liExistente[indice].querySelector('span:nth-of-type(1)');
-                            } else {
-                                addPriceAndImg(text,textoIngresado);
-                                arrayExistente.push(text);
-                            }
-                        })
-                        // if($liExistente.length>0) apiladoInfoProductSmall()
-                    }
-            } else {
-                    arrayFiltrado.forEach(filtrado => {
-
-                        addPriceAndImg(filtrado,textoIngresado)
-                        arrayExistente.push(filtrado);
-
-                        const $liExistente = $ul.querySelectorAll('li')
-
-                        // if($liExistente.length>0) apiladoInfoProductSmall()
-            })
-
-        }
         }
     });
 
@@ -2370,17 +2459,15 @@ async function searchProducts() {
 
             const firtSpan=li.querySelector('div>span:nth-of-type(1)');
             const brand=firtSpan.textContent;
+            const category = li.querySelector('img').dataset.category
 
             const allSpan=li.querySelectorAll('div>span:nth-of-type(2)>span');
             let name=[];
             allSpan.forEach(span=>{
                 name.push(span.textContent);
             })
-
-            window.location.href=`/${brand}/${name.join(' ')}`
+            window.location.href=`/${brand}/${category}/${name.join(' ')}`
         }
-
-
     });
 
 

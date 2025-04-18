@@ -271,7 +271,6 @@ main{
     border-radius: 15px;
     font-size: 50px;
     padding: 0 15px;
-    background: url("/img/tocobo/tocoboBanner3.webp");
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -619,6 +618,8 @@ main{
     font-size: 35px;
     color: black;
     font-weight: bold;
+    /*font-family: var(--fuente-subtitulos);*/
+    /*font-family: roboto, sans-serif;*/
 }
 .carousel{
      overflow: hidden;
@@ -673,6 +674,7 @@ main{
     flex-direction: column;
     /*width: 400px;*/
     /*min-height: 600px;*/
+    pointer-events: none;
     position: absolute;
     top: 250px;
     left: 50%;
@@ -680,15 +682,32 @@ main{
     background: white;
     box-shadow: 0 0 35px rgba(0, 0, 0, 1);
     opacity: 0;
-    transition: opacity 0.35s linear;
+    transition: all 0.25s linear;
     width: 500px;
     font-size: 16px;
+    min-height: 200px;
+    /*max-height: 500px;*/
+    /*overflow-y: scroll;*/
 }
+.show-animation-busqueda{
+    animation: showBusqueda .25s linear;
+}
+@keyframes showBusqueda {
+    0%{
+        opacity: 0;
+    }
+    100%{
+        opacity: 1;
+    }
+}
+
+
 .busquedaInteractiva > ul > li span{
     font-size: 5px;
 }
 .activeBusqueda{
     opacity: 1;
+    pointer-events: auto;
 }
 .iconsBusqueda{
     display: flex;
@@ -750,7 +769,7 @@ main{
 
 .navegador>div>a{
     /*font-family: "WindSong", cursive;*/
-    font-family: var(--fuente-titulo);
+    font-family: var(--fuente-subtitulos);
     font-weight: 100;
     line-height: 1;
     font-size: clamp(40px,7.5vw,70px);
@@ -1388,6 +1407,10 @@ main{
     justify-content: center;
     width: 120px;
 }
+#categoriasFooter>li>a{
+    text-decoration: none;
+    color: black;
+}
 #categoriasFooter>li::before{
     position: absolute;
     content:'';
@@ -1859,17 +1882,19 @@ main{
     box-shadow:  0 0 25px rgba(0,0,0,0.2);
     transition: all 0.35s linear;
     width: 500px;
-    height: 0;
+    /*height: 0;*/
     border-radius: 12px;
     padding: 15px 25px;
     justify-content: center;
-    pointer-events: none;
+
+    /*pointer-events: none;*/
 }
 .pasarelaPago>form{
     display: flex;
     flex-direction: column;
     gap: 25px;
 }
+
 .pasarelaPago>form input{
     padding: 0 10px;
     border: none;
@@ -1877,8 +1902,34 @@ main{
     transition: all 0.35s linear;
     /*outline: 0.5px solid transparent;*/
 }
+.active_form{
+    display: block;
+    pointer-events: auto;
+    animation: showForm 0.35s ease-in-out;
+}
+.desactive_form{
+    animation: hideForm 0.35s ease-in-out;
+}
+@keyframes showForm{
+    0%{
+        opacity: 0;
+    }
+    100%{
+        opacity: 1;
+    }
+}
+@keyframes hideForm{
+    0%{
+        opacity: 1;
+    }
+    100%{
+        opacity: 0;
+    }
+
+}
+
 input:focus{
-    outline: none;
+    /*outline: none;*/
 }
 .pasarelaPago>form button{
     padding: 10px 15px;
@@ -1907,6 +1958,9 @@ input:focus{
     display: flex;
     flex-direction: column;
     gap: 15px;
+}
+.active_pick_store{
+    background : lightblue;
 }
 .region{
     display: flex;
@@ -2381,6 +2435,9 @@ input:focus{
     justify-content: space-between;
     gap: 35px;
 }
+.masVendidoElement > b {
+    font-weight: 300;
+}
 .masVendidoElement_two>div:nth-of-type(2){
     display: flex;
     justify-content: space-between;
@@ -2553,6 +2610,56 @@ input:focus{
     width: 100%;
     font-weight: 900;
 }
+
+.priceStar{
+    display: flex;
+    /*justify-content: space-between;*/
+    padding: 0 15px;
+    width: 100%;
+}
+
+.priceStar>b{
+    margin-left: auto;
+}
+
+.container_productDetail  h1 {
+    font-family: var(--fuente-subtitulos);
+}
+.container_productDetail button{
+    font-weight: 300;
+}
+.bottomInfo > h1 {
+    font-family: var(--fuente-general);
+    font-weight: 200;
+}
+.sideRight > h2{
+    font-weight: 200;
+}
+
+.lastMove > button {
+    /*font-weight: 300;*/
+    /*font-size: 15px;*/
+}
+.productRecomendent > b:nth-of-type(1){
+    font-weight: 200;
+}
+.productRecomendent > b:nth-of-type(2){
+    font-weight: 500;
+}
+.middleInfo > b {
+    font-weight: 300;
+}
+.compraElement > span {
+    font-weight: 300;
+}
+.compraElement > p > small {
+    font-weight: 500;
+    font-size: 17.5px;
+}
+.contadorElementsCompra > small {
+}
+
+
 
 @media (max-width: 320px){
 
@@ -2966,14 +3073,6 @@ input:focus{
         border: 1px solid gray;
     }
 
-
-    /*.productsRecomended>h1{*/
-    /*    border: 5px solid black;*/
-    /*}*/
-    /*.productsRecomended>h1{*/
-    /*    border: 5px solid black;*/
-    /*}*/
-
     /*-------nav-------*/
     .navegador{
         width: 100%;
@@ -3022,9 +3121,49 @@ input:focus{
         justify-content: center;
     }
 
+    .containerMarcas > div:nth-of-type(3){
+        background-position: center 65%;
+    }
+    .containerMarcas > div:nth-of-type(4){
+        background-position: center 10%;
+    }
+    .containerMarcas > div:nth-of-type(6){
+        background-position: center 40%;
+    }
+    .containerMarcas > div:nth-of-type(7){
+        background-position: center 0;
+    }
+    .containerMarcas > div:nth-of-type(8){
+        background-position: center 56.5%;
+    }
+    .containerMarcas > div:nth-of-type(10){
+        background-position: center 25%;
+    }
+
+
 
 }
 @media (min-width: 321px) and (max-width: 480px){
+
+    .containerMarcas > div:nth-of-type(3){
+        background-position: center 65%;
+    }
+    .containerMarcas > div:nth-of-type(4){
+        background-position: center 10%;
+    }
+    .containerMarcas > div:nth-of-type(6){
+        background-position: center 40%;
+    }
+    .containerMarcas > div:nth-of-type(7){
+        background-position: center 0;
+    }
+    .containerMarcas > div:nth-of-type(8){
+        background-position: center 56.5%;
+    }
+    .containerMarcas > div:nth-of-type(10){
+        background-position: center 25%;
+    }
+
     .prePage{
         font-size: 70px;
         font-weight: 900;
@@ -3182,7 +3321,7 @@ input:focus{
     }
     .region>input{
         min-height: 40px; !important
-    flex: 1;
+        flex: 1;
     }
     .couriers{
         flex-wrap: wrap;
@@ -3483,6 +3622,30 @@ input:focus{
 
 }
 @media (min-width: 481px) and (max-width: 640px){
+
+
+    .containerMarcas > div:nth-of-type(2){
+        background-position: center 90%;
+    }
+    .containerMarcas > div:nth-of-type(3){
+        background-position: center 65%;
+    }
+    .containerMarcas > div:nth-of-type(4){
+        background-position: 30% 10%;
+    }
+    .containerMarcas > div:nth-of-type(6){
+        background-position: center 70%;
+    }
+    .containerMarcas > div:nth-of-type(7){
+        background-position: center 15%;
+    }
+    .containerMarcas > div:nth-of-type(8){
+        background-position: center 60%;
+    }
+    .containerMarcas > div:nth-of-type(10){
+        background-position: center 25%;
+    }
+
     /*-------containeArrows----------*/
     #containerArrows{
         padding: 0 10px;
@@ -3856,6 +4019,12 @@ input:focus{
 
 }
 @media (min-width: 641px) and (max-width: 768px){
+
+    .containerMarcas > div:nth-of-type(4){
+        background-position: 45% center;
+    }
+
+
     .marca>div{
         font-size: 50px;
         /*border: 5px solid red;*/
@@ -4038,6 +4207,7 @@ input:focus{
         justify-content: space-between;
         padding: 0 15px;
     }
+
     #estrellas{
         display: flex;
         gap: 0 5px;
@@ -4155,6 +4325,10 @@ input:focus{
 
 }
 @media (min-width: 769px) and (max-width: 1024px){
+
+    .containerMarcas > div:nth-of-type(4){
+        background-position: 45% center;
+    }
 
     .marca>div{
         font-size: 50px;
@@ -4431,6 +4605,23 @@ input:focus{
     }
 }
 @media (min-width: 1025px) and (max-width: 1280px){
+
+    .containerMarcas > div:nth-of-type(2){
+        background-position: center 90%;
+    }
+    .containerMarcas > div:nth-of-type(3){
+        background-position: center 60%;
+    }
+    .containerMarcas > div:nth-of-type(4){
+        background-position: center 40%;
+    }
+    .containerMarcas > div:nth-of-type(6){
+        background-position: center 65%;
+    }
+    .containerMarcas > div:nth-of-type(7){
+        background-position: center 10%;
+    }
+
     .marca>div{
         font-size: 60px;
     }
@@ -4686,6 +4877,21 @@ input:focus{
     }
 }
 @media (min-width: 1281px) and (max-width: 1440px){
+    .containerMarcas > div:nth-of-type(2){
+        background-position: center 90%;
+    }
+    .containerMarcas > div:nth-of-type(3){
+        background-position: center 60%;
+    }
+    .containerMarcas > div:nth-of-type(4){
+        background-position: center 40%;
+    }
+    .containerMarcas > div:nth-of-type(6){
+        background-position: center 65%;
+    }
+    .containerMarcas > div:nth-of-type(7){
+        background-position: center 10%;
+    }
     .productsRecomended{
         margin-top: 50px;
     }
@@ -5010,6 +5216,23 @@ input:focus{
 
 }
 @media (min-width: 1441px) and (max-width: 1536px){
+
+    .containerMarcas > div:nth-of-type(2){
+        background-position: center 90%;
+    }
+    .containerMarcas > div:nth-of-type(3){
+        background-position: center 60%;
+    }
+    .containerMarcas > div:nth-of-type(4){
+        background-position: center 40%;
+    }
+    .containerMarcas > div:nth-of-type(6){
+        background-position: center 65%;
+    }
+    .containerMarcas > div:nth-of-type(7){
+        background-position: center 10%;
+    }
+
     .productsRecomended{
         margin-top: 50px;
     }
@@ -5320,6 +5543,21 @@ input:focus{
 }
 @media (min-width: 1537px){
 
+    .containerMarcas > div:nth-of-type(2){
+        background-position: center 90%;
+    }
+    .containerMarcas > div:nth-of-type(3){
+        background-position: center 60%;
+    }
+    .containerMarcas > div:nth-of-type(4){
+        background-position: center 40%;
+    }
+    .containerMarcas > div:nth-of-type(6){
+        background-position: center 65%;
+    }
+    .containerMarcas > div:nth-of-type(7){
+        background-position: center 10%;
+    }
     .arrowsLeftSide{
         width: 110%;
     }

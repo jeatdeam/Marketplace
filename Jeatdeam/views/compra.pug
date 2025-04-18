@@ -15,8 +15,8 @@ block content
                                         h3= item.brand
                                         span= item.name
                                         p
-                                            b Precio:
-                                            small  $#{item.price}
+                                            b Total:
+                                            small  S/.  #{item.price}
                                         div#deleteElementCompra(data-id-compra=item.idCompra)
                                             <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#000000"><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/></svg>
                                         div.controllerCountProducts
@@ -42,7 +42,7 @@ block content
                                 h3  Información del cliente
                                 input(type="text", name="nombre", placeholder="nombre y apellidos", required)
                                 div
-                                    input(type="tel", name="firtsPhone", placeholder="numero telefonico", required )
+                                    input(type="tel", name="firtsPhone", placeholder="numero telefonico", required)
                                     input(type="tel", name="secondPhone", placeholder="numero telefonico alternativo")
                             div.nameUser
                                 h3 Dirección
@@ -60,7 +60,7 @@ block content
                                     button(type="button", data-empresa="olva") olva courier
                                     button(type="button", data-empresa="dinocourier") dinocourier
                                     button(type="button", data-empresa="otros") otros
-                                textarea(name="infoCourier", placeholder="", required)
+                                textarea(name="infoCourier", placeholder="")
                             button(type="submit") continuar
                     template#qrTemplate
                         section.containerYapePlin

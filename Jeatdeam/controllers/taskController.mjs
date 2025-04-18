@@ -5,8 +5,6 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
-
-
 // Carga el archivo .env
 const result = dotenv.config();
 
@@ -167,10 +165,8 @@ const redireccionamientoToPay= async (req,res)=> {
 //     },
 // ];
 
-
-
 let seccionProducts={
-    boj: {
+    dinosaurios: {
         "bloqueadores": {
 
         },
@@ -190,7 +186,7 @@ let seccionProducts={
 
         }
     },
-    celimax:  {
+    tendencias:  {
         "bloqueadores": {
 
         },
@@ -210,7 +206,7 @@ let seccionProducts={
 
         }
     },
-    cosrx:  {
+    animales:  {
         "bloqueadores": {
 
         },
@@ -230,7 +226,7 @@ let seccionProducts={
 
         }
     },
-    haruharu:  {
+    peluches:  {
         "bloqueadores": {
 
         },
@@ -250,7 +246,7 @@ let seccionProducts={
 
         }
     },
-    nacific: {
+    anime: {
         "bloqueadores": {
 
         },
@@ -270,7 +266,7 @@ let seccionProducts={
 
         }
     },
-    numbuzin:  {
+    mascotas:  {
         "bloqueadores": {
 
         },
@@ -290,7 +286,7 @@ let seccionProducts={
 
         }
     },
-    skinni1004:  {
+    dormitorio:  {
         "bloqueadores": {
 
         },
@@ -310,7 +306,7 @@ let seccionProducts={
 
         }
     },
-    tocobo:  {
+    tecnologia:  {
         "bloqueadores": {
 
         },
@@ -330,7 +326,7 @@ let seccionProducts={
 
         }
     },
-    centella:  {
+    regalos:  {
         "bloqueadores": {
 
         },
@@ -350,7 +346,7 @@ let seccionProducts={
 
         }
     },
-    avene:  {
+    coleccion:  {
         "bloqueadores": {
 
         },
@@ -370,197 +366,227 @@ let seccionProducts={
 
         }
     },
-    eucerin:  {
-        "bloqueadores": {
-
-        },
-        "contorno de ojos":{
-
-        },
-        jabon:{
-
-        },
-        mascarilla:{
-
-        },
-        parches:{
-
-        },
-        serum:{
-
-        }
-    },
+    // eucerin:  {
+    //     "bloqueadores": {
+    //
+    //     },
+    //     "contorno de ojos":{
+    //
+    //     },
+    //     jabon:{
+    //
+    //     },
+    //     mascarilla:{
+    //
+    //     },
+    //     parches:{
+    //
+    //     },
+    //     serum:{
+    //
+    //     }
+    // },
 }
 
  let baseDatos = [
     {
         id: 1,
         title: "Jeatdeam",
-        subtitle:"lorem ipsum dolor sit amet, consetetur->lorem ipsum dolor sit amet, consetetur",
-        price: 155,
-        name: "bloqueador en barra",
-        category:"bloqueadores",
+        subtitle:"Juguete Mordelón Tipo Dinosaurio - Tyrannosaurus Rex Miniatura Texturizado y Articulado",
+        price: 5,
+        name: "T-rex",
+        category:"dinosaurios",
         completed: true,
-        brand:"tocobo",
-        img:["/img/tocobo/bloqueador-barra/tocoboBarraOne.png","/img/tocobo/bloqueador-barra/tocoboBarraTwo.png","/img/tocobo/bloqueador-barra/tocoboBarraThree.png","/img/tocobo/bloqueador-barra/tocoboBarraFour.png"]
+        brand:"Juguete mordelon",
+        img:["https://res.cloudinary.com/dfwtyxxba/image/upload/v1743969575/t-rex-three_sndvmv.webp","https://res.cloudinary.com/dfwtyxxba/image/upload/v1743969578/t-rex-two_donttz.webp","https://res.cloudinary.com/dfwtyxxba/image/upload/v1743969574/t-rex-one_htqvvm.webp","https://res.cloudinary.com/dfwtyxxba/image/upload/v1743969574/t-rex-four_dprqwk.webp"],
+        shortInfo: ["a","b","c","d","e"],
+        longInfo: ["cuack 1","cuack 2","cuack 3","cuack 4"]
+
     },
     {
-
         id: 2,
         title: "Jeatdeam",
-        subtitle:"lorem ipsum dolor sit amet, consetetur->lorem ipsum dolor sit amet, consetetur",
-        price: 255,
-        name: "bloqueador en crema",
-        category:"bloqueadores",
+        subtitle:"Juguete Mordelon Tipo Dinosaurio - Ankylosaurus Miniatura Texturizado y Articulado ",
+        price: 5,
+        name: "Ankylosaurus",
+        category:"dinosaurios",
         completed: true,
-        brand:"tocobo",
-        img:["/img/tocobo/bloqueador-crema/tocoboCremaOne.png","/img/tocobo/bloqueador-crema/tocoboCremaTwo.png","/img/tocobo/bloqueador-crema/tocoboCremaThree.png","/img/tocobo/bloqueador-crema/tocoboCremaFour.png"]
+        brand:"Juguete mordelon",
+        img:["https://res.cloudinary.com/dfwtyxxba/image/upload/v1743982937/anquilosaurio-one_gpass7.webp","https://res.cloudinary.com/dfwtyxxba/image/upload/v1743982937/anquilosaurio-two_apwoil.webp","https://res.cloudinary.com/dfwtyxxba/image/upload/v1743982937/anquilosaurio-three_ojwluy.webp","https://res.cloudinary.com/dfwtyxxba/image/upload/v1743982937/anquilosaurio-four_mmgzlg.webp"],
+        shortInfo: ["a","b","c","d","e"],
+        longInfo: ["cuack 1","cuack 2","cuack 3","cuack 4"]
     },
     {
         id: 3,
         title: "Jeatdeam",
-        subtitle:"lorem ipsum dolor sit amet, consetetur->lorem ipsum dolor sit amet, consetetur",
-        price: 305,
-        name: "contorno de ojos",
-        category:"contorno de ojos",
+        subtitle:"Juguete Mordelon Tipo Dinosaurio - Mosasaurus Miniatura Texturizado y Articulado",
+        price: 5,
+        name: "Mosasaurus",
+        category:"dinosaurios",
         completed: true,
-        brand:"tocobo",
-        img:["/img/tocobo/contorno-de-ojos/tocoboContornoOjosOne.png","/img/tocobo/contorno-de-ojos/tocoboContornoOjosTwo.png","/img/tocobo/contorno-de-ojos/tocoboContornoOjosThree.png","/img/tocobo/contorno-de-ojos/tocoboContornoOjosFour.png"]
+        brand:"Juguete mordelon",
+        img:["https://res.cloudinary.com/dfwtyxxba/image/upload/v1743984890/mosasaurio-three_rska49.webp","https://res.cloudinary.com/dfwtyxxba/image/upload/v1743984890/mosasaurio-two_voqxvm.webp","https://res.cloudinary.com/dfwtyxxba/image/upload/v1743984890/mosasaurio-one_txgkam.webp","https://res.cloudinary.com/dfwtyxxba/image/upload/v1743984890/mosasaurio-four_tbtjim.webp"],
+        shortInfo: ["a","b","c","d","e"],
+        longInfo: ["cuack 1","cuack 2","cuack 3","cuack 4"]
     },
     {
         id: 4,
         title: "Jeatdeam",
-        subtitle:"lorem ipsum dolor sit amet, consetetur->lorem ipsum dolor sit amet, consetetur",
-        price: 425,
-        name: "bifida biome essence",
-        category:"serum",
+        subtitle:"Juguete Mordelon Tipo Dinosaurio - Triceratops Miniatura Texturizado y Articulado",
+        price: 5,
+        name: "Triceratops",
+        category:"dinosaurios",
         completed: true,
-        brand:"tocobo",
-        img:["/img/tocobo/serum/tocoboSerumOne.png","/img/tocobo/serum/tocoboSerumTwo.png","/img/tocobo/serum/tocoboSerumThree.png","/img/tocobo/serum/tocoboSerumFour.png"]
-
+        brand:"Juguete mordelon",
+        img:["https://res.cloudinary.com/dfwtyxxba/image/upload/v1743985913/triceratops-two_smwtem.png","https://res.cloudinary.com/dfwtyxxba/image/upload/v1743985912/triceratops-three_kkspxl.png","https://res.cloudinary.com/dfwtyxxba/image/upload/v1743985912/triceratops-four_bjlegf.png","https://res.cloudinary.com/dfwtyxxba/image/upload/v1743985912/triceratops-one_vto4hb.png"],
+        shortInfo: ["a","b","c","d","e"],
+        longInfo: ["cuack 1","cuack 2","cuack 3","cuack 4"]
     },
     {
         id: 5,
         title: "Jeatdeam",
-        subtitle:"lorem ipsum dolor sit amet, consetetur->lorem ipsum dolor sit amet, consetetur",
-        price: 585,
-        name: "bloqueador en barra",
-        category:"bloqueadores",
+        subtitle:"Juguete Mordelon Tipo Dinosaurio - Indoraptor Miniatura Texturizado y Articulado",
+        price: 5,
+        name: "Indoraptor",
+        category:"dinosaurios",
         completed: true,
-        brand:"boj",
-        img:["/img/beautyofjoseon/bloqueador-barra/bojBarraOne.png","/img/beautyofjoseon/bloqueador-barra/bojBarraTwo.png","/img/beautyofjoseon/bloqueador-barra/bojBarraThree.png","/img/beautyofjoseon/bloqueador-barra/bojBarraFour.png"]
+        brand:"Juguete mordelon",
+        img:["https://res.cloudinary.com/dfwtyxxba/image/upload/v1743986597/indoraptopr-two_jfsddk.webp","https://res.cloudinary.com/dfwtyxxba/image/upload/v1743986596/indoraptopr-one_aamn94.webp","https://res.cloudinary.com/dfwtyxxba/image/upload/v1743986596/indoraptopr-three_vu3gxc.webp","https://res.cloudinary.com/dfwtyxxba/image/upload/v1743986595/indoraptopr-four_ldq29w.webp"],
+        shortInfo: ["a","b","c","d","e"],
+        longInfo: ["cuack 1","cuack 2","cuack 3","cuack 4"]
     },
     {
         id: 6,
         title: "QuienesSomos",
-        subtitle:"lorem ipsum dolor sit amet, consetetur->lorem ipsum dolor sit amet, consetetur",
-        price: 685,
-        name: "bloqueador en crema",
-        category:"bloqueadores",
+        subtitle:"Juguete Mordelon Tipo Dinosaurio - Dilophosaurus Minuatura Texturizado y Articulado",
+        price: 5,
+        name: "Dilophosaurus",
+        category:"dinosaurios",
         completed: false,
-        brand: 'boj',
-        img:["/img/beautyofjoseon/bloqueador-crema/bojCremaOne.png","/img/beautyofjoseon/bloqueador-crema/bojCremaTwo.png","/img/beautyofjoseon/bloqueador-crema/bojCremaThree.png","/img/beautyofjoseon/bloqueador-bcrema/bojCremaFour.png"]
+        brand: 'Juguete mordelon',
+        img:["https://res.cloudinary.com/dfwtyxxba/image/upload/v1743989211/dilofosaurio-three_hwjrgo.webp","https://res.cloudinary.com/dfwtyxxba/image/upload/v1743989185/dilofosaurio-one_dkqvui.webp","https://res.cloudinary.com/dfwtyxxba/image/upload/v1743989212/dilofosaurio-two_uaeryz.webp","https://res.cloudinary.com/dfwtyxxba/image/upload/v1743989184/dilofosaurio-four_mo86j7.webp"],
+        shortInfo: ["a","b","c","d","e"],
+        longInfo: ["cuack 1","cuack 2","cuack 3","cuack 4"]
 
     },
     {
         id: 7,
         title: "MasVendidos",
-        subtitle:"lorem ipsum dolor sit amet, consetetur->lorem ipsum dolor sit amet, consetetur",
-        price: 785,
-        name: "contorno de ojos",
-        category:"contorno de ojos",
+        subtitle:"Juguete Mordelon Tipo Dinosaurio - Carnotaurus Miniatura Texturizado y Articulado",
+        price: 5,
+        name: "Carnotaurus",
+        category:"dinosaurios",
         completed: false,
-        brand: 'boj',
-        img:["/img/beautyofjoseon/contorno-de-ojos/bojContornoOjosOne.png","/img/beautyofjoseon/contorno-de-ojos/bojContornoOjosTwo.png","/img/beautyofjoseon/contorno-de-ojos/bojContornoOjosThree.png","/img/beautyofjoseon/contorno-de-ojos/bojContornoOjosFour.png"]
+        brand: 'Juguete mordelon',
+        img:["https://res.cloudinary.com/dfwtyxxba/image/upload/v1743991321/carnotauro-four_vvef0n.webp","https://res.cloudinary.com/dfwtyxxba/image/upload/v1743991321/carnotauro-one_njmu1o.webp","https://res.cloudinary.com/dfwtyxxba/image/upload/v1743991324/carnotauro-two_avsert.webp","https://res.cloudinary.com/dfwtyxxba/image/upload/v1743991323/carnotauro-three_tdrfel.webp"],
+        shortInfo: ["a","b","c","d","e"],
+        longInfo: ["cuack 1","cuack 2","cuack 3","cuack 4"]
     },
     {
         id: 8,
         title: "MasVendidos",
-        subtitle:"lorem ipsum dolor sit amet, consetetur->lorem ipsum dolor sit amet, consetetur",
-        price: 885,
-        name: "jabon",
-        category:"jabon",
+        subtitle:"Juguete Mordelon Tipo Dinosaurio - Espinosaurio Miniatura Texturizado y Articulado ",
+        price: 5,
+        name: "Espinosaurio",
+        category:"dinosaurios",
         completed: false,
-        brand: 'boj',
-        img:["/img/beautyofjoseon/jabon/bojJabonOne.png","/img/beautyofjoseon/jabon/bojJabonTwo.png","/img/beautyofjoseon/jabon/bojJabonThree.png","/img/beautyofjoseon/jabon/bojJabonFour.png"]
+        brand: 'Juguete mordelon',
+
+        img:["https://res.cloudinary.com/dfwtyxxba/image/upload/v1743996477/espinosaurio-three_vrvqv1.webp","https://res.cloudinary.com/dfwtyxxba/image/upload/v1743996475/espinosaurio-one_f8o5pg.webp","https://res.cloudinary.com/dfwtyxxba/image/upload/v1743996478/espinosaurio-two_dq7hz5.webp","https://res.cloudinary.com/dfwtyxxba/image/upload/v1743996474/espinosaurio-four_imotlm.webp"],
+        shortInfo: ["a","b","c","d","e"],
+        longInfo: ["cuack 1","cuack 2","cuack 3","cuack 4"]
     },
     {
         id: 9,
         title: "MasVendidos",
-        subtitle:"lorem ipsum dolor sit amet, consetetur->lorem ipsum dolor sit amet, consetetur",
-        price: 985,
-        name: "bloqueador en barra",
-        category:"mascarilla",
+        subtitle:"Juguete Mordelon Tipo Dinosaurio - Dimorphodon Miniatura Texturizado y Articulado ",
+        price: 5,
+        name: "Dimorphodon",
+        category:"dinosaurios",
         completed: false,
-        brand: 'boj',
-        img:["/img/beautyofjoseon/mascarilla/bojMascarillaOne.png","/img/beautyofjoseon/mascarilla/bojMascarillaTwo.png","/img/beautyofjoseon/mascarilla/bojMascarillaThree.png","/img/beautyofjoseon/mascarilla/bojMascarillaFour.png"]
+        brand: 'Juguete mordelon',
+        img:["https://res.cloudinary.com/dfwtyxxba/image/upload/v1743997348/dimorphodon-four_f8nyzw.webp","https://res.cloudinary.com/dfwtyxxba/image/upload/v1743997357/dimorphodon-three_ofbgu9.webp","https://res.cloudinary.com/dfwtyxxba/image/upload/v1743997356/dimorphodon-one_pg7fkq.webp","https://res.cloudinary.com/dfwtyxxba/image/upload/v1743997359/dimorphodon-two_ys9scb.webp"],
+        shortInfo: ["a","b","c","d","e"],
+        longInfo: ["cuack 1","cuack 2","cuack 3","cuack 4"]
     },
     {
         id: 10,
         title: "MasVendidos",
-        subtitle:"lorem ipsum dolor sit amet, consetetur->lorem ipsum dolor sit amet, consetetur",
-        price: 1085,
-        name: "serum",
-        category:"serum",
+        subtitle:"Juguete Mordelon Tipo Dinosaurio - Estegosaurios Miniatura Texturizado y Articulado ",
+        price: 5,
+        name: "Estegosaurios",
+        category:"dinosaurios",
         completed: false,
-        brand: 'boj',
-        img:["/img/beautyofjoseon/serum/bojSerumOne.png","/img/beautyofjoseon/serum/bojSerumTwo.png","/img/beautyofjoseon/serum/bojSerumThree.png","/img/beautyofjoseon/serum/bojSerumFour.png"]
+        brand: 'Juguete mordelon',
+        img:["https://res.cloudinary.com/dfwtyxxba/image/upload/v1743998504/estegosauro-one_dkzhqy.webp","https://res.cloudinary.com/dfwtyxxba/image/upload/v1743998507/estegosauro-two_isejx7.webp","https://res.cloudinary.com/dfwtyxxba/image/upload/v1743998506/estegosauro-three_n7ftvf.webp","https://res.cloudinary.com/dfwtyxxba/image/upload/v1743998503/estegosauro-four_ssbd9l.webp"],
+        shortInfo: ["a","b","c","d","e"],
+        longInfo: ["cuack 1","cuack 2","cuack 3","cuack 4"]
     },
     {
         id: 11,
         title: "MasVendidos",
-        subtitle:"lorem ipsum dolor sit amet, consetetur->lorem ipsum dolor sit amet, consetetur",
-        price: 1185,
-        name: "bloqueador en crema",
-        category:"bloqueadores",
+        subtitle:"Juguete Mordelon Tipo Dinosaurio - Velociraptor Miniatura Texturizado y Articulado",
+        price: 7,
+        name: "Velociraptor",
+        category:"dinosaurios",
         completed: false,
-        brand: 'celimax',
-        img:["/img/celimax/bloqueador-crema/celimaxCremaOne.png","/img/celimax/bloqueador-crema/celimaxCremaTwo.png","/img/celimax/bloqueador-crema/celimaxCremaThree.png","/img/celimax/bloqueador-crema/celimaxCremaFour.png"]
+        brand: 'Juguete mordelon',
+        img:["https://res.cloudinary.com/dfwtyxxba/image/upload/v1744125980/velociraptor-four_mti8em.webp","https://res.cloudinary.com/dfwtyxxba/image/upload/v1744125980/velociraptor-three_anvoyx.webp","https://res.cloudinary.com/dfwtyxxba/image/upload/v1744125980/velociraptor-two_ocbszi.webp","https://res.cloudinary.com/dfwtyxxba/image/upload/v1744125979/velociraptor-one_massey.webp"],
+        shortInfo: ["a","b","c","d","e"],
+        longInfo: ["cuack 1","cuack 2","cuack 3","cuack 4"]
     },
     {
         id: 12,
         title: "MasVendidos",
-        subtitle:"lorem ipsum dolor sit amet, consetetur->lorem ipsum dolor sit amet, consetetur",
-        price: 1285,
-        name: "contorno de ojos",
-        category:"contorno de ojos",
+        subtitle:"Juguete Mordelon Tipo Dinosaurio - Pterodactilo Miniatura Texturizado y Articulado",
+        price: 10,
+        name: "Pterodactilo",
+        category:"dinosaurios",
         completed: false,
-        brand: 'celimax',
-        img:["/img/celimax/contorno-de-ojos/celimaxContornoOjosOne.png","/img/celimax/contorno-de-ojos/celimaxContornoOjosTwo.png","/img/celimax/contorno-de-ojos/celimaxContornoOjosThree.png","/img/celimax/contorno-de-ojos/celimaxContornoOjosFour.png"]
+        brand: 'Juguete mordelon',
+        img:["https://res.cloudinary.com/dfwtyxxba/image/upload/v1744126559/trerodactilo-three_jnxxxj.webp","https://res.cloudinary.com/dfwtyxxba/image/upload/v1744126559/trerodactilo-two_bizlbk.webp","https://res.cloudinary.com/dfwtyxxba/image/upload/v1744126558/trerodactilo-four_p2vdoz.webp","https://res.cloudinary.com/dfwtyxxba/image/upload/v1744126559/trerodactilo-one_qqqhxc.webp"],
+        shortInfo: ["a","b","c","d","e"],
+        longInfo: ["cuack 1","cuack 2","cuack 3","cuack 4"]
     },
     {
         id: 13,
         title: "MasVendidos",
-        subtitle:"lorem ipsum dolor sit amet, consetetur->lorem ipsum dolor sit amet, consetetur",
-        price: 1385,
-        name: "espuma facial",
-        category:"jabon",
+        subtitle:"Juguete Mordelon Tipo Dinosaurio - Parasaurolophus Miniatura Texturizado y Articulado",
+        price: 5,
+        name: "Parasaurolophus",
+        category:"dinosaurios",
         completed: false,
-        brand: 'celimax',
-        img:["/img/celimax/jabon/celimaxJabonOne.png","/img/celimax/jabon/celimaxJabonTwo.png","/img/celimax/jabon/celimaxJabonThree.png","/img/celimax/jabon/celimaxJabonFour.png"]
+        brand: 'Juguete mordelon',
+        img:["https://res.cloudinary.com/dfwtyxxba/image/upload/v1744127150/parasaurolophus-four_elj5ps.webp","https://res.cloudinary.com/dfwtyxxba/image/upload/v1744127151/parasaurolophus-two_d5msxf.webp","https://res.cloudinary.com/dfwtyxxba/image/upload/v1744127150/parasaurolophus-three_h0mydf.webp","https://res.cloudinary.com/dfwtyxxba/image/upload/v1744127150/parasaurolophus-one_cexhfz.webp"],
+        shortInfo: ["a","b","c","d","e"],
+        longInfo: ["cuack 1","cuack 2","cuack 3","cuack 4"]
     },
     {
         id: 14,
         title: "MasVendidos",
-        subtitle:"lorem ipsum dolor sit amet, consetetur->lorem ipsum dolor sit amet, consetetur",
-        price: 1485,
-        name: "serum antimanchas",
-        category:"serum",
+        subtitle:"Juguete Mordelon Tipo Dinosaurio - Agresivosaurio Miniatura Texturizado y Articulado",
+        price: 7,
+        name: "Agresivosaurio",
+        category:"dinosaurios",
         completed: false,
-        brand: 'celimax',
-        img:["/img/celimax/mascarilla/celimaxMascarillaOne.png","/img/celimax/mascarilla/celimaxMascarillaTwo.png","/img/celimax/mascarilla/celimaxMascarillaThree.png","/img/celimax/mascarilla/celimaxMascarillaFour.png"]
+        brand: 'Juguete mordelon',
+        img:["https://res.cloudinary.com/dfwtyxxba/image/upload/v1744128098/agresivo-four_xmobis.webp","https://res.cloudinary.com/dfwtyxxba/image/upload/v1744128098/agresivo-one_tselei.webp","https://res.cloudinary.com/dfwtyxxba/image/upload/v1744128099/agresivo-two_zh22jb.webp","https://res.cloudinary.com/dfwtyxxba/image/upload/v1744128098/agresivo-three_jbct5e.webp"],
+        shortInfo: ["a","b","c","d","e"],
+        longInfo: ["cuack 1","cuack 2","cuack 3","cuack 4"]
     },
-    // {
-    //      id: 15,
-    //      title: "MasVendidos",
-    //      subtitle:"lorem ipsum dolor sit amet, consetetur->lorem ipsum dolor sit amet, consetetur",
-    //      price: 1485,
-    //      name: "noni ampoule",
-    //      category:"serum",
-    //      completed: false,
-    //      brand: 'celimax',
-    //      img:["/img/celimax/serum/celimaxSerumOne.png","/img/celimax/serum/celimaxSerumTwo.png","/img/celimax/serum/celimaxSerumThree.png","/img/celimax/serum/celimaxSerumFour.png"]
-    // },
+    {
+         id: 15,
+         title: "MasVendidos",
+         subtitle:"Juguetes Mordelones Tipo Dinosaurios - Pack Miniatura Texturizado y Articulado",
+         price: 50,
+         name: "Pack de dinosaurios",
+         category:"dinosaurios",
+         completed: false,
+         brand: 'Juguete mordelon',
+         img:["https://res.cloudinary.com/dfwtyxxba/image/upload/v1744134468/pack-two_wit2wn.webp","https://res.cloudinary.com/dfwtyxxba/image/upload/v1744134469/pack-three_mpnzhq.webp","https://res.cloudinary.com/dfwtyxxba/image/upload/v1744134679/pack-four_thyt9e.png","https://res.cloudinary.com/dfwtyxxba/image/upload/v1744134468/pack-one_kjsa2u.webp"],
+        shortInfo: ["a","b","c","d","e"],
+        longInfo: ["cuack 1","cuack 2","cuack 3","cuack 4"]
+    },
 
 ]
 
@@ -624,7 +650,7 @@ const catalogoProducts=(req,res)=>{
 const marcaProducts=(req, res)=>{
 
     const brand=req.params.name;
-    const productosPorMarca=baseDatos.filter((product)=>product.brand===brand)
+    const productosPorMarca=baseDatos.filter((product)=>product.category===brand)
 
     res.render('marca',{title: `${brand}`, productosPorMarca,carrito})
 
@@ -843,7 +869,30 @@ const uncompleteTask = (req, res) => {
 const deleteTask = (req, res) => {
 }
 
+
+const contacto = (req, res) => {
+    res.render('contacto');
+}
+const envios = (req, res)=>{
+    res.render('envios');
+}
+const productos = (req, res) => {
+    res.render('productos');
+}
+const promociones = (req, res) => {
+    res.render('promociones');
+}
+const quienesSomos = (req, res) => {
+    res.render('quienesSomos', {baseDatos});
+}
+
+
 export default {
+    contacto,
+    envios,
+    productos,
+    promociones,
+    quienesSomos,
     categoriaProduct,
     extraerMarcas,
     deleteDatos,

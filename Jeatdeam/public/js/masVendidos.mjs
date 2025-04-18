@@ -216,19 +216,6 @@ export function movMasVendidos() {
         }
     });
 
-    // movMasVendidos.addEventListener('mouseenter',e=>{
-    //     cancelAnimationFrame(idAnimateOne)
-    //     // isMovingOne = false;
-    //     // isUncompleteOne = false;
-    // })
-    // movMasVendidos.addEventListener('mouseleave', e=>{
-    //     if(!isMovingOne){
-    //         // if(!isUncompleteOne){
-    //             animate();
-    //         // }
-    //     }
-    // })
-
     document.addEventListener('touchend', e=> {
         if (isMovingOne) {
             positionXFinal = e.type.includes('touch') ? e.changedTouches[0].clientX : e.clientX;
@@ -246,8 +233,6 @@ export function movMasVendidos() {
                 }, 300);
             }
         }
-
-
     })
 
     movMasVendidos.addEventListener('mouseenter', e => {
@@ -262,7 +247,6 @@ export function movMasVendidos() {
             }
         }
     })
-
 
     document.addEventListener('mouseup', e=>{
         if (isMovingOne) {
@@ -283,9 +267,6 @@ export function movMasVendidos() {
         }
 
     });
-
-    // document.addEventListener('touchend', upSliderOne)
-
 
     function animateTwo() {
             contadorTwo += 5;
@@ -445,8 +426,7 @@ export function movMasVendidos() {
         }
 
     });
-
-    // document.addEventListener('touchend', upSliderTwo);
+    
 
 }
 

@@ -1,0 +1,11 @@
+extends layout
+block content
+    main
+        if baseDatos
+            each element in baseDatos
+                h1 esta es la pagina de quienes somos
+                p  #{element.img[0]}
+                img(src=element.img[0])
+                a(href=element.img[0]) aaaaaaaaaaaaaaaaaaaaaaa
+        else
+            h1 probando gaaaaaaaaaaaaaaa

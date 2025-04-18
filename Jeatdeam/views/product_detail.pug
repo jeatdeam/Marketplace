@@ -22,42 +22,42 @@ block content
                 div.sideRight
                         h2=producto.subtitle
                         div.priceStar
-                            b=producto.price
-                            ul#estrellas
-                                li
-                                    <i class="fa-solid fa-star"></i>
-                                li
-                                    <i class="fa-solid fa-star"></i>
-                                li
-                                    <i class="fa-solid fa-star"></i>
-                                li
-                                    <i class="fa-solid fa-star"></i>
-                                li
-                                    <i class="fa-solid fa-star"></i>
+                            b(style="font-weight:600")= `S/. ${producto.price}`
+                            //ul#estrellas
+                            //    li
+                            //        <i class="fa-solid fa-star"></i>
+                            //    li
+                            //        <i class="fa-solid fa-star"></i>
+                            //    li
+                            //        <i class="fa-solid fa-star"></i>
+                            //    li
+                            //        <i class="fa-solid fa-star"></i>
+                            //    li
+                            //        <i class="fa-solid fa-star"></i>
                         hr
                         div.middleInfo
-                            b marca
-                            h4 haruharu
+                            b tipo
+                            h4= producto.shortInfo[0]
                         div.middleInfo
-                            b marca
-                            h4 haruharu
+                            b color
+                            h4= producto.shortInfo[1]
                         div.middleInfo
-                            b marca
-                            h4 haruharu
+                            b estado
+                            h4= producto.shortInfo[2]
                         div.middleInfo
                             b rango de edad
-                            h4 adulto
+                            h4= producto.shortInfo[3]
                         div.middleInfo
                             b caracteristicas
-                            h4 lightweight, hipoalergenico
+                            h4= producto.shortInfo[4]
                         hr
                         div.bottomInfo
                             h1 Sobre este árticulo
                             ul
-                                li Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci at delectus deserunt dolorem dolores doloribus excepturi exercitationem fuga iure laborum laudantium, maxime nisi perferendis, quod repellendus sint tenetur velit vitae.
-                                li Lorem ipsum dolor sit amet, consectetur adipisicing elit. A amet aperiam autem consectetur, cumque cupiditate deleniti dignissimos eaque enim, eveniet expedita fugit incidunt itaque nisi quo recusandae saepe sed veritatis!
-                                li Lorem ipsum dolor sit amet, consectetur adipisicing elit. A alias aliquam aliquid distinctio dolorem ea eaque error eveniet explicabo id, illo laudantium libero nemo nesciunt quae quasi recusandae veritatis voluptatum!
-                                li Lorem ipsum dolor sit amet, consectetur adipisicing elit. A ad at consectetur culpa cum doloribus ea eveniet facilis iusto maiores molestiae mollitia, nesciunt nostrum odio omnis quas sapiente ut veniam?
+                                li= producto.longInfo[0]
+                                li= producto.longInfo[0]
+                                li= producto.longInfo[0]
+                                li= producto.longInfo[0]
                         div.lastMove
                             button(data-id=producto.id, data-brand=producto.brand, data-img=producto.img[0], data-price=producto.price, data-name=producto.name) enviar al carrito
                             button(data-id=producto.id, data-brand=producto.brand, data-img=producto.img[0], data-price=producto.price, data-name=producto.name) comprar
@@ -69,7 +69,7 @@ block content
                         div(class=`product${element.category} productRecomendent`)
                             img(src=element.img[0])
                             b #{element.subtitle}
-                            b #{element.price}
+                            b= `S/. ${element.price}`
                             div
                                 button(class="btn-carrito", data-id=element.id, data-brand=element.brand, data-img=element.img[0], data-price=element.price, data-name=element.name) agregar al carrito
                                 button(class="btn-comprar", data-id=element.id, data-brand=element.brand, data-img=element.img[0], data-price=element.price, data-name=element.name) compra

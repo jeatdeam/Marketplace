@@ -1,5 +1,7 @@
 
 
+
+
 export function asignarNombresHeader(){
 
 
@@ -28,7 +30,7 @@ export function asignarNombresHeader(){
 
                 }else{
                     if($nombreElement.length-1===indice){
-                        seccion.textContent="OTRAS MARCAS";
+                        seccion.textContent="OTROS";
 
                         const ul=seccion.nextElementSibling;
 
