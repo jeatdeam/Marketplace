@@ -1910,6 +1910,12 @@ main{
 .desactive_form{
     animation: hideForm 0.35s ease-in-out;
 }
+.templateYapePlin{
+    animation: showForm 0.35s ease-in-out;
+}
+.templateYapePlin_two{
+    animation: hideForm 0.35s ease-in-out;
+}
 @keyframes showForm{
     0%{
         opacity: 0;
@@ -1927,6 +1933,49 @@ main{
     }
 
 }
+.payCardOptions_one{
+    background-image : url("https://res.cloudinary.com/dfwtyxxba/image/upload/v1745036133/yapethree_pprrrw.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    transition: all 0.35s ease-in-out;
+    animation: showForm 0.35s ease-in-out;
+}
+.payCardOptions_two{
+    background-image : url("https://res.cloudinary.com/dfwtyxxba/image/upload/v1745036633/plinTwo_lbggx2.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    transition: all 0.35s ease-in-out;
+    animation: showForm 0.35s ease-in-out;
+}
+.payVirtualOptions_one{
+    background-image : url("https://res.cloudinary.com/dfwtyxxba/image/upload/v1745037637/visaTwo_yvy6v3.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    transition: all 0.35s ease-in-out;
+    animation: showForm 0.35s ease-in-out;
+}
+.payVirtualOptions_two{
+    background-image : url("https://res.cloudinary.com/dfwtyxxba/image/upload/v1745034321/mastercard_ksbmak.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    transition: all 0.35s ease-in-out;
+    animation: showForm 0.35s ease-in-out;
+}
+.payVirtualOptions_three{
+    background-image : url("https://res.cloudinary.com/dfwtyxxba/image/upload/v1745037451/americanExpressTwo_ihb1dt.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    transition: all 0.35s ease-in-out;
+    animation: showForm 0.35s ease-in-out;
+}
+
+
+
 
 input:focus{
     /*outline: none;*/
@@ -1973,6 +2022,27 @@ input:focus{
     flex: 1;
     height: 40px;
 }
+.selectButton{
+
+}
+.message {
+    animation: showMessage 0.35s ease-in-out;
+    transition : opacity 0.35s ease-in-out;
+}
+@keyframes showMessage {
+    0%{
+        opacity: 0;
+    }
+    100%{
+        opacity: 1;
+    }
+}
+@keyframes hideMessage {
+
+}
+
+
+
 .nameCountry>textarea{
     height: 100px;
     border-radius: 7.5px;
@@ -2423,12 +2493,7 @@ input:focus{
     transition: border .25s linear;
 }
 .buttonsFinalizar>button:nth-of-type(2),.buttonsFinalizar>button:nth-of-type(3){
-    opacity: 0;
-    width: 0;
-    min-width: 0;
-    pointer-events: none;
     display: none;
-    transition: all 0.5s linear;
 }
 .masVendidoElement>div:nth-of-type(2){
     display: flex;

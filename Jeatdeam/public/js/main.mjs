@@ -1499,35 +1499,35 @@ container_group.forEach(container => {
 
 document.addEventListener("click", async (e) => {
         if (e.target.id === "payCard") {
-
-            const  verificarData=await verificarDatosCliente();
-
-            if(verificarData.length>0){
-                const options={
-                    method:'POST',
-                }
-                const checkout=async ()=> {
-                    try {
-                        const response = await fetch('/create-checkout-session', {method: 'POST'})
-
-                        if (!response.ok) {
-                            throw new Error('No se pudo crear la session de pago')
-                        }
-
-                        const session = await response.json();
-
-                        window.location.href = session.url;
-
-                    }catch(error){
-                        console.log('Error en el proceso de pago:',error);
-                    }
-                }
-                await checkout();
-                console.log("Lo hicimos bien");
-            }else{
-                alert('Es requerido ingresar los datos para proceder con la compra')
-            }
-
+            //
+            // const  verificarData=await verificarDatosCliente();
+            //
+            // if(verificarData.length>0){
+            //     const options={
+            //         method:'POST',
+            //     }
+            //     const checkout=async ()=> {
+            //         try {
+            //             const response = await fetch('/create-checkout-session', {method: 'POST'})
+            //
+            //             if (!response.ok) {
+            //                 throw new Error('No se pudo crear la session de pago')
+            //             }
+            //
+            //             const session = await response.json();
+            //
+            //             window.location.href = session.url;
+            //
+            //         }catch(error){
+            //             console.log('Error en el proceso de pago:',error);
+            //         }
+            //     }
+            //     await checkout();
+            //     console.log("Lo hicimos bien");
+            // }else{
+            //     alert('Es requerido ingresar los datos para proceder con la compra')
+            // }
+            //
 
 
         }
