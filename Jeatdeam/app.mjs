@@ -95,6 +95,7 @@ app.post("/datos/cliente/compra/short", taskController.recibirDatosShort);
 app.post("/datos/cliente/compra/complete", taskController.recibirDatosComplete);
 app.post("/create-checkout-session", taskController.redireccionamientoToPay);
 app.post("/generar-qr", taskController.controllerQr);
+app.post("/pagorealizado", taskController.pagoRealizado)
 
 // DELETE
 app.delete("/compra/compra/compra/compra", taskController.deleteCarrito);

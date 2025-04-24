@@ -16,10 +16,11 @@ import {eventsPhone} from "./eventosPhone.js"
 import {postProduct} from "./peticionPost.js"
 import {productInfo} from "./productDescription.mjs";
 import {movMasVendidos} from "./masVendidos.mjs";
-import {envio} from "./formularioEnvio.mjs"
+import {envio, yapePlin} from "./formularioEnvio.mjs"
 
 
 envio();
+yapePlin();
 
 // Prevenir la selección y el arrastre de imágenes
 document.addEventListener('mousedown', e => {

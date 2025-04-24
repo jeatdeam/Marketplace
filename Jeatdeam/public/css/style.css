@@ -2412,7 +2412,7 @@ input:focus{
     background-repeat: no-repeat;
     border-radius: 7.5px;
 }
-.boxYapePlin~button{
+.containerYapePlin > button{
     padding: 15px;
     border-radius: 10px;
     width: 200px;
@@ -2430,6 +2430,10 @@ input:focus{
     justify-content: center;
     border: 1px solid rgba(0,0,0,0.2);
     box-shadow: 0 0 2.5px rgba(0,0,0,0.2);
+}
+.activeElement {
+    display: block;
+    pointer-events: auto;
 }
 .textContainer{
     display: flex;
@@ -2461,6 +2465,15 @@ input:focus{
 .buttonsFinalizar>*{
     /*border: 1px solid black;*/
     /*flex: 1;*/
+}
+.clickOption{
+    /*outline: 5px solid lightblue;*/
+    box-shadow: 12.5px 12.5px 5px rgba(0,0,0,0.5);
+    transition: all 0.15s ease-in-out;
+}
+.activeBorder{
+    outline: 5px solid black;
+    transition: all 0.15s ease-in-out;
 }
 
 .buttonsFinalizar{
@@ -2836,7 +2849,9 @@ input:focus{
         min-width: 200px;
         min-height: 200px;
         border-radius: 7.5px;
+        transition: all 0.15s ease-in-out;
     }
+
 
     .textContainer>h1:nth-of-type(1){
         font-size: 25px;

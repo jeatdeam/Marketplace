@@ -885,9 +885,36 @@ const promociones = (req, res) => {
 const quienesSomos = (req, res) => {
     res.render('quienesSomos', {baseDatos});
 }
+const pagoRealizado = (req, res) => {
+    const evento = req.body;
+
+    // Validamos que sea el evento correcto
+    if (
+        evento.type === "charge.created" &&
+        evento.data?.object?.outcome?.type === "successful_payment"
+    ) {
+        const charge = evento.data.object;
+
+        // Extraemos info útil
+        const monto = charge.amount;
+        const moneda = charge.currency_code;
+        const orderId = charge.metadata?.order_id;
+
+        console.log("✅ Pago exitoso recibido");
+        console.log(`Orden: ${orderId}, Monto: S/.${monto / 100}, Moneda: ${moneda}`);
+
+        // Aquí puedes actualizar la base de datos, enviar correos, etc.
+
+        res.status(200).json({ mensaje: "Pago procesado correctamente" });
+    } else {
+        console.log("⚠️ Evento no relevante o pago fallido");
+        res.status(200).json({ mensaje: "Evento ignorado" });
+    }
+}
 
 
 export default {
+    pagoRealizado,
     contacto,
     envios,
     productos,

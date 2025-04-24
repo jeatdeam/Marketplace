@@ -1,10 +1,56 @@
 // import $couriers from "nodemailer/lib/mime-node/index.js";
 
 
+
+let isActive = false;
+
+function eventBorderOption () {
+
+    const $yape = document.querySelector('.yape')
+    const $plin = document.querySelector('.plin')
+
+    function addEventYape (e) {
+        e.target.classList.add('activeBorder');
+    }
+    function removeEventYape (e) {
+        e.target.classList.remove('activeBorder')
+    }
+
+    if($yape) {
+        $yape.addEventListener('mouseenter', addEventYape)
+        $yape.addEventListener('mouseleave', removeEventYape)
+    }
+    if($plin) {
+        $plin.addEventListener('mouseenter', addEventYape)
+        $plin.addEventListener('mouseleave', removeEventYape)
+    }
+
+
+}
+
+function optionChased (e) {
+
+    const $options = document.querySelectorAll('.boxYapePlin > div');
+    const $button = document.querySelector('.containerYapePlin > button')
+    $options.forEach(el=>el.classList.remove('clickOption'))
+
+    e.target.classList.add('clickOption')
+
+    if($button) {
+        const name = e.target.dataset.option;
+        name === "yape" ? $button.style.backgroundColor = "#6A1B9A" : $button.style.backgroundColor = "#00C6FF"
+        $button.textContent = `Generar codigo de ${name}`;
+        $button.style.color = "white";
+    }
+
+}
+
+
+
 export function envio(){
 
 
-        function insertYapePlin() {
+    function insertYapePlin() {
 
             const $productsAndPay = document.querySelector('.productsAndPay')
             const templateYape = document.getElementById('qrTemplate').content;
@@ -24,6 +70,7 @@ export function envio(){
                 },350)
             }
 
+            eventBorderOption();
 
         }
 
@@ -294,12 +341,135 @@ export function envio(){
             e.target.focus();
         }
         if(e.target.matches('#payCard')){
-            insertYapePlin()
+
+            insertYapePlin();
+            if(isActive) {
+                isActive = false;
+            }
+
         }
-
-
-
+        
     })
 
 
 }
+
+export function yapePlin() {
+    let cloneBox = null;
+
+    function chaseOption() {
+        const prevSiblingYapePlin = document.querySelector('.textContainer');
+        const containerYapePlin = document.querySelector('.boxYapePlin');
+        const button = document.querySelector('.containerYapePlin > button');
+        const backArrow = document.querySelector('.returnYapePlin')
+        const img = document.createElement('img');
+
+        if (containerYapePlin) {
+            if (!cloneBox) {
+                cloneBox = containerYapePlin.cloneNode(true);
+            }
+            containerYapePlin.classList.add('templateYapePlin_two');
+            setTimeout(() => {
+                containerYapePlin.remove()
+                backArrow.classList.add('activeElement','templateYapePlin');
+                button.textContent = 'Enviar';
+                button.style.backgroundColor === "rgb(106, 27, 154)" ? img.src = "https://res.cloudinary.com/dfwtyxxba/image/upload/v1745297417/codigoYape_c0wwou.png" : img.src = "https://res.cloudinary.com/dfwtyxxba/image/upload/v1743736943/Imagen_de_WhatsApp_2025-03-25_a_las_20.33.16_73a6986c_frpub0.jpg"
+
+                prevSiblingYapePlin.insertAdjacentElement('afterend', img)
+            } , 350);
+        } else if (cloneBox) {
+            const imgInsert = document.querySelector('.containerYapePlin > img')
+            imgInsert.remove();
+            backArrow.classList.add('templateYapePlin_two');
+            setTimeout(()=>{
+                backArrow.classList.remove('activeElement','templateYapePlin_two','templateYapePlin');
+            },350)
+            prevSiblingYapePlin.insertAdjacentElement('afterend', cloneBox);
+            button.textContent = 'Generar codigo de pago';
+            cloneBox.classList.add('templateYapePlin');
+            cloneBox = null;
+        }
+
+        eventBorderOption();
+
+
+    }
+
+    function deleteYapePlin(){
+
+        const containerYapePlin = document.querySelector('.containerYapePlin');
+
+        if(containerYapePlin) {
+            containerYapePlin.classList.add('templateYapePlin_two');
+            setTimeout(()=>{
+                containerYapePlin.remove();
+            },350)
+        }
+
+
+    }
+
+
+    document.addEventListener('click', (e) => {
+        if (e.target.matches('.containerYapePlin > button')) {
+            const button = e.target.closest('button');
+            const colorButton = getComputedStyle(button).backgroundColor
+
+            if(colorButton === "rgb(255, 255, 255)"){
+                // alert('escoja una opcion');
+                insertAlert();
+            } else {
+                if(!isActive){
+                    chaseOption();
+                    isActive = true;
+                } else {
+                    console.log('gaaaaaaaaaaaaaaaaaaa')
+                }
+            }
+
+        }
+        if(e.target.closest('.deleteYapePlin')) {
+        deleteYapePlin()
+            isActive = false;
+        }
+        if(e.target.closest('.returnYapePlin')) {
+            if(isActive){
+                chaseOption();
+                isActive = true;
+                setTimeout(()=>isActive=false,350)
+            }
+        }
+        if(e.target.closest('.boxYapePlin > div')) {
+            // e.target.classList.toggle('clickOption')
+            const $smallExistente = document.querySelector('.containerYapePlin > small')
+            $smallExistente? $smallExistente.remove() : "";
+
+            if($smallExistente) {
+                $smallExistente.classList.add('desactive_form')
+                setTimeout(()=>$smallExistente.remove() ,350)
+            }
+            optionChased(e)
+        }
+
+    });
+}
+
+function insertAlert(){
+
+    const $smallExistente = document.querySelector('.containerYapePlin > small')
+
+    if($smallExistente) $smallExistente.remove();
+
+    const $boxYapePlin = document.querySelector('.boxYapePlin');
+    const small = document.createElement('small');
+
+    small.textContent = "Error! Escoja una billetera virtual"
+    small.style.color = "red";
+    small.style.fontSize = "15px";
+    small.style.display = "block";
+    small.classList.add('show-animation-busqueda')
+
+    $boxYapePlin.insertAdjacentElement('afterend', small);
+
+}
+
