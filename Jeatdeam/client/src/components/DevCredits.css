@@ -1,0 +1,67 @@
+.devCredits{
+    background: #171717;
+    color: #ffffff;
+    font-family: 'Doto', monospace;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 8px 16px;
+    padding: 16px;
+}
+.devCredits_text{
+    /* style.css aplica su fuente con `*`, así que hay que fijarla en el propio texto */
+    font-family: 'Doto', monospace;
+    margin: 0;
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    /* El texto tipeado se apila sobre una copia invisible del texto completo */
+    display: grid;
+}
+.devCredits_reserva,
+.devCredits_tipeo{
+    grid-area: 1 / 1;
+    white-space: pre;
+}
+.devCredits_reserva{
+    visibility: hidden;
+}
+.devCredits_cursor{
+    animation: devCredits_parpadeo 1s steps(1) infinite;
+}
+@keyframes devCredits_parpadeo{
+    50%{ opacity: 0; }
+}
+.devCredits_lotties{
+    --firma-w: clamp(140px, 30vw, 200px);
+    --pochita-w: clamp(56px, 12vw, 76px);
+    display: flex;
+    align-items: center;
+}
+.devCredits_lotties>a{
+    display: block;
+    line-height: 0;
+}
+.devCredits_firma{
+    width: var(--firma-w);
+    aspect-ratio: 1000 / 420;
+}
+.devCredits_pochita{
+    width: var(--pochita-w);
+    aspect-ratio: 560 / 500;
+    /* 25px visibles entre el texto "jeatdeam" y pochita: se descuenta el margen transparente
+       de cada lienzo (el texto termina al ~80% de su ancho y pochita empieza al ~3.6% del suyo) */
+    margin-left: calc(25px - 0.2 * var(--firma-w) - 0.036 * var(--pochita-w));
+}
+
+/* Celular: texto arriba y los dos Lotties juntos y centrados debajo */
+@media (max-width: 480px){
+    .devCredits{
+        flex-direction: column;
+    }
+    .devCredits_lotties{
+        justify-content: center;
+    }
+}

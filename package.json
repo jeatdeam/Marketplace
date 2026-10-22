@@ -4,7 +4,12 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "dev:server": "tsx watch Jeatdeam/app.ts",
+    "dev:client": "vite",
+    "typecheck": "tsc -p tsconfig.json && tsc -p tsconfig.server.json",
+    "build": "npm run typecheck && vite build",
+    "preview": "npm run build && tsx Jeatdeam/app.ts",
+    "start": "tsx Jeatdeam/app.ts"
   },
   "type": "module",
   "keywords": [],
@@ -18,14 +23,30 @@
     "express": "^4.21.1",
     "express-session": "^1.18.1",
     "helmet": "^8.0.0",
+    "lottie-react": "^3.1.2",
     "morgan": "^1.10.0",
     "nodemailer": "^6.10.0",
-    "pug": "^3.0.3",
     "qrcode": "^1.5.4",
-    "stripe": "^17.5.0"
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^6.28.0",
+    "stripe": "^17.5.0",
+    "tsx": "^4.23.15"
   },
   "devDependencies": {
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.6",
+    "@types/express-session": "^1.19.0",
+    "@types/morgan": "^1.9.10",
+    "@types/node": "^26.6.5",
+    "@types/nodemailer": "^8.0.2",
+    "@types/qrcode": "^1.5.6",
+    "@types/react": "^18.3.31",
+    "@types/react-dom": "^18.3.7",
+    "@vitejs/plugin-react": "^4.3.4",
     "nodemon": "^3.1.7",
-    "prettier": "^3.3.3"
+    "prettier": "^3.3.3",
+    "typescript": "^7.0.2",
+    "vite": "^5.4.11"
   }
 }
