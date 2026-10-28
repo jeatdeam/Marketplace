@@ -38,7 +38,8 @@ export function BeforeAfterSlider({grupos, sinHeader = false}: BeforeAfterSlider
     const {gruposSlider} = useStore()
     const groups: Group[] = (grupos ?? gruposSlider).map((g) => ({imageOne: g.imagenUno, imageTwo: g.imagenDos, labelOne: g.textoUno || 'Imagen 1', labelTwo: g.textoDos || 'Imagen 2'}))
     const total = groups.length
-    const [current, setCurrent] = useState<number>(0)
+    // previous: grupo que se esta yendo; queda opaco debajo mientras el nuevo aparece encima
+    const [{current, previous}, setSlide] = useState<{ current: number, previous: number | null }>({current: 0, previous: null})
     // hacia dónde viaja la línea durante el grupo: derecha = siguiente, izquierda = anterior
     const [direction, setDirection] = useState<Direction>("right")
     const [dragging, setDragging] = useState<boolean>(false)
@@ -65,7 +66,7 @@ export function BeforeAfterSlider({grupos, sinHeader = false}: BeforeAfterSlider
 
     const goTo = useCallback((index: number, dir: Direction) => {
         setDirection(dir)
-        setCurrent((index + total) % total)
+        setSlide((slide) => ({current: (index + total) % total, previous: slide.current}))
     }, [total])
 
     // cada grupo empieza con la línea al centro y la duración normal
@@ -158,22 +159,24 @@ export function BeforeAfterSlider({grupos, sinHeader = false}: BeforeAfterSlider
                  style={{borderRadius: RADIUS}}
                  className={"group relative  w-full aspect-[16/9] overflow-hidden select-none touch-none shadow-[0_20px_60px_rgba(0,0,0,.35)]"}>
 
-                {/* imagen 2 de fondo e imagen 1 recortada encima: barra a la derecha = imagen 1 completa */}
+                {/* imagen 2 de fondo e imagen 1 recortada encima: barra a la derecha = imagen 1 completa.
+                    solo el grupo nuevo se desvanece, encima del anterior que sigue opaco: si los dos cambiaran
+                    de opacidad a la vez, a mitad del cambio se veria el fondo de la pagina (el parpadeo) */}
                 {groups.map((g, i) => (
                     <div key={i}
-                         className={`absolute inset-0 transition-opacity duration-700 ${i === current ? "opacity-100" : "opacity-0 pointer-events-none"}`}>
+                         className={`absolute inset-0 ${i === current ? "z-[2] opacity-100 transition-opacity duration-700" : i === previous ? "z-[1] opacity-100" : "opacity-0 pointer-events-none"}`}>
                         <img src={g.imageTwo} alt={`imagen 2 del grupo ${i + 1}`} draggable={false}
                              className={"absolute inset-0 w-full h-full object-cover"}/>
                         <img ref={el => { clipRefs.current[i] = el }}
                              src={g.imageOne} alt={`imagen 1 del grupo ${i + 1}`} draggable={false}
                              style={{clipPath: "inset(0 50% 0 0)"}}
                              className={"absolute inset-0 w-full h-full object-cover"}/>
+                        {/* textos del grupo (se editan en el dashboard > Slider): van dentro de su grupo para
+                            aparecer y quedar debajo junto con sus imagenes, en vez de cambiar de golpe */}
+                        <CornerLabel corner={"top-left"} group={i} text={g.labelOne}/>
+                        <CornerLabel corner={"bottom-right"} group={i} text={g.labelTwo}/>
                     </div>
                 ))}
-
-                {/* textos del grupo actual (se editan en el dashboard > Slider) */}
-                <CornerLabel corner={"top-left"} text={groups[current]?.labelOne ?? ""}/>
-                <CornerLabel corner={"bottom-right"} text={groups[current]?.labelTwo ?? ""}/>
 
                 {/* deslizador: línea delgada con un tirador central de 10x25px */}
                 <div onPointerDown={handlePointerDown}
@@ -222,15 +225,17 @@ export function BeforeAfterSlider({grupos, sinHeader = false}: BeforeAfterSlider
 
 type CornerLabelProps = {
     corner: "top-left" | "bottom-right"
+    // cada grupo tiene sus textos: el id del arco no puede repetirse entre grupos
+    group: number
     text: string
 }
 
 // texto curvado sobre un arco en la esquina (concéntrico al borde si el radio es de 48px o más)
-function CornerLabel({corner, text}: CornerLabelProps) {
+function CornerLabel({corner, group, text}: CornerLabelProps) {
     const extra = 80
     const size = LABEL_RADIUS + extra
     const isTopLeft = corner === "top-left"
-    const id = `arc-${corner}`
+    const id = `arc-${corner}-${group}`
 
     // arriba-izquierda: los glifos miran hacia afuera, la línea base queda a 22px del borde
     // abajo-derecha: los glifos miran hacia adentro, la línea base queda a 12px del borde
@@ -242,10 +247,12 @@ function CornerLabel({corner, text}: CornerLabelProps) {
 
     return (
         <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`}
-             className={`absolute z-20 pointer-events-none overflow-visible drop-shadow-[0_1px_3px_rgba(0,0,0,.6)] ${isTopLeft ? "top-0 left-0" : "bottom-0 right-0"}`}>
+             className={`absolute z-20 pointer-events-none overflow-visible ${isTopLeft ? "top-0 left-0" : "bottom-0 right-0"}`}>
             <path id={id} d={path} fill={"none"}/>
-            {/* word-spacing: mas aire entre palabras, que en arco se veian pegadas */}
-            <text className={"fill-white text-[15px] font-extrabold tracking-[0.04em] [word-spacing:0.35em]"}>
+            {/* word-spacing: mas aire entre palabras, que en arco se veian pegadas.
+                el borde oscuro va como contorno del propio texto (paint-order) y no como filtro drop-shadow:
+                el filtro se volvia a pintar en cada cuadro mientras la linea pasaba por debajo y parpadeaba */}
+            <text className={"fill-white stroke-black/45 [stroke-width:3px] [stroke-linejoin:round] [paint-order:stroke] text-[15px] font-extrabold tracking-[0.04em] [word-spacing:0.35em]"}>
                 <textPath href={`#${id}`} startOffset={"50%"} textAnchor={"middle"}>{text}</textPath>
             </text>
         </svg>

@@ -13,7 +13,10 @@ const MENSAJES = [
     { titulo: 'Paga con Yape, Plin o tarjeta', descripcion: 'Compra segura y comprobante electrónico al instante' },
 ];
 
-// franja marino con un camion que cruza la pantalla arrastrando el mensaje; se pausa con el cursor
+// franja marino con un camion que cruza la pantalla arrastrando el mensaje; se pausa con el cursor.
+// cada mensaje hace su propia pasada: entra por la derecha, sale entero por la izquierda y recien ahi se
+// monta el siguiente (key), con su duracion medida antes de empezar. Antes un solo bloque cambiaba de
+// texto al dar la vuelta: su ancho cambiaba, la duracion se recalculaba a mitad de camino y el mensaje saltaba
 export default function BarraSuperior() {
     const { pathname } = useLocation();
     const barraRef = useRef<HTMLDivElement>(null);
@@ -23,6 +26,7 @@ export default function BarraSuperior() {
     // un solo h1 por pagina: en el inicio es este mensaje; en el resto, el titulo de cada pagina
     const Titulo = pathname === '/' ? 'h1' : 'p';
 
+    // se mide antes de pintar cada mensaje nuevo; despues solo si cambia el ancho de la pantalla
     useLayoutEffect(() => {
         const barra = barraRef.current;
         const grupo = grupoRef.current;
@@ -36,9 +40,8 @@ export default function BarraSuperior() {
         medir();
         const observador = new ResizeObserver(medir);
         observador.observe(barra);
-        observador.observe(grupo);
         return () => observador.disconnect();
-    }, []);
+    }, [indice]);
 
     return (
         <div
@@ -47,10 +50,12 @@ export default function BarraSuperior() {
             style={{ height: ALTO_BARRA }}
         >
             <div
+                key={indice}
                 ref={grupoRef}
                 className="barraMovil absolute top-0 left-0 h-full flex items-center gap-[10px] whitespace-nowrap px-[12px] text-[12px] sm:text-[13px]"
-                // un mensaje por pasada
-                onAnimationIteration={() => setIndice((valor) => (valor + 1) % MENSAJES.length)}
+                // salio entero por la izquierda: entra el siguiente mensaje (solo la pasada del grupo,
+                // no una animacion que termine dentro de el)
+                onAnimationEnd={(e) => { if (e.target === e.currentTarget) setIndice((valor) => (valor + 1) % MENSAJES.length); }}
             >
                 <Icono nombre="camion" className="size-[18px] text-[#facc15] -scale-x-100" />
                 <Titulo className="font-semibold text-[#facc15]">{mensaje.titulo}</Titulo>

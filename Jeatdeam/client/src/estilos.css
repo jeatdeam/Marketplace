@@ -75,9 +75,10 @@ body {
     }
 }
 
-/* barra superior: el grupo (camion + mensaje) cruza de derecha a izquierda a velocidad constante */
+/* barra superior: el grupo (camion + mensaje) cruza de derecha a izquierda a velocidad constante.
+   una pasada por mensaje (sin infinite): al terminar, BarraSuperior.tsx monta el siguiente desde cero */
 .barraMovil {
-    animation: cruzarBarra var(--duracion-barra, 18s) linear infinite;
+    animation: cruzarBarra var(--duracion-barra, 18s) linear forwards;
 }
 .barraSuperior:hover .barraMovil {
     animation-play-state: paused;

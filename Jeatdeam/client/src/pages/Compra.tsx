@@ -2,15 +2,13 @@ import { useState, type ReactNode } from 'react';
 import { Link } from 'react-router-dom';
 
 import Icono, { type NombreIcono } from '../components/Icono';
-import ShippingForm, { type Entrega } from '../components/ShippingForm';
+import ShippingForm, { type Entrega, type ValoresEnvio } from '../components/ShippingForm';
 import WalletPanel, { WALLETS, type WalletName } from '../components/WalletPanel';
-import { ANCHO_SECCION, BOTON_PRINCIPAL, BOTON_SECUNDARIO, CAJA_ELEVADA, TARJETA, EncabezadoPagina } from '../components/ui';
-import { crearSesionPago } from '../api';
+import { ANCHO_SECCION, BOTON_PRINCIPAL, BOTON_SECUNDARIO, CAJA_ELEVADA, TARJETA, BotonAtras, EncabezadoPagina } from '../components/ui';
+import { CLAVE_ULTIMO_PEDIDO, crearPedido, crearSesionPago, type PedidoCreado } from '../api';
 import { groupCarrito, totalCarrito, useStore } from '../context/StoreContext';
 import { TIENDA, formatoSoles, precioSoles } from '../datos/tienda';
 import type { CartItem } from '../../../shared/types';
-
-const COSTO_ENVIO = 12;
 
 type Paso = 'carrito' | 'datos' | 'pago';
 type Metodo = 'tarjeta' | WalletName;
@@ -49,7 +47,8 @@ function FilaProducto({ grupo, onSumar, onRestar, onQuitar } : { grupo : CartIte
     );
 }
 
-function Pasos({ actual } : { actual : Paso }) {
+// los pasos ya hechos se pueden tocar para volver a ellos
+function Pasos({ actual, onIr } : { actual : Paso; onIr : (paso : Paso) => void }) {
     const pasos : { id : Paso; texto : string; icono : NombreIcono }[] = [
         { id: 'carrito', texto: 'Carrito', icono: 'bolsa' },
         { id: 'datos', texto: 'Datos', icono: 'usuario' },
@@ -60,12 +59,16 @@ function Pasos({ actual } : { actual : Paso }) {
         <ol className="flex items-center gap-[8px]" aria-label="Pasos de la compra">
             {pasos.map((paso, indice) => (
                 <li key={paso.id} className="flex items-center gap-[8px] flex-1 last:flex-none">
-                    <span
+                    <button
+                        type="button"
+                        disabled={indice >= indiceActual}
+                        onClick={() => onIr(paso.id)}
                         aria-current={indice === indiceActual ? 'step' : undefined}
-                        className={`inline-flex items-center gap-[6px] rounded-full px-[10px] py-[5px] text-[12px] font-semibold ${indice <= indiceActual ? 'bg-slate-900 text-white' : 'bg-slate-100 text-slate-500'}`}
+                        aria-label={indice < indiceActual ? `Volver a ${paso.texto}` : undefined}
+                        className={`inline-flex items-center gap-[6px] rounded-full px-[10px] py-[5px] text-[12px] font-semibold disabled:cursor-default ${indice <= indiceActual ? 'bg-slate-900 text-white' : 'bg-slate-100 text-slate-500'} ${indice < indiceActual ? 'hover:bg-slate-700' : ''}`}
                     >
                         <Icono nombre={indice < indiceActual ? 'check' : paso.icono} className="size-[14px]" /> {paso.texto}
-                    </span>
+                    </button>
                     {indice < pasos.length - 1 && <span className={`h-[2px] flex-1 rounded-full ${indice < indiceActual ? 'bg-slate-900' : 'bg-slate-200'}`} />}
                 </li>
             ))}
@@ -78,8 +81,14 @@ export default function Compra() {
     const { carrito, addToCart, removeOne, removeGroup, clearCarrito } = useStore();
     const [paso, setPaso] = useState<Paso>('carrito');
     const [entrega, setEntrega] = useState<Entrega>('delivery');
+    // datos del formulario: se conservan al volver para corregir algo sin escribir todo de nuevo
+    const [valoresEnvio, setValoresEnvio] = useState<ValoresEnvio>();
     const [metodo, setMetodo] = useState<Metodo | null>(null);
     const [mostrarQr, setMostrarQr] = useState(false);
+    const [pedido, setPedido] = useState<PedidoCreado | null>(null);
+    // con que datos se creo el pedido: si se vuelve atras sin cambiar nada se reutiliza (y no llega otro correo)
+    const [firmaPedido, setFirmaPedido] = useState('');
+    const [preparando, setPreparando] = useState(false);
     const [redirigiendo, setRedirigiendo] = useState(false);
     const [errorPago, setErrorPago] = useState('');
 
@@ -88,10 +97,32 @@ export default function Compra() {
     }
 
     const subtotal = precioSoles(totalCarrito(carrito));
-    const envio = entrega === 'tienda' || subtotal >= TIENDA.envioGratisDesde ? 0 : COSTO_ENVIO;
+    const envio = entrega === 'tienda' || subtotal >= TIENDA.envioGratisDesde ? 0 : TIENDA.costoEnvio;
     const total = subtotal + envio;
     const faltaParaGratis = TIENDA.envioGratisDesde - subtotal;
     const grupos = groupCarrito(carrito);
+
+    // mismo formato que arma el servidor (pedidosController.ts), sin el codigo ni el enlace al pdf
+    const mensajeRespaldo = (billetera : WalletName) => {
+        const campos = valoresEnvio?.campos ?? {};
+        const delivery = entrega === 'delivery';
+        return [
+            `Hola ${TIENDA.nombre}, ya pagué ${formatoSoles(total)} con ${WALLETS[billetera].nombre}. Adjunto la constancia.`,
+            '',
+            '*Mi pedido*',
+            ...grupos.map((grupo) => `• ${grupo.length} x ${grupo[0].name} (${grupo[0].brand}): ${formatoSoles(precioSoles(grupo[0].price) * grupo.length)}`),
+            `Subtotal: ${formatoSoles(subtotal)}`,
+            `${delivery ? 'Delivery' : 'Recojo en tienda'}: ${envio === 0 ? 'Gratis' : formatoSoles(envio)}`,
+            `*Total: ${formatoSoles(total)}*`,
+            '',
+            `*Nombre:* ${campos.nombre ?? ''}`,
+            `*Correo:* ${campos.correo ?? ''}`,
+            `*Celular:* ${[campos.telefono, campos.telefono2].filter(Boolean).join(' / ')}`,
+            ...(delivery
+                ? ['*Entrega:* Delivery', `*Dirección:* ${campos.direccion}, ${campos.distrito}, ${campos.departamento}`, ...(campos.referencia ? [`*Referencia:* ${campos.referencia}`] : [])]
+                : [`*Entrega:* Recojo en tienda: ${TIENDA.direccion}`]),
+        ].join('\n');
+    };
 
     if (carrito.length === 0) {
         return (
@@ -124,9 +155,33 @@ export default function Compra() {
         }
     };
 
-    const continuar = () => {
+    const irA = (destino : Paso) => {
+        setMostrarQr(false);
+        setPaso(destino);
+    };
+
+    // antes de pagar se guarda el pedido para tener la url de su pdf; si falla, se puede pagar igual sin el enlace
+    const continuar = async () => {
+        if (!metodo) return;
+        const firma = JSON.stringify([metodo, entrega, valoresEnvio, carrito.map((item) => item.idCompra)]);
+        if (pedido && firma === firmaPedido) {
+            if (metodo === 'tarjeta') pagarConTarjeta();
+            else setMostrarQr(true);
+            return;
+        }
+        setPreparando(true);
+        const nuevo = await crearPedido(metodo, entrega).catch(() => null);
+        setPedido(nuevo);
+        setFirmaPedido(nuevo ? firma : '');
+        try {
+            if (nuevo) sessionStorage.setItem(CLAVE_ULTIMO_PEDIDO, JSON.stringify(nuevo));
+            else sessionStorage.removeItem(CLAVE_ULTIMO_PEDIDO);
+        } catch {
+            // sin sessionStorage (modo privado) solo se pierde el enlace en la pagina de pago exitoso
+        }
+        setPreparando(false);
         if (metodo === 'tarjeta') pagarConTarjeta();
-        else if (metodo) setMostrarQr(true);
+        else setMostrarQr(true);
     };
 
     return (
@@ -167,7 +222,7 @@ export default function Compra() {
                 </section>
 
                 <aside className={`${TARJETA} !p-[18px] sm:!p-[25px] lg:sticky lg:top-[110px]`} aria-label="Resumen y pago">
-                    <Pasos actual={paso} />
+                    <Pasos actual={paso} onIr={irA} />
 
                     <dl className="mt-[18px] flex flex-col gap-[8px] text-[14px]">
                         <div className="flex justify-between"><dt className="text-slate-500">Subtotal</dt><dd className="font-semibold">{formatoSoles(subtotal)}</dd></div>
@@ -190,20 +245,19 @@ export default function Compra() {
 
                         {paso === 'datos' && (
                             <>
-                                <button type="button" onClick={() => setPaso('carrito')} className="mb-[12px] inline-flex items-center gap-[6px] text-[13px] font-semibold text-slate-600 hover:text-slate-900">
-                                    <Icono nombre="flechaIzquierda" className="size-[16px]" /> Volver
-                                </button>
-                                <ShippingForm onListo={(tipo) => { setEntrega(tipo); setPaso('pago'); }} />
+                                <div className="mb-[14px]"><BotonAtras onClick={() => irA('carrito')}>Volver al carrito</BotonAtras></div>
+                                <ShippingForm
+                                    inicial={valoresEnvio}
+                                    onListo={(valores) => { setValoresEnvio(valores); setEntrega(valores.entrega); setPaso('pago'); }}
+                                />
                             </>
                         )}
 
                         {paso === 'pago' && (mostrarQr && metodo && metodo !== 'tarjeta' ? (
-                            <WalletPanel billetera={metodo} total={total} onVolver={() => setMostrarQr(false)} />
+                            <WalletPanel billetera={metodo} total={total} pedido={pedido} mensajeRespaldo={mensajeRespaldo(metodo)} onVolver={() => setMostrarQr(false)} onCorregir={() => irA('datos')} />
                         ) : (
                             <>
-                                <button type="button" onClick={() => setPaso('datos')} className="mb-[12px] inline-flex items-center gap-[6px] text-[13px] font-semibold text-slate-600 hover:text-slate-900">
-                                    <Icono nombre="flechaIzquierda" className="size-[16px]" /> Editar mis datos
-                                </button>
+                                <div className="mb-[14px]"><BotonAtras onClick={() => irA('datos')}>Corregir mis datos</BotonAtras></div>
                                 <p className="mb-[10px] text-[12px] font-semibold uppercase tracking-[0.08em] text-slate-600">Elige cómo pagar</p>
                                 <div role="radiogroup" aria-label="Medio de pago" className="flex flex-col gap-[10px]">
                                     <OpcionPago activa={metodo === 'tarjeta'} onElegir={() => setMetodo('tarjeta')} titulo="Tarjeta de crédito o débito" texto="Visa, Mastercard, Amex · pasarela segura">
@@ -217,9 +271,9 @@ export default function Compra() {
                                 </div>
                                 {errorPago && <p role="alert" className="mt-[10px] text-[13px] font-medium text-red-600">{errorPago}</p>}
                                 <div className="pt-[16px]">
-                                    <button type="button" onClick={continuar} disabled={!metodo || redirigiendo} className={`${BOTON_PRINCIPAL} w-full !py-[12px]`}>
+                                    <button type="button" onClick={continuar} disabled={!metodo || preparando || redirigiendo} className={`${BOTON_PRINCIPAL} w-full !py-[12px]`}>
                                         <Icono nombre={metodo === 'tarjeta' ? 'candado' : 'qr'} className="size-[17px]" />
-                                        {redirigiendo ? 'Abriendo pasarela…' : metodo === 'tarjeta' ? `Pagar ${formatoSoles(total)}` : metodo ? `Ver QR de ${WALLETS[metodo].nombre}` : 'Elige un medio de pago'}
+                                        {preparando ? 'Preparando tu pedido…' : redirigiendo ? 'Abriendo pasarela…' : metodo === 'tarjeta' ? `Pagar ${formatoSoles(total)}` : metodo ? `Ver QR de ${WALLETS[metodo].nombre}` : 'Elige un medio de pago'}
                                     </button>
                                 </div>
                             </>

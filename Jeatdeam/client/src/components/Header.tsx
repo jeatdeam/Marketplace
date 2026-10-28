@@ -3,6 +3,8 @@ import { Link, NavLink } from 'react-router-dom';
 
 import Icono from './Icono';
 import CarritoHeader from './CarritoHeader';
+import FirmaKmoon, { anchoFirma } from './FirmaKmoon';
+import { useMediaQuery } from '../hooks/useMediaQuery';
 import Buscador from './Buscador';
 import MenuClasico from './MenuClasico';
 import { ENLACES } from './BarraLateral';
@@ -10,18 +12,41 @@ import { ANCHO_HEADER } from './ui';
 import { ALTO_BARRA } from './BarraSuperior';
 import { TIENDA } from '../datos/tienda';
 
-// arriba del todo el header queda 22px debajo de la barra; al bajar sube hasta 10px del borde
-export const SEPARACION_INICIAL = ALTO_BARRA + 22;
-const SEPARACION_SCROLL = 10;
+// la misma separacion siempre: arriba del todo el header queda 22px debajo de la barra y al bajar
+// se despega y queda a 22px del borde de la ventana
+const SEPARACION_HEADER = 22;
+export const SEPARACION_INICIAL = ALTO_BARRA + SEPARACION_HEADER;
+const SEPARACION_SCROLL = SEPARACION_HEADER;
 
+// claro (header marino): el logo Lottie animado, que trae su propia luna.
+// sobre fondo claro (footer, dashboard): la luna del png con el nombre en texto
 export function Logo({ claro = true } : { claro?: boolean }) {
+    // mas alto que el header (72px celular, 80px desde sm): va en absolute y sobresale arriba y abajo;
+    // el enlace reserva su ancho para que los botones no se muevan. Sobresale SALIDA px por arriba (menos
+    // que SEPARACION_HEADER, asi no toca la barra ni se corta al bajar) y el resto por abajo, sin pasar del slider
+    const grande = useMediaQuery('(min-width: 640px)');
+    const alto = grande ? 128 : 104;
+    const altoHeader = grande ? 80 : 72;
+    const salida = grande ? 18 : 16;
+    // el enlace (44px) esta centrado en el header: se sube hasta el borde del header y luego la salida
+    const arriba = -(altoHeader - 44) / 2 - salida;
+    if (claro) {
+        return (
+            <Link to="/" className="relative block h-[44px] shrink-0" style={{ width: anchoFirma(alto) }} aria-label={`${TIENDA.nombre}, ir al inicio`}>
+                <span className="absolute left-0" style={{ top: arriba }}>
+                    <FirmaKmoon alto={alto} />
+                </span>
+            </Link>
+        );
+    }
     return (
         <Link to="/" className="flex items-center gap-[10px] shrink-0" aria-label={`${TIENDA.nombre}, ir al inicio`}>
-            <span className="grid place-items-center size-[40px] rounded-full bg-[#facc15] text-slate-900 shadow-[0_0_0_3px_rgba(255,255,255,.25)]">
-                <Icono nombre="regalo" className="size-[22px]" />
+            {/* la luna del logo (public/img/k-moon.png) dentro de un circulo blanco: el png trae el centro blanco */}
+            <span className="grid place-items-center size-[42px] rounded-full bg-white shadow-[0_0_0_3px_rgba(255,255,255,.25)] overflow-hidden">
+                <img src="/img/k-moon.png" alt="" className="size-[46px] max-w-none object-contain" />
             </span>
             <span className={`text-[20px] font-extrabold tracking-tight leading-none ${claro ? 'text-white' : 'text-slate-900'}`}>
-                JD<span className="text-[#facc15]">·</span>Store
+                {TIENDA.nombre}
             </span>
         </Link>
     );

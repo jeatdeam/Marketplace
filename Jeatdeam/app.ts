@@ -1,3 +1,5 @@
+// primero: carga las variables de entorno antes de que los controladores las lean
+import { enProduccion } from './entorno.ts';
 import express from 'express';
 import path from 'path';
 import fs from 'fs';
@@ -9,6 +11,8 @@ import expressSession from 'express-session';
 import taskController from './controllers/taskController.ts';
 import atencionController from './controllers/atencionController.ts';
 import adminController, { requiereAdmin } from './controllers/adminController.ts';
+import pedidosController from './controllers/pedidosController.ts';
+import { cargarDeSupabase } from './controllers/almacen.ts';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 
@@ -17,6 +21,9 @@ const __dirname = dirname(__filename);
 
 const app = express();
 const PORT = process.env.PORT || 8080;
+
+// Render pone un proxy https delante: sin esto req.ip seria la del proxy y la cookie segura no se enviaria
+app.set('trust proxy', 1);
 
 // Middlewares básicos
 app.use(cors());
@@ -48,11 +55,15 @@ app.use((req, res, next) => {
 });
 
 // Middleware de sesión
+if (enProduccion && !process.env.SESSION_SECRET) {
+    console.warn('⚠️ Falta SESSION_SECRET: las sesiones del dashboard usan un secreto por defecto.');
+}
 app.use(expressSession({
-    secret: 'tu-secreto-aqui',
+    secret: process.env.SESSION_SECRET ?? 'tu-secreto-aqui',
     resave: false,
     saveUninitialized: true,
-    cookie: { secure: false }
+    // 'auto': cookie segura cuando la peticion llega por https (Render), normal en localhost
+    cookie: { secure: 'auto', httpOnly: true, sameSite: 'lax' }
 }));
 
 // Middlewares de archivos estáticos y datos
@@ -63,6 +74,9 @@ app.use(express.urlencoded({ extended: true }));
 
 // API consumida por el cliente React
 const api = express.Router();
+
+// Render la consulta para saber si el servicio esta vivo (healthCheckPath en render.yaml)
+api.get("/salud", (_req, res) => { res.json({ ok: true }); });
 
 // GET
 api.get("/datos/cliente/compra/estatic", taskController.verificarDatos);
@@ -78,6 +92,7 @@ api.post("/create-checkout-session", taskController.redireccionamientoToPay);
 api.post("/generar-qr", taskController.controllerQr);
 api.post("/reclamaciones", atencionController.registrarReclamo);
 api.post("/contacto", atencionController.registrarContacto);
+api.post("/pedidos", pedidosController.crearPedido);
 api.get("/banners", adminController.listarBanners);
 api.get("/apariencia", adminController.verApariencia);
 
@@ -106,6 +121,9 @@ app.use("/api", api);
 // Webhook de pagos (se mantiene en la raíz porque lo llama un servicio externo)
 app.post("/pagorealizado", taskController.pagoRealizado)
 
+// PDF del pedido: url publica que va en el mensaje de whatsapp (/pedido/KM-000013-<token>.pdf)
+app.get("/pedido/:archivo", pedidosController.verPdf);
+
 // Cliente React compilado (npm run build)
 const clientDist = path.join(__dirname, 'client', 'dist');
 app.use(express.static(clientDist));
@@ -119,5 +137,6 @@ app.get("*", (req, res) => {
     res.sendFile(indexHtml);
 });
 
-// Escuchar servidor
+// Escuchar servidor (antes se trae la tienda de Supabase, si esta configurado)
+await cargarDeSupabase();
 app.listen(PORT, () => console.log(`Servidor corriendo en el puerto ${PORT}`));

@@ -42,6 +42,21 @@ export const MARINO_CIELO = 'bg-gradient-to-br from-[#172554] via-[#1e3a8a] to-[
 // la vista previa del dashboard (un iframe) muestra todo de una: sin esperar al scroll
 export const SinAparecer = createContext(false);
 
+// boton para volver al paso anterior de la compra: flecha dentro de un circulo que se corre al pasar el cursor
+export function BotonAtras({ onClick, children } : { onClick : () => void; children : ReactNode }) {
+    return (
+        <button type="button" onClick={onClick} className="group/atras inline-flex items-center gap-[8px] text-[13px] font-semibold text-slate-600 hover:text-slate-900">
+            <span className="grid place-items-center size-[32px] rounded-full bg-white ring-1 ring-slate-200 transition-all duration-300 group-hover/atras:-translate-x-[3px] group-hover/atras:ring-slate-400">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.2} strokeLinecap="round" strokeLinejoin="round" className="size-[16px]" aria-hidden="true">
+                    <path d="m12 19-7-7 7-7" />
+                    <path d="M19 12H5" />
+                </svg>
+            </span>
+            {children}
+        </button>
+    );
+}
+
 export function Aparecer({ children, className = '' } : { children : ReactNode; className?: string }) {
     const ref = useRef<HTMLDivElement>(null);
     const [oculto, setOculto] = useState(false);

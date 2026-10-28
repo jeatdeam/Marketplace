@@ -1,0 +1,45 @@
+# Blueprint de Render (debe estar en la raiz del repo). Guia: Jeatdeam/integraciones/render/README.md
+services:
+  - type: web
+    name: marketplace-jeatdeam
+    runtime: node
+    region: virginia        # Render no tiene region en Sudamerica; virginia es la mas cercana a Peru
+    plan: free
+    branch: main
+    autoDeploy: true
+    # --include=dev: vite y typescript son devDependencies y hacen falta para compilar el cliente
+    buildCommand: npm ci --include=dev && npm run build
+    startCommand: npm start
+    healthCheckPath: /api/salud
+    envVars:
+      - key: NODE_VERSION
+        value: "22"
+      - key: NODE_ENV
+        value: production
+      - key: SESSION_SECRET
+        generateValue: true
+      # sync: false -> Render las pide al crear el servicio (no se guardan en el repo)
+      - key: DASHBOARD_CLAVE
+        sync: false
+      - key: SECRET_KEY
+        sync: false
+      - key: PUBLIC_KEY
+        sync: false
+      - key: MONEDA_STRIPE
+        value: pen
+      - key: EMAIL_USER
+        sync: false
+      - key: EMAIL_PASS
+        sync: false
+      - key: CLOUDINARY_CLOUD_NAME
+        sync: false
+      - key: CLOUDINARY_API_KEY
+        sync: false
+      - key: CLOUDINARY_API_SECRET
+        sync: false
+      - key: CLOUDINARY_CARPETA
+        value: jeatdeam
+      - key: SUPABASE_URL
+        sync: false
+      - key: SUPABASE_SECRET_KEY
+        sync: false

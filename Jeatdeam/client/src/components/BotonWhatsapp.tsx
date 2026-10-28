@@ -52,7 +52,7 @@ export default function BotonWhatsapp() {
     return (
         <a
             ref={boton}
-            href={`https://wa.me/${TIENDA.whatsapp}?text=${encodeURIComponent('Hola JD Store, quiero hacer una consulta')}`}
+            href={`https://wa.me/${TIENDA.whatsapp}?text=${encodeURIComponent(`Hola ${TIENDA.nombre}, quiero hacer una consulta`)}`}
             target="_blank"
             rel="noreferrer"
             aria-label="Escríbenos por WhatsApp"

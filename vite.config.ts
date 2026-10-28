@@ -23,6 +23,8 @@ export default defineConfig({
         port: 5173,
         proxy: {
             '/api': 'http://localhost:8080',
+            // pdf de los pedidos (lo arma Express)
+            '^/pedido/.+\\.pdf$': 'http://localhost:8080',
         },
     },
     build: {

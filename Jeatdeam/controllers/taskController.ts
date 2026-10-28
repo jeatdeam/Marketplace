@@ -1,8 +1,6 @@
 import Stripe from 'stripe';
 import QRCode from 'qrcode';
 import nodemailer from 'nodemailer';
-import dotenv from 'dotenv';
-import { fileURLToPath } from 'url';
 import type { Request, Response } from 'express';
 
 import type {
@@ -15,16 +13,6 @@ import type {
     Secciones,
 } from '../shared/types.ts';
 import { cargarAlmacen, esPrimeraCarga, guardarAlmacen } from './almacen.ts';
-
-// Carga Jeatdeam/.env sin importar desde qué carpeta se arranque el servidor
-const result = dotenv.config({ path: fileURLToPath(new URL('../.env', import.meta.url)) });
-
-if (result.error) {
-    console.error("⚠️ Error al cargar .env:", result.error);
-} else {
-    console.log("✅ Archivo .env cargado correctamente.");
-}
-
 
 const stripe = new Stripe(process.env.SECRET_KEY ?? '');
 
@@ -48,24 +36,36 @@ const MONEDA_STRIPE = process.env.MONEDA_STRIPE ?? 'pen';
 
 // el precio y el nombre salen del backend, nunca del navegador; asi tambien se pueden pagar
 // los productos creados desde el dashboard, que no tienen un precio creado en stripe
-const productsToPay = (): Stripe.Checkout.SessionCreateParams.LineItem[] => {
+// el carrito agrupado por producto con el precio del backend; lo usan stripe y los pedidos (pedidosController.ts)
+export function lineasCarrito() {
     const cantidades = new Map<string, number>();
     carrito.forEach((item) => cantidades.set(item.id, (cantidades.get(item.id) ?? 0) + 1));
 
-    return Array.from(cantidades, ([id, quantity]) => {
+    return Array.from(cantidades, ([id, cantidad]) => {
         const producto = baseDatos.find((el) => String(el.id) === id);
         const item = carrito.find((el) => el.id === id)!;
         return {
-            quantity,
-            price_data: {
-                currency: MONEDA_STRIPE,
-                // precio final: el normal menos el descuento puesto en el dashboard
-                unit_amount: producto ? Math.round((producto.price * (100 - (producto.descuento ?? 0))) / 100) : item.price,
-                product_data: { name: producto ? `${producto.name} - ${producto.brand}` : item.name },
-            },
+            nombre: producto?.name ?? item.name,
+            marca: producto?.brand ?? item.brand,
+            cantidad,
+            // precio final en centimos: el normal menos el descuento puesto en el dashboard
+            unitario: producto ? Math.round((producto.price * (100 - (producto.descuento ?? 0))) / 100) : item.price,
         };
     });
-};
+}
+
+// los ultimos datos que se llenaron en el formulario de envio
+export const ultimoCliente = (): DatosCliente | undefined => datosCliente[datosCliente.length - 1];
+
+const productsToPay = (): Stripe.Checkout.SessionCreateParams.LineItem[] =>
+    lineasCarrito().map((linea) => ({
+        quantity: linea.cantidad,
+        price_data: {
+            currency: MONEDA_STRIPE,
+            unit_amount: linea.unitario,
+            product_data: { name: `${linea.nombre} - ${linea.marca}` },
+        },
+    }));
 
 // solo la primera vez (sin datos/tienda.json): los productos escritos en el codigo toman, en orden,
 // el id y el precio de stripe; despues el json del backend es la fuente de verdad
@@ -565,7 +565,8 @@ let datosCliente:DatosCliente[]=[
 
 
 ]
-const transporter=nodemailer.createTransport({
+// tambien lo usa pedidosController.ts para mandar el pedido al correo del cliente
+export const transporter=nodemailer.createTransport({
     service: "gmail",
     auth: {
         user: process.env.EMAIL_USER,
@@ -676,30 +677,11 @@ const recibirDatosShort = async (req:Request<unknown, unknown, DatosClienteShort
 
     datosCliente.push({ correo, nombre, tel, telSec });
 
-    const mailOptions = {
-        from: "firtsadic3@gmail.com",
-        to: correo,
-        subject: "Confirmación de recepción de datos",
-        text: `Hola ${nombre}, hemos recibido tu información. Teléfono: ${tel}, Teléfono Secundario: ${telSec}.`,
-    };
-
-        // await transporter.sendMail(mailOptions);
-        transporter.sendMail(mailOptions)
-            .then(result=>{
-                console.log('correo enviado: ',result)
-            })
-            .catch(error=>{
-                console.error('error al enviar el correo: ',error);
-            });
-
-        return res.json({
-            estado: `✅ Datos recibidos y correo enviado -> ${correo}`,
-            datosCliente,
-        });
-    // } catch (error) {
-    //     console.error("❌ Error al enviar el correo:", error);
-    //     return res.status(500).json({ error: "Error al enviar el correo" });
-    // }
+    // el correo al cliente sale al elegir el medio de pago, con el detalle de compra y el pdf (pedidosController.ts)
+    return res.json({
+        estado: `✅ Datos recibidos -> ${correo}`,
+        datosCliente,
+    });
 };
 
 

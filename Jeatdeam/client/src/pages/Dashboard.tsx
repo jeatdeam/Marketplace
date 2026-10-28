@@ -2,7 +2,7 @@ import { useCallback, useEffect, useRef, useState, type FormEvent } from 'react'
 import { Link } from 'react-router-dom';
 
 import Icono from '../components/Icono';
-import LogoAndes from '../components/LogoAndes';
+import { Logo } from '../components/Header';
 import PanelProductos from '../components/dashboard/PanelProductos';
 import PanelBanners from '../components/dashboard/PanelBanners';
 import PanelCategorias from '../components/dashboard/PanelCategorias';
@@ -40,10 +40,10 @@ export default function Dashboard() {
 
     return (
         <div className="flex min-h-screen flex-col">
-            {/* fondo blanco de vidrio: el logo Lottie de Los Andes EPPS va recoloreado para verse sobre blanco */}
+            {/* fondo blanco de vidrio: el logo va con el texto oscuro */}
             <header className="sticky top-0 z-40 bg-white/80 backdrop-blur-md ring-1 ring-slate-900/5 shadow-[0_8px_24px_rgba(15,23,42,.06)] text-slate-900">
                 <div className="w-[94%] max-w-[1400px] mx-auto h-[76px] flex items-center gap-[14px]">
-                    <LogoAndes />
+                    <Logo claro={false} />
                     <span className="hidden sm:inline-flex items-center gap-[6px] rounded-full bg-sky-50 text-sky-700 ring-1 ring-sky-100 px-[10px] py-[3px] text-[12px] font-semibold">
                         <Icono nombre="panel" className="size-[14px]" /> Dashboard
                     </span>
@@ -127,7 +127,7 @@ function Login({ onEntrar } : { onEntrar : () => void }) {
         <main className="flex-1 grid place-items-center min-h-screen px-[16px]">
             <form onSubmit={onSubmit} className={`${TARJETA} w-full max-w-[380px] flex flex-col gap-[16px]`}>
                 <div className="-mx-[25px] -mt-[25px] mb-[4px] rounded-t-[12.5px] border-b border-slate-900/5 bg-white/80 px-[25px] py-[14px]">
-                    <LogoAndes />
+                    <Logo claro={false} />
                 </div>
                 <div>
                     <h1 className="text-[20px] font-bold">Dashboard</h1>

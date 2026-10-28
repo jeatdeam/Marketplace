@@ -1,18 +1,7 @@
 // datos de la tienda y del catalogo; lo que el servidor no trae se inventa aqui para el prototipo
 import type { Apariencia, GrupoSlider, Product } from '../../../shared/types';
 
-export const TIENDA = {
-    nombre: 'JD Store',
-    lema: 'Juguetes, peluches y regalos que se quedan en la familia',
-    whatsapp: '51987654321', // 51 + 9 digitos
-    telefono: '+51 987 654 321',
-    correo: 'hola@jdstore.pe',
-    direccion: 'Av. Elvira García y García 2514, Cercado de Lima',
-    horario: 'Lun a sáb · 9:00 a 19:00',
-    ruc: '20612345678',
-    razonSocial: 'JD Store Juguetes S.A.C.',
-    envioGratisDesde: 300,
-};
+export { TIENDA } from '../../../shared/tienda';
 
 export const REDES = [
     { nombre: 'Facebook', icono: 'facebook', url: 'https://facebook.com' },
@@ -114,7 +103,7 @@ export function datosProducto(producto : Product) {
         calificacion: Math.min(5, Math.round(calificacion * 10) / 10),
         resenas,
         stock,
-        sku: `JD-${producto.category.slice(0, 3).toUpperCase()}-${String(semilla % 10000).padStart(4, '0')}`,
+        sku: `KM-${producto.category.slice(0, 3).toUpperCase()}-${String(semilla % 10000).padStart(4, '0')}`,
         nuevo: producto.nuevo ?? semilla % 4 === 0,
     };
 }

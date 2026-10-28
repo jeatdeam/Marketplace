@@ -3,8 +3,10 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 
 import type { Apariencia, Banner, Product } from '../shared/types.ts';
+import { guardarTienda, leerTienda, supabaseActivo } from '../integraciones/supabase/supabase.ts';
 
-// prototipo: todo vive en memoria y se copia a un json del backend para sobrevivir a los reinicios
+// prototipo: todo vive en memoria y se copia a un json del backend para sobrevivir a los reinicios.
+// con Supabase configurado, ese mismo json tambien se guarda alla (en Render el disco se borra al redeplegar)
 const CARPETA = fileURLToPath(new URL('../datos/', import.meta.url));
 const ARCHIVO = path.join(CARPETA, 'tienda.json');
 
@@ -19,13 +21,19 @@ export const almacen: Datos = { productos: [], banners: [], apariencia: { catego
 
 let existiaArchivo = false;
 
+// reemplaza el contenido sin cambiar las referencias (taskController guarda almacen.productos como baseDatos)
+function aplicar(guardado: Partial<Datos>) {
+    almacen.productos.splice(0, almacen.productos.length, ...(guardado.productos ?? []));
+    almacen.banners.splice(0, almacen.banners.length, ...(guardado.banners ?? []));
+    for (const clave of Object.keys(almacen.apariencia.categorias)) delete almacen.apariencia.categorias[clave];
+    for (const clave of Object.keys(almacen.apariencia.slider)) delete almacen.apariencia.slider[clave];
+    Object.assign(almacen.apariencia.categorias, guardado.apariencia?.categorias);
+    Object.assign(almacen.apariencia.slider, guardado.apariencia?.slider);
+}
+
 export function cargarAlmacen(semilla: Product[]): Product[] {
     try {
-        const guardado = JSON.parse(fs.readFileSync(ARCHIVO, 'utf-8')) as Partial<Datos>;
-        almacen.productos.push(...(guardado.productos ?? []));
-        almacen.banners.push(...(guardado.banners ?? []));
-        Object.assign(almacen.apariencia.categorias, guardado.apariencia?.categorias);
-        Object.assign(almacen.apariencia.slider, guardado.apariencia?.slider);
+        aplicar(JSON.parse(fs.readFileSync(ARCHIVO, 'utf-8')) as Partial<Datos>);
         existiaArchivo = true;
         console.log(`Datos cargados de ${path.relative(process.cwd(), ARCHIVO)}: ${almacen.productos.length} productos, ${almacen.banners.length} banners`);
     } catch {
@@ -35,14 +43,46 @@ export function cargarAlmacen(semilla: Product[]): Product[] {
     return almacen.productos;
 }
 
+// se llama una vez antes de abrir el servidor: si Supabase ya tiene la tienda, manda sobre el json local;
+// si la tabla esta vacia, se sube lo que hay en local como punto de partida
+export async function cargarDeSupabase() {
+    if (!supabaseActivo()) return;
+    try {
+        const remoto = await leerTienda<Partial<Datos>>();
+        if (remoto) {
+            aplicar(remoto);
+            existiaArchivo = true;
+            escribirLocal();
+            console.log(`Datos cargados de Supabase: ${almacen.productos.length} productos, ${almacen.banners.length} banners`);
+        } else {
+            await guardarTienda(almacen);
+            console.log('Supabase estaba vacio: se subio la tienda local.');
+        }
+    } catch (error) {
+        console.error('No se pudo leer la tienda de Supabase, se usa la local:', (error as Error).message);
+    }
+}
+
 // true solo la primera vez: es cuando hace falta traer ids y precios de stripe
 export const esPrimeraCarga = () => !existiaArchivo;
 
 // escritura atomica: primero a un temporal y luego se renombra, asi un corte no deja el json a medias
-export function guardarAlmacen() {
+function escribirLocal() {
     fs.mkdirSync(CARPETA, { recursive: true });
     const temporal = `${ARCHIVO}.tmp`;
     fs.writeFileSync(temporal, JSON.stringify(almacen, null, 2));
     fs.renameSync(temporal, ARCHIVO);
+}
+
+// las subidas a Supabase van en fila: si dos cambios llegan seguidos, el ultimo nunca queda pisado por el anterior
+let cola = Promise.resolve();
+
+export function guardarAlmacen() {
+    escribirLocal();
     existiaArchivo = true;
+    if (!supabaseActivo()) return;
+    const copia = structuredClone(almacen);
+    cola = cola
+        .then(() => guardarTienda(copia))
+        .catch((error) => console.error('No se pudo guardar la tienda en Supabase:', (error as Error).message));
 }

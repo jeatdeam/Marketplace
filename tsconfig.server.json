@@ -11,5 +11,5 @@
         "resolveJsonModule": true,
         "types": ["node"]
     },
-    "include": ["Jeatdeam/app.ts", "Jeatdeam/controllers", "Jeatdeam/shared"]
+    "include": ["Jeatdeam/app.ts", "Jeatdeam/entorno.ts", "Jeatdeam/controllers", "Jeatdeam/integraciones", "Jeatdeam/shared"]
 }

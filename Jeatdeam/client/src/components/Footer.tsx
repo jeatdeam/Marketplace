@@ -73,7 +73,7 @@ export default function Footer() {
                     </div>
                     <div className="flex flex-wrap gap-[10px]">
                         <a
-                            href={`https://wa.me/${TIENDA.whatsapp}?text=${encodeURIComponent('Hola JD Store, quiero cotizar una compra por volumen')}`}
+                            href={`https://wa.me/${TIENDA.whatsapp}?text=${encodeURIComponent(`Hola ${TIENDA.nombre}, quiero cotizar una compra por volumen`)}`}
                             target="_blank"
                             rel="noreferrer"
                             className={BOTON_PRINCIPAL}

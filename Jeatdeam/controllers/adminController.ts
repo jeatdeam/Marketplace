@@ -5,6 +5,7 @@ import { fileURLToPath } from 'url';
 import type { NextFunction, Request, Response } from 'express';
 
 import { almacen, guardarAlmacen } from './almacen.ts';
+import { cloudinaryActivo, subirACloudinary } from '../integraciones/cloudinary/cloudinary.ts';
 import { GRUPOS_SLIDER, MAX_TEXTO_SLIDER, POSICIONES_BANNER, type Banner, type GrupoSlider, type PosicionBanner, type Product, type ProductoEntrada, type TemaBanner } from '../shared/types.ts';
 
 declare module 'express-session' {
@@ -46,8 +47,12 @@ const login = (req: Request<unknown, unknown, { clave?: string }>, res: Response
         return res.status(401).json({ error: 'Clave incorrecta' });
     }
     intentos.delete(ip);
-    req.session.admin = true;
-    res.json({ ok: true });
+    // sesion nueva al entrar: evita reutilizar un id de sesion anterior al login
+    req.session.regenerate((error) => {
+        if (error) return res.status(500).json({ error: 'No se pudo iniciar sesión' });
+        req.session.admin = true;
+        res.json({ ok: true });
+    });
 };
 
 const logout = (req: Request, res: Response) => {
@@ -245,12 +250,21 @@ const borrarGrupoSlider = (req: Request<{ indice: string }>, res: Response) => {
 
 // ---------- imagenes ----------
 
-// recibe la imagen como data url (base64) para no sumar dependencias; se guarda en public/uploads
-const subirImagen = (req: Request<unknown, unknown, { datos?: string }>, res: Response) => {
-    const coincide = /^data:(image\/[a-z+]+);base64,(.+)$/.exec(String(req.body?.datos ?? ''));
+// recibe la imagen como data url (base64); va a Cloudinary si esta configurado, si no a public/uploads
+const subirImagen = async (req: Request<unknown, unknown, { datos?: string }>, res: Response) => {
+    const datos = String(req.body?.datos ?? '');
+    const coincide = /^data:(image\/[a-z+]+);base64,(.+)$/.exec(datos);
     if (!coincide || !TIPOS_IMAGEN[coincide[1]]) return res.status(400).json({ error: 'Formato no permitido (JPG, PNG, WEBP, GIF o AVIF)' });
     const buffer = Buffer.from(coincide[2], 'base64');
     if (buffer.length > MAX_IMAGEN) return res.status(400).json({ error: 'La imagen pesa más de 5 MB' });
+    if (cloudinaryActivo()) {
+        try {
+            return res.status(201).json({ url: await subirACloudinary(datos) });
+        } catch (error) {
+            console.error('Error subiendo a Cloudinary:', (error as Error).message);
+            return res.status(502).json({ error: 'No se pudo subir la imagen a Cloudinary' });
+        }
+    }
     fs.mkdirSync(CARPETA_SUBIDAS, { recursive: true });
     const nombre = `${Date.now()}-${crypto.randomBytes(4).toString('hex')}.${TIPOS_IMAGEN[coincide[1]]}`;
     fs.writeFileSync(path.join(CARPETA_SUBIDAS, nombre), buffer);

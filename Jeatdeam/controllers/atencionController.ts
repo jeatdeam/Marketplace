@@ -1,6 +1,9 @@
 import type { Request, Response } from 'express';
 
-// prototipo: las hojas de reclamacion y los mensajes se guardan en memoria (se pierden al reiniciar)
+import { insertarMensaje, insertarReclamo, supabaseActivo } from '../integraciones/supabase/supabase.ts';
+
+// prototipo: con Supabase configurado las hojas de reclamacion y los mensajes se guardan alla;
+// sin el, quedan en memoria (se pierden al reiniciar)
 interface Reclamo {
     codigo: string;
     fecha: string;
@@ -25,25 +28,45 @@ function limpiar(body: Record<string, unknown>): Record<string, string> {
     );
 }
 
-const registrarReclamo = (req: Request<unknown, unknown, Record<string, unknown>>, res: Response) => {
+const registrarReclamo = async (req: Request<unknown, unknown, Record<string, unknown>>, res: Response) => {
     const body = req.body ?? {};
     const sinLlenar = faltantes(body, CAMPOS_RECLAMO);
     if (sinLlenar.length) {
         return res.status(400).json({ error: `Faltan datos: ${sinLlenar.join(', ')}` });
     }
     const fecha = new Date().toISOString();
-    const codigo = `RC-${fecha.slice(0, 4)}-${String(reclamos.length + 1).padStart(6, '0')}`;
-    reclamos.push({ codigo, fecha, datos: limpiar(body) });
+    const datos = limpiar(body);
+    let numero = reclamos.length + 1;
+    if (supabaseActivo()) {
+        try {
+            numero = await insertarReclamo(fecha, datos);
+        } catch (error) {
+            console.error((error as Error).message);
+            return res.status(502).json({ error: 'No se pudo registrar el reclamo, intenta de nuevo' });
+        }
+    }
+    const codigo = `RC-${fecha.slice(0, 4)}-${String(numero).padStart(6, '0')}`;
+    if (!supabaseActivo()) reclamos.push({ codigo, fecha, datos });
     res.status(201).json({ codigo, fecha });
 };
 
-const registrarContacto = (req: Request<unknown, unknown, Record<string, unknown>>, res: Response) => {
+const registrarContacto = async (req: Request<unknown, unknown, Record<string, unknown>>, res: Response) => {
     const body = req.body ?? {};
     const sinLlenar = faltantes(body, CAMPOS_CONTACTO);
     if (sinLlenar.length) {
         return res.status(400).json({ error: `Faltan datos: ${sinLlenar.join(', ')}` });
     }
-    mensajes.push({ fecha: new Date().toISOString(), datos: limpiar(body) });
+    const mensaje = { fecha: new Date().toISOString(), datos: limpiar(body) };
+    if (supabaseActivo()) {
+        try {
+            await insertarMensaje(mensaje.fecha, mensaje.datos);
+        } catch (error) {
+            console.error((error as Error).message);
+            return res.status(502).json({ error: 'No se pudo enviar el mensaje, intenta de nuevo' });
+        }
+    } else {
+        mensajes.push(mensaje);
+    }
     res.status(201).json({ mensaje: 'Mensaje recibido' });
 };
 

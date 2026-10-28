@@ -14,6 +14,13 @@ const COURIERS = [
 
 export type Entrega = 'delivery' | 'tienda';
 
+// lo que se lleno: al volver desde el pago el formulario aparece con estos datos para corregirlos
+export interface ValoresEnvio {
+    entrega : Entrega;
+    courier : string;
+    campos : Record<string, string>;
+}
+
 function Campo({ etiqueta, children, className = '' } : { etiqueta : string; children : ReactNode; className?: string }) {
     return (
         <label className={`block ${className}`}>
@@ -24,9 +31,9 @@ function Campo({ etiqueta, children, className = '' } : { etiqueta : string; chi
 }
 
 // formulario "datos de envio" del carrito; al validarse se envia al servidor y pasa al pago
-export default function ShippingForm({ onListo } : { onListo : (entrega : Entrega) => void }) {
-    const [entrega, setEntrega] = useState<Entrega>('delivery');
-    const [courier, setCourier] = useState('');
+export default function ShippingForm({ inicial, onListo } : { inicial?: ValoresEnvio; onListo : (valores : ValoresEnvio) => void }) {
+    const [entrega, setEntrega] = useState<Entrega>(inicial?.entrega ?? 'delivery');
+    const [courier, setCourier] = useState(inicial?.courier ?? '');
     const [errorCourier, setErrorCourier] = useState(false);
     const [enviando, setEnviando] = useState(false);
     const [error, setError] = useState('');
@@ -58,7 +65,7 @@ export default function ShippingForm({ onListo } : { onListo : (entrega : Entreg
             } else {
                 await enviarDatosShort({ correo: campos.correo, nombre: campos.nombre, tel: campos.telefono, telSec: campos.telefono2 });
             }
-            onListo(entrega);
+            onListo({ entrega, courier, campos });
         } catch {
             setError('No pudimos guardar tus datos. Revisa tu conexión e inténtalo otra vez.');
         } finally {
@@ -92,35 +99,35 @@ export default function ShippingForm({ onListo } : { onListo : (entrega : Entreg
             </div>
 
             <Campo etiqueta="Correo electrónico">
-                <input type="email" name="correo" required autoComplete="email" placeholder="tucorreo@ejemplo.com" className={INPUT} />
+                <input type="email" name="correo" defaultValue={inicial?.campos.correo} required autoComplete="email" placeholder="tucorreo@ejemplo.com" className={INPUT} />
             </Campo>
             <Campo etiqueta="Nombre y apellidos">
-                <input type="text" name="nombre" required autoComplete="name" placeholder="Ana Torres Quispe" className={INPUT} />
+                <input type="text" name="nombre" defaultValue={inicial?.campos.nombre} required autoComplete="name" placeholder="Ana Torres Quispe" className={INPUT} />
             </Campo>
             <div className="grid sm:grid-cols-2 gap-[12px]">
                 <Campo etiqueta="Celular">
-                    <input type="tel" name="telefono" required pattern="9\d{8}" title="9 dígitos, empieza con 9" inputMode="numeric" autoComplete="tel-national" placeholder="987654321" className={INPUT} />
+                    <input type="tel" name="telefono" defaultValue={inicial?.campos.telefono} required pattern="9\d{8}" title="9 dígitos, empieza con 9" inputMode="numeric" autoComplete="tel-national" placeholder="987654321" className={INPUT} />
                 </Campo>
                 <Campo etiqueta="Celular alternativo (opcional)">
-                    <input type="tel" name="telefono2" pattern="9\d{8}" title="9 dígitos, empieza con 9" inputMode="numeric" placeholder="912345678" className={INPUT} />
+                    <input type="tel" name="telefono2" defaultValue={inicial?.campos.telefono2} pattern="9\d{8}" title="9 dígitos, empieza con 9" inputMode="numeric" placeholder="912345678" className={INPUT} />
                 </Campo>
             </div>
 
             {delivery ? (
                 <>
                     <Campo etiqueta="Dirección">
-                        <input type="text" name="direccion" required autoComplete="street-address" placeholder="Av. Arequipa 1234, dpto. 502" className={INPUT} />
+                        <input type="text" name="direccion" defaultValue={inicial?.campos.direccion} required autoComplete="street-address" placeholder="Av. Arequipa 1234, dpto. 502" className={INPUT} />
                     </Campo>
                     <div className="grid grid-cols-2 gap-[12px]">
                         <Campo etiqueta="Departamento">
-                            <input type="text" name="departamento" required placeholder="Lima" className={INPUT} />
+                            <input type="text" name="departamento" defaultValue={inicial?.campos.departamento} required placeholder="Lima" className={INPUT} />
                         </Campo>
                         <Campo etiqueta="Distrito">
-                            <input type="text" name="distrito" required placeholder="Miraflores" className={INPUT} />
+                            <input type="text" name="distrito" defaultValue={inicial?.campos.distrito} required placeholder="Miraflores" className={INPUT} />
                         </Campo>
                     </div>
                     <Campo etiqueta="Referencia (opcional)">
-                        <textarea name="referencia" rows={2} placeholder="Frente al parque, portón verde" className={`${INPUT} resize-none`} />
+                        <textarea name="referencia" defaultValue={inicial?.campos.referencia} rows={2} placeholder="Frente al parque, portón verde" className={`${INPUT} resize-none`} />
                     </Campo>
                     <fieldset>
                         <legend className={ETIQUETA_CAMPO}>Courier (provincias)</legend>
@@ -144,7 +151,7 @@ export default function ShippingForm({ onListo } : { onListo : (entrega : Entreg
                         )}
                         {courier && (
                             <textarea
-                                name="infoCourier"
+                                name="infoCourier" defaultValue={inicial?.campos.infoCourier}
                                 rows={2}
                                 required
                                 placeholder={`${COURIERS.find((c) => c.empresa === courier)?.label}: sede, nombre y DNI de quien recoge`}
