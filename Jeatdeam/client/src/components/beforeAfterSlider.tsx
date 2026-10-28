@@ -148,9 +148,10 @@ export function BeforeAfterSlider({grupos, sinHeader = false}: BeforeAfterSlider
         }
     }, [dragging, endDrag])
 
-    // mismo ancho que las secciones de abajo (ANCHO_SECCION)
+    // mismo ancho que las secciones de abajo (ANCHO_SECCION). Arriba: el header termina a 128px (celular) y
+    // 136px (sm) del borde; se suma la separacion del inicio (ESPACIO_BLOQUES: 24px y 30px)
     return (
-        <div className={`${ANCHO_SECCION} ${sinHeader ? 'py-[24px]' : 'pt-[168px] sm:pt-[192px]'}`}>
+        <div className={`${ANCHO_SECCION} ${sinHeader ? 'py-[24px]' : 'pt-[152px] sm:pt-[166px]'}`}>
           {/* envoltura sin overflow-hidden: la linea va aqui para poder salir 15px arriba y abajo de la imagen */}
           <div className={"relative"}>
             <div ref={containerRef}

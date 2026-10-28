@@ -14,7 +14,9 @@ export const TARJETA = 'bg-white/55 backdrop-blur-md rounded-[12.5px] p-[25px] r
 export const PANEL_VIDRIO = 'bg-white/45 backdrop-blur-2xl backdrop-saturate-150 ring-1 ring-white/70 shadow-[0_16px_40px_rgba(15,23,42,.2)]';
 export const CAJA_ELEVADA = 'bg-white shadow-[0_0_0_1px_rgba(15,23,42,.08),0_4px_0_rgba(15,23,42,.07)]';
 export const VIDRIO = 'bg-white/55 ring-1 ring-white backdrop-blur';
-export const ESPACIO_BLOQUES = 'gap-[40px] sm:gap-[56px]';
+// separacion unica del inicio (24px celular, 30px desde sm): header -> carrusel, entre secciones,
+// titulo -> contenido y ultima seccion -> footer
+export const ESPACIO_BLOQUES = 'gap-[24px] sm:gap-[30px]';
 // ancho del cuerpo: 90% hasta 799px (celular, sm y md), 80% de 800 a 1023px (tab), 90% de 1024 a 1279px (lg),
 // fijo en 1065px de 1280 a 1535px (xl) y 55% desde 1536px (2xl)
 export const ANCHO_SECCION = 'w-[90%] tab:w-[80%] lg:w-[90%] xl:w-[1065px] 2xl:w-[55%] mx-auto';
@@ -71,7 +73,7 @@ export function Aparecer({ children, className = '' } : { children : ReactNode; 
 // pegado: sin aire arriba, para paginas donde la separacion entre bloques la da el contenedor (inicio)
 export function TituloSeccion({ children, sobretitulo, id, pegado = false } : { children : ReactNode; sobretitulo?: string; id?: string; pegado?: boolean }) {
     return (
-        <div className={`${pegado ? '' : 'pt-[24px] sm:pt-[40.5px]'} pb-[16px] sm:pb-[30.5px] text-center`}>
+        <div className={`${pegado ? '' : 'pt-[24px] sm:pt-[40.5px]'} pb-[24px] sm:pb-[30px] text-center`}>
             {sobretitulo && (
                 <p className="text-[11px] sm:text-[12px] font-semibold uppercase tracking-[.15em] text-sky-700 mb-[8px]">{sobretitulo}</p>
             )}
