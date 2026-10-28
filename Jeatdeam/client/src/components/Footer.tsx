@@ -133,8 +133,8 @@ export default function Footer() {
                     </div>
                 </div>
 
-                {/* redes entre dos lineas que se desvanecen */}
-                <div className="mt-[36px] flex items-center gap-[16px]">
+                {/* redes entre dos lineas que se desvanecen; el boton de whatsapp no baja mas alla de esta fila */}
+                <div id="limite-whatsapp" className="mt-[36px] flex items-center gap-[16px]">
                     <span className="h-px flex-1 bg-gradient-to-r from-transparent to-sky-400/70" aria-hidden="true" />
                     <ul className="flex gap-[10px]">
                         {REDES.map((red) => (
