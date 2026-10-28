@@ -1,0 +1,444 @@
+{
+  "productos": [
+    {
+      "id": "price_1QxiFSLhyJyLDtVvH4MOLkmo",
+      "title": "Jeatdeam",
+      "subtitle": "Juguete Mordelón Tipo Dinosaurio - Tyrannosaurus Rex Miniatura Texturizado y Articulado",
+      "price": 8000,
+      "name": "T-rex",
+      "category": "dinosaurios",
+      "completed": true,
+      "brand": "Juguete mordelon",
+      "img": [
+        "https://res.cloudinary.com/dfwtyxxba/image/upload/v1743969575/t-rex-three_sndvmv.webp",
+        "https://res.cloudinary.com/dfwtyxxba/image/upload/v1743969578/t-rex-two_donttz.webp",
+        "https://res.cloudinary.com/dfwtyxxba/image/upload/v1743969574/t-rex-one_htqvvm.webp",
+        "https://res.cloudinary.com/dfwtyxxba/image/upload/v1743969574/t-rex-four_dprqwk.webp"
+      ],
+      "shortInfo": [
+        "a",
+        "b",
+        "c",
+        "d",
+        "e"
+      ],
+      "longInfo": [
+        "cuack 1",
+        "cuack 2",
+        "cuack 3",
+        "cuack 4"
+      ]
+    },
+    {
+      "id": "price_1QxiEzLhyJyLDtVvFnDol6HW",
+      "title": "Jeatdeam",
+      "subtitle": "Juguete Mordelon Tipo Dinosaurio - Ankylosaurus Miniatura Texturizado y Articulado ",
+      "price": 5000,
+      "name": "Ankylosaurus",
+      "category": "dinosaurios",
+      "completed": true,
+      "brand": "Juguete mordelon",
+      "img": [
+        "https://res.cloudinary.com/dfwtyxxba/image/upload/v1743982937/anquilosaurio-one_gpass7.webp",
+        "https://res.cloudinary.com/dfwtyxxba/image/upload/v1743982937/anquilosaurio-two_apwoil.webp",
+        "https://res.cloudinary.com/dfwtyxxba/image/upload/v1743982937/anquilosaurio-three_ojwluy.webp",
+        "https://res.cloudinary.com/dfwtyxxba/image/upload/v1743982937/anquilosaurio-four_mmgzlg.webp"
+      ],
+      "shortInfo": [
+        "a",
+        "b",
+        "c",
+        "d",
+        "e"
+      ],
+      "longInfo": [
+        "cuack 1",
+        "cuack 2",
+        "cuack 3",
+        "cuack 4"
+      ]
+    },
+    {
+      "id": "price_1Qe60uLhyJyLDtVvINeuJ5QT",
+      "title": "Jeatdeam",
+      "subtitle": "Juguete Mordelon Tipo Dinosaurio - Mosasaurus Miniatura Texturizado y Articulado",
+      "price": 13000,
+      "name": "Mosasaurus",
+      "category": "dinosaurios",
+      "completed": true,
+      "brand": "Juguete mordelon",
+      "img": [
+        "https://res.cloudinary.com/dfwtyxxba/image/upload/v1743984890/mosasaurio-three_rska49.webp",
+        "https://res.cloudinary.com/dfwtyxxba/image/upload/v1743984890/mosasaurio-two_voqxvm.webp",
+        "https://res.cloudinary.com/dfwtyxxba/image/upload/v1743984890/mosasaurio-one_txgkam.webp",
+        "https://res.cloudinary.com/dfwtyxxba/image/upload/v1743984890/mosasaurio-four_tbtjim.webp"
+      ],
+      "shortInfo": [
+        "a",
+        "b",
+        "c",
+        "d",
+        "e"
+      ],
+      "longInfo": [
+        "cuack 1",
+        "cuack 2",
+        "cuack 3",
+        "cuack 4"
+      ]
+    },
+    {
+      "id": "price_1Qe5zlLhyJyLDtVvUulmP8RG",
+      "title": "Jeatdeam",
+      "subtitle": "Juguete Mordelon Tipo Dinosaurio - Triceratops Miniatura Texturizado y Articulado",
+      "price": 12000,
+      "name": "Triceratops",
+      "category": "dinosaurios",
+      "completed": true,
+      "brand": "Juguete mordelon",
+      "img": [
+        "https://res.cloudinary.com/dfwtyxxba/image/upload/v1743985913/triceratops-two_smwtem.png",
+        "https://res.cloudinary.com/dfwtyxxba/image/upload/v1743985912/triceratops-three_kkspxl.png",
+        "https://res.cloudinary.com/dfwtyxxba/image/upload/v1743985912/triceratops-four_bjlegf.png",
+        "https://res.cloudinary.com/dfwtyxxba/image/upload/v1743985912/triceratops-one_vto4hb.png"
+      ],
+      "shortInfo": [
+        "a",
+        "b",
+        "c",
+        "d",
+        "e"
+      ],
+      "longInfo": [
+        "cuack 1",
+        "cuack 2",
+        "cuack 3",
+        "cuack 4"
+      ]
+    },
+    {
+      "id": "price_1Qe5z7LhyJyLDtVvFrzcWk08",
+      "title": "Jeatdeam",
+      "subtitle": "Juguete Mordelon Tipo Dinosaurio - Indoraptor Miniatura Texturizado y Articulado",
+      "price": 11000,
+      "name": "Indoraptor",
+      "category": "dinosaurios",
+      "completed": true,
+      "brand": "Juguete mordelon",
+      "img": [
+        "https://res.cloudinary.com/dfwtyxxba/image/upload/v1743986597/indoraptopr-two_jfsddk.webp",
+        "https://res.cloudinary.com/dfwtyxxba/image/upload/v1743986596/indoraptopr-one_aamn94.webp",
+        "https://res.cloudinary.com/dfwtyxxba/image/upload/v1743986596/indoraptopr-three_vu3gxc.webp",
+        "https://res.cloudinary.com/dfwtyxxba/image/upload/v1743986595/indoraptopr-four_ldq29w.webp"
+      ],
+      "shortInfo": [
+        "a",
+        "b",
+        "c",
+        "d",
+        "e"
+      ],
+      "longInfo": [
+        "cuack 1",
+        "cuack 2",
+        "cuack 3",
+        "cuack 4"
+      ]
+    },
+    {
+      "id": "price_1Qe5xwLhyJyLDtVvnyaAH1Mm",
+      "title": "QuienesSomos",
+      "subtitle": "Juguete Mordelon Tipo Dinosaurio - Dilophosaurus Minuatura Texturizado y Articulado",
+      "price": 10000,
+      "name": "Dilophosaurus",
+      "category": "dinosaurios",
+      "completed": false,
+      "brand": "Juguete mordelon",
+      "img": [
+        "https://res.cloudinary.com/dfwtyxxba/image/upload/v1743989211/dilofosaurio-three_hwjrgo.webp",
+        "https://res.cloudinary.com/dfwtyxxba/image/upload/v1743989185/dilofosaurio-one_dkqvui.webp",
+        "https://res.cloudinary.com/dfwtyxxba/image/upload/v1743989212/dilofosaurio-two_uaeryz.webp",
+        "https://res.cloudinary.com/dfwtyxxba/image/upload/v1743989184/dilofosaurio-four_mo86j7.webp"
+      ],
+      "shortInfo": [
+        "a",
+        "b",
+        "c",
+        "d",
+        "e"
+      ],
+      "longInfo": [
+        "cuack 1",
+        "cuack 2",
+        "cuack 3",
+        "cuack 4"
+      ]
+    },
+    {
+      "id": "price_1Qe5x7LhyJyLDtVvWi0UrgsS",
+      "title": "MasVendidos",
+      "subtitle": "Juguete Mordelon Tipo Dinosaurio - Carnotaurus Miniatura Texturizado y Articulado",
+      "price": 9000,
+      "name": "Carnotaurus",
+      "category": "dinosaurios",
+      "completed": false,
+      "brand": "Juguete mordelon",
+      "img": [
+        "https://res.cloudinary.com/dfwtyxxba/image/upload/v1743991321/carnotauro-four_vvef0n.webp",
+        "https://res.cloudinary.com/dfwtyxxba/image/upload/v1743991321/carnotauro-one_njmu1o.webp",
+        "https://res.cloudinary.com/dfwtyxxba/image/upload/v1743991324/carnotauro-two_avsert.webp",
+        "https://res.cloudinary.com/dfwtyxxba/image/upload/v1743991323/carnotauro-three_tdrfel.webp"
+      ],
+      "shortInfo": [
+        "a",
+        "b",
+        "c",
+        "d",
+        "e"
+      ],
+      "longInfo": [
+        "cuack 1",
+        "cuack 2",
+        "cuack 3",
+        "cuack 4"
+      ]
+    },
+    {
+      "id": "price_1Qe5wOLhyJyLDtVvgWkrqmK3",
+      "title": "MasVendidos",
+      "subtitle": "Juguete Mordelon Tipo Dinosaurio - Espinosaurio Miniatura Texturizado y Articulado ",
+      "price": 8000,
+      "name": "Espinosaurio",
+      "category": "dinosaurios",
+      "completed": false,
+      "brand": "Juguete mordelon",
+      "img": [
+        "https://res.cloudinary.com/dfwtyxxba/image/upload/v1743996477/espinosaurio-three_vrvqv1.webp",
+        "https://res.cloudinary.com/dfwtyxxba/image/upload/v1743996475/espinosaurio-one_f8o5pg.webp",
+        "https://res.cloudinary.com/dfwtyxxba/image/upload/v1743996478/espinosaurio-two_dq7hz5.webp",
+        "https://res.cloudinary.com/dfwtyxxba/image/upload/v1743996474/espinosaurio-four_imotlm.webp"
+      ],
+      "shortInfo": [
+        "a",
+        "b",
+        "c",
+        "d",
+        "e"
+      ],
+      "longInfo": [
+        "cuack 1",
+        "cuack 2",
+        "cuack 3",
+        "cuack 4"
+      ]
+    },
+    {
+      "id": "price_1Qe5vdLhyJyLDtVvo2bARr9A",
+      "title": "MasVendidos",
+      "subtitle": "Juguete Mordelon Tipo Dinosaurio - Dimorphodon Miniatura Texturizado y Articulado ",
+      "price": 7000,
+      "name": "Dimorphodon",
+      "category": "dinosaurios",
+      "completed": false,
+      "brand": "Juguete mordelon",
+      "img": [
+        "https://res.cloudinary.com/dfwtyxxba/image/upload/v1743997348/dimorphodon-four_f8nyzw.webp",
+        "https://res.cloudinary.com/dfwtyxxba/image/upload/v1743997357/dimorphodon-three_ofbgu9.webp",
+        "https://res.cloudinary.com/dfwtyxxba/image/upload/v1743997356/dimorphodon-one_pg7fkq.webp",
+        "https://res.cloudinary.com/dfwtyxxba/image/upload/v1743997359/dimorphodon-two_ys9scb.webp"
+      ],
+      "shortInfo": [
+        "a",
+        "b",
+        "c",
+        "d",
+        "e"
+      ],
+      "longInfo": [
+        "cuack 1",
+        "cuack 2",
+        "cuack 3",
+        "cuack 4"
+      ]
+    },
+    {
+      "id": "price_1Qe5tiLhyJyLDtVvm5vb5XdX",
+      "title": "MasVendidos",
+      "subtitle": "Juguete Mordelon Tipo Dinosaurio - Estegosaurios Miniatura Texturizado y Articulado ",
+      "price": 6000,
+      "name": "Estegosaurios",
+      "category": "dinosaurios",
+      "completed": false,
+      "brand": "Juguete mordelon",
+      "img": [
+        "https://res.cloudinary.com/dfwtyxxba/image/upload/v1743998504/estegosauro-one_dkzhqy.webp",
+        "https://res.cloudinary.com/dfwtyxxba/image/upload/v1743998507/estegosauro-two_isejx7.webp",
+        "https://res.cloudinary.com/dfwtyxxba/image/upload/v1743998506/estegosauro-three_n7ftvf.webp",
+        "https://res.cloudinary.com/dfwtyxxba/image/upload/v1743998503/estegosauro-four_ssbd9l.webp"
+      ],
+      "shortInfo": [
+        "a",
+        "b",
+        "c",
+        "d",
+        "e"
+      ],
+      "longInfo": [
+        "cuack 1",
+        "cuack 2",
+        "cuack 3",
+        "cuack 4"
+      ]
+    },
+    {
+      "id": "price_1Qe5tGLhyJyLDtVvZuDbhGFi",
+      "title": "MasVendidos",
+      "subtitle": "Juguete Mordelon Tipo Dinosaurio - Velociraptor Miniatura Texturizado y Articulado",
+      "price": 5000,
+      "name": "Velociraptor",
+      "category": "dinosaurios",
+      "completed": false,
+      "brand": "Juguete mordelon",
+      "img": [
+        "https://res.cloudinary.com/dfwtyxxba/image/upload/v1744125980/velociraptor-four_mti8em.webp",
+        "https://res.cloudinary.com/dfwtyxxba/image/upload/v1744125980/velociraptor-three_anvoyx.webp",
+        "https://res.cloudinary.com/dfwtyxxba/image/upload/v1744125980/velociraptor-two_ocbszi.webp",
+        "https://res.cloudinary.com/dfwtyxxba/image/upload/v1744125979/velociraptor-one_massey.webp"
+      ],
+      "shortInfo": [
+        "a",
+        "b",
+        "c",
+        "d",
+        "e"
+      ],
+      "longInfo": [
+        "cuack 1",
+        "cuack 2",
+        "cuack 3",
+        "cuack 4"
+      ]
+    },
+    {
+      "id": "price_1QdtuaLhyJyLDtVvxd2LHU1c",
+      "title": "MasVendidos",
+      "subtitle": "Juguete Mordelon Tipo Dinosaurio - Pterodactilo Miniatura Texturizado y Articulado",
+      "price": 1231200,
+      "name": "Pterodactilo",
+      "category": "dinosaurios",
+      "completed": false,
+      "brand": "Juguete mordelon",
+      "img": [
+        "https://res.cloudinary.com/dfwtyxxba/image/upload/v1744126559/trerodactilo-three_jnxxxj.webp",
+        "https://res.cloudinary.com/dfwtyxxba/image/upload/v1744126559/trerodactilo-two_bizlbk.webp",
+        "https://res.cloudinary.com/dfwtyxxba/image/upload/v1744126558/trerodactilo-four_p2vdoz.webp",
+        "https://res.cloudinary.com/dfwtyxxba/image/upload/v1744126559/trerodactilo-one_qqqhxc.webp"
+      ],
+      "shortInfo": [
+        "a",
+        "b",
+        "c",
+        "d",
+        "e"
+      ],
+      "longInfo": [
+        "cuack 1",
+        "cuack 2",
+        "cuack 3",
+        "cuack 4"
+      ]
+    },
+    {
+      "id": "price_1QdtstLhyJyLDtVvuW61MehC",
+      "title": "MasVendidos",
+      "subtitle": "Juguete Mordelon Tipo Dinosaurio - Parasaurolophus Miniatura Texturizado y Articulado",
+      "price": 2000,
+      "name": "Parasaurolophus",
+      "category": "dinosaurios",
+      "completed": false,
+      "brand": "Juguete mordelon",
+      "img": [
+        "https://res.cloudinary.com/dfwtyxxba/image/upload/v1744127150/parasaurolophus-four_elj5ps.webp",
+        "https://res.cloudinary.com/dfwtyxxba/image/upload/v1744127151/parasaurolophus-two_d5msxf.webp",
+        "https://res.cloudinary.com/dfwtyxxba/image/upload/v1744127150/parasaurolophus-three_h0mydf.webp",
+        "https://res.cloudinary.com/dfwtyxxba/image/upload/v1744127150/parasaurolophus-one_cexhfz.webp"
+      ],
+      "shortInfo": [
+        "a",
+        "b",
+        "c",
+        "d",
+        "e"
+      ],
+      "longInfo": [
+        "cuack 1",
+        "cuack 2",
+        "cuack 3",
+        "cuack 4"
+      ]
+    },
+    {
+      "id": "price_1QdtsVLhyJyLDtVvn0wEBjWa",
+      "title": "MasVendidos",
+      "subtitle": "Juguete Mordelon Tipo Dinosaurio - Agresivosaurio Miniatura Texturizado y Articulado",
+      "price": 1500,
+      "name": "Agresivosaurio",
+      "category": "dinosaurios",
+      "completed": false,
+      "brand": "Juguete mordelon",
+      "img": [
+        "https://res.cloudinary.com/dfwtyxxba/image/upload/v1744128098/agresivo-four_xmobis.webp",
+        "https://res.cloudinary.com/dfwtyxxba/image/upload/v1744128098/agresivo-one_tselei.webp",
+        "https://res.cloudinary.com/dfwtyxxba/image/upload/v1744128099/agresivo-two_zh22jb.webp",
+        "https://res.cloudinary.com/dfwtyxxba/image/upload/v1744128098/agresivo-three_jbct5e.webp"
+      ],
+      "shortInfo": [
+        "a",
+        "b",
+        "c",
+        "d",
+        "e"
+      ],
+      "longInfo": [
+        "cuack 1",
+        "cuack 2",
+        "cuack 3",
+        "cuack 4"
+      ]
+    },
+    {
+      "id": "price_1Qao03LhyJyLDtVvCt0CEvEJ",
+      "title": "MasVendidos",
+      "subtitle": "Juguetes Mordelones Tipo Dinosaurios - Pack Miniatura Texturizado y Articulado",
+      "price": 10000,
+      "name": "Pack de dinosaurios",
+      "category": "dinosaurios",
+      "completed": false,
+      "brand": "Juguete mordelon",
+      "img": [
+        "https://res.cloudinary.com/dfwtyxxba/image/upload/v1744134468/pack-two_wit2wn.webp",
+        "https://res.cloudinary.com/dfwtyxxba/image/upload/v1744134469/pack-three_mpnzhq.webp",
+        "https://res.cloudinary.com/dfwtyxxba/image/upload/v1744134679/pack-four_thyt9e.png",
+        "https://res.cloudinary.com/dfwtyxxba/image/upload/v1744134468/pack-one_kjsa2u.webp"
+      ],
+      "shortInfo": [
+        "a",
+        "b",
+        "c",
+        "d",
+        "e"
+      ],
+      "longInfo": [
+        "cuack 1",
+        "cuack 2",
+        "cuack 3",
+        "cuack 4"
+      ]
+    }
+  ],
+  "banners": [],
+  "apariencia": {
+    "categorias": {},
+    "slider": {}
+  }
+}

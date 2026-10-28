@@ -1,93 +1,57 @@
 import { lazy, Suspense, useCallback, useEffect, useState } from 'react';
+import { createPortal } from 'react-dom';
 import { Outlet, useLocation } from 'react-router-dom';
 
-import Intro from './Intro';
+import BarraSuperior from './BarraSuperior';
 import Header from './Header';
 import Footer from './Footer';
-import SearchOverlay from './SearchOverlay';
-import MenuSmall from './MenuSmall';
+import BotonWhatsapp from './BotonWhatsapp';
+import BarraLateral from './BarraLateral';
 import { eliminarDatosCliente } from '../api';
-import { useMediaQuery } from '../hooks/useMediaQuery';
 
-// Los Lotties pesan ~370 KB: se cargan en un chunk aparte
-const DevCredits = lazy(() => import('./DevCredits'));
-
-function useGlobalBehaviors() {
-    useEffect(() => {
-        // Evita la selección de texto y el arrastre de imágenes, sin bloquear los campos de formulario
-        const onMouseDown = (e: MouseEvent) => {
-            if (!(e.target as Element).closest('input, textarea, select')) e.preventDefault();
-        };
-
-        // Pequeño "tick" visual al presionar cualquier botón
-        const onClick = (e: MouseEvent) => {
-            const button = (e.target as Element).closest('button');
-            if (!button) return;
-            button.classList.add('tickButton');
-            setTimeout(() => button.classList.remove('tickButton'), 150);
-        };
-
-        // Los datos del formulario de envío no sobreviven a cerrar/recargar la página
-        const onBeforeUnload = () => {
-            eliminarDatosCliente();
-        };
-
-        document.addEventListener('mousedown', onMouseDown);
-        document.addEventListener('click', onClick);
-        window.addEventListener('beforeunload', onBeforeUnload);
-        return () => {
-            document.removeEventListener('mousedown', onMouseDown);
-            document.removeEventListener('click', onClick);
-            window.removeEventListener('beforeunload', onBeforeUnload);
-        };
-    }, []);
-}
+// creditos del desarrollador (github:jeatdeam/creditos-dev): la firma Lottie pesa ~500 KB, va en un chunk aparte
+const Creditos = lazy(() => import('creditos-dev').then((modulo) => ({ default: modulo.Creditos })));
 
 export default function Layout() {
     const { pathname } = useLocation();
-    const [searchOpen, setSearchOpen] = useState(false);
-    const [menuOpen, setMenuOpen] = useState(false);
-    const isDesktop = useMediaQuery('(min-width: 769px)');
+    const [menuAbierto, setMenuAbierto] = useState(false);
 
-    useGlobalBehaviors();
+    const cerrarMenu = useCallback(() => setMenuAbierto(false), []);
 
-    const closeSearch = useCallback(() => setSearchOpen(false), []);
-    const closeMenu = useCallback(() => setMenuOpen(false), []);
-
-    // Al navegar: volver arriba y cerrar overlays
+    // Al navegar: volver arriba y cerrar el menú
     useEffect(() => {
         window.scrollTo(0, 0);
-        setSearchOpen(false);
-        setMenuOpen(false);
+        setMenuAbierto(false);
     }, [pathname]);
 
+    // Los datos del formulario de envío no sobreviven a cerrar/recargar la página
     useEffect(() => {
-        if (isDesktop) setMenuOpen(false);
-    }, [isDesktop]);
-
-    useEffect(() => {
-        document.body.classList.toggle('activeBody', searchOpen);
-    }, [searchOpen]);
-
-    useEffect(() => {
-        document.body.style.filter = menuOpen ? 'blur(5px)' : '';
-    }, [menuOpen]);
+        const alSalir = () => { eliminarDatosCliente(); };
+        window.addEventListener('beforeunload', alSalir);
+        return () => window.removeEventListener('beforeunload', alSalir);
+    }, []);
 
     return (
-        <>
-            <Intro />
-            <Header
-                menuOpen={menuOpen}
-                onOpenSearch={() => setSearchOpen(true)}
-                onToggleMenu={() => setMenuOpen((open) => !open)}
-            />
-            <Outlet />
+        <div className="relative flex min-h-screen flex-col">
+            <a href="#contenido" className="sr-only focus:not-sr-only focus:fixed focus:top-[8px] focus:left-[8px] focus:z-[100] focus:rounded-[10px] focus:bg-white focus:px-[14px] focus:py-[8px] focus:font-semibold">
+                Saltar al contenido
+            </a>
+            <BarraSuperior />
+            <Header menuAbierto={menuAbierto} onAlternarMenu={() => setMenuAbierto((valor) => !valor)} onCerrarMenu={cerrarMenu} />
+            <BarraLateral visibleEnCelular={menuAbierto} onCerrar={cerrarMenu} />
+            <div id="contenido" className="flex flex-1 flex-col">
+                <Outlet />
+            </div>
             <Footer />
             <Suspense fallback={null}>
-                <DevCredits />
+                <Creditos />
             </Suspense>
-            <SearchOverlay open={searchOpen} onClose={closeSearch} />
-            <MenuSmall open={menuOpen} onClose={closeMenu} />
-        </>
+            <BotonWhatsapp />
+            {/* hasta 768px: fondo blanco de vidrio detras de la barra; tocarlo la cierra */}
+            {menuAbierto && createPortal(
+                <div className="aparecerVidrio fixed inset-0 z-[70] bg-white/40 backdrop-blur-sm min-[769px]:hidden" onClick={cerrarMenu} aria-hidden="true" />,
+                document.body,
+            )}
+        </div>
     );
 }

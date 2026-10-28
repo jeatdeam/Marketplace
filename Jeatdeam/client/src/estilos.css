@@ -1,0 +1,223 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* tokens de la guia ANDESEPPS: marino para header/banners, hielo para el fondo */
+:root {
+    --foreground: #0f172a;
+    --marino-1: #0f172a;
+    --marino-2: #172554;
+    --hielo-1: #d6ecf8;
+    --hielo-2: #e6f4fb;
+    --hielo-3: #f3f9fd;
+    --amarillo: #facc15;
+    --cielo: #0369a1;
+}
+
+html,
+body {
+    /* nunca hay scroll horizontal; clip (y no hidden) para no romper position: sticky */
+    overflow-x: clip;
+}
+
+body {
+    color: var(--foreground);
+    background-color: #f7fbfe;
+    background-image: linear-gradient(160deg, #d6ecf8 0%, #e6f4fb 35%, #f3f9fd 70%, #ffffff 100%);
+    background-attachment: fixed;
+}
+
+::selection {
+    background: #bae6fd;
+    color: #0f172a;
+}
+
+/* el contorno solo aparece con teclado; sobre el marino se cambia a amarillo para que se vea */
+:focus-visible {
+    outline: 2px solid var(--cielo);
+    outline-offset: 2px;
+}
+.menuOscuro :focus-visible {
+    outline-color: var(--amarillo);
+}
+
+/* scroll fino para paneles con lista (carrito, filtros) */
+.scroll-fino {
+    scrollbar-width: thin;
+    scrollbar-color: #d1d5db transparent;
+}
+.scroll-fino::-webkit-scrollbar { width: 8px; }
+.scroll-fino::-webkit-scrollbar-thumb { background: #d1d5db; border-radius: 8px; }
+.scroll-fino::-webkit-scrollbar-thumb:hover { background: #9ca3af; }
+
+/* circulo de 30px que aparece detras del icono en hover */
+.backCircle {
+    position: relative;
+    isolation: isolate;
+}
+.backCircle::before {
+    content: '';
+    position: absolute;
+    inset: 50% auto auto 50%;
+    width: 34px;
+    height: 34px;
+    border-radius: 9999px;
+    background: rgba(255, 255, 255, 0.18);
+    transform: translate(-50%, -50%) scale(0.6);
+    opacity: 0;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+    z-index: -1;
+}
+@media (hover: hover) {
+    .backCircle:hover::before {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+}
+
+/* barra superior: el grupo (camion + mensaje) cruza de derecha a izquierda a velocidad constante */
+.barraMovil {
+    animation: cruzarBarra var(--duracion-barra, 18s) linear infinite;
+}
+.barraSuperior:hover .barraMovil {
+    animation-play-state: paused;
+}
+@keyframes cruzarBarra {
+    from { transform: translateX(var(--ancho-barra, 100vw)); }
+    to { transform: translateX(-100%); }
+}
+
+/* contador del carrito: dos anillos que laten detras del numero.
+   sin "position" aqui: el contador ya es absolute (Tailwind) y esta regla, al ir despues, lo anularia */
+.contadorPulso::before,
+.contadorPulso::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 9999px;
+    border: 2px solid rgba(255, 255, 255, 0.7);
+    animation: pulsoContador 1.8s ease-out infinite;
+}
+.contadorPulso::after {
+    animation-delay: 0.9s;
+}
+@keyframes pulsoContador {
+    from { transform: scale(1); opacity: 0.8; }
+    to { transform: scale(2.1); opacity: 0; }
+}
+
+/* carrusel infinito: la lista va duplicada y se mueve media pista */
+.carrusel {
+    animation: animateCarrusel 25s linear infinite;
+}
+.carrusel:hover {
+    animation-play-state: paused;
+}
+@keyframes animateCarrusel {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+}
+
+/* aparicion al hacer scroll (solo para lo que empieza debajo de la pantalla) */
+.aparecer {
+    transition: opacity 0.7s ease, transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.aparecer-oculto {
+    opacity: 0;
+    transform: translateY(28px);
+}
+
+/* cascada de letras del mosaico de categorias: cada letra baja con 40ms x indice de retraso */
+.letraCascada {
+    display: inline-block;
+    white-space: pre;
+    transition: transform 0.35s ease, opacity 0.35s ease;
+    transition-delay: calc(var(--i) * 40ms);
+}
+.group:hover .letraCascada {
+    transform: translateY(4px);
+    opacity: 0.85;
+}
+
+/* parpadeo de la cantidad al sumar o restar en el carrito */
+.parpadeoCantidad {
+    animation: parpadeoCantidad 0.45s ease-out;
+}
+@keyframes parpadeoCantidad {
+    0% { box-shadow: 0 0 0 0 rgba(56, 189, 248, 0.7); }
+    100% { box-shadow: 0 0 0 10px rgba(56, 189, 248, 0); }
+}
+
+/* vidrio esmerilado detras de los paneles en celular */
+.aparecerVidrio {
+    animation: aparecerVidrio 0.2s ease-out;
+}
+@keyframes aparecerVidrio {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* barra de progreso de la galeria del producto (5s); se pausa con el cursor encima */
+.barraCarga {
+    transform-origin: left;
+    animation: barraCarga 5s linear forwards;
+}
+.galeria:hover .barraCarga {
+    animation-play-state: paused;
+}
+@keyframes barraCarga {
+    from { transform: scaleX(0); }
+    to { transform: scaleX(1); }
+}
+
+/* fundido de la imagen principal de la galeria al cambiar */
+.animateElement {
+    animation: animateElement 0.45s ease-out;
+}
+@keyframes animateElement {
+    from { opacity: 0; transform: scale(0.98); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+/* ondas del boton de whatsapp */
+.ondaWhatsapp::before,
+.ondaWhatsapp::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 9999px;
+    background: #25d366;
+    z-index: -1;
+    animation: ondaWhatsapp 2.2s ease-out infinite;
+}
+.ondaWhatsapp::after {
+    animation-delay: 1.1s;
+}
+@keyframes ondaWhatsapp {
+    from { transform: scale(1); opacity: 0.45; }
+    to { transform: scale(1.8); opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+    /* la barra superior queda quieta y centrada */
+    .barraMovil {
+        animation: none !important;
+        transform: none !important;
+        margin-inline: auto;
+    }
+    .carrusel {
+        animation: none !important;
+    }
+    .aparecer-oculto {
+        opacity: 1;
+        transform: none;
+    }
+}

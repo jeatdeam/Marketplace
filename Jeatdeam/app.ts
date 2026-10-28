@@ -7,6 +7,8 @@ import morgan from 'morgan';
 import expressSession from 'express-session';
 
 import taskController from './controllers/taskController.ts';
+import atencionController from './controllers/atencionController.ts';
+import adminController, { requiereAdmin } from './controllers/adminController.ts';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 
@@ -55,7 +57,8 @@ app.use(expressSession({
 
 // Middlewares de archivos estáticos y datos
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(express.json());
+// 8mb: el dashboard sube imagenes en base64 (hasta 5 MB cada una)
+app.use(express.json({ limit: '8mb' }));
 app.use(express.urlencoded({ extended: true }));
 
 // API consumida por el cliente React
@@ -73,6 +76,26 @@ api.post("/datos/cliente/compra/short", taskController.recibirDatosShort);
 api.post("/datos/cliente/compra/complete", taskController.recibirDatosComplete);
 api.post("/create-checkout-session", taskController.redireccionamientoToPay);
 api.post("/generar-qr", taskController.controllerQr);
+api.post("/reclamaciones", atencionController.registrarReclamo);
+api.post("/contacto", atencionController.registrarContacto);
+api.get("/banners", adminController.listarBanners);
+api.get("/apariencia", adminController.verApariencia);
+
+// Dashboard (no se enlaza desde la tienda): la sesión se revisa antes de tocar datos
+api.post("/admin/login", adminController.login);
+api.post("/admin/logout", adminController.logout);
+api.get("/admin/sesion", adminController.sesion);
+api.get("/admin/productos", requiereAdmin, adminController.listarProductos);
+api.post("/admin/productos", requiereAdmin, adminController.crearProducto);
+api.put("/admin/productos/:id", requiereAdmin, adminController.editarProducto);
+api.delete("/admin/productos/:id", requiereAdmin, adminController.borrarProducto);
+api.put("/admin/banners/:posicion", requiereAdmin, adminController.guardarBanner);
+api.delete("/admin/banners/:posicion", requiereAdmin, adminController.borrarBanner);
+api.put("/admin/categorias/:slug", requiereAdmin, adminController.guardarCategoria);
+api.delete("/admin/categorias/:slug", requiereAdmin, adminController.borrarCategoria);
+api.put("/admin/slider/:indice", requiereAdmin, adminController.guardarGrupoSlider);
+api.delete("/admin/slider/:indice", requiereAdmin, adminController.borrarGrupoSlider);
+api.post("/admin/imagenes", requiereAdmin, adminController.subirImagen);
 
 // DELETE
 api.delete("/compra/compra/compra/compra", taskController.deleteCarrito);

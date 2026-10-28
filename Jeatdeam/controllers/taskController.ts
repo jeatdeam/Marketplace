@@ -14,6 +14,7 @@ import type {
     Product,
     Secciones,
 } from '../shared/types.ts';
+import { cargarAlmacen, esPrimeraCarga, guardarAlmacen } from './almacen.ts';
 
 // Carga Jeatdeam/.env sin importar desde qué carpeta se arranque el servidor
 const result = dotenv.config({ path: fileURLToPath(new URL('../.env', import.meta.url)) });
@@ -27,7 +28,6 @@ if (result.error) {
 
 const stripe = new Stripe(process.env.SECRET_KEY ?? '');
 
-console.log("Stripe API Key:", process.env.SECRET_KEY);
 
 async function verificarMoneda() {
     try {
@@ -43,116 +43,64 @@ async function verificarMoneda() {
 verificarMoneda();
 
 
-interface LineItem {
-    price: string;
-    quantity: number;
-}
+// moneda del checkout; el sitio muestra soles
+const MONEDA_STRIPE = process.env.MONEDA_STRIPE ?? 'pen';
 
-const productsToPay=():LineItem[]=>{
+// el precio y el nombre salen del backend, nunca del navegador; asi tambien se pueden pagar
+// los productos creados desde el dashboard, que no tienen un precio creado en stripe
+const productsToPay = (): Stripe.Checkout.SessionCreateParams.LineItem[] => {
+    const cantidades = new Map<string, number>();
+    carrito.forEach((item) => cantidades.set(item.id, (cantidades.get(item.id) ?? 0) + 1));
 
-    let products:LineItem[]=[]
-    carrito.forEach((element,index)=>{
-        let quantity=0;
-        let price=element.id;
-        carrito.forEach((el,index)=>{
-            if(element.id===el.id){
-                quantity++;
-            }
+    return Array.from(cantidades, ([id, quantity]) => {
+        const producto = baseDatos.find((el) => String(el.id) === id);
+        const item = carrito.find((el) => el.id === id)!;
+        return {
+            quantity,
+            price_data: {
+                currency: MONEDA_STRIPE,
+                // precio final: el normal menos el descuento puesto en el dashboard
+                unit_amount: producto ? Math.round((producto.price * (100 - (producto.descuento ?? 0))) / 100) : item.price,
+                product_data: { name: producto ? `${producto.name} - ${producto.brand}` : item.name },
+            },
+        };
+    });
+};
 
-        })
-        if(products.some(el=>el.price===price)){
-            console.log('ya existe el grupo con idPrice->',price)
-        }else{
-            products.push({price: price,quantity});
-        }
-
-    })
-    console.log('aqui esta los productos comprimidos->',products);
-
-    let   array=products.reduce<LineItem[]>((acc, el)=>{
-        if(!acc.some(element=>element.price===el.price)){
-            acc.push(el);
-        }
-        return acc;
-    },[])
-
-    console.log('aqui esta los productos filtrados->',array);
-
-    return array;
-}
-function getProducts() {
-    const urlProducts="https://api.stripe.com/v1/products?limit=100";
-    const urlPrices = "https://api.stripe.com/v1/prices?limit=100";
-
-    const options={
-        headers:{
-            Authorization:`Bearer ${process.env.SECRET_KEY}`
-        }
-    }
-    const peticionId = async () => {
-        const response=await fetch(urlPrices,options);
-
-        if(!response.ok){
-            throw new Error(`Hubo un error en la peticion -> ${response.statusText}`);
-        }
-        const result=await response.json();
-
-
-        const productData:{id:string}[]=result.data;
-
-        if(productData){
-            // productData.forEach(el=>console.log(el.id))
-        }
-        baseDatos.forEach((product, indice) => {
-            product.id = productData[indice].id;  // Actualiza el id de cada producto
+// solo la primera vez (sin datos/tienda.json): los productos escritos en el codigo toman, en orden,
+// el id y el precio de stripe; despues el json del backend es la fuente de verdad
+async function sincronizarStripe() {
+    if (!esPrimeraCarga()) return;
+    try {
+        const response = await fetch("https://api.stripe.com/v1/prices?limit=100", {
+            headers: { Authorization: `Bearer ${process.env.SECRET_KEY}` },
         });
-
+        if (!response.ok) throw new Error(response.statusText);
+        const precios: { id: string; unit_amount: number }[] = (await response.json()).data ?? [];
+        baseDatos.forEach((product, indice) => {
+            const precio = precios[indice];
+            if (!precio) return;
+            product.id = precio.id;
+            product.price = precio.unit_amount;
+        });
+    } catch (error) {
+        console.error('No se pudieron traer los precios de Stripe:', (error as Error).message);
     }
-    peticionId();
+    guardarAlmacen();
 }
-getProducts();
-
-function getPrices(){
-    const urlProducts="https://api.stripe.com/v1/products?limit=100";
-    const urlPrices = "https://api.stripe.com/v1/prices?limit=100";
-
-
-    const options={
-        headers:{
-            authorization:`Bearer ${process.env.SECRET_KEY}`
-        }
-    }
-    const peticionPrice=async()=>{
-        const response=await fetch(urlPrices,options);
-
-        if(!response.ok){
-            throw new Error(`Hubo un error en la peticion -> ${response.statusText}`);
-        }
-        const result=await response.json();
-        const resultData:{unit_amount:number}[]=result.data
-
-        baseDatos.forEach((product,indice)=>{
-
-            product.price=resultData[indice].unit_amount;
-
-        })
-    }
-    peticionPrice();
-
-}
-getPrices();
-
 
 const redireccionamientoToPay= async (req:Request,res:Response)=> {
 
     try {
         // Crear la sesión de Checkout en Stripe
+        // vuelve al mismo origen desde el que se pagó (vite en desarrollo, express en producción)
+        const origen = req.get('origin') ?? `${req.protocol}://${req.get('host')}`;
         const session = await stripe.checkout.sessions.create({
             payment_method_types: ['card'],
             line_items: productsToPay(),
             mode: 'payment',
-            success_url: `http://localhost:5000/catalogoProducts`,
-            cancel_url: `http://localhost:5000/carrito/estado`,
+            success_url: `${origen}/pago-exitoso`,
+            cancel_url: `${origen}/carrito`,
         });
 
         // Enviar la URL de la sesión de Stripe
@@ -403,7 +351,7 @@ let seccionProducts:Secciones={
     // },
 }
 
- let baseDatos:Product[] = [
+const semillaProductos:Product[] = [
     {
         id: 1,
         title: "Jeatdeam",
@@ -604,6 +552,9 @@ let seccionProducts:Secciones={
     },
 
 ]
+
+const baseDatos: Product[] = cargarAlmacen(semillaProductos);
+sincronizarStripe();
 
 
  let carrito:CartItem[]=[

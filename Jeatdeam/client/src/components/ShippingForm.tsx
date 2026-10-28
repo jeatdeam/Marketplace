@@ -1,140 +1,172 @@
-import { useEffect, useRef, useState, type CSSProperties, type FormEvent } from 'react';
+import { useState, type FormEvent, type ReactNode } from 'react';
+
+import Icono from './Icono';
+import { BOTON_PRINCIPAL, ETIQUETA_CAMPO, INPUT } from './ui';
+import { enviarDatosComplete, enviarDatosShort } from '../api';
+import { TIENDA } from '../datos/tienda';
 
 const COURIERS = [
-    { empresa: 'shalom', label: 'shalom', color: 'red' },
-    { empresa: 'olva', label: 'olva courier', color: 'yellow' },
-    { empresa: 'dinocourier', label: 'dinocourier', color: 'lightgreen' },
-    { empresa: 'otros', label: 'otros', color: 'lightgray' },
+    { empresa: 'shalom', label: 'Shalom' },
+    { empresa: 'olva', label: 'Olva Courier' },
+    { empresa: 'dinocourier', label: 'Dinocourier' },
+    { empresa: 'otros', label: 'Otro' },
 ];
 
-const courierMessageStyle: CSSProperties = {
-    border: '1px solid gray',
-    backgroundColor: 'red',
-    padding: '5px',
-    borderRadius: '8px',
-    fontSize: '12.5px',
-    position: 'absolute',
-    top: '110%',
-    left: '0',
-    display: 'block',
-    transition: 'all 0.35s ease-in-out',
-};
+export type Entrega = 'delivery' | 'tienda';
 
-// Formulario "Datos de envio" del carrito
-interface ShippingFormProps {
-    className: string;
-    focusOnOpen: boolean;
-    onSuccess: () => void;
+function Campo({ etiqueta, children, className = '' } : { etiqueta : string; children : ReactNode; className?: string }) {
+    return (
+        <label className={`block ${className}`}>
+            <span className={ETIQUETA_CAMPO}>{etiqueta}</span>
+            {children}
+        </label>
+    );
 }
 
-export default function ShippingForm({ className, focusOnOpen, onSuccess }: ShippingFormProps) {
-    const [pickStore, setPickStore] = useState(false);
-    const [courier, setCourier] = useState<string | null>(null);
-    const [infoCourier, setInfoCourier] = useState('');
-    const [courierMessage, setCourierMessage] = useState(0); // >0 = visible (cambia para repetir el parpadeo)
-    const emailRef = useRef<HTMLInputElement>(null);
-    const courierRef = useRef<HTMLTextAreaElement>(null);
+// formulario "datos de envio" del carrito; al validarse se envia al servidor y pasa al pago
+export default function ShippingForm({ onListo } : { onListo : (entrega : Entrega) => void }) {
+    const [entrega, setEntrega] = useState<Entrega>('delivery');
+    const [courier, setCourier] = useState('');
+    const [errorCourier, setErrorCourier] = useState(false);
+    const [enviando, setEnviando] = useState(false);
+    const [error, setError] = useState('');
+    const delivery = entrega === 'delivery';
 
-    useEffect(() => {
-        if (focusOnOpen) emailRef.current?.focus();
-    }, [focusOnOpen]);
-
-    useEffect(() => {
-        if (courier) courierRef.current?.focus();
-    }, [courier]);
-
-    const chooseCourier = (empresa: string) => {
-        setCourier(empresa);
-        setInfoCourier('');
-        setCourierMessage(0);
-    };
-
-    const onSubmit = (e: FormEvent<HTMLFormElement>) => {
+    const onSubmit = async (e : FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        if (!pickStore && !courier) {
-            setCourierMessage((value) => value + 1);
+        if (delivery && !courier) {
+            setErrorCourier(true);
             return;
         }
-        onSuccess();
+        const campos = Object.fromEntries(new FormData(e.currentTarget)) as Record<string, string>;
+        setEnviando(true);
+        setError('');
+        try {
+            if (delivery) {
+                await enviarDatosComplete({
+                    correo: campos.correo,
+                    nombre: campos.nombre,
+                    numOne: campos.telefono,
+                    numTwo: campos.telefono2,
+                    direccion: campos.direccion,
+                    departamento: campos.departamento,
+                    distrito: campos.distrito,
+                    infoExtra: campos.referencia,
+                    infoCourier: campos.infoCourier,
+                    eleccionEmpresa: courier,
+                });
+            } else {
+                await enviarDatosShort({ correo: campos.correo, nombre: campos.nombre, tel: campos.telefono, telSec: campos.telefono2 });
+            }
+            onListo(entrega);
+        } catch {
+            setError('No pudimos guardar tus datos. Revisa tu conexión e inténtalo otra vez.');
+        } finally {
+            setEnviando(false);
+        }
     };
 
-    const hiddenWhenPickStore: CSSProperties | undefined = pickStore ? { display: 'none' } : undefined;
-
     return (
-        <section className={`pasarelaPago ${className}`}>
-            <form id="myForm" onSubmit={onSubmit}>
-                <div className="titleForm">
-                    <h1>Datos de envio</h1>
+        <form onSubmit={onSubmit} className="flex flex-col gap-[16px]">
+            {/* tarjetas seleccionables para el tipo de entrega */}
+            <div role="radiogroup" aria-label="Tipo de entrega" className="grid grid-cols-2 gap-[10px]">
+                {([
+                    { valor: 'delivery', icono: 'camion', titulo: 'Delivery', texto: 'Lima y provincias' },
+                    { valor: 'tienda', icono: 'tienda', titulo: 'Recojo en tienda', texto: 'Gratis, Cercado de Lima' },
+                ] as const).map((opcion) => (
                     <button
+                        key={opcion.valor}
                         type="button"
-                        className={`recojoTienda${pickStore ? ' active_pick_store' : ''}`}
-                        onClick={() => setPickStore((value) => !value)}
+                        role="radio"
+                        aria-checked={entrega === opcion.valor}
+                        onClick={() => setEntrega(opcion.valor)}
+                        className={`flex items-start gap-[10px] rounded-[12px] p-[12px] text-left ring-2 transition-all ${entrega === opcion.valor ? 'ring-slate-900 bg-slate-50' : 'ring-slate-200 hover:ring-slate-400'}`}
                     >
-                        Recojo en tienda
+                        <Icono nombre={opcion.icono} className="size-[20px] shrink-0 text-sky-700" />
+                        <span>
+                            <span className="block text-[14px] font-semibold">{opcion.titulo}</span>
+                            <span className="block text-[12px] text-slate-500">{opcion.texto}</span>
+                        </span>
                     </button>
-                </div>
-                <div className="messagePay">
-                    <hr />
-                    <small>Rellene los campos para envios a Lima y provincias</small>
-                    <hr />
-                </div>
-                <div className="emailPay">
-                    <h3>Email</h3>
-                    <input ref={emailRef} type="email" name="correo" placeholder="ingrese su correo electronico" required />
-                </div>
-                <div className="detailCard">
-                    <h3> Información del cliente</h3>
-                    <input type="text" name="nombre" placeholder="nombre y apellidos" required />
-                    <div>
-                        <input type="tel" name="firtsPhone" placeholder="numero telefonico" required />
-                        <input type="tel" name="secondPhone" placeholder="numero telefonico alternativo" />
+                ))}
+            </div>
+
+            <Campo etiqueta="Correo electrónico">
+                <input type="email" name="correo" required autoComplete="email" placeholder="tucorreo@ejemplo.com" className={INPUT} />
+            </Campo>
+            <Campo etiqueta="Nombre y apellidos">
+                <input type="text" name="nombre" required autoComplete="name" placeholder="Ana Torres Quispe" className={INPUT} />
+            </Campo>
+            <div className="grid sm:grid-cols-2 gap-[12px]">
+                <Campo etiqueta="Celular">
+                    <input type="tel" name="telefono" required pattern="9\d{8}" title="9 dígitos, empieza con 9" inputMode="numeric" autoComplete="tel-national" placeholder="987654321" className={INPUT} />
+                </Campo>
+                <Campo etiqueta="Celular alternativo (opcional)">
+                    <input type="tel" name="telefono2" pattern="9\d{8}" title="9 dígitos, empieza con 9" inputMode="numeric" placeholder="912345678" className={INPUT} />
+                </Campo>
+            </div>
+
+            {delivery ? (
+                <>
+                    <Campo etiqueta="Dirección">
+                        <input type="text" name="direccion" required autoComplete="street-address" placeholder="Av. Arequipa 1234, dpto. 502" className={INPUT} />
+                    </Campo>
+                    <div className="grid grid-cols-2 gap-[12px]">
+                        <Campo etiqueta="Departamento">
+                            <input type="text" name="departamento" required placeholder="Lima" className={INPUT} />
+                        </Campo>
+                        <Campo etiqueta="Distrito">
+                            <input type="text" name="distrito" required placeholder="Miraflores" className={INPUT} />
+                        </Campo>
                     </div>
-                </div>
-                <div className="nameUser" style={hiddenWhenPickStore}>
-                    <h3>Dirección</h3>
-                    <input type="text" name="direccion" placeholder="ingrese su direccion" required={!pickStore} />
-                </div>
-                <div className="nameCountry" style={hiddenWhenPickStore}>
-                    <h3>Region de envio</h3>
-                    <div className="region">
-                        <input type="text" name="departamento" placeholder="departamento" required={!pickStore} />
-                        <input type="text" name="distrito" placeholder="distrito" required={!pickStore} />
-                    </div>
-                    <textarea name="infoExtra" placeholder="detalles adicionales como croquis o referencias"></textarea>
-                </div>
-                <div className="couriersContainer" style={hiddenWhenPickStore}>
-                    <h3>Courier</h3>
-                    <div className="couriers" style={{ position: 'relative' }}>
-                        {COURIERS.map(({ empresa, label, color }) => (
-                            <button
-                                key={empresa}
-                                type="button"
-                                data-empresa={empresa}
-                                className={courier === empresa ? 'selectButton' : undefined}
-                                style={courier === empresa ? { backgroundColor: color } : undefined}
-                                onClick={() => chooseCourier(empresa)}
-                            >
-                                {label}
-                            </button>
-                        ))}
-                        {courierMessage > 0 && (
-                            <span key={courierMessage} className="spanAdd message" style={courierMessageStyle}>
-                                ! Debe escoger un courier ¡
-                            </span>
+                    <Campo etiqueta="Referencia (opcional)">
+                        <textarea name="referencia" rows={2} placeholder="Frente al parque, portón verde" className={`${INPUT} resize-none`} />
+                    </Campo>
+                    <fieldset>
+                        <legend className={ETIQUETA_CAMPO}>Courier (provincias)</legend>
+                        <div className="flex flex-wrap gap-[8px]">
+                            {COURIERS.map(({ empresa, label }) => (
+                                <button
+                                    key={empresa}
+                                    type="button"
+                                    aria-pressed={courier === empresa}
+                                    onClick={() => { setCourier(empresa); setErrorCourier(false); }}
+                                    className={`rounded-full px-[14px] py-[7px] text-[13px] font-semibold ring-2 transition-all active:scale-95 ${courier === empresa ? 'bg-slate-900 text-white ring-slate-900' : 'bg-white ring-slate-200 hover:ring-slate-400'}`}
+                                >
+                                    {label}
+                                </button>
+                            ))}
+                        </div>
+                        {errorCourier && (
+                            <p role="alert" className="mt-[8px] flex items-center gap-[6px] text-[13px] font-medium text-red-600">
+                                <Icono nombre="alerta" className="size-[15px]" /> Elige un courier para continuar
+                            </p>
                         )}
-                    </div>
-                    <textarea
-                        ref={courierRef}
-                        name="infoCourier"
-                        placeholder={courier ? `${courier} - sede de la empresa, encargado de recojo, dni, celular, etc.` : ''}
-                        style={courier ? { display: 'block' } : undefined}
-                        required={Boolean(courier) && !pickStore}
-                        value={infoCourier}
-                        onChange={(e) => setInfoCourier(e.target.value)}
-                    ></textarea>
-                </div>
-                <button type="submit">continuar</button>
-            </form>
-        </section>
+                        {courier && (
+                            <textarea
+                                name="infoCourier"
+                                rows={2}
+                                required
+                                placeholder={`${COURIERS.find((c) => c.empresa === courier)?.label}: sede, nombre y DNI de quien recoge`}
+                                className={`${INPUT} mt-[10px] resize-none`}
+                            />
+                        )}
+                    </fieldset>
+                </>
+            ) : (
+                <p className="flex items-start gap-[10px] rounded-[12px] bg-sky-50 p-[14px] text-[13px] text-sky-900">
+                    <Icono nombre="ubicacion" className="size-[18px] shrink-0" />
+                    Recoge tu pedido en {TIENDA.direccion} · {TIENDA.horario}. Te avisamos por WhatsApp cuando esté listo.
+                </p>
+            )}
+
+            {error && <p role="alert" className="text-[13px] font-medium text-red-600">{error}</p>}
+
+            <div className="pt-[4px]">
+                <button type="submit" disabled={enviando} className={`${BOTON_PRINCIPAL} w-full !py-[12px]`}>
+                    {enviando ? 'Guardando…' : <>Continuar al pago <Icono nombre="flechaDerecha" className="size-[17px]" /></>}
+                </button>
+            </div>
+        </form>
     );
 }

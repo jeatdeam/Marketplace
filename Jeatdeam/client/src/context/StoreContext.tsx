@@ -2,12 +2,20 @@ import { createContext, useCallback, useContext, useEffect, useMemo, useState, t
 import { useNavigate } from 'react-router-dom';
 
 import * as api from '../api';
-import type { CartItem, EstadoCarritoResponse, Product, Secciones } from '../../../shared/types';
+import { categoriasConImagen, gruposSlider, precioFinalCentimos, type Categoria } from '../datos/tienda';
+import type { Apariencia, Banner, CartItem, EstadoCarritoResponse, GrupoSlider, Product, Secciones } from '../../../shared/types';
 
 interface StoreValue {
     baseDatos: Product[] | null;
     secciones: Secciones | null;
     carrito: CartItem[] | null;
+    banners: Banner[];
+    // imagenes del inicio cambiadas en el dashboard, ya mezcladas con las originales
+    apariencia: Apariencia;
+    categorias: Categoria[];
+    gruposSlider: GrupoSlider[];
+    // el dashboard la llama despues de guardar para que la tienda muestre los cambios al instante
+    recargarDatos: () => Promise<void>;
     refreshCarrito: () => Promise<EstadoCarritoResponse | null>;
     addToCart: (product: Product | CartItem) => Promise<void>;
     removeGroup: (id: string) => Promise<void>;
@@ -22,6 +30,8 @@ export function StoreProvider({ children }: { children: ReactNode }) {
     const [baseDatos, setBaseDatos] = useState<Product[] | null>(null);
     const [secciones, setSecciones] = useState<Secciones | null>(null);
     const [carrito, setCarrito] = useState<CartItem[] | null>(null);
+    const [banners, setBanners] = useState<Banner[]>([]);
+    const [apariencia, setApariencia] = useState<Apariencia>({ categorias: {}, slider: {} });
 
     const refreshCarrito = useCallback(async () => {
         try {
@@ -35,12 +45,23 @@ export function StoreProvider({ children }: { children: ReactNode }) {
         }
     }, []);
 
+    const recargarDatos = useCallback(async () => {
+        await refreshCarrito();
+        try {
+            const [nuevosBanners, nuevaApariencia] = await Promise.all([api.getBanners(), api.getApariencia()]);
+            setBanners(nuevosBanners);
+            setApariencia(nuevaApariencia);
+        } catch (error) {
+            console.error('No se pudieron cargar los banners ni las imagenes del inicio', error);
+        }
+    }, [refreshCarrito]);
+
     useEffect(() => {
-        refreshCarrito();
+        recargarDatos();
         api.getSecciones()
             .then(setSecciones)
             .catch((error) => console.error(`ocurrio un error en la peticion->${error.message}`));
-    }, [refreshCarrito]);
+    }, [recargarDatos]);
 
     const addToCart = useCallback(async (product: Product | CartItem) => {
         try {
@@ -53,7 +74,8 @@ export function StoreProvider({ children }: { children: ReactNode }) {
                 idCompra,
                 brand: product.brand,
                 img: Array.isArray(product.img) ? product.img[0] : product.img,
-                price: Number(product.price),
+                // un producto entra con su precio final; un item del carrito ya lo trae
+                price: 'subtitle' in product ? precioFinalCentimos(product) : Number(product.price),
                 name: product.name,
             });
             setCarrito(result.allProduct);
@@ -90,16 +112,24 @@ export function StoreProvider({ children }: { children: ReactNode }) {
         }
     }, []);
 
+    const categorias = useMemo(() => categoriasConImagen(apariencia), [apariencia]);
+    const grupos = useMemo(() => gruposSlider(apariencia), [apariencia]);
+
     const value = useMemo<StoreValue>(() => ({
         baseDatos,
         secciones,
         carrito,
+        banners,
+        apariencia,
+        categorias,
+        gruposSlider: grupos,
+        recargarDatos,
         refreshCarrito,
         addToCart,
         removeGroup,
         removeOne,
         clearCarrito,
-    }), [baseDatos, secciones, carrito, refreshCarrito, addToCart, removeGroup, removeOne, clearCarrito]);
+    }), [baseDatos, secciones, carrito, banners, apariencia, categorias, grupos, recargarDatos, refreshCarrito, addToCart, removeGroup, removeOne, clearCarrito]);
 
     return <StoreContext.Provider value={value}>{children}</StoreContext.Provider>;
 }

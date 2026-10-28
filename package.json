@@ -9,7 +9,8 @@
     "typecheck": "tsc -p tsconfig.json && tsc -p tsconfig.server.json",
     "build": "npm run typecheck && vite build",
     "preview": "npm run build && tsx Jeatdeam/app.ts",
-    "start": "tsx Jeatdeam/app.ts"
+    "start": "tsx Jeatdeam/app.ts",
+    "dev": "concurrently -k -n server,client -c blue,green \"npm:dev:server\" \"npm:dev:client\""
   },
   "type": "module",
   "keywords": [],
@@ -19,6 +20,7 @@
   "dependencies": {
     "@stripe/stripe-js": "^5.5.0",
     "cors": "^2.8.5",
+    "creditos-dev": "github:jeatdeam/creditos-dev#v1.0.0",
     "dotenv": "^16.4.7",
     "express": "^4.21.1",
     "express-session": "^1.18.1",
@@ -44,8 +46,12 @@
     "@types/react": "^18.3.31",
     "@types/react-dom": "^18.3.7",
     "@vitejs/plugin-react": "^4.3.4",
+    "autoprefixer": "^10.4.20",
+    "concurrently": "^9.2.5",
     "nodemon": "^3.1.7",
+    "postcss": "^8.4.49",
     "prettier": "^3.3.3",
+    "tailwindcss": "^3.4.17",
     "typescript": "^7.0.2",
     "vite": "^5.4.11"
   }
