@@ -11,6 +11,7 @@
 
     "dev:client": "vite",
     "build:client": "vite build",
+    "build:vercel": "vite build --mode vercel",
     "preview:client": "vite preview",
 
     "dev:server": "tsx watch Jeatdeam/app.ts",

@@ -2,7 +2,7 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "framework": "vite",
   "installCommand": "npm ci --include=dev",
-  "buildCommand": "npm run build:client",
+  "buildCommand": "npm run build:vercel",
   "outputDirectory": "dist",
   "rewrites": [
     { "source": "/api/:path*", "destination": "https://marketplace-1-daxe.onrender.com/api/:path*" },
