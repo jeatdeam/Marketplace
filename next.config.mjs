@@ -7,8 +7,6 @@ const API_URL = (
 
 /** @type {import('next').NextConfig} */
 export default {
-    // typescript 7 no trae la api que next usa para revisar tipos: los revisa `npm run typecheck`
-    typescript: { ignoreBuildErrors: true },
     async redirects() {
         return [{ source: '/catalogoProducts', destination: '/productos', permanent: true }];
     },
