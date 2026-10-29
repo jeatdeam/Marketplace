@@ -3,7 +3,7 @@
   "framework": "vite",
   "installCommand": "npm ci --include=dev",
   "buildCommand": "npm run build:client",
-  "outputDirectory": "Jeatdeam/client/dist",
+  "outputDirectory": "dist",
   "rewrites": [
     { "source": "/api/:path*", "destination": "https://marketplace-1-daxe.onrender.com/api/:path*" },
     { "source": "/pedido/:archivo", "destination": "https://marketplace-1-daxe.onrender.com/pedido/:archivo" },

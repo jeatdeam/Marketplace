@@ -29,7 +29,8 @@ export default defineConfig({
         },
     },
     build: {
-        outDir: 'dist',
+        // en Vercel el build va a <raiz>/dist, que es donde Vercel lo busca por defecto
+        outDir: process.env.VERCEL ? fileURLToPath(new URL('./dist', import.meta.url)) : 'dist',
         emptyOutDir: true,
         copyPublicDir: Boolean(process.env.VERCEL),
     },
