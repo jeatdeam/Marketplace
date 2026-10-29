@@ -6,6 +6,7 @@ import autoprefixer from 'autoprefixer';
 
 // El cliente React vive en Jeatdeam/client; Express sirve el build (Jeatdeam/client/dist)
 // y las imágenes/videos desde Jeatdeam/public, así que no se copian al build.
+// En Vercel (VERCEL=1) no hay Express sirviendo estaticos: ahi si se copian.
 export default defineConfig({
     root: 'Jeatdeam/client',
     publicDir: '../public',
@@ -30,6 +31,6 @@ export default defineConfig({
     build: {
         outDir: 'dist',
         emptyOutDir: true,
-        copyPublicDir: false,
+        copyPublicDir: Boolean(process.env.VERCEL),
     },
 });

@@ -570,18 +570,26 @@ export const transporter=nodemailer.createTransport({
     service: "gmail",
     auth: {
         user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASS,
+        // la contraseña de aplicacion de google se copia como "abcd efgh ijkl mnop": se quitan los espacios
+        pass: process.env.EMAIL_PASS?.replace(/\s/g, ''),
     }
 })
 
-transporter.verify((error,success)=>{
-    if(error){
-        console.error('Error en el transporte de correo',error);
-    }else{
-        console.log('servidor de correo listo para enviar mensajes');
-    }
+// con el correo de ejemplo de .env.ejemplo gmail rechaza el login y, tras varios intentos, bloquea la cuenta un rato
+export const correoSinConfigurar = !process.env.EMAIL_USER || process.env.EMAIL_USER === 'correo@gmail.com';
 
-})
+if(correoSinConfigurar){
+    console.warn('Correo sin configurar: pon tu gmail en EMAIL_USER y la contraseña de aplicacion en EMAIL_PASS (Jeatdeam/.env)');
+}else{
+    transporter.verify((error,success)=>{
+        if(error){
+            console.error('Error en el transporte de correo',error);
+        }else{
+            console.log('servidor de correo listo para enviar mensajes');
+        }
+
+    })
+}
 
 const extraerMarcas=(req:Request,res:Response)=>{
 

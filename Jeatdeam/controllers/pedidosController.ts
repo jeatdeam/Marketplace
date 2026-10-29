@@ -3,7 +3,7 @@ import { fileURLToPath } from 'url';
 import PDFDocument from 'pdfkit';
 import type { Request, Response } from 'express';
 
-import { lineasCarrito, transporter, ultimoCliente } from './taskController.ts';
+import { correoSinConfigurar, lineasCarrito, transporter, ultimoCliente } from './taskController.ts';
 import { insertarPedido, leerPedido, supabaseActivo } from '../integraciones/supabase/supabase.ts';
 import { cloudinaryActivo, subirPdfACloudinary } from '../integraciones/cloudinary/cloudinary.ts';
 import { TIENDA } from '../shared/tienda.ts';
@@ -157,7 +157,7 @@ const escapar = (texto: string) => texto.replace(/[&<>"']/g, (c) => ENTIDADES[c]
 
 // correo al cliente con copia oculta a la tienda; el pdf va adjunto y tambien enlazado
 async function enviarCorreo(pedido: Pedido, codigo: string, url: string) {
-    if (!process.env.EMAIL_USER || !process.env.EMAIL_PASS) return;
+    if (correoSinConfigurar || !process.env.EMAIL_PASS) return;
     const corto = codigoCorto(codigo);
     const [envioTexto, envioValor] = filaEnvio(pedido);
     const celda = 'padding:8px 0;border-bottom:1px solid #e2e8f0';

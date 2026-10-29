@@ -5,11 +5,14 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "typecheck": "tsc -p tsconfig.json && tsc -p tsconfig.server.json",
-    
+    "build": "npm run typecheck && vite build",
+    "start": "tsx Jeatdeam/app.ts",
+    "preview": "npm run build && tsx Jeatdeam/app.ts",
+
     "dev:client": "vite",
     "build:client": "vite build",
     "preview:client": "vite preview",
-    
+
     "dev:server": "tsx watch Jeatdeam/app.ts",
     "build:server": "tsc -p tsconfig.server.json",
     "start:server": "tsx Jeatdeam/app.ts",
