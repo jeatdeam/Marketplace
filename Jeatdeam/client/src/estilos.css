@@ -20,11 +20,15 @@ body {
     overflow-x: clip;
 }
 
+/* fondo gris calido (el de Claude) en toda la pagina, tambien en html para que no asome blanco al estirar
+   el scroll; el header va en azul marino (Header.tsx) y el footer en un gris del mismo tono (Footer.tsx) */
+html,
+body {
+    background-color: #f0eee6;
+}
+
 body {
     color: var(--foreground);
-    background-color: #f7fbfe;
-    background-image: linear-gradient(160deg, #d6ecf8 0%, #e6f4fb 35%, #f3f9fd 70%, #ffffff 100%);
-    background-attachment: fixed;
 }
 
 ::selection {

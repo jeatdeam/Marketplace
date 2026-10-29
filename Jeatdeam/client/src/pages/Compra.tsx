@@ -108,7 +108,11 @@ export default function Compra() {
             `Hola ${TIENDA.nombre}, ya pagué ${formatoSoles(total)} con ${WALLETS[billetera].nombre}. Adjunto la constancia.`,
             '',
             '*Mi pedido*',
-            ...grupos.map((grupo) => `• ${grupo.length} x ${grupo[0].name} (${grupo[0].brand}): ${formatoSoles(precioSoles(grupo[0].price) * grupo.length)}`),
+            // igual que el servidor: cada producto con el enlace a su foto
+            ...grupos.flatMap((grupo) => [
+                `• ${grupo.length} x ${grupo[0].name} (${grupo[0].brand}): ${formatoSoles(precioSoles(grupo[0].price) * grupo.length)}`,
+                ...(grupo[0].img ? [`   Foto: ${grupo[0].img.startsWith('/') ? `${window.location.origin}${grupo[0].img}` : grupo[0].img}`] : []),
+            ]),
             `Subtotal: ${formatoSoles(subtotal)}`,
             `${delivery ? 'Delivery' : 'Recojo en tienda'}: ${envio === 0 ? 'Gratis' : formatoSoles(envio)}`,
             `*Total: ${formatoSoles(total)}*`,

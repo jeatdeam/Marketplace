@@ -22,12 +22,12 @@ const SEPARACION_SCROLL = SEPARACION_HEADER;
 // sobre fondo claro (footer, dashboard): la luna del png con el nombre en texto
 export function Logo({ claro = true } : { claro?: boolean }) {
     // mas alto que el header (72px celular, 80px desde sm): va en absolute y sobresale arriba y abajo;
-    // el enlace reserva su ancho para que los botones no se muevan. Sobresale SALIDA px por arriba (menos
-    // que SEPARACION_HEADER, asi no toca la barra ni se corta al bajar) y el resto por abajo, sin pasar del slider
+    // el enlace reserva su ancho para que los botones no se muevan. Sobresale `salida` px por arriba (la luna y
+    // la filigrana dejan aire dentro del dibujo, asi no toca la barra ni se corta al bajar) y el resto por abajo
     const grande = useMediaQuery('(min-width: 640px)');
     const alto = grande ? 128 : 104;
     const altoHeader = grande ? 80 : 72;
-    const salida = grande ? 18 : 16;
+    const salida = grande ? 20.5 : 18.5;
     // el enlace (44px) esta centrado en el header: se sube hasta el borde del header y luego la salida
     const arriba = -(altoHeader - 44) / 2 - salida;
     if (claro) {
@@ -147,8 +147,9 @@ export default function Header({ menuAbierto, onAlternarMenu, onCerrarMenu } : H
         >
             {/* el fondo va en una capa aparte y no en el header: asi los desplegables del buscador
                 y del carrito (que estan dentro) pueden desenfocar la pagina con su propio backdrop-filter.
-                azul solido y el mismo arriba y al bajar: la firma blanca se lee igual sobre cualquier parte de la pagina */}
-            <span aria-hidden="true" className="absolute inset-0 -z-10 rounded-[15px] bg-gradient-to-r from-[#1e40af] to-[#2563eb]" />
+                degradado con el azul marino del carrusel de ofertas (MARINO_CIELO en ui.tsx), solido y el mismo arriba y al bajar.
+                termina en un azul medio y no en celeste: a la derecha van los iconos blancos (contraste 5:1) */}
+            <span aria-hidden="true" className="absolute inset-0 -z-10 rounded-[15px] bg-gradient-to-r from-[#172554] via-[#1e3a8a] to-[#3b6cc4]" />
             <div ref={logo} className="shrink-0"><Logo /></div>
             <div className="ml-auto flex items-center gap-[10px]">
                 <AccesosDirectos cantidad={cantidad} />

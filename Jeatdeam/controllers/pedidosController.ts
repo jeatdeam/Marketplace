@@ -1,4 +1,6 @@
 import crypto from 'crypto';
+import fs from 'fs';
+import path from 'path';
 import { fileURLToPath } from 'url';
 import PDFDocument from 'pdfkit';
 import type { Request, Response } from 'express';
@@ -18,12 +20,15 @@ const METODOS = { yape: 'Yape', plin: 'Plin' } as const;
 type Metodo = keyof typeof METODOS;
 type Entrega = 'delivery' | 'tienda';
 
+// los pedidos guardados antes de que se guardara la foto no la tienen
+type Linea = Omit<ReturnType<typeof lineasCarrito>[number], 'imagen'> & { imagen?: string };
+
 interface Pedido {
     fecha: string;
     metodo: Metodo;
     entrega: Entrega;
     cliente: DatosCliente;
-    lineas: ReturnType<typeof lineasCarrito>;
+    lineas: Linea[];
     // en centimos, como el resto de la tienda
     subtotal: number;
     envio: number;
@@ -35,6 +40,7 @@ const LOGO = fileURLToPath(new URL('../../public/img/k-moon-pdf.png', import.met
 // mismos nombres que muestra el formulario (ShippingForm.tsx)
 const COURIERS: Record<string, string> = { shalom: 'Shalom', olva: 'Olva Courier', dinocourier: 'Dinocourier', otros: 'Otro' };
 const ARCHIVO_PDF = /^KM-(\d{1,9})-([a-f0-9]{16})\.pdf$/;
+const PUBLIC = fileURLToPath(new URL('../../public/', import.meta.url));
 
 // sin Supabase los pedidos quedan en memoria (se pierden al reiniciar)
 const enMemoria: { numero: number; token: string; pedido: Pedido }[] = [];
@@ -80,10 +86,11 @@ const crearPedido = async (req: Request<unknown, unknown, { metodo?: string; ent
 
     const codigo = codigoPedido(numero, token);
     const url = await urlPdf(pedido, codigo, req);
-    res.status(201).json({ codigo, url, mensaje: mensajeWhatsapp(pedido, codigo, url) });
+    const base = origen(req);
+    res.status(201).json({ codigo, url, mensaje: mensajeWhatsapp(pedido, codigo, url, base) });
 
     // el correo no frena la compra: si gmail falla, solo queda en el log
-    enviarCorreo(pedido, codigo, url).catch((error) => console.error('No se pudo enviar el pedido por correo:', (error as Error).message));
+    enviarCorreo(pedido, codigo, url, base).catch((error) => console.error('No se pudo enviar el pedido por correo:', (error as Error).message));
 };
 
 // con Cloudinary el pdf se sube y su url funciona desde cualquier celular (tambien probando en localhost);
@@ -103,6 +110,42 @@ async function urlPdf(pedido: Pedido, codigo: string, req: Pick<Request, 'get' |
         console.error('No se pudo subir el pdf a Cloudinary, se usa la url del servidor:', (error as Error).message);
         return propia;
     }
+}
+
+// ---------- fotos de los productos ----------
+
+// cloudinary entrega cualquier foto como jpg cuadrado y chico (pdfkit no lee webp y el correo pesa menos):
+// la transformacion va justo despues de /upload/. Las fotos de otros sitios quedan como estan
+const CLOUDINARY_UPLOAD = /^(https:\/\/res\.cloudinary\.com\/[^/]+\/image\/upload\/)/;
+const fotoChica = (url: string, lado: number) => url.replace(CLOUDINARY_UPLOAD, `$1f_jpg,q_80,c_fill,w_${lado},h_${lado}/`);
+// las fotos guardadas en public/ (/img/..., /uploads/...) necesitan el dominio para abrirse desde whatsapp o el correo
+const absoluta = (url: string, base: string) => (url.startsWith('/') ? `${base}${url}` : url);
+
+type Fotos = Map<string, Buffer>;
+const esJpgOPng = (datos: Buffer) => (datos[0] === 0xff && datos[1] === 0xd8) || (datos[0] === 0x89 && datos[1] === 0x50);
+
+// las miniaturas del pdf se bajan antes de dibujarlo; la que falle o no sea jpg/png se queda sin foto
+async function cargarFotos(pedido: Pedido): Promise<Fotos> {
+    const fotos: Fotos = new Map();
+    const urls = [...new Set(pedido.lineas.map((linea) => linea.imagen).filter((imagen): imagen is string => Boolean(imagen)))];
+    await Promise.all(urls.map(async (imagen) => {
+        try {
+            let datos: Buffer;
+            if (imagen.startsWith('/')) {
+                const archivo = path.join(PUBLIC, imagen);
+                if (!archivo.startsWith(PUBLIC)) return;
+                datos = await fs.promises.readFile(archivo);
+            } else {
+                const respuesta = await fetch(fotoChica(imagen, 160), { signal: AbortSignal.timeout(5000) });
+                if (!respuesta.ok) return;
+                datos = Buffer.from(await respuesta.arrayBuffer());
+            }
+            if (esJpgOPng(datos)) fotos.set(imagen, datos);
+        } catch {
+            // sin foto: la fila del producto sale igual
+        }
+    }));
+    return fotos;
 }
 
 // ---------- detalle de compra (whatsapp, correo y pdf) ----------
@@ -134,14 +177,18 @@ function datosEntrega(pedido: Pedido): [string, string][] {
 const filaEnvio = (pedido: Pedido): [string, string] =>
     [pedido.entrega === 'tienda' ? 'Recojo en tienda' : 'Delivery', pedido.envio ? soles(pedido.envio) : 'Gratis'];
 
-// whatsapp entiende *negritas*; el cliente solo tiene que adjuntar la captura del pago y enviar
-function mensajeWhatsapp(pedido: Pedido, codigo: string, url: string) {
+// whatsapp entiende *negritas*; el cliente solo tiene que adjuntar la captura del pago y enviar.
+// un enlace de wa.me no puede llevar imagenes: cada producto lleva el enlace a su foto (y el pdf las trae todas)
+function mensajeWhatsapp(pedido: Pedido, codigo: string, url: string, base: string) {
     const [envioTexto, envioValor] = filaEnvio(pedido);
     return [
         `Hola ${TIENDA.nombre}, ya pagué ${soles(pedido.total)} con ${METODOS[pedido.metodo]}. Adjunto la constancia.`,
         '',
         `*Pedido ${codigoCorto(codigo)}*`,
-        ...pedido.lineas.map((l) => `• ${l.cantidad} x ${l.nombre} (${l.marca}): ${soles(l.unitario * l.cantidad)}`),
+        ...pedido.lineas.flatMap((l) => [
+            `• ${l.cantidad} x ${l.nombre} (${l.marca}): ${soles(l.unitario * l.cantidad)}`,
+            ...(l.imagen ? [`   Foto: ${absoluta(l.imagen, base)}`] : []),
+        ]),
         `Subtotal: ${soles(pedido.subtotal)}`,
         `${envioTexto}: ${envioValor}`,
         `*Total: ${soles(pedido.total)}*`,
@@ -156,7 +203,7 @@ const ENTIDADES: Record<string, string> = { '&': '&amp;', '<': '&lt;', '>': '&gt
 const escapar = (texto: string) => texto.replace(/[&<>"']/g, (c) => ENTIDADES[c]);
 
 // correo al cliente con copia oculta a la tienda; el pdf va adjunto y tambien enlazado
-async function enviarCorreo(pedido: Pedido, codigo: string, url: string) {
+async function enviarCorreo(pedido: Pedido, codigo: string, url: string, base: string) {
     if (correoSinConfigurar || !process.env.EMAIL_PASS) return;
     const corto = codigoCorto(codigo);
     const [envioTexto, envioValor] = filaEnvio(pedido);
@@ -171,7 +218,7 @@ async function enviarCorreo(pedido: Pedido, codigo: string, url: string) {
   <p style="color:#475569">${escapar(estado)}</p>
   <table style="width:100%;border-collapse:collapse;font-size:14px;margin:16px 0">
     <tr><th align="left" style="${celda}">Producto</th><th style="${celda}">Cant.</th><th align="right" style="${celda}">Importe</th></tr>
-    ${pedido.lineas.map((l) => `<tr><td style="${celda}">${escapar(l.nombre)} · ${escapar(l.marca)}</td><td align="center" style="${celda}">${l.cantidad}</td><td align="right" style="${celda}">${soles(l.unitario * l.cantidad)}</td></tr>`).join('')}
+    ${pedido.lineas.map((l) => `<tr><td style="${celda}">${l.imagen ? `<img src="${escapar(fotoChica(absoluta(l.imagen, base), 96))}" alt="" width="48" height="48" style="border-radius:8px;vertical-align:middle;margin-right:10px;object-fit:cover">` : ''}${escapar(l.nombre)} · ${escapar(l.marca)}</td><td align="center" style="${celda}">${l.cantidad}</td><td align="right" style="${celda}">${soles(l.unitario * l.cantidad)}</td></tr>`).join('')}
     <tr><td colspan="2" align="right" style="padding:8px 0">Subtotal</td><td align="right">${soles(pedido.subtotal)}</td></tr>
     <tr><td colspan="2" align="right" style="padding:8px 0">${envioTexto}</td><td align="right">${envioValor}</td></tr>
     <tr><td colspan="2" align="right" style="padding:8px 0;font-size:16px"><b>Total</b></td><td align="right" style="font-size:16px"><b>${soles(pedido.total)}</b></td></tr>
@@ -208,10 +255,11 @@ const verPdf = async (req: Request<{ archivo: string }>, res: Response) => {
     if (!pedido) return res.status(404).send('Pedido no encontrado');
 
     const codigo = codigoPedido(numero, token);
+    const fotos = await cargarFotos(pedido);
     res.setHeader('Content-Type', 'application/pdf');
     // inline: se abre en el navegador o en el visor de whatsapp en vez de descargarse directo
     res.setHeader('Content-Disposition', `inline; filename="${codigo}.pdf"`);
-    dibujarPdf(pedido, codigo).pipe(res);
+    dibujarPdf(pedido, codigo, fotos).pipe(res);
 };
 
 // ---------- pdf ----------
@@ -219,17 +267,23 @@ const verPdf = async (req: Request<{ archivo: string }>, res: Response) => {
 const MARINO = '#1e3a5f';
 const GRIS = '#64748b';
 
-// el pdf como Buffer, para adjuntarlo al correo
-const pdfBuffer = (pedido: Pedido, codigo: string) => new Promise<Buffer>((resolver, rechazar) => {
-    const partes: Buffer[] = [];
-    dibujarPdf(pedido, codigo)
-        .on('data', (parte: Buffer) => partes.push(parte))
-        .on('end', () => resolver(Buffer.concat(partes)))
-        .on('error', rechazar);
-});
+// lado de la miniatura de cada producto en el pdf (puntos)
+const MINIATURA = 40;
+
+// el pdf como Buffer, para adjuntarlo al correo y subirlo a Cloudinary
+const pdfBuffer = async (pedido: Pedido, codigo: string) => {
+    const fotos = await cargarFotos(pedido);
+    return new Promise<Buffer>((resolver, rechazar) => {
+        const partes: Buffer[] = [];
+        dibujarPdf(pedido, codigo, fotos)
+            .on('data', (parte: Buffer) => partes.push(parte))
+            .on('end', () => resolver(Buffer.concat(partes)))
+            .on('error', rechazar);
+    });
+};
 
 // devuelve el documento ya cerrado: es un stream que se manda a la respuesta o se junta en un Buffer
-function dibujarPdf(pedido: Pedido, codigo: string) {
+function dibujarPdf(pedido: Pedido, codigo: string, fotos: Fotos) {
     const doc = new PDFDocument({ size: 'A4', margin: 50, info: { Title: `Pedido ${codigo}`, Author: TIENDA.nombre } });
     const izquierda = doc.page.margins.left;
     const ancho = doc.page.width - izquierda - doc.page.margins.right;
@@ -257,22 +311,36 @@ function dibujarPdf(pedido: Pedido, codigo: string) {
 
     // productos
     seccion(doc, 'Productos', izquierda, ancho);
+    // con fotos, el nombre se corre a la derecha de la miniatura
+    const hueco = fotos.size ? MINIATURA + 10 : 0;
     const columnas = [
-        { titulo: 'Producto', x: izquierda, ancho: ancho - 230, alinear: 'left' as const },
+        { titulo: 'Producto', x: izquierda + hueco, ancho: ancho - 230 - hueco, alinear: 'left' as const },
         { titulo: 'Cant.', x: izquierda + ancho - 230, ancho: 50, alinear: 'center' as const },
         { titulo: 'P. unit.', x: izquierda + ancho - 180, ancho: 85, alinear: 'right' as const },
         { titulo: 'Importe', x: izquierda + ancho - 95, ancho: 95, alinear: 'right' as const },
     ];
-    const fila = (valores: string[], negrita = false) => {
-        const y = doc.y;
+    // con producto: fila con su miniatura (o un cuadro gris si la foto no cargo) y el texto centrado a su altura
+    const fila = (valores: string[], negrita = false, producto?: Linea) => {
         doc.font(negrita ? 'Helvetica-Bold' : 'Helvetica').fontSize(10).fillColor('#0f172a');
         const altos = valores.map((valor, i) => doc.heightOfString(valor, { width: columnas[i].ancho }));
-        valores.forEach((valor, i) => doc.text(valor, columnas[i].x, y, { width: columnas[i].ancho, align: columnas[i].alinear }));
-        doc.y = y + Math.max(...altos) + 6;
+        const altoTexto = Math.max(...altos);
+        const altoFila = producto && hueco ? Math.max(altoTexto, MINIATURA) : altoTexto;
+        // una fila nunca queda partida entre dos paginas
+        if (doc.y + altoFila > doc.page.height - doc.page.margins.bottom) doc.addPage();
+        const y = doc.y;
+        if (producto && hueco) {
+            const foto = producto.imagen ? fotos.get(producto.imagen) : undefined;
+            if (foto) doc.image(foto, izquierda, y, { fit: [MINIATURA, MINIATURA], align: 'center', valign: 'center' });
+            else doc.roundedRect(izquierda, y, MINIATURA, MINIATURA, 6).fillColor('#f1f5f9').fill();
+            doc.fillColor('#0f172a');
+        }
+        const yTexto = y + (altoFila - altoTexto) / 2;
+        valores.forEach((valor, i) => doc.text(valor, columnas[i].x, yTexto, { width: columnas[i].ancho, align: columnas[i].alinear }));
+        doc.y = y + altoFila + 6;
     };
     fila(columnas.map((c) => c.titulo), true);
     pedido.lineas.forEach((linea) =>
-        fila([`${linea.nombre} · ${linea.marca}`, String(linea.cantidad), soles(linea.unitario), soles(linea.unitario * linea.cantidad)]));
+        fila([`${linea.nombre} · ${linea.marca}`, String(linea.cantidad), soles(linea.unitario), soles(linea.unitario * linea.cantidad)], false, linea));
     linea(doc, izquierda, ancho);
 
     // totales a la derecha

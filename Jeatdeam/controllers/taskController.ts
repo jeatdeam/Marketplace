@@ -24,6 +24,8 @@ export function lineasCarrito() {
         return {
             nombre: producto?.name ?? item.name,
             marca: producto?.brand ?? item.brand,
+            // primera foto del producto: va en el pdf, en el correo y como enlace en el whatsapp del pedido
+            imagen: producto?.img?.[0] ?? item.img,
             cantidad,
             // precio final en centimos: el normal menos el descuento puesto en el dashboard
             unitario: producto ? Math.round((producto.price * (100 - (producto.descuento ?? 0))) / 100) : item.price,

@@ -58,7 +58,7 @@ function DatoContacto({ icono, children, href } : { icono : NombreIcono; childre
 
 export default function Footer() {
     return (
-        <footer className="relative mt-[24px] sm:mt-[30px] overflow-hidden bg-gradient-to-b from-[#d6ecf8] to-[#b9dff3]">
+        <footer className="relative mt-[24px] sm:mt-[30px] overflow-hidden bg-gradient-to-b from-[#f0eee6] to-[#e6e3d8]">
             {/* brillo blanco difuminado arriba */}
             <div className="pointer-events-none absolute -top-[200px] left-1/2 -translate-x-1/2 w-[70%] h-[300px] rounded-full bg-white blur-[120px]" aria-hidden="true" />
 
