@@ -29,7 +29,7 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
                 {/* poppins para todo el sitio y doto (pixelada) solo para los creditos del desarrollador */}
                 <link rel="preconnect" href="https://fonts.googleapis.com" />
                 <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
-                <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Doto:wght@400;700&family=Poppins:wght@400;500;600;700;800&display=swap" />
+                <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Doto:wght@400;700&family=Poppins:wght@300;400;500;600;700;800&display=swap" />
             </head>
             <body className="min-h-full flex flex-col">
                 <StoreProvider inicial={inicial}>{children}</StoreProvider>

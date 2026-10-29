@@ -72,7 +72,8 @@ function AccesosDirectos({ cantidad } : { cantidad : number }) {
                     key={enlace.a}
                     to={enlace.a}
                     end={enlace.exacto}
-                    className={({ isActive }) => `flex items-center justify-center gap-[7px] w-[124px] h-[40px] shrink-0 rounded-[10px] text-[14px] font-semibold ring-1 transition-colors ${isActive ? 'bg-white/20 ring-white/40' : 'bg-white/5 ring-white/15 hover:bg-white/15'}`}
+                    // sin fondo ni borde; solo al pasar el mouse se pone blanco (con el texto en marino para que se lea)
+                    className="flex items-center justify-center gap-[7px] w-[124px] h-[40px] shrink-0 rounded-[10px] text-[14px] font-light transition-colors hover:bg-white hover:text-[#172554]"
                 >
                     <Icono nombre={enlace.icono} className="size-[17px]" />
                     {enlace.texto}
@@ -147,9 +148,9 @@ export default function Header({ menuAbierto, onAlternarMenu, onCerrarMenu } : H
         >
             {/* el fondo va en una capa aparte y no en el header: asi los desplegables del buscador
                 y del carrito (que estan dentro) pueden desenfocar la pagina con su propio backdrop-filter.
-                degradado con el azul marino del carrusel de ofertas (MARINO_CIELO en ui.tsx), solido y el mismo arriba y al bajar.
-                termina en un azul medio y no en celeste: a la derecha van los iconos blancos (contraste 5:1) */}
-            <span aria-hidden="true" className="absolute inset-0 -z-10 rounded-[15px] bg-gradient-to-r from-[#172554] via-[#1e3a8a] to-[#3b6cc4]" />
+                el azul marino original del header en un solo tono (sin degradado) y opaco: con transparencia se veia mas
+                claro arriba (sobre el fondo gris) que al bajar (sobre las fotos); asi es el mismo color todo el tiempo */}
+            <span aria-hidden="true" className="absolute inset-0 -z-10 rounded-[15px] bg-[#172554]" />
             <div ref={logo} className="shrink-0"><Logo /></div>
             <div className="ml-auto flex items-center gap-[10px]">
                 <AccesosDirectos cantidad={cantidad} />
