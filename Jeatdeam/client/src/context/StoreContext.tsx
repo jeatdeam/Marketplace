@@ -1,9 +1,11 @@
+'use client';
 import { createContext, useCallback, useContext, useEffect, useMemo, useState, type ReactNode } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from '../router';
 
 import * as api from '../api';
 import { categoriasConImagen, gruposSlider, precioFinalCentimos, type Categoria } from '../datos/tienda';
 import type { Apariencia, Banner, CartItem, EstadoCarritoResponse, GrupoSlider, Product, Secciones } from '../../../shared/types';
+import type { DatosTienda } from '../servidor/datos';
 
 interface StoreValue {
     baseDatos: Product[] | null;
@@ -25,13 +27,15 @@ interface StoreValue {
 
 const StoreContext = createContext<StoreValue | null>(null);
 
-export function StoreProvider({ children }: { children: ReactNode }) {
+// inicial: productos, banners e imagenes que el servidor de Vercel ya trajo de su cache (app/layout.tsx),
+// asi la pagina llega armada sin esperar a Render. El carrito si se pide a Render al cargar
+export function StoreProvider({ children, inicial }: { children: ReactNode; inicial?: DatosTienda }) {
     // null = todavía cargando
-    const [baseDatos, setBaseDatos] = useState<Product[] | null>(null);
-    const [secciones, setSecciones] = useState<Secciones | null>(null);
+    const [baseDatos, setBaseDatos] = useState<Product[] | null>(inicial?.baseDatos.length ? inicial.baseDatos : null);
+    const [secciones, setSecciones] = useState<Secciones | null>(inicial?.secciones ?? null);
     const [carrito, setCarrito] = useState<CartItem[] | null>(null);
-    const [banners, setBanners] = useState<Banner[]>([]);
-    const [apariencia, setApariencia] = useState<Apariencia>({ categorias: {}, slider: {} });
+    const [banners, setBanners] = useState<Banner[]>(inicial?.banners ?? []);
+    const [apariencia, setApariencia] = useState<Apariencia>(inicial?.apariencia ?? { categorias: {}, slider: {} });
 
     const refreshCarrito = useCallback(async () => {
         try {

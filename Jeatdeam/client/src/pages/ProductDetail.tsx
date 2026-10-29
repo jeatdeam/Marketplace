@@ -1,5 +1,6 @@
+'use client';
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams } from '../router';
 
 import Icono from '../components/Icono';
 import CarruselProductos from '../components/CarruselProductos';

@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react';
-import { LottieLight } from 'lottie-react';
+import { useEffect, useState, type ComponentType } from 'react';
+import type { LottieLightProps } from 'lottie-react';
 
 import { useMediaQuery } from '../hooks/useMediaQuery';
 
@@ -13,28 +13,32 @@ const RECORTE = { izquierda: 32, derecha: 1140, arriba: 90, abajo: 845 };
 // todo dibujado y aun sin desvanecer: es donde se queda con "reducir movimiento"
 const CUADRO_REPOSO = 130;
 
-// el json pesa ~400 KB: va en un chunk aparte para no frenar la primera carga de la tienda
-const cargarLogo = () => import('../assets/lotties/kmoon_logo.json').then((modulo) => modulo.default as object);
+// el json pesa ~400 KB: va en un chunk aparte para no frenar la primera carga de la tienda.
+// lottie tambien se carga aqui y no arriba: usa document, que no existe al armar la pagina en el servidor
+const cargarLogo = () => Promise.all([
+    import('lottie-react').then((modulo) => modulo.LottieLight as ComponentType<LottieLightProps>),
+    import('../assets/lotties/kmoon_logo.json').then((modulo) => modulo.default as object),
+]);
 
 // ancho que ocupa el logo para un alto dado
 export const anchoFirma = (alto : number) => (RECORTE.derecha - RECORTE.izquierda) * (alto / (RECORTE.abajo - RECORTE.arriba));
 
 export default function FirmaKmoon({ alto } : { alto : number }) {
-    const [logo, setLogo] = useState<object | null>(null);
+    const [logo, setLogo] = useState<{ Lottie : ComponentType<LottieLightProps>; datos : object } | null>(null);
     const quieto = useMediaQuery('(prefers-reduced-motion: reduce)');
     const escala = alto / (RECORTE.abajo - RECORTE.arriba);
 
     useEffect(() => {
         let vigente = true;
-        cargarLogo().then((datos) => { if (vigente) setLogo(datos); });
+        cargarLogo().then(([Lottie, datos]) => { if (vigente) setLogo({ Lottie, datos }); });
         return () => { vigente = false; };
     }, []);
 
     return (
         <span aria-hidden="true" className="pointer-events-none block overflow-hidden" style={{ width: anchoFirma(alto), height: alto }}>
             {logo && (
-                <LottieLight
-                    src={logo}
+                <logo.Lottie
+                    src={logo.datos}
                     loop={!quieto}
                     autoplay
                     segment={quieto ? [CUADRO_REPOSO, CUADRO_REPOSO + 1] : undefined}

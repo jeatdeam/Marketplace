@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from '../router';
 
 import Icono from './Icono';
 import { BOTON_PRINCIPAL, CAJA_ELEVADA } from './ui';

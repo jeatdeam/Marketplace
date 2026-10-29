@@ -1,6 +1,8 @@
-import { lazy, Suspense, useCallback, useEffect, useState } from 'react';
+'use client';
+import { useCallback, useEffect, useState, type ReactNode } from 'react';
 import { createPortal } from 'react-dom';
-import { Outlet, useLocation } from 'react-router-dom';
+import dynamic from 'next/dynamic';
+import { useLocation } from '../router';
 
 import BarraSuperior from './BarraSuperior';
 import Header from './Header';
@@ -10,9 +12,11 @@ import BarraLateral from './BarraLateral';
 import { eliminarDatosCliente } from '../api';
 
 // creditos del desarrollador (github:jeatdeam/creditos-dev): la firma Lottie pesa ~500 KB, va en un chunk aparte
-const Creditos = lazy(() => import('creditos-dev').then((modulo) => ({ default: modulo.Creditos })));
+// y solo en el navegador (lottie usa document, que no existe al armar la pagina en el servidor)
+const Creditos = dynamic(() => import('creditos-dev').then((modulo) => modulo.Creditos), { ssr: false });
 
-export default function Layout() {
+// barra, header, footer y whatsapp de la tienda alrededor de cada pagina (app/(tienda)/layout.tsx)
+export default function Layout({ children } : { children : ReactNode }) {
     const { pathname } = useLocation();
     const [menuAbierto, setMenuAbierto] = useState(false);
 
@@ -40,12 +44,10 @@ export default function Layout() {
             <Header menuAbierto={menuAbierto} onAlternarMenu={() => setMenuAbierto((valor) => !valor)} onCerrarMenu={cerrarMenu} />
             <BarraLateral visibleEnCelular={menuAbierto} onCerrar={cerrarMenu} />
             <div id="contenido" className="flex flex-1 flex-col">
-                <Outlet />
+                {children}
             </div>
             <Footer />
-            <Suspense fallback={null}>
-                <Creditos />
-            </Suspense>
+            <Creditos />
             <BotonWhatsapp />
             {/* hasta 768px: fondo blanco de vidrio detras de la barra; tocarlo la cierra */}
             {menuAbierto && createPortal(

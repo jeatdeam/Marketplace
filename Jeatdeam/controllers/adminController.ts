@@ -16,7 +16,7 @@ declare module 'express-session' {
 
 // prototipo: una sola clave para el dashboard; se cambia con DASHBOARD_CLAVE en Jeatdeam/.env
 const CLAVE = process.env.DASHBOARD_CLAVE ?? 'admin123';
-const CARPETA_SUBIDAS = fileURLToPath(new URL('../public/uploads/', import.meta.url));
+const CARPETA_SUBIDAS = fileURLToPath(new URL('../../public/uploads/', import.meta.url));
 const TIPOS_IMAGEN: Record<string, string> = { 'image/png': 'png', 'image/jpeg': 'jpg', 'image/webp': 'webp', 'image/gif': 'gif', 'image/avif': 'avif' };
 const MAX_IMAGEN = 5 * 1024 * 1024;
 const TEMAS: TemaBanner[] = ['hielo', 'blanco', 'cielo'];
@@ -114,7 +114,7 @@ const aProducto = (datos: ProductoEntrada, base?: Product): Product => ({
     shortInfo: base?.shortInfo ?? [],
     longInfo: base?.longInfo ?? [],
     ...datos,
-    // el resto de la tienda trabaja en centimos (como stripe)
+    // el resto de la tienda trabaja en centimos
     price: Math.round(datos.price * 100),
 });
 

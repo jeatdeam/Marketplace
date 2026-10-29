@@ -1,3 +1,4 @@
+'use client';
 import { PaginaEstado } from '../components/ui';
 
 export default function NotFound() {

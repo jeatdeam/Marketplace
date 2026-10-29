@@ -2,5 +2,8 @@
 node_modules/
 dist/
 .DS_Store
-.vite/
+.next/
+next-env.d.ts
+tsconfig.tsbuildinfo
+public/uploads/
 .vercel/

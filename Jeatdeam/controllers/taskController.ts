@@ -1,4 +1,3 @@
-import Stripe from 'stripe';
 import QRCode from 'qrcode';
 import nodemailer from 'nodemailer';
 import type { Request, Response } from 'express';
@@ -14,29 +13,7 @@ import type {
 } from '../shared/types.ts';
 import { cargarAlmacen, esPrimeraCarga, guardarAlmacen } from './almacen.ts';
 
-const stripe = new Stripe(process.env.SECRET_KEY ?? '');
-
-
-async function verificarMoneda() {
-    try {
-        const precios = await stripe.prices.list({ limit: 10 });
-
-        precios.data.forEach(precio => {
-            console.log(`ID: ${precio.id}, Moneda: ${precio.currency}, Monto: ${(precio.unit_amount ?? 0) / 100}`);
-        });
-    } catch (error) {
-        console.error("Error al obtener precios desde Stripe:", (error as Error).message);
-    }
-}
-verificarMoneda();
-
-
-// moneda del checkout; el sitio muestra soles
-const MONEDA_STRIPE = process.env.MONEDA_STRIPE ?? 'pen';
-
-// el precio y el nombre salen del backend, nunca del navegador; asi tambien se pueden pagar
-// los productos creados desde el dashboard, que no tienen un precio creado en stripe
-// el carrito agrupado por producto con el precio del backend; lo usan stripe y los pedidos (pedidosController.ts)
+// el carrito agrupado por producto con el precio del backend (nunca el del navegador); lo usan los pedidos (pedidosController.ts)
 export function lineasCarrito() {
     const cantidades = new Map<string, number>();
     carrito.forEach((item) => cantidades.set(item.id, (cantidades.get(item.id) ?? 0) + 1));
@@ -57,76 +34,6 @@ export function lineasCarrito() {
 // los ultimos datos que se llenaron en el formulario de envio
 export const ultimoCliente = (): DatosCliente | undefined => datosCliente[datosCliente.length - 1];
 
-const productsToPay = (): Stripe.Checkout.SessionCreateParams.LineItem[] =>
-    lineasCarrito().map((linea) => ({
-        quantity: linea.cantidad,
-        price_data: {
-            currency: MONEDA_STRIPE,
-            unit_amount: linea.unitario,
-            product_data: { name: `${linea.nombre} - ${linea.marca}` },
-        },
-    }));
-
-// solo la primera vez (sin datos/tienda.json): los productos escritos en el codigo toman, en orden,
-// el id y el precio de stripe; despues el json del backend es la fuente de verdad
-async function sincronizarStripe() {
-    if (!esPrimeraCarga()) return;
-    try {
-        const response = await fetch("https://api.stripe.com/v1/prices?limit=100", {
-            headers: { Authorization: `Bearer ${process.env.SECRET_KEY}` },
-        });
-        if (!response.ok) throw new Error(response.statusText);
-        const precios: { id: string; unit_amount: number }[] = (await response.json()).data ?? [];
-        baseDatos.forEach((product, indice) => {
-            const precio = precios[indice];
-            if (!precio) return;
-            product.id = precio.id;
-            product.price = precio.unit_amount;
-        });
-    } catch (error) {
-        console.error('No se pudieron traer los precios de Stripe:', (error as Error).message);
-    }
-    guardarAlmacen();
-}
-
-const redireccionamientoToPay= async (req:Request,res:Response)=> {
-
-    try {
-        // Crear la sesión de Checkout en Stripe
-        // vuelve al mismo origen desde el que se pagó (vite en desarrollo, express en producción)
-        const origen = req.get('origin') ?? `${req.protocol}://${req.get('host')}`;
-        const session = await stripe.checkout.sessions.create({
-            payment_method_types: ['card'],
-            line_items: productsToPay(),
-            mode: 'payment',
-            success_url: `${origen}/pago-exitoso`,
-            cancel_url: `${origen}/carrito`,
-        });
-
-        // Enviar la URL de la sesión de Stripe
-        res.json({ url: session.url });
-    } catch (error) {
-        console.error('Error creando la sesión de Stripe:', (error as Error).message);
-        console.error((error as Error).stack);
-        res.status(500).send('Error interno del servidor');
-    }
-
-};
-
-
-// const productsToPay = () => [
-//     {
-//         price_data: {
-//             currency: 'usd',
-//             product_data: {
-//                 name: 'Camiseta Negra',
-//                 description: 'Talla M',
-//             },
-//             unit_amount: 2500, // 25.00 USD
-//         },
-//         quantity: 2, // Cantidad de productos
-//     },
-// ];
 
 let seccionProducts:Secciones={
     dinosaurios: {
@@ -554,7 +461,8 @@ const semillaProductos:Product[] = [
 ]
 
 const baseDatos: Product[] = cargarAlmacen(semillaProductos);
-sincronizarStripe();
+// la primera vez (sin datos/tienda.json) se guardan los productos escritos en el codigo
+if (esPrimeraCarga()) guardarAlmacen();
 
 
  let carrito:CartItem[]=[
@@ -742,56 +650,13 @@ const controllerQr = async (req:Request<unknown, unknown, { monto?: number; nume
 };
 
 
-
-interface EventoPago {
-    type?: string;
-    data?: {
-        object?: {
-            amount: number;
-            currency_code: string;
-            metadata?: { order_id?: string };
-            outcome?: { type?: string };
-        };
-    };
-}
-
-const pagoRealizado = (req:Request<unknown, unknown, EventoPago>, res:Response) => {
-    const evento = req.body;
-
-    // Validamos que sea el evento correcto
-    if (
-        evento.type === "charge.created" &&
-        evento.data?.object?.outcome?.type === "successful_payment"
-    ) {
-        const charge = evento.data.object;
-
-        // Extraemos info útil
-        const monto = charge.amount;
-        const moneda = charge.currency_code;
-        const orderId = charge.metadata?.order_id;
-
-        console.log("✅ Pago exitoso recibido");
-        console.log(`Orden: ${orderId}, Monto: S/.${monto / 100}, Moneda: ${moneda}`);
-
-        // Aquí puedes actualizar la base de datos, enviar correos, etc.
-
-        res.status(200).json({ mensaje: "Pago procesado correctamente" });
-    } else {
-        console.log("⚠️ Evento no relevante o pago fallido");
-        res.status(200).json({ mensaje: "Evento ignorado" });
-    }
-}
-
-
 export default {
-    pagoRealizado,
     extraerMarcas,
     deleteDatos,
     verificarDatos,
     recibirDatosShort,
     recibirDatosComplete,
     controllerQr,
-    redireccionamientoToPay,
     baseDatosProducts,
     deleteCarrito,
     estadoCarrito,

@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react';
-import { Link } from 'react-router-dom';
+import { Link } from '../router';
 
 import Icono from './Icono';
 import { MARINO_BLANCO, MARINO_CIELO, MARINO_HIELO, PILDORA_BANNER } from './ui';

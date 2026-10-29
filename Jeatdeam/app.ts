@@ -2,7 +2,6 @@
 import { enProduccion } from './entorno.ts';
 import express from 'express';
 import path from 'path';
-import fs from 'fs';
 import cors from 'cors';
 import helmet from 'helmet';
 import morgan from 'morgan';
@@ -67,7 +66,8 @@ app.use(expressSession({
 }));
 
 // Middlewares de archivos estáticos y datos
-app.use(express.static(path.join(__dirname, 'public')));
+// public/ esta en la raiz del repo: la comparte con la tienda Next.js
+app.use(express.static(path.join(__dirname, '..', 'public')));
 // 8mb: el dashboard sube imagenes en base64 (hasta 5 MB cada una)
 app.use(express.json({ limit: '8mb' }));
 app.use(express.urlencoded({ extended: true }));
@@ -88,7 +88,6 @@ api.get("/base/datos/json", taskController.baseDatosProducts);
 api.post("/compra/compra/compra/compra", taskController.agregarCarrito);
 api.post("/datos/cliente/compra/short", taskController.recibirDatosShort);
 api.post("/datos/cliente/compra/complete", taskController.recibirDatosComplete);
-api.post("/create-checkout-session", taskController.redireccionamientoToPay);
 api.post("/generar-qr", taskController.controllerQr);
 api.post("/reclamaciones", atencionController.registrarReclamo);
 api.post("/contacto", atencionController.registrarContacto);
@@ -118,23 +117,15 @@ api.delete("/datos/cliente/compra", taskController.deleteDatos);
 
 app.use("/api", api);
 
-// Webhook de pagos (se mantiene en la raíz porque lo llama un servicio externo)
-app.post("/pagorealizado", taskController.pagoRealizado)
-
 // PDF del pedido: url publica que va en el mensaje de whatsapp (/pedido/KM-000013-<token>.pdf)
 app.get("/pedido/:archivo", pedidosController.verPdf);
 
-// Cliente React compilado (npm run build)
-const clientDist = path.join(__dirname, 'client', 'dist');
-app.use(express.static(clientDist));
-
-// Cualquier otra ruta GET la resuelve React Router
+// la tienda (Next.js) vive en Vercel: este servidor solo es la API. Cualquier otra ruta GET
+// se manda a la tienda si URL_TIENDA esta definida
 app.get("*", (req, res) => {
-    const indexHtml = path.join(clientDist, 'index.html');
-    if (!fs.existsSync(indexHtml)) {
-        return res.status(503).send('El cliente React no está compilado. Ejecuta "npm run build".');
-    }
-    res.sendFile(indexHtml);
+    const tienda = process.env.URL_TIENDA?.split(',')[0]?.trim().replace(/\/+$/, '');
+    if (tienda) return res.redirect(`${tienda}${req.originalUrl}`);
+    res.status(404).json({ error: 'No encontrado: la tienda está en Vercel y aquí solo vive la API' });
 });
 
 // Escuchar servidor (antes se trae la tienda de Supabase, si esta configurado)

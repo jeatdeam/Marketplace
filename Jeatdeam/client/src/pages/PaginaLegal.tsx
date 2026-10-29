@@ -1,3 +1,4 @@
+'use client';
 import { ANCHO_SECCION, TARJETA, EncabezadoPagina } from '../components/ui';
 import { TIENDA } from '../datos/tienda';
 
@@ -7,7 +8,7 @@ const TEXTOS = {
         titulo: 'Términos y condiciones',
         secciones: [
             { titulo: 'Sobre nosotros', texto: `Este sitio es operado por ${TIENDA.razonSocial} (RUC ${TIENDA.ruc}), con domicilio en ${TIENDA.direccion}.` },
-            { titulo: 'Precios y pagos', texto: 'Los precios están expresados en soles e incluyen IGV. Aceptamos tarjetas de crédito y débito, Yape y Plin. El pedido se confirma cuando el pago es validado.' },
+            { titulo: 'Precios y pagos', texto: 'Los precios están expresados en soles e incluyen IGV. Aceptamos Yape y Plin. El pedido se confirma cuando el pago es validado.' },
             { titulo: 'Envíos', texto: 'Los plazos de entrega son referenciales y empiezan a contar desde la confirmación del pago. Más detalles en la página de envíos.' },
             { titulo: 'Cambios y devoluciones', texto: 'Puedes solicitar el cambio de un producto con fallas de fábrica dentro de los 7 días de recibido, con su empaque original.' },
             { titulo: 'Libro de reclamaciones', texto: 'Conforme a la Ley 29571, ponemos a tu disposición un Libro de Reclamaciones virtual. Respondemos en un plazo máximo de 15 días hábiles.' },
@@ -17,7 +18,7 @@ const TEXTOS = {
         titulo: 'Política de privacidad',
         secciones: [
             { titulo: 'Qué datos guardamos', texto: 'Tu nombre, correo, celular y dirección de entrega, solo para procesar y entregar tu pedido.' },
-            { titulo: 'Pagos', texto: 'Los datos de tu tarjeta los procesa la pasarela de pago; nosotros nunca los vemos ni los guardamos.' },
+            { titulo: 'Pagos', texto: 'Pagas con Yape o Plin desde tu propia app; nosotros nunca vemos ni guardamos tus datos bancarios.' },
             { titulo: 'Con quién los compartimos', texto: 'Solo con el courier que entrega tu pedido. No vendemos ni cedemos tus datos.' },
             { titulo: 'Tus derechos', texto: `Puedes pedir acceso, corrección o eliminación de tus datos (Ley 29733) escribiendo a ${TIENDA.correo}.` },
         ],

@@ -24,10 +24,11 @@ Render compila el cliente React (`npm run build`) y arranca Express (`npm start`
       | Variable | De dónde sale |
       |---|---|
       | `DASHBOARD_CLAVE` | la clave que quieras para entrar a `/dashboard` |
-      | `SECRET_KEY` / `PUBLIC_KEY` | Stripe → Developers → API keys (usa las de **test**) |
       | `EMAIL_USER` / `EMAIL_PASS` | Gmail + contraseña de aplicación |
       | `CLOUDINARY_*` | Cloudinary → Settings → API Keys |
       | `SUPABASE_URL` / `SUPABASE_SECRET_KEY` | Supabase → Project Settings → API Keys |
+      | `URL_TIENDA` | la URL de la tienda en Vercel (ej. `https://tu-tienda.vercel.app`) |
+      | `REVALIDAR_SECRETO` | un texto largo; el mismo valor va en Vercel → Settings → Environment Variables |
 
       `SESSION_SECRET` la genera Render sola.
    4. **Apply**. El primer build tarda unos minutos.
@@ -52,7 +53,3 @@ Y en **Environment** agrega las variables de la tabla, más `NODE_VERSION=22`, `
 - El disco se **borra** en cada deploy o reinicio. Por eso los datos van a Supabase y las imágenes a Cloudinary.
 - Las sesiones del dashboard viven en memoria: al reiniciar hay que volver a iniciar sesión.
 - El **carrito** también vive en memoria del servidor y es compartido. Sirve para la prueba, pero no para producción real.
-
-## Stripe
-
-`success_url` y `cancel_url` se arman con el dominio de la petición, así que funcionan solos con `onrender.com`. Si usas el webhook `/pagorealizado`, regístralo en Stripe con `https://<tu-servicio>.onrender.com/pagorealizado`.

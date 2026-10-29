@@ -1,3 +1,4 @@
+'use client';
 import { BeforeAfterSlider } from '../components/beforeAfterSlider';
 import { BannerNuevo, BannerOferta, BannerPrincipal, contenidoNuevo, contenidoOferta, productosEnOferta, type ContenidoBanner } from '../components/BannerInicio';
 import CarruselProductos from '../components/CarruselProductos';

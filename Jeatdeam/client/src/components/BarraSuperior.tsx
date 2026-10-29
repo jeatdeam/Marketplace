@@ -1,5 +1,5 @@
 import { useLayoutEffect, useRef, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation } from '../router';
 
 import Icono from './Icono';
 import { TIENDA } from '../datos/tienda';
@@ -10,7 +10,7 @@ const PX_POR_SEGUNDO = 70;
 
 const MENSAJES = [
     { titulo: `Delivery gratis desde S/ ${TIENDA.envioGratisDesde}`, descripcion: 'Envíos a Lima en el día y a provincias en 48 h' },
-    { titulo: 'Paga con Yape, Plin o tarjeta', descripcion: 'Compra segura y comprobante electrónico al instante' },
+    { titulo: 'Paga con Yape o Plin', descripcion: 'Compra segura y comprobante electrónico al instante' },
 ];
 
 // franja marino con un camion que cruza la pantalla arrastrando el mensaje; se pausa con el cursor.

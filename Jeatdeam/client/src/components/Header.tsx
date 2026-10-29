@@ -1,5 +1,5 @@
 import { useEffect, useLayoutEffect, useRef, useState } from 'react';
-import { Link, NavLink } from 'react-router-dom';
+import { Link, NavLink } from '../router';
 
 import Icono from './Icono';
 import CarritoHeader from './CarritoHeader';
@@ -121,7 +121,6 @@ interface HeaderProps {
 
 export default function Header({ menuAbierto, onAlternarMenu, onCerrarMenu } : HeaderProps) {
     const [top, setTop] = useState(SEPARACION_INICIAL);
-    const bajado = top < SEPARACION_INICIAL;
     const { header, logo, resto, cantidad } = useAccesosQueEntran();
 
     useEffect(() => {
@@ -146,12 +145,10 @@ export default function Header({ menuAbierto, onAlternarMenu, onCerrarMenu } : H
             style={{ top }}
             className={`menuOscuro fixed z-50 isolate ${ANCHO_HEADER} 2xl:w-[60%] h-[72px] sm:h-[80px] rounded-[15px] px-[14px] sm:px-[20px] flex items-center gap-[12px] text-white shadow-[0_0_0_1px_rgba(255,255,255,.14),0_8px_24px_rgba(15,23,42,.18)]`}
         >
-            {/* el vidrio va en una capa de fondo y no en el header: asi los desplegables del buscador
-                y del carrito (que estan dentro) pueden desenfocar la pagina con su propio backdrop-filter */}
-            <span
-                aria-hidden="true"
-                className={`absolute inset-0 -z-10 rounded-[15px] backdrop-blur-md bg-gradient-to-r ${bajado ? 'from-[#0f172a]/75 to-[#172554]/75' : 'from-[#0f172a]/90 to-[#172554]/90'}`}
-            />
+            {/* el fondo va en una capa aparte y no en el header: asi los desplegables del buscador
+                y del carrito (que estan dentro) pueden desenfocar la pagina con su propio backdrop-filter.
+                azul solido y el mismo arriba y al bajar: la firma blanca se lee igual sobre cualquier parte de la pagina */}
+            <span aria-hidden="true" className="absolute inset-0 -z-10 rounded-[15px] bg-gradient-to-r from-[#1e40af] to-[#2563eb]" />
             <div ref={logo} className="shrink-0"><Logo /></div>
             <div className="ml-auto flex items-center gap-[10px]">
                 <AccesosDirectos cantidad={cantidad} />

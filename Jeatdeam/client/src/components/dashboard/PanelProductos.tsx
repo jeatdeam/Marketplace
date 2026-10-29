@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link } from '../../router';
 
 import FormularioProducto from './FormularioProducto';
 import Modal from './Modal';

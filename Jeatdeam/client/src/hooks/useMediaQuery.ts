@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
 
+// en el servidor no hay pantalla: empieza en false y se corrige apenas carga en el navegador
 export function useMediaQuery(query: string): boolean {
-    const [matches, setMatches] = useState(() => window.matchMedia(query).matches);
+    const [matches, setMatches] = useState(false);
 
     useEffect(() => {
         const media = window.matchMedia(query);

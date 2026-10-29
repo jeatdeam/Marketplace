@@ -1,5 +1,6 @@
+'use client';
 import { useCallback, useEffect, useRef, useState, type FormEvent } from 'react';
-import { Link } from 'react-router-dom';
+import { Link } from '../router';
 
 import Icono from '../components/Icono';
 import { Logo } from '../components/Header';
@@ -17,7 +18,7 @@ export default function Dashboard() {
     const [sesion, setSesion] = useState<boolean | null>(null);
     const [pestana, setPestana] = useState<Pestana>('productos');
     const [aviso, setAviso] = useState('');
-    const temporizador = useRef<ReturnType<typeof setTimeout>>();
+    const temporizador = useRef<ReturnType<typeof setTimeout>>(undefined);
 
     useEffect(() => {
         admin.sesion().then((r) => setSesion(r.admin)).catch(() => setSesion(false));

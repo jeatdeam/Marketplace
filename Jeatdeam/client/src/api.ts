@@ -59,10 +59,6 @@ export const enviarDatosShort = (datos: DatosClienteShort) =>
 export const enviarDatosComplete = (datos: DatosClienteComplete) =>
     request<{ estado: string }>('/datos/cliente/compra/complete', { method: 'POST', body: JSON.stringify(datos) });
 
-// sesion de checkout de stripe: devuelve la url a la que hay que redirigir
-export const crearSesionPago = () =>
-    request<{ url: string }>('/create-checkout-session', { method: 'POST' });
-
 // guarda el pedido (carrito + datos de envio) y devuelve la url publica de su pdf
 export interface PedidoCreado {
     codigo: string;
@@ -70,9 +66,7 @@ export interface PedidoCreado {
     // detalle de compra listo para whatsapp (productos, totales, entrega y enlace al pdf)
     mensaje: string;
 }
-// el ultimo pedido queda en sessionStorage para ofrecer su pdf en /pago-exitoso (al volver de stripe)
-export const CLAVE_ULTIMO_PEDIDO = 'kmoon-ultimo-pedido';
-export const crearPedido = (metodo: 'tarjeta' | 'yape' | 'plin', entrega: 'delivery' | 'tienda') =>
+export const crearPedido = (metodo: 'yape' | 'plin', entrega: 'delivery' | 'tienda') =>
     request<PedidoCreado>('/pedidos', { method: 'POST', body: JSON.stringify({ metodo, entrega }) });
 
 // formularios de atencion al cliente (prototipo: el servidor los guarda en memoria)

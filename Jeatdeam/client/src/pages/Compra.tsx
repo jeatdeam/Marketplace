@@ -1,17 +1,17 @@
+'use client';
 import { useState, type ReactNode } from 'react';
-import { Link } from 'react-router-dom';
+import { Link } from '../router';
 
 import Icono, { type NombreIcono } from '../components/Icono';
 import ShippingForm, { type Entrega, type ValoresEnvio } from '../components/ShippingForm';
 import WalletPanel, { WALLETS, type WalletName } from '../components/WalletPanel';
 import { ANCHO_SECCION, BOTON_PRINCIPAL, BOTON_SECUNDARIO, CAJA_ELEVADA, TARJETA, BotonAtras, EncabezadoPagina } from '../components/ui';
-import { CLAVE_ULTIMO_PEDIDO, crearPedido, crearSesionPago, type PedidoCreado } from '../api';
+import { crearPedido, type PedidoCreado } from '../api';
 import { groupCarrito, totalCarrito, useStore } from '../context/StoreContext';
 import { TIENDA, formatoSoles, precioSoles } from '../datos/tienda';
 import type { CartItem } from '../../../shared/types';
 
 type Paso = 'carrito' | 'datos' | 'pago';
-type Metodo = 'tarjeta' | WalletName;
 
 function FilaProducto({ grupo, onSumar, onRestar, onQuitar } : { grupo : CartItem[]; onSumar : () => void; onRestar : () => void; onQuitar : () => void }) {
     const item = grupo[0];
@@ -83,14 +83,12 @@ export default function Compra() {
     const [entrega, setEntrega] = useState<Entrega>('delivery');
     // datos del formulario: se conservan al volver para corregir algo sin escribir todo de nuevo
     const [valoresEnvio, setValoresEnvio] = useState<ValoresEnvio>();
-    const [metodo, setMetodo] = useState<Metodo | null>(null);
+    const [metodo, setMetodo] = useState<WalletName | null>(null);
     const [mostrarQr, setMostrarQr] = useState(false);
     const [pedido, setPedido] = useState<PedidoCreado | null>(null);
     // con que datos se creo el pedido: si se vuelve atras sin cambiar nada se reutiliza (y no llega otro correo)
     const [firmaPedido, setFirmaPedido] = useState('');
     const [preparando, setPreparando] = useState(false);
-    const [redirigiendo, setRedirigiendo] = useState(false);
-    const [errorPago, setErrorPago] = useState('');
 
     if (!carrito) {
         return <main className="flex-1 pt-[180px] text-center text-slate-500" role="status">Cargando carrito…</main>;
@@ -133,7 +131,7 @@ export default function Compra() {
                         <Icono nombre="bolsa" className="size-[40px]" grosor={1.5} />
                     </span>
                     <h2 className="text-[20px] font-bold">Tu carrito está vacío</h2>
-                    <p className="max-w-[360px] text-[14px] text-slate-500">Agrega tus juguetes favoritos y vuelve aquí para pagar con Yape, Plin o tarjeta.</p>
+                    <p className="max-w-[360px] text-[14px] text-slate-500">Agrega tus juguetes favoritos y vuelve aquí para pagar con Yape o Plin.</p>
                     <div className="pt-[10px] flex flex-wrap justify-center gap-[10px]">
                         <Link to="/productos" className={BOTON_PRINCIPAL}>Ver catálogo</Link>
                         <Link to="/promociones" className={BOTON_SECUNDARIO}>Ver ofertas</Link>
@@ -142,18 +140,6 @@ export default function Compra() {
             </main>
         );
     }
-
-    const pagarConTarjeta = async () => {
-        setRedirigiendo(true);
-        setErrorPago('');
-        try {
-            const { url } = await crearSesionPago();
-            window.location.href = url;
-        } catch {
-            setErrorPago('No pudimos abrir la pasarela de pago. Inténtalo de nuevo o paga con Yape o Plin.');
-            setRedirigiendo(false);
-        }
-    };
 
     const irA = (destino : Paso) => {
         setMostrarQr(false);
@@ -165,23 +151,15 @@ export default function Compra() {
         if (!metodo) return;
         const firma = JSON.stringify([metodo, entrega, valoresEnvio, carrito.map((item) => item.idCompra)]);
         if (pedido && firma === firmaPedido) {
-            if (metodo === 'tarjeta') pagarConTarjeta();
-            else setMostrarQr(true);
+            setMostrarQr(true);
             return;
         }
         setPreparando(true);
         const nuevo = await crearPedido(metodo, entrega).catch(() => null);
         setPedido(nuevo);
         setFirmaPedido(nuevo ? firma : '');
-        try {
-            if (nuevo) sessionStorage.setItem(CLAVE_ULTIMO_PEDIDO, JSON.stringify(nuevo));
-            else sessionStorage.removeItem(CLAVE_ULTIMO_PEDIDO);
-        } catch {
-            // sin sessionStorage (modo privado) solo se pierde el enlace en la pagina de pago exitoso
-        }
         setPreparando(false);
-        if (metodo === 'tarjeta') pagarConTarjeta();
-        else setMostrarQr(true);
+        setMostrarQr(true);
     };
 
     return (
@@ -253,27 +231,23 @@ export default function Compra() {
                             </>
                         )}
 
-                        {paso === 'pago' && (mostrarQr && metodo && metodo !== 'tarjeta' ? (
+                        {paso === 'pago' && (mostrarQr && metodo ? (
                             <WalletPanel billetera={metodo} total={total} pedido={pedido} mensajeRespaldo={mensajeRespaldo(metodo)} onVolver={() => setMostrarQr(false)} onCorregir={() => irA('datos')} />
                         ) : (
                             <>
                                 <div className="mb-[14px]"><BotonAtras onClick={() => irA('datos')}>Corregir mis datos</BotonAtras></div>
                                 <p className="mb-[10px] text-[12px] font-semibold uppercase tracking-[0.08em] text-slate-600">Elige cómo pagar</p>
                                 <div role="radiogroup" aria-label="Medio de pago" className="flex flex-col gap-[10px]">
-                                    <OpcionPago activa={metodo === 'tarjeta'} onElegir={() => setMetodo('tarjeta')} titulo="Tarjeta de crédito o débito" texto="Visa, Mastercard, Amex · pasarela segura">
-                                        <span className="grid place-items-center size-[40px] rounded-[10px] bg-slate-900 text-white"><Icono nombre="tarjeta" className="size-[20px]" /></span>
-                                    </OpcionPago>
                                     {(Object.keys(WALLETS) as WalletName[]).map((nombre) => (
                                         <OpcionPago key={nombre} activa={metodo === nombre} onElegir={() => setMetodo(nombre)} titulo={WALLETS[nombre].nombre} texto="Escanea el QR desde tu celular">
                                             <span className="grid place-items-center size-[40px] rounded-[10px] bg-white ring-1 ring-black/10 p-[4px]"><img src={WALLETS[nombre].logo} alt="" className="max-h-full object-contain" /></span>
                                         </OpcionPago>
                                     ))}
                                 </div>
-                                {errorPago && <p role="alert" className="mt-[10px] text-[13px] font-medium text-red-600">{errorPago}</p>}
                                 <div className="pt-[16px]">
-                                    <button type="button" onClick={continuar} disabled={!metodo || preparando || redirigiendo} className={`${BOTON_PRINCIPAL} w-full !py-[12px]`}>
-                                        <Icono nombre={metodo === 'tarjeta' ? 'candado' : 'qr'} className="size-[17px]" />
-                                        {preparando ? 'Preparando tu pedido…' : redirigiendo ? 'Abriendo pasarela…' : metodo === 'tarjeta' ? `Pagar ${formatoSoles(total)}` : metodo ? `Ver QR de ${WALLETS[metodo].nombre}` : 'Elige un medio de pago'}
+                                    <button type="button" onClick={continuar} disabled={!metodo || preparando} className={`${BOTON_PRINCIPAL} w-full !py-[12px]`}>
+                                        <Icono nombre="qr" className="size-[17px]" />
+                                        {preparando ? 'Preparando tu pedido…' : metodo ? `Ver QR de ${WALLETS[metodo].nombre}` : 'Elige un medio de pago'}
                                     </button>
                                 </div>
                             </>

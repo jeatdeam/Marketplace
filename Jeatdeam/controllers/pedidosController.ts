@@ -14,7 +14,7 @@ import type { DatosCliente, DatosClienteComplete } from '../shared/types.ts';
 // url publica (/pedido/KM-000013-<token>.pdf); se arma cada vez que se abre, asi no hay archivos que se
 // pierdan cuando Render reinicia
 
-const METODOS = { tarjeta: 'Tarjeta (Stripe)', yape: 'Yape', plin: 'Plin' } as const;
+const METODOS = { yape: 'Yape', plin: 'Plin' } as const;
 type Metodo = keyof typeof METODOS;
 type Entrega = 'delivery' | 'tienda';
 
@@ -31,7 +31,7 @@ interface Pedido {
 }
 
 // version chica del logo (240px): con el original de 1026px el pdf pesaba ~440 KB
-const LOGO = fileURLToPath(new URL('../public/img/k-moon-pdf.png', import.meta.url));
+const LOGO = fileURLToPath(new URL('../../public/img/k-moon-pdf.png', import.meta.url));
 // mismos nombres que muestra el formulario (ShippingForm.tsx)
 const COURIERS: Record<string, string> = { shalom: 'Shalom', olva: 'Olva Courier', dinocourier: 'Dinocourier', otros: 'Otro' };
 const ARCHIVO_PDF = /^KM-(\d{1,9})-([a-f0-9]{16})\.pdf$/;
@@ -161,9 +161,7 @@ async function enviarCorreo(pedido: Pedido, codigo: string, url: string) {
     const corto = codigoCorto(codigo);
     const [envioTexto, envioValor] = filaEnvio(pedido);
     const celda = 'padding:8px 0;border-bottom:1px solid #e2e8f0';
-    const estado = pedido.metodo === 'tarjeta'
-        ? 'Si completaste el pago con tarjeta, ya estamos preparando tu pedido.'
-        : `Lo confirmamos apenas verifiquemos tu pago con ${METODOS[pedido.metodo]} por WhatsApp (${TIENDA.telefono}).`;
+    const estado = `Lo confirmamos apenas verifiquemos tu pago con ${METODOS[pedido.metodo]} por WhatsApp (${TIENDA.telefono}).`;
 
     const html = `
 <div style="font-family:Arial,Helvetica,sans-serif;max-width:560px;margin:auto;color:#0f172a">
@@ -292,9 +290,7 @@ function dibujarPdf(pedido: Pedido, codigo: string) {
     // aviso: es una constancia, no un comprobante electronico
     doc.moveDown(2);
     doc.font('Helvetica').fontSize(9).fillColor(GRIS).text(
-        pedido.metodo === 'tarjeta'
-            ? 'Este documento resume tu pedido. El pago con tarjeta se confirma en la pasarela de Stripe.'
-            : `Este documento resume tu pedido. Se confirma cuando ${TIENDA.nombre} verifica tu pago por WhatsApp.`,
+        `Este documento resume tu pedido. Se confirma cuando ${TIENDA.nombre} verifica tu pago por WhatsApp.`,
         izquierda, doc.y, { width: ancho, align: 'center' },
     ).text('No es un comprobante de pago electrónico (boleta o factura).', { width: ancho, align: 'center' });
 

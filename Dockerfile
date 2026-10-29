@@ -12,7 +12,7 @@ RUN npm install
 # Copia el resto del código
 COPY . .
 
-# Verifica tipos (cliente y servidor), compila el cliente React (Jeatdeam/client/dist)
+# Verifica los tipos del servidor (la tienda Next.js se compila en Vercel, no aquí)
 # y deja solo dependencias de producción (tsx queda para ejecutar el servidor TypeScript)
 RUN npm run build && npm prune --omit=dev
 

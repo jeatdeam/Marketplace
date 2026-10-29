@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link } from '../router';
 
 import Icono, { type NombreIcono } from './Icono';
 import { Logo } from './Header';

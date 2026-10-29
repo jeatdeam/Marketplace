@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState, type ReactNode } from 'react';
-import { Link, NavLink, useLocation } from 'react-router-dom';
+import { Link, NavLink, useLocation } from '../router';
 
 import Icono, { type NombreIcono } from './Icono';
 import { PANEL_VIDRIO } from './ui';

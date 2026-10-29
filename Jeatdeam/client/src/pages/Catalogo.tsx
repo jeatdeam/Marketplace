@@ -1,5 +1,6 @@
+'use client';
 import { useEffect, useMemo, useState, type ReactNode } from 'react';
-import { Link, useSearchParams } from 'react-router-dom';
+import { Link, useSearchParams } from '../router';
 
 import Icono from '../components/Icono';
 import TarjetaProducto from '../components/TarjetaProducto';

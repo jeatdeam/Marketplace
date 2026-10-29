@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState, type MouseEvent } from 'react';
-import { Link } from 'react-router-dom';
+import { Link } from '../router';
 
 import Icono from './Icono';
 import { BOTON_PRODUCTO, Estrellas } from './ui';
@@ -11,7 +11,7 @@ import type { Product } from '../../../shared/types';
 export default function TarjetaProducto({ producto } : { producto : Product }) {
     const { add, buy } = useCartActions();
     const [agregado, setAgregado] = useState(false);
-    const temporizador = useRef<ReturnType<typeof setTimeout>>();
+    const temporizador = useRef<ReturnType<typeof setTimeout>>(undefined);
     const datos = datosProducto(producto);
 
     useEffect(() => () => clearTimeout(temporizador.current), []);

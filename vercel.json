@@ -1,12 +1,6 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "framework": "vite",
+  "framework": "nextjs",
   "installCommand": "npm ci --include=dev",
-  "buildCommand": "npm run build:vercel",
-  "outputDirectory": "dist",
-  "rewrites": [
-    { "source": "/api/:path*", "destination": "https://marketplace-1-daxe.onrender.com/api/:path*" },
-    { "source": "/pedido/:archivo", "destination": "https://marketplace-1-daxe.onrender.com/pedido/:archivo" },
-    { "source": "/((?!assets/|img/|video/|beforeAfter/|css/).*)", "destination": "/index.html" }
-  ]
+  "buildCommand": "npm run build:web"
 }

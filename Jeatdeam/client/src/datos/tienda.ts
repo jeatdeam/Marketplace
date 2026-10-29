@@ -64,7 +64,7 @@ export const categoriaPorSlug = (slug : string) => CATEGORIAS.find((categoria) =
 export const nombreCategoria = (slug : string) =>
     categoriaPorSlug(slug)?.nombre ?? slug.charAt(0).toUpperCase() + slug.slice(1);
 
-// el servidor guarda los precios en centimos (unit_amount de stripe)
+// el servidor guarda los precios en centimos
 export const precioSoles = (centimos : number) => centimos / 100;
 
 export const formatoSoles = (soles : number) =>
@@ -83,7 +83,7 @@ export const precioFinalCentimos = (producto : Product) =>
 
 const DESCUENTOS = [0, 10, 0, 15, 20, 0, 25, 0, 30, 10];
 
-// el precio real no se toca (stripe cobra ese); el descuento se muestra con un "precio anterior" inventado
+// el precio real no se toca (es el que se cobra); el descuento se muestra con un "precio anterior" inventado
 export function datosProducto(producto : Product) {
     const semilla = hash(producto.name);
     // lo que se guardo en el dashboard manda; si falta, se inventa un valor estable

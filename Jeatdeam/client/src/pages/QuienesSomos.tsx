@@ -1,4 +1,5 @@
-import { Link } from 'react-router-dom';
+'use client';
+import { Link } from '../router';
 
 import Icono, { type NombreIcono } from '../components/Icono';
 import { ANCHO_SECCION, BOTON_PRINCIPAL, BOTON_SECUNDARIO, MARINO_HIELO, TARJETA, EncabezadoPagina } from '../components/ui';

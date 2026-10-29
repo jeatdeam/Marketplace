@@ -1,7 +1,7 @@
 // Tipos compartidos entre el servidor Express (Jeatdeam/app.ts) y el cliente React (Jeatdeam/client)
 
 export interface Product {
-    id: number | string; // número local; el servidor lo reemplaza por el id de precio de Stripe
+    id: number | string; // número local, o texto en los productos guardados de antes
     title: string;
     subtitle: string;
     price: number;

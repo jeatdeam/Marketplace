@@ -1,3 +1,4 @@
+'use client';
 import { useState, type FormEvent } from 'react';
 
 import Icono, { type NombreIcono } from '../components/Icono';

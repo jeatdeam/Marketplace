@@ -18,15 +18,16 @@ services:
         value: production
       - key: SESSION_SECRET
         generateValue: true
+      # la tienda Next.js en Vercel (url de produccion): a ella se avisa tras cada cambio del dashboard
+      # y a ella se mandan las visitas que lleguen a este servidor fuera de /api
+      - key: URL_TIENDA
+        sync: false
+      # mismo valor que REVALIDAR_SECRETO en Vercel (lo pide /api/revalidar de la tienda)
+      - key: REVALIDAR_SECRETO
+        sync: false
       # sync: false -> Render las pide al crear el servicio (no se guardan en el repo)
       - key: DASHBOARD_CLAVE
         sync: false
-      - key: SECRET_KEY
-        sync: false
-      - key: PUBLIC_KEY
-        sync: false
-      - key: MONEDA_STRIPE
-        value: pen
       - key: EMAIL_USER
         sync: false
       - key: EMAIL_PASS

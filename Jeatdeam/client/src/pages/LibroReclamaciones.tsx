@@ -1,5 +1,6 @@
+'use client';
 import { useState, type FormEvent, type ReactNode } from 'react';
-import { Link } from 'react-router-dom';
+import { Link } from '../router';
 
 import Icono from '../components/Icono';
 import { ANCHO_SECCION, BOTON_PRINCIPAL, BOTON_SECUNDARIO, ETIQUETA_CAMPO, INPUT, TARJETA, EncabezadoPagina } from '../components/ui';

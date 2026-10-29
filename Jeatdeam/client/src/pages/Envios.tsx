@@ -1,4 +1,5 @@
-import { Link } from 'react-router-dom';
+'use client';
+import { Link } from '../router';
 
 import Icono, { type NombreIcono } from '../components/Icono';
 import { ANCHO_SECCION, BOTON_PRINCIPAL, TARJETA, EncabezadoPagina } from '../components/ui';
@@ -12,7 +13,7 @@ const ZONAS = [
 ];
 
 const PASOS : { icono : NombreIcono; titulo : string; texto : string }[] = [
-    { icono: 'bolsa', titulo: 'Compras', texto: 'Arma tu carrito y paga con tarjeta, Yape o Plin.' },
+    { icono: 'bolsa', titulo: 'Compras', texto: 'Arma tu carrito y paga con Yape o Plin.' },
     { icono: 'paquete', titulo: 'Empacamos', texto: 'Revisamos cada juguete y lo protegemos con burbupack.' },
     { icono: 'camion', titulo: 'Enviamos', texto: 'Te mandamos el número de seguimiento por WhatsApp.' },
     { icono: 'regalo', titulo: 'Recibes', texto: 'Y si es regalo, lo enviamos con tarjeta y sin precio.' },

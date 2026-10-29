@@ -5,20 +5,15 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "typecheck": "tsc -p tsconfig.json && tsc -p tsconfig.server.json",
-    "build": "npm run typecheck && vite build",
+    "build": "npm run build:server",
     "start": "tsx Jeatdeam/app.ts",
-    "preview": "npm run build && tsx Jeatdeam/app.ts",
-
-    "dev:client": "vite",
-    "build:client": "vite build",
-    "build:vercel": "vite build --mode vercel",
-    "preview:client": "vite preview",
-
+    "dev:web": "next dev",
+    "build:web": "next build",
+    "start:web": "next start",
     "dev:server": "tsx watch Jeatdeam/app.ts",
     "build:server": "tsc -p tsconfig.server.json",
     "start:server": "tsx Jeatdeam/app.ts",
-    
-    "dev": "concurrently -k -n server,client -c blue,green \"npm:dev:server\" \"npm:dev:client\""
+    "dev": "concurrently -k -n server,web -c blue,green \"npm:dev:server\" \"npm:dev:web\""
   },
   "type": "module",
   "engines": {
@@ -29,7 +24,6 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "@stripe/stripe-js": "^5.5.0",
     "@supabase/supabase-js": "^2.118.0",
     "cloudinary": "^2.11.0",
     "cors": "^2.8.5",
@@ -40,13 +34,12 @@
     "helmet": "^8.0.0",
     "lottie-react": "^3.1.2",
     "morgan": "^1.10.0",
+    "next": "^16.2.6",
     "nodemailer": "^6.10.0",
     "pdfkit": "^0.20.2",
     "qrcode": "^1.5.4",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
-    "react-router-dom": "^6.28.0",
-    "stripe": "^17.5.0",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4",
     "tsx": "^4.23.15"
   },
   "devDependencies": {
@@ -58,16 +51,14 @@
     "@types/nodemailer": "^8.0.2",
     "@types/pdfkit": "^0.17.7",
     "@types/qrcode": "^1.5.6",
-    "@types/react": "^18.3.31",
-    "@types/react-dom": "^18.3.7",
-    "@vitejs/plugin-react": "^4.3.4",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
     "autoprefixer": "^10.4.20",
     "concurrently": "^9.2.5",
     "nodemon": "^3.1.7",
     "postcss": "^8.4.49",
     "prettier": "^3.3.3",
     "tailwindcss": "^3.4.17",
-    "typescript": "^7.0.2",
-    "vite": "^5.4.11"
+    "typescript": "7.0.2"
   }
 }

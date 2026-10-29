@@ -1,10 +1,10 @@
-// tailwind 3 para el cliente react (guia de estilo ANDESEPPS)
+// tailwind 3 para la tienda Next.js (guia de estilo ANDESEPPS)
 /** @type {import('tailwindcss').Config} */
 export default {
     // relative: las rutas se resuelven desde este archivo y no desde donde se lance npm
     content: {
         relative: true,
-        files: ['./Jeatdeam/client/index.html', './Jeatdeam/client/src/**/*.{ts,tsx}'],
+        files: ['./app/**/*.{ts,tsx}', './Jeatdeam/client/src/**/*.{ts,tsx}'],
     },
     theme: {
         // todas las pantallas como texto y en orden: asi lg le gana a tab y siguen funcionando las

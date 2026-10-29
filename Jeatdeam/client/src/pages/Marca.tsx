@@ -1,12 +1,13 @@
-import { useParams } from 'react-router-dom';
+'use client';
+import { useParams } from '../router';
 
 import Catalogo from './Catalogo';
 import NotFound from './NotFound';
 import { categoriaPorSlug } from '../datos/tienda';
 
-// /:name -> catalogo con la categoria ya marcada (dinosaurios, peluches, ...)
+// /:brand -> catalogo con la categoria ya marcada (dinosaurios, peluches, ...); la carpeta de next es [brand]
 export default function Marca() {
-    const { name = '' } = useParams();
+    const { brand: name = '' } = useParams<'brand'>();
     const categoria = categoriaPorSlug(name);
     if (!categoria) return <NotFound />;
 

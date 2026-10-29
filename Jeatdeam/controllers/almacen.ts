@@ -63,7 +63,7 @@ export async function cargarDeSupabase() {
     }
 }
 
-// true solo la primera vez: es cuando hace falta traer ids y precios de stripe
+// true solo la primera vez: es cuando hay que guardar los productos escritos en el codigo
 export const esPrimeraCarga = () => !existiaArchivo;
 
 // escritura atomica: primero a un temporal y luego se renombra, asi un corte no deja el json a medias
@@ -74,12 +74,24 @@ function escribirLocal() {
     fs.renameSync(temporal, ARCHIVO);
 }
 
+// la tienda (Next.js en Vercel) guarda productos, banners e imagenes en su cache; despues de cada cambio se le
+// avisa para que lo muestre al instante. Sin REVALIDAR_SECRETO no se avisa y el cambio aparece en 60 s.
+// no se espera la respuesta: si la tienda no contesta, el guardado igual termina bien
+function avisarTienda() {
+    const secreto = process.env.REVALIDAR_SECRETO;
+    if (!secreto) return;
+    const tienda = (process.env.URL_TIENDA || 'http://localhost:3000').split(',')[0].trim().replace(/\/+$/, '');
+    fetch(`${tienda}/api/revalidar`, { method: 'POST', headers: { 'x-revalidar-secreto': secreto } })
+        .catch((error) => console.error('No se pudo avisar a la tienda:', (error as Error).message));
+}
+
 // las subidas a Supabase van en fila: si dos cambios llegan seguidos, el ultimo nunca queda pisado por el anterior
 let cola = Promise.resolve();
 
 export function guardarAlmacen() {
     escribirLocal();
     existiaArchivo = true;
+    avisarTienda();
     if (!supabaseActivo()) return;
     const copia = structuredClone(almacen);
     cola = cola

@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react';
-import { Link, NavLink } from 'react-router-dom';
+import { Link, NavLink } from '../router';
 
 import Icono from './Icono';
 import { PANEL_VIDRIO } from './ui';
