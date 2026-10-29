@@ -20,11 +20,11 @@ body {
     overflow-x: clip;
 }
 
-/* fondo gris calido (el de Claude) en toda la pagina, tambien en html para que no asome blanco al estirar
-   el scroll; el header va en azul marino (Header.tsx) y el footer en un gris del mismo tono (Footer.tsx) */
+/* fondo beige calido (en la linea del de Claude) en toda la pagina, tambien en html para que no asome blanco al estirar
+   el scroll; el header va en azul marino (Header.tsx) y el footer en un beige del mismo tono (Footer.tsx) */
 html,
 body {
-    background-color: #f0eee6;
+    background-color: #f6f0e4;
 }
 
 body {

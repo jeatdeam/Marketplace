@@ -157,7 +157,7 @@ export function BeforeAfterSlider({grupos, sinHeader = false}: BeforeAfterSlider
           <div className={"relative"}>
             <div ref={containerRef}
                  style={{borderRadius: RADIUS}}
-                 className={"group relative  w-full aspect-[16/9] overflow-hidden select-none touch-none shadow-[0_20px_60px_rgba(0,0,0,.35)]"}>
+                 className={"group relative  w-full aspect-[16/9] overflow-hidden select-none touch-none"}>
 
                 {/* imagen 2 de fondo e imagen 1 recortada encima: barra a la derecha = imagen 1 completa.
                     solo el grupo nuevo se desvanece, encima del anterior que sigue opaco: si los dos cambiaran
