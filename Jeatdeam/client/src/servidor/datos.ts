@@ -5,7 +5,7 @@ import type { Apariencia, BaseDatosResponse, Banner, Product, Secciones, Seccion
 // direccion del backend (Express, Jeatdeam/app.ts). En Vercel se puede cambiar con API_URL;
 // en local es el Express de `npm run dev:server`
 export const API_URL = (
-    process.env.API_URL || (process.env.NODE_ENV === 'production' ? 'https://marketplace-1-daxe.onrender.com' : 'http://localhost:8080')
+    process.env.API_URL || (process.env.NODE_ENV === 'production' ? 'https://marketplace-obys.onrender.com' : 'http://localhost:8080')
 ).replace(/\/+$/, '');
 
 // productos, secciones, banners e imagenes del inicio se piden desde el servidor de Vercel y quedan en su

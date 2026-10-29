@@ -2,7 +2,7 @@
 // API_URL: url de Render; en local, el Express de `npm run dev:server` (puerto 8080).
 // misma regla que Jeatdeam/client/src/servidor/datos.ts
 const API_URL = (
-    process.env.API_URL || (process.env.NODE_ENV === 'production' ? 'https://marketplace-1-daxe.onrender.com' : 'http://localhost:8080')
+    process.env.API_URL || (process.env.NODE_ENV === 'production' ? 'https://marketplace-obys.onrender.com' : 'http://localhost:8080')
 ).replace(/\/+$/, '');
 
 /** @type {import('next').NextConfig} */

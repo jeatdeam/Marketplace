@@ -1,4 +1,4 @@
-La tienda (Next.js) está en Vercel y la API (Express) en Render: https://marketplace-1-daxe.onrender.com
+La tienda (Next.js) está en Vercel y la API (Express) en Render: https://marketplace-obys.onrender.com
 
 
 ## Estructura (Next.js + Express, todo en TypeScript)
@@ -31,6 +31,6 @@ npm start            # Express con la API en el puerto 8080 (Render)
 
 | Dónde | Variable | Para qué |
 |---|---|---|
-| Vercel | `API_URL` (opcional) | URL de Render; por defecto `https://marketplace-1-daxe.onrender.com` |
+| Vercel | `API_URL` (opcional) | URL de Render; por defecto `https://marketplace-obys.onrender.com` |
 | Vercel y Render | `REVALIDAR_SECRETO` | mismo valor en los dos: Render avisa a `/api/revalidar` al guardar en el dashboard y la tienda muestra el cambio al instante (sin ella tarda hasta 60 s) |
 | Render | `URL_TIENDA` | URL de la tienda en Vercel: a ella se avisa y se redirigen las visitas que lleguen a Render fuera de `/api` |

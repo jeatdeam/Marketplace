@@ -39,7 +39,7 @@ Render compila el cliente React (`npm run build`) y arranca Express (`npm start`
 
 ## Si ya tienes el servicio creado a mano
 
-El README del proyecto apunta a `marketplace-1-daxe.onrender.com`. Puedes mantener ese servicio en vez de crear el Blueprint. En **Settings** pon:
+El README del proyecto apunta a `marketplace-obys.onrender.com`. Puedes mantener ese servicio en vez de crear el Blueprint. En **Settings** pon:
 
 - Build Command: `npm ci --include=dev && npm run build`
 - Start Command: `npm start`
